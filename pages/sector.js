@@ -246,20 +246,20 @@ const Search = props => {
           </div>
         </div>
 
-        <nav class="pagination" role="navigation" aria-label="pagination">
-          <ul class="pagination-list">
+        <nav className="pagination" role="navigation" aria-label="pagination">
+          <ul className="pagination-list">
             <li>
               <a
-                class="pagination-link"
+                className="pagination-link"
                 aria-label="Goto previous page"
                 disabled
               >
-                <i class="fas fa-chevron-left" />
+                <i className="fas fa-chevron-left" />
               </a>
             </li>
             <li>
               <a
-                class="pagination-link is-current"
+                className="pagination-link is-current"
                 aria-label="Page 1"
                 aria-current="page"
               >
@@ -267,43 +267,43 @@ const Search = props => {
               </a>
             </li>
             <li>
-              <a class="pagination-link" aria-label="Goto page 2">
+              <a className="pagination-link" aria-label="Goto page 2">
                 2
               </a>
             </li>
             <li>
-              <a class="pagination-link" aria-label="Goto page 3">
+              <a className="pagination-link" aria-label="Goto page 3">
                 3
               </a>
             </li>
             <li>
-              <a class="pagination-link" aria-label="Goto page 4">
+              <a className="pagination-link" aria-label="Goto page 4">
                 4
               </a>
             </li>
             <li>
-              <a class="pagination-link" aria-label="Goto page 5">
+              <a className="pagination-link" aria-label="Goto page 5">
                 5
               </a>
             </li>
             <li>
-              <a class="pagination-link" aria-label="Goto page 6">
+              <a className="pagination-link" aria-label="Goto page 6">
                 6
               </a>
             </li>
             <li>
-              <a class="pagination-link" aria-label="Goto page 7">
+              <a className="pagination-link" aria-label="Goto page 7">
                 7
               </a>
             </li>
             <li>
-              <a class="pagination-link" aria-label="Goto page 8">
+              <a className="pagination-link" aria-label="Goto page 8">
                 8
               </a>
             </li>
             <li>
-              <a class="pagination-link" aria-label="Goto next page">
-                <i class="fas fa-chevron-right" />
+              <a className="pagination-link" aria-label="Goto next page">
+                <i className="fas fa-chevron-right" />
               </a>
             </li>
           </ul>

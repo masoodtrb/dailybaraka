@@ -35,7 +35,7 @@ const Nav = props => (
     </div>
     <div className="main-nav">
       <div className="container">
-        <div class="main-nav__container">
+        <div className="main-nav__container">
           <ul>
             <li>
               <a href="">About us</a>
@@ -56,29 +56,33 @@ const Nav = props => (
 
           {props.page != "index" && (
             <React.Fragment>
-              <div class="main-nav__logo">
+              <div className="main-nav__logo">
                 <a href="/">
                   <img src="/static/images/logo.png" alt="daily baraka logo" />
                 </a>
               </div>
 
-              <div class="main-nav__search">
-                <div class="field has-addons">
-                  <p class="control">
-                    <span class="select">
+              <div className="main-nav__search">
+                <div className="field has-addons">
+                  <p className="control">
+                    <span className="select">
                       <select>
-                        <option selected>All</option>
+                        <option defaultValue>All</option>
                         <option>Sector 1</option>
                         <option>Sector 2</option>
                       </select>
                     </span>
                   </p>
-                  <p class="control search-input">
-                    <input class="input" type="search" placeholder="Search" />
+                  <p className="control search-input">
+                    <input
+                      className="input"
+                      type="search"
+                      placeholder="Search"
+                    />
                   </p>
-                  <p class="control">
-                    <button type="submit" class="button">
-                      <i class="fas fa-search" />
+                  <p className="control">
+                    <button type="submit" className="button">
+                      <i className="fas fa-search" />
                     </button>
                   </p>
                 </div>

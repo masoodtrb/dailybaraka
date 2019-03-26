@@ -23,7 +23,7 @@ const Home = props => {
               <p className="control">
                 <span className="select">
                   <select>
-                    <option selected>All</option>
+                    <option defaultValue>All</option>
                     <option>Sector 1</option>
                     <option>Sector 2</option>
                   </select>
