@@ -1,0 +1,21 @@
+{
+  "name": "daily-baraka-front",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "dependencies": {
+    "next": "^8.0.3",
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5"
+  },
+  "devDependencies": {
+    "@zeit/next-sass": "^1.0.1",
+    "dotenv-webpack": "^1.7.0",
+    "express": "^4.16.4",
+    "next-compose-plugins": "^2.1.1",
+    "next-routes": "^1.4.2",
+    "node-sass": "^4.11.0"
+  }
+}
