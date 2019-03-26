@@ -52,7 +52,7 @@ const Search = props => {
 
           <div className="supplier__products">
             <h2>
-              <i className="fas fa-heart" />
+              <i class="fas fa-tags" />
               Products
             </h2>
 

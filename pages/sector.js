@@ -17,7 +17,7 @@ const Search = props => {
         <div className="sector__supplier">
           <div className="container">
             <h2>
-              <i className="fas fa-heart" />
+              <i className="fas fa-store" />
               Supplier Title
             </h2>
 
@@ -139,7 +139,7 @@ const Search = props => {
         <div className="sector__supplier">
           <div className="container">
             <h2>
-              <i className="fas fa-heart" />
+              <i className="fas fa-store" />
               Supplier Title
             </h2>
 
@@ -261,7 +261,7 @@ const Search = props => {
         <div className="sector__supplier">
           <div className="container">
             <h2>
-              <i className="fas fa-heart" />
+              <i className="fas fa-store" />
               Supplier Title
             </h2>
 
@@ -383,7 +383,7 @@ const Search = props => {
         <div className="sector__supplier">
           <div className="container">
             <h2>
-              <i className="fas fa-heart" />
+              <i className="fas fa-store" />
               Supplier Title
             </h2>
 
@@ -505,7 +505,7 @@ const Search = props => {
         <div className="sector__supplier">
           <div className="container">
             <h2>
-              <i className="fas fa-heart" />
+              <i className="fas fa-store" />
               Supplier Title
             </h2>
 
