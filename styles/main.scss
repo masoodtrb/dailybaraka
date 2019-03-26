@@ -1,4 +1,4 @@
-$font-size: 12px;
+$font-size: 16px;
 
 body {
   font-size: $font-size;
@@ -7,7 +7,7 @@ body {
 }
 
 h1 {
-  font-size: 24px;
+  font-size: 1.6em;
   margin: 20px 0;
 }
 
@@ -22,7 +22,7 @@ h1 {
         margin-right: 30px;
         color: #fff;
         font-size: 0.7em;
-        line-height: 27px;
+        line-height: 32px;
       }
     }
 
@@ -31,7 +31,7 @@ h1 {
 
       .select {
         select {
-          height: 22px;
+          height: 26px;
           font-size: 0.8em;
           margin-top: 2px;
           padding: 0 38px 0 6px;
@@ -159,12 +159,12 @@ h1 {
   text-align: center;
 
   .home__logo {
-    width: 324px;
+    width: 500px;
     margin-top: 70px;
   }
 
   .home__search {
-    width: 250px;
+    width: 400px;
     margin: 20px auto;
     font-size: 0.7em;
 
@@ -172,6 +172,7 @@ h1 {
       font-size: 0.7em;
       line-height: 36px;
       height: 36px;
+      border-radius: 2px !important;
 
       &::placeholder {
         color: #013d13 !important;
@@ -208,30 +209,37 @@ h1 {
   }
 
   .home__sectors {
-    width: 450px;
+    width: 600px;
     display: block;
     margin: 0 auto;
     ul > li {
       display: inline-block;
+      margin: 0 2px;
       a {
         display: block;
-        width: 60px;
-        height: 16px;
-        border-radius: 8px;
+        height: 22px;
+        border-radius: 11px;
         background-color: #dfdfdf;
         border: solid 0.5px rgba(0, 0, 0, 0.12);
         color: rgba(0, 0, 0, 0.87);
         text-align: left;
+        padding: 2px 6px 2px 2px;
+
+        &:hover {
+          background-color: darken(#dfdfdf, 10%);
+        }
+
         img {
           border-radius: 50%;
-          width: 12px;
-          height: 12px;
-          margin: 2px 0 0 2px;
+          width: 17px;
+          height: 17px;
+          margin-right: 2px;
+          vertical-align: super;
         }
         span {
-          font-size: 0.7em;
+          font-size: 0.9em;
           vertical-align: text-top;
-          line-height: 15px;
+          line-height: 5px;
         }
       }
     }
@@ -386,8 +394,8 @@ h1 {
     box-shadow: 0 0.5px 1.5px 0 rgba(0, 0, 0, 0.2);
 
     img {
-      height: 70px;
-      width: 70px;
+      height: 76px;
+      width: 76px;
     }
 
     p {
