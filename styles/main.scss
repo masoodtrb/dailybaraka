@@ -152,7 +152,7 @@ h1 {
 .page {
   min-height: 80vh;
   overflow: hidden;
-  margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 .page.home {
@@ -287,6 +287,23 @@ h1 {
       }
     }
   }
+
+  .pagination {
+    margin-bottom: 10px;
+
+    .pagination-list {
+      justify-content: center;
+    }
+
+    .pagination-link {
+      background-color: #fff;
+
+      &.is-current {
+        background-color: #005739;
+        border-color: #005739;
+      }
+    }
+  }
 }
 
 .page.supplier {
@@ -369,7 +386,8 @@ h1 {
     box-shadow: 0 0.5px 1.5px 0 rgba(0, 0, 0, 0.2);
 
     img {
-      height: 128px;
+      height: 70px;
+      width: 70px;
     }
 
     p {
@@ -379,17 +397,6 @@ h1 {
     strong {
       font-size: 1.8em;
       font-weight: normal;
-    }
-  }
-
-  .pagination {
-    .pagination-list {
-      justify-content: center;
-    }
-
-    .pagination-link.is-current {
-      background-color: #3273dc;
-      border-color: #3273dc;
     }
   }
 }
