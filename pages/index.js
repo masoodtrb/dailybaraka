@@ -8,7 +8,7 @@ const Home = props => {
   return (
     <div>
       <Head title="Home" />
-      <Nav />
+      <Nav page="index" />
 
       <div className="page home">
         <div className="container">
