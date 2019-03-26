@@ -36,7 +36,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -54,7 +53,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -72,7 +70,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -90,7 +87,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -108,7 +104,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -126,7 +121,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -158,7 +152,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -176,7 +169,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -194,7 +186,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -212,7 +203,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -230,7 +220,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -248,7 +237,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -280,7 +268,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -298,7 +285,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -316,7 +302,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -334,7 +319,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -352,7 +336,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -370,7 +353,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -402,7 +384,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -420,7 +401,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -438,7 +418,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -456,7 +435,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -474,7 +452,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -492,7 +469,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -524,7 +500,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -542,7 +517,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -560,7 +534,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -578,7 +551,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -596,7 +568,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
@@ -614,7 +585,6 @@ const Search = props => {
                       </div>
                       <div className="card-content">
                         <h3>Product Title</h3>
-                        <div className="content">Store Name</div>
                       </div>
                     </div>
                   </a>
