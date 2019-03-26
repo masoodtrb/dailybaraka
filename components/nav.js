@@ -1,70 +1,54 @@
-import React from 'react'
-// import Link from 'next/link'
-import { Link } from '../routes'
-
-const links = [
-  { href: 'https://github.com/segmentio/create-next-app', label: 'Github' }
-].map(link => {
-  link.key = `nav-link-${link.href}-${link.label}`
-  return link
-})
+import React from "react";
+import { Link } from "../routes";
 
 const Nav = () => (
-  <nav>
-    <ul>
-      <li>
-        <Link prefetch route="home">
-          <a>Home</a>
-        </Link>
-      </li>
-      <li>
-        <Link prefetch route="search">
-          <a>Search</a>
-        </Link>
-      </li>
-      <li>
-        <Link prefetch route="product" params={{id: 'asdad'}}>
-          <a>Product: asdad</a>
-        </Link>
-      </li>
-      <ul>
-        {links.map(({ key, href, label }) => (
-          <li key={key}>
-            <Link href={href}>
-              <a>{label}</a>
-            </Link>
+  <div className="header">
+    <div className="top-nav">
+      <div className="container">
+        <div className="regions">
+          <div className="select">
+            <select>
+              <option>Region</option>
+              <option>English</option>
+              <option>German</option>
+              <option>Spanish</option>
+              <option>French</option>
+            </select>
+          </div>
+        </div>
+
+        <ul>
+          <li>
+            <a href="">Sign in</a>
           </li>
-        ))}
-      </ul>
-    </ul>
+          <li>
+            <a href="">Signup</a>
+          </li>
+          <li>
+            <a href="">Local Stores</a>
+          </li>
+          <li>
+            <a href="">Commercial Enquiries</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div className="main-nav">
+      <div className="container">
+        <ul>
+          <li>
+            <a href="">About us</a>
+          </li>
+          <li>
+            <a href="">Contact us</a>
+          </li>
+          <li>
+            <a href="">Sectors</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+);
 
-    <style jsx>{`
-      :global(body) {
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, Avenir Next, Avenir,
-          Helvetica, sans-serif;
-      }
-      nav {
-        text-align: center;
-      }
-      ul {
-        display: flex;
-        justify-content: space-between;
-      }
-      nav > ul {
-        padding: 4px 16px;
-      }
-      li {
-        display: flex;
-        padding: 6px 8px;
-      }
-      a {
-        color: #067df7;
-        text-decoration: none;
-        font-size: 13px;
-      }
-    `}</style>
-  </nav>
-)
-
-export default Nav
+export default Nav;

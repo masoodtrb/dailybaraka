@@ -11,7 +11,7 @@ const Search = props => {
 
       <div className="page sectors">
         <div className="container">
-          <h1>Search</h1>
+          <h1>Sectors</h1>
 
           <div className="columns is-multiline">
             <div className="column is-4">

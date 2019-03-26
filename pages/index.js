@@ -1,47 +1,137 @@
-import React from "react"
-import Link from "next/link"
-import Head from "../components/head"
-import Nav from "../components/nav"
-import "../styles/main.scss"
+import React from "react";
+import Link from "next/link";
+import Head from "../components/head";
+import Nav from "../components/nav";
+import "../styles/main.scss";
 
-const Home = (props) => {
+const Home = props => {
   return (
     <div>
       <Head title="Home" />
       <Nav />
-      <div className="hero">
-        <h1 className="title">Welcome to Next!</h1>
-        <p className="description">
-          To get started, edit <code>pages/index.js</code> and save to reload.
-        </p>
-  
-        <div className="row">
-          <p>{process.env.TEST}</p>
-          <Link href="https://github.com/zeit/next.js#getting-started">
-            <a className="card">
-              <h3>Getting Started &rarr;</h3>
-              <p>Learn more about Next on Github and in their examples</p>
-            </a>
-          </Link>
-          <Link href="https://open.segment.com/create-next-app">
-            <a className="card">
-              <h3>Examples &rarr;</h3>
-              <p>
-                Find other example boilerplates on the{" "}
-                <code>create-next-app</code> site
+
+      <div className="page home">
+        <div className="container">
+          <img
+            className="home__logo"
+            src="/static/images/logo-big.png"
+            alt="daily baraka logo"
+          />
+
+          <div className="home__search">
+            <div className="field has-addons">
+              <p className="control">
+                <span className="select">
+                  <select>
+                    <option selected>All</option>
+                    <option>Sector 1</option>
+                    <option>Sector 2</option>
+                  </select>
+                </span>
               </p>
-            </a>
-          </Link>
-          <Link href="https://github.com/segmentio/create-next-app">
-            <a className="card">
-              <h3>Create Next App &rarr;</h3>
-              <p>Was this tool helpful? Let us know how we can improve it</p>
-            </a>
-          </Link>
+              <p className="control search-input">
+                <input className="input" type="search" placeholder="Search" />
+              </p>
+              <p className="control">
+                <button type="submit" className="button">
+                  <i className="fas fa-search" />
+                </button>
+              </p>
+            </div>
+          </div>
+
+          <div className="home__sectors">
+            <ul>
+              <li>
+                <a href="">
+                  <img src="/static/images/sector-sm.png" alt="" />
+                  <span>sector 1</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <img src="/static/images/sector-sm.png" alt="" />
+                  <span>sector 2</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <img src="/static/images/sector-sm.png" alt="" />
+                  <span>sector 3</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <img src="/static/images/sector-sm.png" alt="" />
+                  <span>sector 4</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <img src="/static/images/sector-sm.png" alt="" />
+                  <span>sector 5</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <img src="/static/images/sector-sm.png" alt="" />
+                  <span>sector 6</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <img src="/static/images/sector-sm.png" alt="" />
+                  <span>sector 7</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <img src="/static/images/sector-sm.png" alt="" />
+                  <span>sector 8</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <img src="/static/images/sector-sm.png" alt="" />
+                  <span>sector 9</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <img src="/static/images/sector-sm.png" alt="" />
+                  <span>sector 10</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <img src="/static/images/sector-sm.png" alt="" />
+                  <span>sector 11</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <img src="/static/images/sector-sm.png" alt="" />
+                  <span>sector 12</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <img src="/static/images/sector-sm.png" alt="" />
+                  <span>sector 13</span>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <img src="/static/images/sector-sm.png" alt="" />
+                  <span>sector 14</span>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
