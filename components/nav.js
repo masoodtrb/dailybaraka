@@ -45,6 +45,12 @@ const Nav = () => (
           <li>
             <a href="">Sectors</a>
           </li>
+          <li>
+            <a href="">Accreditation Organisations</a>
+          </li>
+          <li>
+            <a href="">Our Services</a>
+          </li>
         </ul>
       </div>
     </div>
