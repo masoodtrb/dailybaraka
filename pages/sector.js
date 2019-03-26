@@ -14,237 +14,42 @@ const Search = props => {
           <h1>Sector Title</h1>
         </div>
 
-        <div className="sector__supplier">
-          <div className="container">
-            <h2>
-              <i className="fas fa-store" />
-              Supplier Title
-            </h2>
+        {[...Array(3).keys()].map((item, index) => (
+          <div className="sector__supplier">
+            <div className="container">
+              <a href="/supplier">
+                <h2>
+                  <i className="fas fa-store" />
+                  Supplier Title {index + 1}
+                </h2>
+              </a>
 
-            <div className="sector__products">
-              <div className="columns">
-                <div className="column is-2">
-                  <a>
-                    <div className="card">
-                      <div className="card-image">
-                        <figure className="image is-4by3">
-                          <img
-                            src="https://bulma.io/images/placeholders/1280x960.png"
-                            alt="Placeholder image"
-                          />
-                        </figure>
-                      </div>
-                      <div className="card-content">
-                        <h3>Product Title</h3>
-                      </div>
+              <div className="sector__products">
+                <div className="columns">
+                  {[...Array(6).keys()].map((item, index) => (
+                    <div className="column is-2">
+                      <a href="/product">
+                        <div className="card">
+                          <div className="card-image">
+                            <figure className="image is-4by3">
+                              <img
+                                src="https://bulma.io/images/placeholders/1280x960.png"
+                                alt="Placeholder image"
+                              />
+                            </figure>
+                          </div>
+                          <div className="card-content">
+                            <h3>Product Title {index + 1}</h3>
+                          </div>
+                        </div>
+                      </a>
                     </div>
-                  </a>
-                </div>
-                <div className="column is-2">
-                  <a>
-                    <div className="card">
-                      <div className="card-image">
-                        <figure className="image is-4by3">
-                          <img
-                            src="https://bulma.io/images/placeholders/1280x960.png"
-                            alt="Placeholder image"
-                          />
-                        </figure>
-                      </div>
-                      <div className="card-content">
-                        <h3>Product Title</h3>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div className="column is-2">
-                  <a>
-                    <div className="card">
-                      <div className="card-image">
-                        <figure className="image is-4by3">
-                          <img
-                            src="https://bulma.io/images/placeholders/1280x960.png"
-                            alt="Placeholder image"
-                          />
-                        </figure>
-                      </div>
-                      <div className="card-content">
-                        <h3>Product Title</h3>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div className="column is-2">
-                  <a>
-                    <div className="card">
-                      <div className="card-image">
-                        <figure className="image is-4by3">
-                          <img
-                            src="https://bulma.io/images/placeholders/1280x960.png"
-                            alt="Placeholder image"
-                          />
-                        </figure>
-                      </div>
-                      <div className="card-content">
-                        <h3>Product Title</h3>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div className="column is-2">
-                  <a>
-                    <div className="card">
-                      <div className="card-image">
-                        <figure className="image is-4by3">
-                          <img
-                            src="https://bulma.io/images/placeholders/1280x960.png"
-                            alt="Placeholder image"
-                          />
-                        </figure>
-                      </div>
-                      <div className="card-content">
-                        <h3>Product Title</h3>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div className="column is-2">
-                  <a>
-                    <div className="card">
-                      <div className="card-image">
-                        <figure className="image is-4by3">
-                          <img
-                            src="https://bulma.io/images/placeholders/1280x960.png"
-                            alt="Placeholder image"
-                          />
-                        </figure>
-                      </div>
-                      <div className="card-content">
-                        <h3>Product Title</h3>
-                      </div>
-                    </div>
-                  </a>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="sector__supplier">
-          <div className="container">
-            <h2>
-              <i className="fas fa-store" />
-              Supplier Title
-            </h2>
-
-            <div className="sector__products">
-              <div className="columns">
-                <div className="column is-2">
-                  <a>
-                    <div className="card">
-                      <div className="card-image">
-                        <figure className="image is-4by3">
-                          <img
-                            src="https://bulma.io/images/placeholders/1280x960.png"
-                            alt="Placeholder image"
-                          />
-                        </figure>
-                      </div>
-                      <div className="card-content">
-                        <h3>Product Title</h3>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div className="column is-2">
-                  <a>
-                    <div className="card">
-                      <div className="card-image">
-                        <figure className="image is-4by3">
-                          <img
-                            src="https://bulma.io/images/placeholders/1280x960.png"
-                            alt="Placeholder image"
-                          />
-                        </figure>
-                      </div>
-                      <div className="card-content">
-                        <h3>Product Title</h3>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div className="column is-2">
-                  <a>
-                    <div className="card">
-                      <div className="card-image">
-                        <figure className="image is-4by3">
-                          <img
-                            src="https://bulma.io/images/placeholders/1280x960.png"
-                            alt="Placeholder image"
-                          />
-                        </figure>
-                      </div>
-                      <div className="card-content">
-                        <h3>Product Title</h3>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div className="column is-2">
-                  <a>
-                    <div className="card">
-                      <div className="card-image">
-                        <figure className="image is-4by3">
-                          <img
-                            src="https://bulma.io/images/placeholders/1280x960.png"
-                            alt="Placeholder image"
-                          />
-                        </figure>
-                      </div>
-                      <div className="card-content">
-                        <h3>Product Title</h3>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div className="column is-2">
-                  <a>
-                    <div className="card">
-                      <div className="card-image">
-                        <figure className="image is-4by3">
-                          <img
-                            src="https://bulma.io/images/placeholders/1280x960.png"
-                            alt="Placeholder image"
-                          />
-                        </figure>
-                      </div>
-                      <div className="card-content">
-                        <h3>Product Title</h3>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div className="column is-2">
-                  <a>
-                    <div className="card">
-                      <div className="card-image">
-                        <figure className="image is-4by3">
-                          <img
-                            src="https://bulma.io/images/placeholders/1280x960.png"
-                            alt="Placeholder image"
-                          />
-                        </figure>
-                      </div>
-                      <div className="card-content">
-                        <h3>Product Title</h3>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        ))}
 
         <nav className="pagination" role="navigation" aria-label="pagination">
           <ul className="pagination-list">

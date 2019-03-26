@@ -38,19 +38,19 @@ const Nav = props => (
         <div className="main-nav__container">
           <ul>
             <li>
-              <a href="">About us</a>
+              <a href="/about">About us</a>
             </li>
             <li>
-              <a href="">Contact us</a>
+              <a href="/contact">Contact us</a>
             </li>
             <li>
-              <a href="">Sectors</a>
+              <a href="/sectors">Sectors</a>
             </li>
             <li>
-              <a href="">Accreditation Organisations</a>
+              <a href="/accreditation">Accreditation Organisations</a>
             </li>
             <li>
-              <a href="">Our Services</a>
+              <a href="/services">Our Services</a>
             </li>
           </ul>
 
@@ -63,29 +63,34 @@ const Nav = props => (
               </div>
 
               <div className="main-nav__search">
-                <div className="field has-addons">
-                  <p className="control">
-                    <span className="select">
-                      <select>
-                        <option defaultValue>All</option>
-                        <option>Sector 1</option>
-                        <option>Sector 2</option>
-                      </select>
-                    </span>
-                  </p>
-                  <p className="control search-input">
-                    <input
-                      className="input"
-                      type="search"
-                      placeholder="Search"
-                    />
-                  </p>
-                  <p className="control">
-                    <button type="submit" className="button">
-                      <i className="fas fa-search" />
-                    </button>
-                  </p>
-                </div>
+                <form action="/search" method="get">
+                  <div className="field has-addons">
+                    <p className="control">
+                      <span className="select">
+                        <select name="sector">
+                          <option defaultValue value="all">
+                            All
+                          </option>
+                          <option value="sector-1">Sector 1</option>
+                          <option value="sector-2">Sector 2</option>
+                        </select>
+                      </span>
+                    </p>
+                    <p className="control search-input">
+                      <input
+                        name="q"
+                        className="input"
+                        type="search"
+                        placeholder="Search"
+                      />
+                    </p>
+                    <p className="control">
+                      <button type="submit" className="button">
+                        <i className="fas fa-search" />
+                      </button>
+                    </p>
+                  </div>
+                </form>
               </div>
             </React.Fragment>
           )}

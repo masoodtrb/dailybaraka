@@ -13,13 +13,13 @@ export default class MyDocument extends Document {
             <div className="container">
               <ul className="social">
                 <li>
-                  <a href="">IN</a>
+                  <a href="https://instagram.com/">IN</a>
                 </li>
                 <li>
-                  <a href="">TW</a>
+                  <a href="https://twitter.com/">TW</a>
                 </li>
                 <li>
-                  <a href="">FB</a>
+                  <a href="https:/facebook.com/">FB</a>
                 </li>
               </ul>
 
