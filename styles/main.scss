@@ -30,14 +30,22 @@ a {
     font-weight: normal;
   }
 
-  input {
+  input,
+  textarea,
+  select {
     border: 1px solid #eeeeee;
     font-size: 0.8em;
     height: 36px;
     border-radius: 2px;
+    box-shadow: none;
 
     &::placeholder {
       color: rgba(0, 0, 0, 0.38);
+    }
+
+    &:focus {
+      box-shadow: none;
+      border: 1px solid #007457;
     }
   }
 }
@@ -51,6 +59,16 @@ a {
 
     &:hover {
       background-color: darken(#007457, 5%);
+    }
+  }
+}
+
+.tabs {
+  li {
+    font-size: 0.8em;
+    &.is-active a {
+      border-bottom-color: #007457;
+      color: #007457;
     }
   }
 }
@@ -219,7 +237,7 @@ a {
 
   .home__search {
     width: 400px;
-    margin: 20px auto;
+    margin: 80px auto;
     font-size: 0.7em;
 
     input {
@@ -496,13 +514,6 @@ a {
   .product__description {
     .tabs {
       margin-bottom: 30px;
-      li {
-        font-size: 0.7em;
-        &.is-active a {
-          border-bottom-color: #007457;
-          color: #007457;
-        }
-      }
     }
   }
 
@@ -533,5 +544,36 @@ a {
       font-size: 0.9em;
       line-height: 40px;
     }
+  }
+}
+
+.page.signup {
+  background: url("/static/images/supplier-bg.png") no-repeat;
+  background-size: 100%;
+  padding-top: 200px;
+
+  .tabs {
+    display: block;
+  }
+
+  .tab-content {
+    display: none;
+    &.active {
+      display: initial;
+    }
+  }
+
+  form > strong {
+    color: #014e3b;
+    font-size: 1em;
+    font-weight: normal;
+    display: block;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+
+  .signup__map {
+    height: 500px;
+    border: 1px solid #ccc;
   }
 }

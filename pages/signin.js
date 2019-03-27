@@ -19,29 +19,33 @@ class Product extends Component {
             <div className="columns">
               <div className="column is-6 is-offset-3">
                 <form action="/signin" method="post">
-                  <div class="field">
-                    <label class="label">Username</label>
-                    <div class="control">
-                      <input class="input" type="text" placeholder="Username" />
+                  <div className="field">
+                    <label className="label">Username</label>
+                    <div className="control">
+                      <input
+                        className="input"
+                        type="text"
+                        placeholder="Username"
+                      />
                     </div>
                   </div>
-                  <div class="field">
-                    <label class="label">Password</label>
-                    <div class="control">
+                  <div className="field">
+                    <label className="label">Password</label>
+                    <div className="control">
                       <input
-                        class="input"
+                        className="input"
                         type="password"
                         placeholder="Password"
                       />
                     </div>
                   </div>
 
-                  <div class="field is-grouped">
-                    <div class="control">
-                      <button class="button is-primary">Submit</button>
+                  <div className="field is-grouped">
+                    <div className="control">
+                      <button className="button is-primary">Submit</button>
                     </div>
 
-                    <div class="control forgot-pass">
+                    <div className="control forgot-pass">
                       <a href="/forgot-pass">Forgot Password?</a>
                     </div>
                   </div>
@@ -49,7 +53,7 @@ class Product extends Component {
                 <br />
                 <br />
                 <p className="note has-text-centered">
-                  Do not have an account? <a href="signup">Sign up</a>
+                  Do not have an account? <a href="/signup">Sign up</a>
                 </p>
               </div>
             </div>
