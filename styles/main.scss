@@ -547,7 +547,7 @@ a {
   }
 }
 
-.page.signup {
+.page.enquiry {
   background: url("/static/images/supplier-bg.png") no-repeat;
   background-size: 100%;
   padding-top: 200px;
@@ -576,4 +576,10 @@ a {
     height: 500px;
     border: 1px solid #ccc;
   }
+}
+
+.page.signup {
+  background: url("/static/images/supplier-bg.png") no-repeat;
+  background-size: 100%;
+  padding-top: 150px;
 }

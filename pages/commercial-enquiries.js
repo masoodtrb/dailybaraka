@@ -81,10 +81,10 @@ class Product extends Component {
     const { tab } = this.state;
     return (
       <div>
-        <Head title="Sign up" />
+        <Head title="Commercial Enquiries" />
         <Nav />
 
-        <div className="page signup">
+        <div className="page enquiry">
           <div className="container">
             <div className="tabs">
               <ul>
@@ -269,7 +269,7 @@ class Product extends Component {
                       <Map
                         center={markerPosition}
                         zoom={this.state.zoom}
-                        className="signup__map"
+                        className="enquiry__map"
                         onMove={this.onUpdatePosition}
                       >
                         <TileLayer
