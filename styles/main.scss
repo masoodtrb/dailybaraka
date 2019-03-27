@@ -11,6 +11,50 @@ h1 {
   margin: 20px 0;
 }
 
+a {
+  color: rgba(0, 119, 199, 0.77);
+
+  &:hover {
+    color: darken(rgba(0, 119, 199, 0.77), 10%);
+  }
+}
+
+.field {
+  &:not(:last-child) {
+    margin-bottom: 1.2rem;
+  }
+
+  .label {
+    color: #007457;
+    font-size: 0.8em;
+    font-weight: normal;
+  }
+
+  input {
+    border: 1px solid #eeeeee;
+    font-size: 0.8em;
+    height: 36px;
+    border-radius: 2px;
+
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.38);
+    }
+  }
+}
+
+.button {
+  &.is-primary {
+    border-radius: 2px;
+    background-color: #007457;
+    color: #fff;
+    font-size: 0.9em;
+
+    &:hover {
+      background-color: darken(#007457, 5%);
+    }
+  }
+}
+
 .header {
   .top-nav {
     background-color: #005739;
@@ -69,6 +113,7 @@ h1 {
         }
       }
     }
+
     &__logo {
       flex: 1;
       text-align: center;
@@ -115,6 +160,8 @@ h1 {
           padding: 0 10px;
           width: 40px;
           color: #013d13;
+          text-align: center;
+          text-align-last: center;
         }
         &:after {
           display: none !important;
@@ -465,5 +512,26 @@ h1 {
     width: 175px;
     height: 80px;
     margin-top: 80px;
+  }
+}
+
+.page.signin {
+  background: url("/static/images/supplier-bg.png") no-repeat;
+  background-size: 100%;
+
+  padding-top: 200px;
+
+  .button.is-primary {
+    width: 90px;
+    height: 40px;
+  }
+
+  .forgot-pass {
+    flex: 1;
+    text-align: right;
+    a {
+      font-size: 0.9em;
+      line-height: 40px;
+    }
   }
 }

@@ -8,7 +8,7 @@ const Nav = props => (
         <div className="top-nav__rightside">
           <ul>
             <li>
-              <a href="">Sign in</a>
+              <a href="/signin">Sign in</a>
             </li>
             <li>
               <a href="">Signup</a>
