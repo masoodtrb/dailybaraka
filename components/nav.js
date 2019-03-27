@@ -5,7 +5,16 @@ const Nav = props => (
   <div className="header">
     <div className="top-nav">
       <div className="container">
-        <div className="regions">
+        <div className="top-nav__rightside">
+          <ul>
+            <li>
+              <a href="">Sign in</a>
+            </li>
+            <li>
+              <a href="">Signup</a>
+            </li>
+          </ul>
+
           <div className="select">
             <select>
               <option>Region</option>
@@ -19,16 +28,16 @@ const Nav = props => (
 
         <ul>
           <li>
-            <a href="">Sign in</a>
+            <a href="/about">About us</a>
           </li>
           <li>
-            <a href="">Signup</a>
+            <a href="/contact">Contact us</a>
           </li>
           <li>
-            <a href="">Local Stores</a>
+            <a href="/accreditation">Accreditation Organisations</a>
           </li>
           <li>
-            <a href="">Commercial Enquiries</a>
+            <a href="/services">Our Services</a>
           </li>
         </ul>
       </div>
@@ -38,19 +47,14 @@ const Nav = props => (
         <div className="main-nav__container">
           <ul>
             <li>
-              <a href="/about">About us</a>
-            </li>
-            <li>
-              <a href="/contact">Contact us</a>
+              <a href="">Local Stores</a>
             </li>
             <li>
               <a href="/sectors">Sectors</a>
             </li>
+
             <li>
-              <a href="/accreditation">Accreditation Organisations</a>
-            </li>
-            <li>
-              <a href="/services">Our Services</a>
+              <a href="">Commercial Enquiries</a>
             </li>
           </ul>
 

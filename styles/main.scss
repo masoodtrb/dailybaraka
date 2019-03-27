@@ -15,32 +15,35 @@ h1 {
   .top-nav {
     background-color: #005739;
 
-    ul > li {
+    ul {
       display: inline-block;
-      a {
-        display: block;
-        margin-right: 30px;
-        color: #fff;
-        font-size: 0.7em;
-        line-height: 32px;
+      li {
+        display: inline-block;
+        a {
+          display: block;
+          margin-right: 30px;
+          color: #fff;
+          font-size: 0.7em;
+          line-height: 32px;
+        }
       }
     }
 
-    .regions {
+    .top-nav__rightside {
       float: right;
+    }
 
-      .select {
-        select {
-          height: 26px;
-          font-size: 0.8em;
-          margin-top: 2px;
-          padding: 0 38px 0 6px;
-          border-radius: 2px;
-        }
-        &:after {
-          top: 14px;
-          border-color: #999;
-        }
+    .select {
+      select {
+        height: 26px;
+        font-size: 0.8em;
+        margin-top: 2px;
+        padding: 0 38px 0 6px;
+        border-radius: 2px;
+      }
+      &:after {
+        top: 14px;
+        border-color: #999;
       }
     }
   }
@@ -50,6 +53,7 @@ h1 {
 
     &__container {
       display: flex;
+      width: 100%;
     }
 
     ul > li {

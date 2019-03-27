@@ -14,7 +14,7 @@ const Search = props => {
           <h1>Search</h1>
 
           <div className="columns is-multiline">
-            {[...Array(9).keys()].map((item, index) => (
+            {[...Array(9)].map((item, index) => (
               <div className="column is-4">
                 <a href="/sector">
                   <div className="box">

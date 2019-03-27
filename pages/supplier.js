@@ -57,7 +57,7 @@ const Search = props => {
             </h2>
 
             <div className="columns is-multiline">
-              {[...Array(12).keys()].map((item, index) => (
+              {[...Array(12)].map((item, index) => (
                 <div className="column is-2">
                   <a href="/product">
                     <div className="card">

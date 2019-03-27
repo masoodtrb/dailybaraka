@@ -14,7 +14,7 @@ const Search = props => {
           <h1>Sector Title</h1>
         </div>
 
-        {[...Array(3).keys()].map((item, index) => (
+        {[...Array(3)].map((item, index) => (
           <div className="sector__supplier">
             <div className="container">
               <a href="/supplier">
@@ -26,7 +26,7 @@ const Search = props => {
 
               <div className="sector__products">
                 <div className="columns">
-                  {[...Array(6).keys()].map((item, index) => (
+                  {[...Array(6)].map((item, index) => (
                     <div className="column is-2">
                       <a href="/product">
                         <div className="card">
