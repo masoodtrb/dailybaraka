@@ -3,7 +3,7 @@ import Head from "../components/head";
 import Nav from "../components/nav";
 import "../styles/main.scss";
 
-class Product extends Component {
+class Signin extends Component {
   static async getInitialProps({ query }) {
     return { query };
   }
@@ -64,4 +64,4 @@ class Product extends Component {
   }
 }
 
-export default Product;
+export default Signin;

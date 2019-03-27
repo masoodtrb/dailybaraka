@@ -3,10 +3,10 @@ import Head from "../components/head";
 import Nav from "../components/nav";
 import "../styles/main.scss";
 
-const Search = props => {
+const Supplier = props => {
   return (
     <div>
-      <Head title="Search" />
+      <Head title="Supplier" />
       <Nav />
 
       <div className="page supplier">
@@ -84,4 +84,4 @@ const Search = props => {
   );
 };
 
-export default Search;
+export default Supplier;

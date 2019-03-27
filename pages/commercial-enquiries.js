@@ -3,13 +3,9 @@ import Head from "../components/head";
 import Nav from "../components/nav";
 import "../styles/main.scss";
 
-let Map, TileLayer, Marker, Popup;
+let Map, TileLayer, Marker;
 
-class Product extends Component {
-  static async getInitialProps({ query }) {
-    return { query };
-  }
-
+class Enquiry extends Component {
   state = {
     marker: {
       lat: 51.505,
@@ -25,7 +21,6 @@ class Product extends Component {
     Map = require("react-leaflet").Map;
     TileLayer = require("react-leaflet").TileLayer;
     Marker = require("react-leaflet").Marker;
-    Popup = require("react-leaflet").Popup;
 
     this.forceUpdate();
   }
@@ -77,6 +72,7 @@ class Product extends Component {
   };
 
   render() {
+    debugger;
     const markerPosition = [this.state.marker.lat, this.state.marker.lng];
     const { tab } = this.state;
     return (
@@ -434,4 +430,4 @@ class Product extends Component {
   }
 }
 
-export default Product;
+export default Enquiry;

@@ -3,7 +3,7 @@ import Head from "../components/head";
 import Nav from "../components/nav";
 import "../styles/main.scss";
 
-class Product extends Component {
+class Signup extends Component {
   static async getInitialProps({ query }) {
     return { query };
   }
@@ -16,7 +16,7 @@ class Product extends Component {
 
         <div className="page signup">
           <div className="container">
-            <h1>Sign UP</h1>
+            <h1>Sign up</h1>
             <div className="columns">
               <div className="column is-6">
                 <form onSubmit={e => this.onSubmit(e)}>
@@ -76,4 +76,4 @@ class Product extends Component {
   }
 }
 
-export default Product;
+export default Signup;
