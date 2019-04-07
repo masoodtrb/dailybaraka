@@ -10,72 +10,59 @@ const Supplier = props => {
       <Nav />
 
       <div className="page supplier">
+        <img
+          src="/static/images/product-cover.png"
+          className="supplier__cover"
+          alt="Supplier Title"
+        />
         <div className="container">
           <div className="columns">
-            <div className="column is-2">
+            <div className="column">
               <img
-                className="supplier__logo"
-                src="/static/images/supplier-avatar.png"
-                alt="Supplier Logo"
+                src="https://picsum.photos/120/120/?image=1"
+                alt="Brand Image"
               />
-            </div>
-            <div className="column supplier__info">
-              <h1>Supplier Name</h1>
-              <span className="supplier__contact">
-                <i className="fas fa-phone" />
-                Tel:
-                <a href="tel: +4497658754">+4497658754</a>
-              </span>
-              <span className="supplier__contact">
-                <i className="fas fa-map-marker-alt" />
-                Address:
-                <a href="https://map.google.com/">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                </a>
-              </span>
-
+              <h1>Nestle Corporate</h1>
               <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. In
-                corporis delectus qui error molestias cupiditate voluptate,
-                laudantium alias ratione ex, aut repellat nostrum cum quibusdam
-                enim soluta ipsa labore explicabo. Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Fugiat doloribus, quos enim
-                eveniet cupiditate voluptatibus accusamus id accusantium, ipsam
-                non officia ea quasi asperiores adipisci eligendi et eum
-                consequuntur suscipit? Lorem, ipsum dolor sit amet consectetur
-                adipisicing elit. Molestias qui ex a tenetur quae expedita error
-                quas minima, iste ipsum aspernatur libero, recusandae voluptas
-                debitis, aliquid itaque sapiente magnam suscipit.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro,
+                eaque aut doloremque ipsam a impedit, omnis sit hic fugit, rem
+                exercitationem ex in eum maiores. Similique mollitia iure totam
+                debitis. Lorem ipsum dolor sit amet consectetur, adipisicing
+                elit. Quisquam quis ea deserunt ut dolores labore in. Et itaque
+                enim est. Placeat perferendis sed tempore cumque. Illum nobis in
+                iusto officia. Lorem ipsum dolor sit, amet consectetur
+                adipisicing elit. At dignissimos veniam cupiditate ea atque,
+                incidunt perspiciatis ut minus illo perferendis reprehenderit
+                exercitationem modi impedit rerum doloribus. Aliquam nulla quasi
+                iste. Lorem ipsum dolor sit amet consectetur adipisicing elit. A
+                placeat nesciunt cum maxime obcaecati, aut nostrum tempore
+                quisquam necessitatibus praesentium quod quidem vel atque
+                dolorum quae possimus animi exercitationem rem!
               </p>
             </div>
-          </div>
+            <div className="column">
+              <div className="supplier__products">
+                <h2>Product Listing</h2>
 
-          <div className="supplier__products">
-            <h2>
-              <i className="fas fa-tags" />
-              Products
-            </h2>
-
-            <div className="columns is-multiline">
-              {[...Array(12)].map((item, index) => (
-                <div className="column is-2">
-                  <a href="/product">
-                    <div className="card">
-                      <div className="card-image">
-                        <figure className="image is-4by3">
-                          <img
-                            src="https://bulma.io/images/placeholders/1280x960.png"
-                            alt="Placeholder image"
-                          />
-                        </figure>
-                      </div>
-                      <div className="card-content">
-                        <h3>Product Title {index + 1}</h3>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              ))}
+                <h3>Beverages</h3>
+                <ul>
+                  <li>
+                    <a>Coffeemate Original/light</a>
+                  </li>
+                  <li>
+                    <a>Coffeemate Original/light</a>
+                  </li>
+                  <li>
+                    <a>Coffeemate Original/light</a>
+                  </li>
+                  <li>
+                    <a>Coffeemate Original/light</a>
+                  </li>
+                  <li>
+                    <a>Coffeemate Original/light</a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

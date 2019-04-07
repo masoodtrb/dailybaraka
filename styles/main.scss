@@ -75,7 +75,8 @@ a {
 
 .header {
   .top-nav {
-    background-color: #005739;
+    background-color: rgb(34, 35, 43);
+    border-bottom: 1px solid rgb(164, 162, 164);
 
     ul {
       display: inline-block;
@@ -111,7 +112,7 @@ a {
   }
 
   .main-nav {
-    background-color: #007457;
+    background-color: rgb(34, 35, 43);
 
     &__container {
       display: flex;
@@ -161,12 +162,12 @@ a {
 
       button {
         margin-left: 4px;
-        background-color: #014e3b;
+        background-color: rgb(158, 187, 68);
         border-radius: 3px !important;
         border: none;
         i {
           color: #fff;
-          opacity: 0.5;
+          opacity: 0.7;
         }
       }
 
@@ -353,7 +354,9 @@ a {
     .image {
       border: solid 0.5px #707070;
       border-radius: 2px 2px 0 0;
+      overflow: hidden;
     }
+
     .card {
       box-shadow: none;
       border-radius: 2px;
@@ -387,72 +390,51 @@ a {
 }
 
 .page.supplier {
-  background: url("/static/images/supplier-bg.png") no-repeat;
-  background-size: 100%;
+  h2,
+  h3 {
+    font-size: 1em;
+    margin-bottom: 14px;
+  }
 
-  .supplier__logo {
+  .container {
+    margin-top: -70px;
+  }
+
+  .supplier__cover {
     width: 100%;
-    border-radius: 50%;
-    margin-top: 20px;
-  }
-  .supplier__info {
-    margin-top: 60px;
-
-    p {
-      margin-top: 10px;
-      line-height: 22px;
-    }
-  }
-
-  .supplier__contact {
-    display: block;
-    line-height: 30px;
-
-    i {
-      color: #005739;
-      font-size: 14px;
-      width: 25px;
-      text-align: center;
-    }
-  }
-
-  h2 {
-    background-color: #005739;
-    color: #fff;
-    line-height: 24px;
-    font-size: 0.8em;
-    display: inline-block;
-    min-width: 180px;
-    padding-right: 10px;
-    margin-top: 10px;
-    margin-bottom: 15px;
-    border-radius: 10px 5px 5px 10px;
-
-    i {
-      background-color: #dce7e3;
-      border-radius: 8px 0 0 8px;
-      color: #005739;
-      padding: 7px;
-      margin-right: 5px;
-    }
   }
 
   .supplier__products {
-    .card {
-      box-shadow: none;
-      border: solid 0.5px rgba(0, 0, 0, 0.12);
-      border-radius: 4px;
-      margin-bottom: 20px;
+    background-color: rgba(171, 171, 171, 0.6);
+    border: 0.5px solid #b1b1b1;
+    float: right;
+    width: 420px;
+    padding: 30px 18px;
+    color: #06182e;
+    font-size: 0.8em;
+    line-height: 25px;
 
-      .card-content {
-        background-color: transparent;
-        padding: 1rem;
-      }
+    h2 {
+      font-size: 1em;
+    }
 
-      h3 {
-        font-size: 1.2em;
-        letter-spacing: 0.2px;
-        color: rgba(0, 0, 0, 0.87);
+    h3 {
+      font-size: 0.95em;
+      margin-bottom: 5px;
+    }
+
+    ul {
+      padding-left: 15px;
+      li {
+        line-height: 32px;
+
+        a {
+          color: #06182e;
+
+          &:hover {
+            color: darken(#06182e, 10%);
+          }
+        }
       }
     }
   }
@@ -482,47 +464,80 @@ a {
 }
 
 .page.product {
-  background: url("/static/images/supplier-bg.png") no-repeat;
-  background-size: 100%;
-
   h2,
   h3 {
     font-size: 1em;
     margin-bottom: 14px;
   }
 
-  .product__image {
-    margin-top: 20px;
+  .container {
+    margin-top: -70px;
+  }
+
+  .product__cover {
     width: 100%;
   }
 
   .product__images {
     display: flex;
-    justify-content: space-between;
-    margin-top: 5px;
+    justify-content: flex-end;
+
+    li {
+      margin: 0 6px;
+    }
+
+    img {
+      width: 120px;
+      height: 120px;
+    }
   }
 
   .product__info {
-    margin-top: 60px;
-
     p {
       margin-top: 10px;
       line-height: 22px;
     }
   }
 
-  .product__description {
-    .tabs {
-      margin-bottom: 30px;
+  .product__topcertified {
+    float: right;
+    list-style: none;
+    margin-top: 70px;
+    li {
+      display: inline-block;
+      margin: 5px 0;
     }
   }
 
-  .product__barcode {
-    position: absolute;
-    right: 0;
-    width: 175px;
-    height: 80px;
-    margin-top: 80px;
+  .product__description {
+    clear: both;
+    .tabs {
+      margin-bottom: 30px;
+
+      ul {
+        border: none;
+
+        li {
+          background-color: #ababab;
+          padding: 8px 12px;
+          font-size: 0.8em;
+          margin-left: 8px;
+          border-radius: 20px;
+          a {
+            padding: 0;
+            border: none;
+            color: #f3f1f1;
+          }
+
+          &.is-active {
+            background-color: #a2c34b;
+            a {
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
   }
 }
 
