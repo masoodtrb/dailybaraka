@@ -32,7 +32,7 @@ class Supplier extends Component {
                   src={
                     supplier.logo
                       ? process.env.API_URL +
-                        "/shop/general/v1/file/" +
+                        "api/shop/general/v1/file/" +
                         supplier.logo.id
                       : "/static/images/128x128.png"
                   }

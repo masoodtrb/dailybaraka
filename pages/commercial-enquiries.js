@@ -82,7 +82,7 @@ class Enquiry extends Component {
 
     this.setState({ storeForm: { state: "SUBMITTING" } });
 
-    fetch("http://daily.irresno.ir/api/shop/retailers/v1/create", {
+    fetch("/api/shop/retailers/v1/create", {
       crossDomain: true,
       method: "POST",
       headers: {
@@ -126,7 +126,7 @@ class Enquiry extends Component {
   onSupplierFormSubmit = formData => {
     this.setState({ supplierForm: { state: "SUBMITTING" } });
 
-    fetch("http://daily.irresno.ir/api/shop/retailers/v1/create", {
+    fetch("/api/shop/retailers/v1/create", {
       crossDomain: true,
       method: "POST",
       headers: {

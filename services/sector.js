@@ -2,7 +2,7 @@ import fetch from "isomorphic-unfetch";
 
 async function getAll() {
   const response = await fetch(
-    process.env.API_URL + "shop/categories/v1/search",
+    process.env.API_URL + "api/shop/categories/v1/search",
     {
       method: "POST"
     }
@@ -12,7 +12,7 @@ async function getAll() {
 
 async function getSuppliersAndProducts(sectorId) {
   const response = await fetch(
-    process.env.API_URL + "shop/suppliers/v1/fat-search",
+    process.env.API_URL + "api/shop/suppliers/v1/fat-search",
     {
       method: "POST",
       headers: {
