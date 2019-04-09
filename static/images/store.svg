@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="78.996" height="78.996" viewBox="0 0 78.996 78.996">
+  <defs>
+    <filter id="bg" x="0" y="0" width="78.996" height="78.996" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feFlood flood-color="#cfccd6" flood-opacity="0.6"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-path">
+      <path id="Path_2" data-name="Path 2" d="M2.5,4.091A1.575,1.575,0,0,1,4.091,2.5H14.909A1.575,1.575,0,0,1,16.5,4.091V14.909A1.575,1.575,0,0,1,14.909,16.5H4.091A1.575,1.575,0,0,1,2.5,14.909V4.091Zm1.273,0V14.909a.3.3,0,0,0,.318.318H14.909a.3.3,0,0,0,.318-.318V4.091a.3.3,0,0,0-.318-.318H4.091a.3.3,0,0,0-.318.318Zm7.955.955a.636.636,0,1,1,1.273,0V6.636a3.5,3.5,0,1,1-7,0V5.045a.6.6,0,0,1,.636-.636.6.6,0,0,1,.636.636V6.636a2.227,2.227,0,0,0,4.455,0V5.045Z"/>
+    </clipPath>
+  </defs>
+  <g id="pin" transform="translate(18 16)">
+    <g transform="matrix(1, 0, 0, 1, -18, -16)" filter="url(#bg)">
+      <rect id="bg-2" data-name="bg" width="42.996" height="42.996" rx="8" transform="translate(18 16)" fill="#3497fd"/>
+    </g>
+    <g id="icon" transform="translate(-164.625 -329.625)">
+      <rect id="bg-3" data-name="bg" width="24" height="24" transform="translate(170 335)" fill="none"/>
+      <g id="ico" transform="translate(172.5 337.5)" opacity="0.8" clip-path="url(#clip-path)">
+        <rect id="Rectangle_9" data-name="Rectangle 9" width="17.182" height="17.182" transform="translate(0.909 0.909)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

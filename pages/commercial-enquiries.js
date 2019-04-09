@@ -54,12 +54,12 @@ class Enquiry extends Component {
         error => {
           // for when getting location results in an error
           alert(
-            "For find your location, Accept the location access request on your browser please. " +
+            "For finding your location, Please accept the Location Access Request on your browser. " +
               "Also you can find your organization location from the map."
           );
 
           console.error(
-            "An error has occured while retrieving location",
+            "An error has occurred while retrieving location",
             error
           );
         }
@@ -249,7 +249,6 @@ class Enquiry extends Component {
                   </div>
                 </div>
               </div>
-
               <div
                 className={[
                   "animate hidden",
@@ -265,7 +264,6 @@ class Enquiry extends Component {
                 </div>
               </div>
             </div>
-
             <div
               className={[
                 "tab-content",

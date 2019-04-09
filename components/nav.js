@@ -13,9 +13,21 @@ class Nav extends Component {
     if (!token) {
       token = sessionStorage.getItem("token");
     }
-    this.setState({
-      user: { token: token }
-    });
+    if (token) {
+      fetch("/api/shop/account/v1/current-user", {
+        headers: {
+          Authorization: "Bearer " + token
+        }
+      })
+        .then(response => {
+          return response.json();
+        })
+        .then(json => {
+          this.setState({
+            user: { ...json, token: token }
+          });
+        });
+    }
 
     // get all sectors
     fetch("/api/shop/categories/v1/search", {
@@ -50,7 +62,10 @@ class Nav extends Component {
                   <React.Fragment>
                     <li>
                       <i className="fas fa-user" />
-                      &nbsp; Welcome
+                      &nbsp; Welcome{" "}
+                      <a className="username" href="#">
+                        {this.state.user.firstName}
+                      </a>
                     </li>
                     <li>
                       <a href="#" onClick={e => this.onLogout(e)}>
@@ -61,7 +76,7 @@ class Nav extends Component {
                 ) : (
                   <React.Fragment>
                     <li>
-                      <Link href="/signIn">Sign in</Link>
+                      <Link href="/signIn">Sign In</Link>
                     </li>
                     <li>
                       <Link href="/signUp">SignUp</Link>
@@ -86,8 +101,8 @@ class Nav extends Component {
                 <Link href="/contact">Contact us</Link>
               </li>
               <li>
-                <Link href="/accreditation-organisations">
-                  Accreditation Organisations
+                <Link href="/accreditation-organizations">
+                  Accreditation Organizations
                 </Link>
               </li>
               <li>
@@ -101,7 +116,7 @@ class Nav extends Component {
             <div className="main-nav__container">
               <ul>
                 <li>
-                  <Link href="">Local Stores</Link>
+                  <Link href="/local-stores">Local Stores</Link>
                 </li>
                 <li>
                   <Link href="/sectors">Sectors</Link>
@@ -132,7 +147,8 @@ class Nav extends Component {
                               <option defaultValue value="all">
                                 All
                               </option>
-                              {this.state.sectors.length === 0 ? (
+                              {this.state.sectors &&
+                              this.state.sectors.length === 0 ? (
                                 <option disabled="disabled">Loading...</option>
                               ) : (
                                 this.state.sectors.map(sector => (

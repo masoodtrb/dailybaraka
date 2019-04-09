@@ -110,9 +110,12 @@ a {
         color: #fff;
         font-size: 0.7em;
         a {
-          display: block;
           color: #fff;
           line-height: 32px;
+
+          &.username {
+            color: #a2c34b;
+          }
         }
       }
     }
@@ -225,7 +228,7 @@ a {
   height: 45px;
 
   p.copyright {
-    color: #cbcbcb;
+    color: #a5a5a5;
     font-size: 0.9em;
   }
 
@@ -233,15 +236,57 @@ a {
     float: right;
     li {
       display: inline-block;
+      margin-left: 5px;
       a {
         display: block;
         background-color: #c3c3c3;
         border-radius: 50%;
-        width: 16px;
-        height: 16px;
+        width: 22px;
+        height: 22px;
+        line-height: 22px;
         font-size: 0.7em;
         text-align: center;
         color: #fff;
+        &.social__instagram {
+          background-color: #007ab9;
+
+          &:hover {
+            background-color: darken(#007ab9, 10%);
+          }
+        }
+        &.social__twitter {
+          background-color: #598dca;
+          &:hover {
+            background-color: darken(#598dca, 10%);
+          }
+        }
+        &.social__facebook {
+          background-color: #3a589b;
+          &:hover {
+            background-color: darken(#3a589b, 10%);
+          }
+        }
+      }
+    }
+  }
+
+  p {
+    display: inline-block;
+  }
+
+  &__links {
+    display: inline-block;
+    margin-left: 15px;
+    li {
+      display: inline-block;
+      border-left: 1px solid #e3e3e3;
+      padding-left: 15px;
+      a {
+        font-size: 0.9em;
+        color: #a5a5a5;
+        &:hover {
+          color: darken(#a5a5a5, 5%);
+        }
       }
     }
   }
@@ -626,4 +671,72 @@ a {
   background: url("/static/images/supplier-bg.png") no-repeat;
   background-size: 100%;
   padding-top: 150px;
+}
+
+.page.local-stores {
+  padding-bottom: 0;
+  .map {
+    position: relative;
+
+    &__component {
+      height: 80vh;
+    }
+
+    &__buttons {
+      z-index: 1000;
+      position: absolute;
+      bottom: 30px;
+      right: 20px;
+
+      button {
+        background-color: #fff;
+        box-shadow: 0 6px 8px 0 rgba(69, 91, 99, 0.1);
+        border-radius: 6px;
+        width: 46px;
+        height: 46px;
+        line-height: 46px;
+        color: #454f63;
+        font-size: 18px;
+
+        &:hover {
+          background-color: darken(#fff, 2%);
+        }
+      }
+    }
+
+    &__location {
+    }
+
+    .box {
+      padding: 0;
+      border-radius: 2px;
+      box-shadow: none;
+      width: 250px;
+
+      img {
+        height: 76px;
+        width: 76px;
+      }
+
+      p {
+        line-height: 72px;
+      }
+
+      strong {
+        font-size: 1.8em;
+        font-weight: normal;
+      }
+    }
+  }
+
+  .leaflet-popup-content-wrapper {
+    border-radius: 0;
+    padding: 0;
+    .leaflet-popup-content {
+      margin: 0;
+    }
+    .leaflet-popup-content p {
+      margin: 0;
+    }
+  }
 }

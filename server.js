@@ -19,16 +19,24 @@ app.prepare().then(() => {
   server.use("/api/", (req, res) => {
     const url = process.env.API_URL + "api" + req.url;
 
-    var options = {
+    // request headers
+    const headers = {
+      "content-type": "application/json"
+    };
+    if (req.headers.authorization) {
+      headers.Authorization = req.headers.authorization;
+    }
+
+    // request options
+    const options = {
       method: req.method,
       url,
-      headers: {
-        "content-type": "application/json"
-      },
+      headers,
       body: req.body,
       json: true
     };
 
+    // proxy the request to api
     request(options, (error, response, body) => {
       if (error) throw new Error(error);
 
