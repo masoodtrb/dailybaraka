@@ -39,7 +39,7 @@ class Search extends Component {
                               src={
                                 item.mainPicture
                                   ? process.env.API_URL +
-                                    "/shop/general/v1/file/" +
+                                    "api/shop/general/v1/file/" +
                                     item.mainPicture.id
                                   : "/static/images/128x128.png"
                               }

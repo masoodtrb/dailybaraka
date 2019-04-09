@@ -106,11 +106,12 @@ a {
       display: inline-block;
       li {
         display: inline-block;
+        margin-right: 30px;
+        color: #fff;
+        font-size: 0.7em;
         a {
           display: block;
-          margin-right: 30px;
           color: #fff;
-          font-size: 0.7em;
           line-height: 32px;
         }
       }
@@ -576,7 +577,7 @@ a {
   }
 }
 
-.page.signin {
+.page.signIn {
   background: url("/static/images/supplier-bg.png") no-repeat;
   background-size: 100%;
 
@@ -621,7 +622,7 @@ a {
   }
 }
 
-.page.signup {
+.page.signUp {
   background: url("/static/images/supplier-bg.png") no-repeat;
   background-size: 100%;
   padding-top: 150px;

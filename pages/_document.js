@@ -1,5 +1,6 @@
 import Document, { Head, Main, NextScript } from "next/document";
 
+import * as sectorService from "../services/sector";
 export default class MyDocument extends Document {
   render() {
     return (
@@ -7,7 +8,6 @@ export default class MyDocument extends Document {
         <Head />
         <body>
           <Main />
-          <NextScript />
 
           <div className="footer">
             <div className="container">
@@ -28,6 +28,7 @@ export default class MyDocument extends Document {
               </p>
             </div>
           </div>
+          <NextScript />
         </body>
       </html>
     );

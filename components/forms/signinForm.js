@@ -1,8 +1,9 @@
 import React from "react";
+import Link from "next/link";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
-const SigninSchema = Yup.object().shape({
+const SignInSchema = Yup.object().shape({
   email: Yup.string()
     .email("Email is invalid.")
     .required("Email is required."),
@@ -12,7 +13,7 @@ const SigninSchema = Yup.object().shape({
     .required("Password is required.")
 });
 
-const SigninForm = props => (
+const SignInForm = props => (
   <div>
     <Formik
       initialValues={{
@@ -20,7 +21,7 @@ const SigninForm = props => (
         password: "",
         rememberMe: false
       }}
-      validationSchema={SigninSchema}
+      validationSchema={SignInSchema}
       onSubmit={values => {
         props.onSubmit(values);
       }}
@@ -68,6 +69,7 @@ const SigninForm = props => (
           <div className="field is-grouped">
             <div className="control">
               <button
+                type="submit"
                 className={[
                   "button is-primary",
                   props.onProgress ? "is-loading" : ""
@@ -78,7 +80,7 @@ const SigninForm = props => (
             </div>
 
             <div className="control forgot-pass">
-              <a href="/forgot-pass">Forgot Password?</a>
+              <Link href="/forgot-pass">Forgot Password?</Link>
             </div>
           </div>
         </Form>
@@ -87,4 +89,4 @@ const SigninForm = props => (
   </div>
 );
 
-export default SigninForm;
+export default SignInForm;

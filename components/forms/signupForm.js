@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
-const SignupSchema = Yup.object().shape({
+const SignUpSchema = Yup.object().shape({
   firstName: Yup.string()
     .min(2, "First Name is too short.")
     .max(50, "First Name is too large.")
@@ -13,8 +13,7 @@ const SignupSchema = Yup.object().shape({
     .required("Last Name is required."),
   phone: Yup.string()
     .min(4, "Phone is too short.")
-    .max(50, "Phone is too large.")
-    .required("Phone is required."),
+    .max(50, "Phone is too large."),
   email: Yup.string()
     .email("Email is invalid.")
     .required("Email is required."),
@@ -30,7 +29,7 @@ const SignupSchema = Yup.object().shape({
     .required("Confirm Password is required.")
 });
 
-const SignupForm = props => (
+const SignUpForm = props => (
   <div>
     <Formik
       initialValues={{
@@ -41,7 +40,7 @@ const SignupForm = props => (
         password: "",
         rePassword: ""
       }}
-      validationSchema={SignupSchema}
+      validationSchema={SignUpSchema}
       onSubmit={values => {
         props.onSubmit(values);
       }}
@@ -138,6 +137,7 @@ const SignupForm = props => (
           <div className="field">
             <div className="control">
               <button
+                type="submit"
                 className={[
                   "button is-primary",
                   props.onProgress ? "is-loading" : ""
@@ -153,4 +153,4 @@ const SignupForm = props => (
   </div>
 );
 
-export default SignupForm;
+export default SignUpForm;
