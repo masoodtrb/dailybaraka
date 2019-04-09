@@ -9,4 +9,5 @@ module.exports = routes()
   .add("supplier", "/supplier/:id-:name")
   .add("signIn", "/signIn")
   .add("signUp", "/signUp")
-  .add("commercial-enquiries", "/commercial-enquiries");
+  .add("commercial-enquiries", "/commercial-enquiries")
+  .add("local-stores", "/local-stores");
