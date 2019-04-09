@@ -1,13 +1,21 @@
 import React, { Component } from "react";
+
+import * as sectorService from "../services/sector";
+
 import Head from "../components/head";
 import Nav from "../components/nav";
+
 import "../styles/main.scss";
 
 class Sectors extends Component {
+  static async getInitialProps({ req }) {
+    return { sectors: await sectorService.getAll() };
+  }
+
   render() {
     return (
       <div>
-        <Head title="Search" />
+        <Head title="Sectors" />
         <Nav />
 
         <div className="page sectors">
@@ -15,23 +23,23 @@ class Sectors extends Component {
             <h1>Sectors</h1>
 
             <div className="columns is-multiline">
-              {[...Array(9)].map((item, index) => (
-                <div className="column is-4">
-                  <a href="/sector">
+              {this.props.sectors.result.map((item, index) => (
+                <div key={item.id} className="column is-4">
+                  <a href={"/sector/" + item.id + "-" + item.name}>
                     <div className="box">
                       <article className="media">
                         <div className="media-left">
                           <figure className="image">
                             <img
                               src="https://bulma.io/images/placeholders/128x128.png"
-                              alt="Image"
+                              alt={item.name}
                             />
                           </figure>
                         </div>
                         <div className="media-content">
                           <div className="content">
                             <p>
-                              <strong>Sector {index + 1}</strong>
+                              <strong>{item.name}</strong>
                             </p>
                           </div>
                         </div>

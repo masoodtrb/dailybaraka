@@ -16,12 +16,9 @@ const Nav = props => (
           </ul>
 
           <div className="select">
-            <select>
-              <option>Region</option>
-              <option>English</option>
-              <option>German</option>
-              <option>Spanish</option>
-              <option>French</option>
+            <select defaultValue="en-uk">
+              <option>Language</option>
+              <option value="en-uk">English - UK</option>
             </select>
           </div>
         </div>

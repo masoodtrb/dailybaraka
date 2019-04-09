@@ -115,7 +115,7 @@ const Head = props => (
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"
       integrity="sha256-8B1OaG0zT7uYA572S2xOxWACq9NXYPQ+U5kHPV1bJN4="
-      crossorigin="anonymous"
+      crossOrigin="anonymous"
     />
     <link
       href="https://fonts.googleapis.com/css?family=Noto+Sans"
@@ -125,7 +125,7 @@ const Head = props => (
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
       integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-      crossorigin="anonymous"
+      crossOrigin="anonymous"
     />
     <link
       href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"

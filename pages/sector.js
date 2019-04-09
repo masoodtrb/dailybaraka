@@ -1,17 +1,22 @@
 import React, { Component } from "react";
+import * as sectorService from "../services/sector";
+
 import Head from "../components/head";
 import Nav from "../components/nav";
+
 import "../styles/main.scss";
 
 class Sector extends Component {
   static async getInitialProps({ query }) {
-    return { query };
+    return {
+      sector: await sectorService.getSuppliersAndProducts(query.id)
+    };
   }
 
   render() {
     return (
       <div>
-        <Head title="Search" />
+        <Head title="Sector" />
         <Nav />
 
         <div className="page sector">
@@ -19,32 +24,41 @@ class Sector extends Component {
             <h1>Sector Title</h1>
           </div>
 
-          {[...Array(3)].map((item, index) => (
-            <div className="sector__supplier">
+          {this.props.sector.result.map((supplier, index) => (
+            <div key={"supplier-" + supplier.id} className="sector__supplier">
               <div className="container">
-                <a href="/supplier">
+                <a href={"/supplier/" + supplier.id + "-" + supplier.name}>
                   <h2>
                     <i className="fas fa-store" />
-                    Supplier Title {index + 1}
+                    {supplier.name}
                   </h2>
                 </a>
 
                 <div className="sector__products">
                   <div className="columns">
-                    {[...Array(6)].map((item, index) => (
-                      <div className="column is-2">
-                        <a href="/product">
+                    {supplier.products.map((product, index) => (
+                      <div
+                        key={"product-" + product.id}
+                        className="column is-2"
+                      >
+                        <a href={"/product/" + product.id + "-" + product.name}>
                           <div className="card">
                             <div className="card-image">
                               <figure className="image is-4by3">
                                 <img
-                                  src="https://bulma.io/images/placeholders/1280x960.png"
-                                  alt="Placeholder image"
+                                  src={
+                                    product.mainPicture
+                                      ? process.env.API_URL +
+                                        "/shop/general/v1/file/" +
+                                        product.mainPicture.id
+                                      : "/static/images/128x128.png"
+                                  }
+                                  alt={product.name}
                                 />
                               </figure>
                             </div>
                             <div className="card-content">
-                              <h3>Product Title {index + 1}</h3>
+                              <h3>{product.name}</h3>
                             </div>
                           </div>
                         </a>
@@ -56,68 +70,42 @@ class Sector extends Component {
             </div>
           ))}
 
-          <nav className="pagination" role="navigation" aria-label="pagination">
-            <ul className="pagination-list">
-              <li>
-                <a
-                  className="pagination-link"
-                  aria-label="Goto previous page"
-                  disabled
-                >
-                  <i className="fas fa-chevron-left" />
-                </a>
-              </li>
-              <li>
-                <a
-                  className="pagination-link is-current"
-                  aria-label="Page 1"
-                  aria-current="page"
-                >
-                  1
-                </a>
-              </li>
-              <li>
-                <a className="pagination-link" aria-label="Goto page 2">
-                  2
-                </a>
-              </li>
-              <li>
-                <a className="pagination-link" aria-label="Goto page 3">
-                  3
-                </a>
-              </li>
-              <li>
-                <a className="pagination-link" aria-label="Goto page 4">
-                  4
-                </a>
-              </li>
-              <li>
-                <a className="pagination-link" aria-label="Goto page 5">
-                  5
-                </a>
-              </li>
-              <li>
-                <a className="pagination-link" aria-label="Goto page 6">
-                  6
-                </a>
-              </li>
-              <li>
-                <a className="pagination-link" aria-label="Goto page 7">
-                  7
-                </a>
-              </li>
-              <li>
-                <a className="pagination-link" aria-label="Goto page 8">
-                  8
-                </a>
-              </li>
-              <li>
-                <a className="pagination-link" aria-label="Goto next page">
-                  <i className="fas fa-chevron-right" />
-                </a>
-              </li>
-            </ul>
-          </nav>
+          {this.props.sector.pagination.page > 1 && (
+            <nav
+              className="pagination"
+              role="navigation"
+              aria-label="pagination"
+            >
+              <ul className="pagination-list">
+                <li>
+                  <a
+                    className="pagination-link"
+                    aria-label="Goto previous page"
+                    disabled
+                  >
+                    <i className="fas fa-chevron-left" />
+                  </a>
+                </li>
+                {[...Array(this.props.sector.pagination.page)].map(
+                  (item, index) => (
+                    <li key={"page-" + (index + 1)}>
+                      <a
+                        className="pagination-link"
+                        aria-label={"Goto page " + (index + 1)}
+                      >
+                        {index + 1}
+                      </a>
+                    </li>
+                  )
+                )}
+                <li>
+                  <a className="pagination-link" aria-label="Goto next page">
+                    <i className="fas fa-chevron-right" />
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          )}
         </div>
       </div>
     );

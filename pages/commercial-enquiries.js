@@ -3,6 +3,9 @@ import Head from "../components/head";
 import Nav from "../components/nav";
 import "../styles/main.scss";
 
+import CreateStoreForm from "../components/forms/createStoreForm";
+import CreateSupplierForm from "../components/forms/createSupplierForm";
+
 let Map, TileLayer, Marker;
 
 class Enquiry extends Component {
@@ -12,7 +15,9 @@ class Enquiry extends Component {
       lng: -0.09
     },
     zoom: 16,
-    tab: "store"
+    tab: "store",
+    storeForm: { state: "INITIATE", error: "" },
+    supplierForm: { state: "INITIATE", error: "" }
   };
 
   componentDidMount() {
@@ -71,8 +76,98 @@ class Enquiry extends Component {
     this.setState({ tab: tabState });
   };
 
+  onStoreFormSubmit = formData => {
+    formData.latitude = this.state.marker.lat;
+    formData.longitude = this.state.marker.lon;
+
+    this.setState({ storeForm: { state: "SUBMITTING" } });
+
+    fetch("http://daily.irresno.ir/api/shop/retailers/v1/create", {
+      crossDomain: true,
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        address: formData.address,
+        city: formData.city,
+        country: formData.country,
+        lat: formData.latitude,
+        lng: formData.longitude,
+        name: formData.name,
+        phoneNumbers: formData.phone,
+        postalCode: formData.postalCode,
+        province: formData.state,
+        enquiry: formData.enquiry,
+        owner: {
+          email: formData.email,
+          firstName: formData.firstName,
+          lastName: formData.lastName
+        }
+      })
+    }).then(response => {
+      if (response.ok) {
+        this.setState({ storeForm: { state: "SUCCESS" } });
+      } else {
+        this.setState({
+          storeForm: {
+            state: "ERROR",
+            error:
+              "Can not process the request. Type of error: " +
+              response.status +
+              ", response status: " +
+              response.statusText
+          }
+        });
+      }
+    });
+  };
+
+  onSupplierFormSubmit = formData => {
+    this.setState({ supplierForm: { state: "SUBMITTING" } });
+
+    fetch("http://daily.irresno.ir/api/shop/retailers/v1/create", {
+      crossDomain: true,
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        address: formData.address,
+        city: formData.city,
+        country: formData.country,
+        lat: formData.latitude,
+        lng: formData.longitude,
+        name: formData.name,
+        phoneNumbers: formData.phone,
+        postalCode: formData.postalCode,
+        province: formData.state,
+        enquiry: formData.enquiry,
+        owner: {
+          email: formData.email,
+          firstName: formData.firstName,
+          lastName: formData.lastName
+        }
+      })
+    }).then(response => {
+      if (response.ok) {
+        this.setState({ supplierForm: { state: "SUCCESS" } });
+      } else {
+        this.setState({
+          supplierForm: {
+            state: "ERROR",
+            error:
+              "Can not process the request. Type of error: " +
+              response.status +
+              ", response status: " +
+              response.statusText
+          }
+        });
+      }
+    });
+  };
+
   render() {
-    debugger;
     const markerPosition = [this.state.marker.lat, this.state.marker.lng];
     const { tab } = this.state;
     return (
@@ -103,151 +198,27 @@ class Enquiry extends Component {
                 tab === "store" ? "active" : null
               ].join(" ")}
             >
-              <div className="columns">
+              <div
+                className={[
+                  "columns animate",
+                  this.state.storeForm.state === "SUCCESS"
+                    ? "animate-hidden"
+                    : ""
+                ].join(" ")}
+              >
                 <div className="column is-6">
-                  <form onSubmit={e => this.onStoreSubmit(e)}>
-                    <div className="field">
-                      <label className="label">Organization/Business *</label>
-                      <div className="control">
-                        <input
-                          className="input"
-                          type="text"
-                          placeholder="Name of your organization"
-                        />
-                      </div>
+                  {this.state.storeForm.state === "ERROR" && (
+                    <div className="notification is-danger">
+                      <button className="delete" />
+                      <strong>An error has occurred</strong>
+                      <br />
+                      <p>{this.state.storeForm.error}</p>
                     </div>
-                    <div className="field">
-                      <label className="label">Address *</label>
-                      <div className="control">
-                        <input
-                          className="input"
-                          type="text"
-                          placeholder="Your organization address"
-                        />
-                      </div>
-                    </div>
-                    <div className="field">
-                      <div className="columns">
-                        <div className="column">
-                          <label className="label">City *</label>
-                          <div className="control">
-                            <input
-                              className="input"
-                              type="text"
-                              placeholder="City where your organization located on"
-                            />
-                          </div>
-                        </div>
-                        <div className="column">
-                          <label className="label">State/Provience *</label>
-                          <div className="control">
-                            <input
-                              className="input"
-                              type="text"
-                              placeholder="Your organization State/Provience"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="field">
-                      <div className="columns">
-                        <div className="column">
-                          <label className="label">Country *</label>
-                          <div className="control">
-                            <input
-                              className="input"
-                              type="text"
-                              placeholder="Country where your organization located on"
-                            />
-                          </div>
-                        </div>
-                        <div className="column">
-                          <label className="label">Postal Code *</label>
-                          <div className="control">
-                            <input
-                              className="input"
-                              type="text"
-                              placeholder="Your organization Postal Code"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <strong>Contact Name</strong>
-
-                    <div className="field">
-                      <div className="columns">
-                        <div className="column">
-                          <label className="label">First Name *</label>
-                          <div className="control">
-                            <input
-                              className="input"
-                              type="text"
-                              placeholder="Your name"
-                            />
-                          </div>
-                        </div>
-                        <div className="column">
-                          <label className="label">Last name *</label>
-                          <div className="control">
-                            <input
-                              className="input"
-                              type="text"
-                              placeholder="Your Last name"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="field">
-                      <label className="label">Phone Number *</label>
-                      <div className="control">
-                        <input
-                          className="input"
-                          type="tel"
-                          placeholder="Phone Number"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="field">
-                      <label className="label">Email *</label>
-                      <div className="control">
-                        <input
-                          className="input"
-                          type="email"
-                          placeholder="Email"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="field">
-                      <label className="label">Enquery</label>
-                      <div className="control">
-                        <textarea class="textarea" placeholder="Enquery" />
-                      </div>
-                    </div>
-
-                    <input
-                      type="hidden"
-                      name="latitude"
-                      value={this.state.marker.lat}
-                    />
-                    <input
-                      type="hidden"
-                      name="longitude"
-                      value={this.state.marker.lng}
-                    />
-
-                    <div className="field">
-                      <div className="control">
-                        <button className="button is-primary">Submit</button>
-                      </div>
-                    </div>
-                  </form>
+                  )}
+                  <CreateStoreForm
+                    onProgress={this.state.storeForm.state === "SUBMITTING"}
+                    onSubmit={formData => this.onStoreFormSubmit(formData)}
+                  />
                 </div>
                 <div className="column is-6">
                   <div className="has-text-centered">
@@ -255,7 +226,7 @@ class Enquiry extends Component {
                       className="button is-primary"
                       onClick={e => this.onSetLocation(e)}
                     >
-                      <i class="fas fa-map-marker-alt" />
+                      <i className="fas fa-map-marker-alt" />
                       &nbsp;Get my location
                     </button>
                   </div>
@@ -278,6 +249,21 @@ class Enquiry extends Component {
                   </div>
                 </div>
               </div>
+
+              <div
+                className={[
+                  "animate hidden",
+                  this.state.storeForm.state === "SUCCESS" ? "animate-show" : ""
+                ].join(" ")}
+              >
+                <div className="notification is-success">
+                  <strong>
+                    Your store information has been successfully submitted.
+                  </strong>
+                  <br />
+                  We will contact you as soon as possible.
+                </div>
+              </div>
             </div>
 
             <div
@@ -286,140 +272,44 @@ class Enquiry extends Component {
                 tab === "supplier" ? "active" : null
               ].join(" ")}
             >
-              <div className="columns">
+              <div
+                className={[
+                  "columns animate",
+                  this.state.supplierForm.state === "SUCCESS"
+                    ? "animate-hidden"
+                    : ""
+                ].join(" ")}
+              >
                 <div className="column is-6">
-                  <form onSubmit={e => this.onSupplierSubmit(e)}>
-                    <div className="field">
-                      <label className="label">Organization/Business *</label>
-                      <div className="control">
-                        <input
-                          className="input"
-                          type="text"
-                          placeholder="Name of your organization"
-                        />
-                      </div>
+                  {this.state.supplierForm.state === "ERROR" && (
+                    <div className="notification is-danger">
+                      <button className="delete" />
+                      <strong>An error has occurred</strong>
+                      <br />
+                      <p>{this.state.supplierForm.error}</p>
                     </div>
-                    <div className="field">
-                      <label className="label">Address *</label>
-                      <div className="control">
-                        <input
-                          className="input"
-                          type="text"
-                          placeholder="Your organization address"
-                        />
-                      </div>
-                    </div>
-                    <div className="field">
-                      <div className="columns">
-                        <div className="column">
-                          <label className="label">City *</label>
-                          <div className="control">
-                            <input
-                              className="input"
-                              type="text"
-                              placeholder="City where your organization located on"
-                            />
-                          </div>
-                        </div>
-                        <div className="column">
-                          <label className="label">State/Provience *</label>
-                          <div className="control">
-                            <input
-                              className="input"
-                              type="text"
-                              placeholder="Your organization State/Provience"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                  )}
+                  <CreateSupplierForm
+                    onProgress={this.state.supplierForm.state === "SUBMITTING"}
+                    onSubmit={formData => this.onSupplierFormSubmit(formData)}
+                  />
+                </div>
+              </div>
 
-                    <div className="field">
-                      <div className="columns">
-                        <div className="column">
-                          <label className="label">Country *</label>
-                          <div className="control">
-                            <input
-                              className="input"
-                              type="text"
-                              placeholder="Country where your organization located on"
-                            />
-                          </div>
-                        </div>
-                        <div className="column">
-                          <label className="label">Postal Code *</label>
-                          <div className="control">
-                            <input
-                              className="input"
-                              type="text"
-                              placeholder="Your organization Postal Code"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <strong>Contact Name</strong>
-
-                    <div className="field">
-                      <div className="columns">
-                        <div className="column">
-                          <label className="label">First Name *</label>
-                          <div className="control">
-                            <input
-                              className="input"
-                              type="text"
-                              placeholder="Your name"
-                            />
-                          </div>
-                        </div>
-                        <div className="column">
-                          <label className="label">Last name *</label>
-                          <div className="control">
-                            <input
-                              className="input"
-                              type="text"
-                              placeholder="Your Last name"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="field">
-                      <label className="label">Phone Number *</label>
-                      <div className="control">
-                        <input
-                          className="input"
-                          type="tel"
-                          placeholder="Phone Number"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="field">
-                      <label className="label">Email *</label>
-                      <div className="control">
-                        <input
-                          className="input"
-                          type="email"
-                          placeholder="Email"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="field">
-                      <label className="label">Enquery</label>
-                      <div className="control">
-                        <textarea class="textarea" placeholder="Enquery" />
-                      </div>
-                    </div>
-
-                    <div className="field">
-                      <div className="control">
-                        <button className="button is-primary">Submit</button>
-                      </div>
-                    </div>
-                  </form>
+              <div
+                className={[
+                  "animate hidden",
+                  this.state.supplierForm.state === "SUCCESS"
+                    ? "animate-show"
+                    : ""
+                ].join(" ")}
+              >
+                <div className="notification is-success">
+                  <strong>
+                    Your store information has been successfully submitted.
+                  </strong>
+                  <br />
+                  We will contact you as soon as possible.
                 </div>
               </div>
             </div>

@@ -2,11 +2,45 @@ import React, { Component } from "react";
 import Head from "../components/head";
 import Nav from "../components/nav";
 import "../styles/main.scss";
+import SignupFormForm from "../components/forms/signupForm";
 
 class Signup extends Component {
-  static async getInitialProps({ query }) {
-    return { query };
-  }
+  state = {
+    signupForm: { state: "INITIATE", error: "" }
+  };
+
+  onSignupSubmit = formData => {
+    fetch("http://daily.irresno.ir/api/shop/account/v1/register", {
+      crossDomain: true,
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        langKey: "en",
+        email: formData.email,
+        login: formData.email,
+        password: formData.password,
+        firstName: formData.firstName,
+        lastName: formData.lastName
+      })
+    }).then(response => {
+      if (response.ok) {
+        this.props.history.push("/");
+      } else {
+        this.setState({
+          signupForm: {
+            state: "ERROR",
+            error:
+              "Can not process the request. Type of error: " +
+              response.status +
+              ", response status: " +
+              response.statusText
+          }
+        });
+      }
+    });
+  };
 
   render() {
     return (
@@ -16,57 +50,23 @@ class Signup extends Component {
 
         <div className="page signup">
           <div className="container">
-            <h1>Sign up</h1>
             <div className="columns">
-              <div className="column is-6">
-                <form onSubmit={e => this.onSubmit(e)}>
-                  <div className="field">
-                    <label className="label">First Name *</label>
-                    <div className="control">
-                      <input
-                        className="input"
-                        type="text"
-                        placeholder="Your Name"
-                      />
-                    </div>
-                  </div>
-                  <div className="field">
-                    <label className="label">Last Name *</label>
-                    <div className="control">
-                      <input
-                        className="input"
-                        type="text"
-                        placeholder="Your Last Name"
-                      />
-                    </div>
-                  </div>
-                  <div className="field">
-                    <label className="label">Phone Number *</label>
-                    <div className="control">
-                      <input
-                        className="input"
-                        type="text"
-                        placeholder="Phone Number"
-                      />
-                    </div>
-                  </div>
-                  <div className="field">
-                    <label className="label">Email *</label>
-                    <div className="control">
-                      <input
-                        className="input"
-                        type="text"
-                        placeholder="Your Email"
-                      />
-                    </div>
-                  </div>
+              <div className="column is-6 is-offset-3">
+                <h1>Sign Up</h1>
 
-                  <div className="field">
-                    <div className="control">
-                      <button className="button is-primary">Submit</button>
-                    </div>
+                {this.state.signupForm.state === "ERROR" && (
+                  <div className="notification is-danger">
+                    <button className="delete" />
+                    <strong>An error has occurred</strong>
+                    <br />
+                    <p>{this.state.signupForm.error}</p>
                   </div>
-                </form>
+                )}
+
+                <SignupFormForm
+                  onProgress={this.state.signupForm.state === "SUBMITTING"}
+                  onSubmit={formData => this.onSignupSubmit(formData)}
+                />
               </div>
             </div>
           </div>

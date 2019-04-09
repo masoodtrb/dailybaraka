@@ -1,4 +1,5 @@
 $font-size: 16px;
+$primary-color: #06182e;
 
 body {
   font-size: $font-size;
@@ -25,7 +26,7 @@ a {
   }
 
   .label {
-    color: #007457;
+    color: $primary-color;
     font-size: 0.8em;
     font-weight: normal;
   }
@@ -45,7 +46,7 @@ a {
 
     &:focus {
       box-shadow: none;
-      border: 1px solid #007457;
+      border: 1px solid $primary-color;
     }
   }
 }
@@ -53,12 +54,12 @@ a {
 .button {
   &.is-primary {
     border-radius: 2px;
-    background-color: #007457;
+    background-color: $primary-color;
     color: #fff;
     font-size: 0.9em;
 
     &:hover {
-      background-color: darken(#007457, 5%);
+      background-color: darken($primary-color, 5%);
     }
   }
 }
@@ -67,9 +68,32 @@ a {
   li {
     font-size: 0.8em;
     &.is-active a {
-      border-bottom-color: #007457;
-      color: #007457;
+      border-bottom-color: $primary-color;
+      color: $primary-color;
     }
+  }
+}
+
+.tab-content {
+  display: none;
+  &.active {
+    display: block;
+  }
+}
+
+.animate {
+  transition: all 5s ease;
+
+  &.hidden {
+    display: none;
+  }
+
+  &.animate-hidden {
+    display: none;
+  }
+
+  &.animate-show {
+    display: block;
   }
 }
 
@@ -255,7 +279,7 @@ a {
 
     button {
       margin-left: 2px;
-      background-color: #007457;
+      background-color: $primary-color;
       border-radius: 3px !important;
       i {
         color: #fff;
@@ -328,7 +352,7 @@ a {
     margin-bottom: 40px;
 
     h2 {
-      background-color: #005739;
+      background-color: $primary-color;
       color: #fff;
       line-height: 24px;
       font-size: 0.8em;
@@ -341,7 +365,7 @@ a {
       i {
         background-color: #dce7e3;
         border-radius: 8px 0 0 8px;
-        color: #005739;
+        color: $primary-color;
         padding: 7px;
         margin-right: 5px;
       }
@@ -382,8 +406,8 @@ a {
       background-color: #fff;
 
       &.is-current {
-        background-color: #005739;
-        border-color: #005739;
+        background-color: $primary-color;
+        border-color: $primary-color;
       }
     }
   }
@@ -411,7 +435,7 @@ a {
     float: right;
     width: 420px;
     padding: 30px 18px;
-    color: #06182e;
+    color: $primary-color;
     font-size: 0.8em;
     margin-top: -200px;
 
@@ -430,11 +454,11 @@ a {
         line-height: 32px;
 
         a {
-          color: #06182e;
+          color: $primary-color;
           font-size: 1em;
 
           &:hover {
-            color: darken(#06182e, 10%);
+            color: darken($primary-color, 10%);
           }
         }
       }
@@ -480,7 +504,12 @@ a {
     width: 100%;
   }
 
-  .product__images {
+  .product__brand-image {
+    width: 120px;
+    height: 120px;
+  }
+
+  .product__related {
     display: flex;
     justify-content: flex-end;
 
@@ -491,6 +520,7 @@ a {
     img {
       width: 120px;
       height: 120px;
+      border-radius: 3px;
     }
   }
 
@@ -521,12 +551,11 @@ a {
 
         li {
           background-color: #ababab;
-          padding: 8px 12px;
           font-size: 0.8em;
           margin-left: 8px;
           border-radius: 20px;
           a {
-            padding: 0;
+            padding: 8px 12px;
             border: none;
             color: #f3f1f1;
           }
@@ -539,6 +568,10 @@ a {
           }
         }
       }
+    }
+
+    .tab-content {
+      padding-left: 20px;
     }
   }
 }
@@ -573,15 +606,8 @@ a {
     display: block;
   }
 
-  .tab-content {
-    display: none;
-    &.active {
-      display: initial;
-    }
-  }
-
   form > strong {
-    color: #014e3b;
+    color: $primary-color;
     font-size: 1em;
     font-weight: normal;
     display: block;

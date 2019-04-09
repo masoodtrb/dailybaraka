@@ -2,11 +2,42 @@ import React, { Component } from "react";
 import Head from "../components/head";
 import Nav from "../components/nav";
 import "../styles/main.scss";
+import SigninForm from "./../components/forms/signinForm";
 
 class Signin extends Component {
-  static async getInitialProps({ query }) {
-    return { query };
-  }
+  state = {
+    signinForm: { state: "INITIATE", error: "" }
+  };
+
+  onSigninSubmit = formData => {
+    fetch("http://daily.irresno.ir/api/panel/authenticate/v1/login", {
+      crossDomain: true,
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        password: formData.password,
+        rememberMe: formData.rememberMe,
+        username: formData.username
+      })
+    }).then(response => {
+      if (response.ok) {
+        this.props.history.push("/");
+      } else {
+        this.setState({
+          signinForm: {
+            state: "ERROR",
+            error:
+              "Can not process the request. Type of error: " +
+              response.status +
+              ", response status: " +
+              response.statusText
+          }
+        });
+      }
+    });
+  };
 
   render() {
     return (
@@ -18,38 +49,21 @@ class Signin extends Component {
           <div className="container">
             <div className="columns">
               <div className="column is-6 is-offset-3">
-                <form action="/signin" method="post">
-                  <div className="field">
-                    <label className="label">Username</label>
-                    <div className="control">
-                      <input
-                        className="input"
-                        type="text"
-                        placeholder="Username"
-                      />
-                    </div>
-                  </div>
-                  <div className="field">
-                    <label className="label">Password</label>
-                    <div className="control">
-                      <input
-                        className="input"
-                        type="password"
-                        placeholder="Password"
-                      />
-                    </div>
-                  </div>
+                <h1>Sign In</h1>
 
-                  <div className="field is-grouped">
-                    <div className="control">
-                      <button className="button is-primary">Submit</button>
-                    </div>
-
-                    <div className="control forgot-pass">
-                      <a href="/forgot-pass">Forgot Password?</a>
-                    </div>
+                {this.state.signinForm.state === "ERROR" && (
+                  <div className="notification is-danger">
+                    <button className="delete" />
+                    <strong>An error has occurred</strong>
+                    <br />
+                    <p>{this.state.signinForm.error}</p>
                   </div>
-                </form>
+                )}
+
+                <SigninForm
+                  onProgress={this.state.signinForm.state === "SUBMITTING"}
+                  onSubmit={formData => this.onSigninSubmit(formData)}
+                />
                 <br />
                 <br />
                 <p className="note has-text-centered">
