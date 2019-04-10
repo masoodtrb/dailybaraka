@@ -9,7 +9,7 @@ class Nav extends Component {
 
   componentDidMount() {
     // get token from localStorage
-    const token = localStorage.getItem("token");
+    let token = localStorage.getItem("token");
     if (!token) {
       token = sessionStorage.getItem("token");
     }
@@ -45,6 +45,9 @@ class Nav extends Component {
 
   onLogout(event) {
     event.preventDefault();
+
+    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
 
     this.setState({
       user: null
@@ -170,7 +173,10 @@ class Nav extends Component {
                                 <option disabled="disabled">Loading...</option>
                               ) : (
                                 this.state.sectors.map(sector => (
-                                  <option value={sector.id}>
+                                  <option
+                                    key={"sector-" + sector.id}
+                                    value={sector.id}
+                                  >
                                     {sector.name}
                                   </option>
                                 ))

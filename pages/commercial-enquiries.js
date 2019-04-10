@@ -1,10 +1,14 @@
 import React, { Component } from "react";
+import Recaptcha from "react-google-invisible-recaptcha";
+import Link from "next/link";
+
 import Head from "../components/head";
 import Nav from "../components/nav";
-import "../styles/main.scss";
 
 import CreateStoreForm from "../components/forms/createStoreForm";
 import CreateSupplierForm from "../components/forms/createSupplierForm";
+
+import "../styles/main.scss";
 
 let Map, TileLayer, Marker;
 
@@ -17,7 +21,9 @@ class Enquiry extends Component {
     zoom: 16,
     tab: "store",
     storeForm: { state: "INITIATE", error: "" },
-    supplierForm: { state: "INITIATE", error: "" }
+    storeFormData: {},
+    supplierForm: { state: "INITIATE", error: "" },
+    supplierFormData: {}
   };
 
   componentDidMount() {
@@ -76,14 +82,47 @@ class Enquiry extends Component {
     this.setState({ tab: tabState });
   };
 
+  onStoreFormSRecaptchaError = errorType => {
+    this.setState({
+      storeForm: {
+        state: "ERROR",
+        error: (
+          <React.Fragment>
+            The authorizing system, to detect you as a <strong>HUMAN</strong>{" "}
+            not a 🤖, occurred an error.
+            <br />
+            You could reload page to continue. If you receive this error again,
+            please{" "}
+            <Link href="/page/contact-us">
+              <a>get in touch with us.</a>
+            </Link>
+          </React.Fragment>
+        )
+      }
+    });
+  };
+
   onStoreFormSubmit = formData => {
     formData.latitude = this.state.marker.lat;
-    formData.longitude = this.state.marker.lon;
+    formData.longitude = this.state.marker.lng;
 
-    this.setState({ storeForm: { state: "SUBMITTING" } });
+    this.setState(
+      {
+        storeForm: { state: "SUBMITTING" },
+        storeFormData: formData
+      },
+      () => {
+        this.recaptchaStoreFormRef.execute();
+      }
+    );
+  };
 
+  onStoreFormRecaptchaResolved = () => {
+    const recaptchaToken = this.recaptchaStoreFormRef.getResponse();
+
+    const formData = this.state.storeFormData;
+    debugger;
     fetch("/api/shop/retailers/v1/create", {
-      crossDomain: true,
       method: "POST",
       headers: {
         "content-type": "application/json"
@@ -103,30 +142,84 @@ class Enquiry extends Component {
           email: formData.email,
           firstName: formData.firstName,
           lastName: formData.lastName
+        },
+        recaptchaToken
+      })
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.text();
+        } else {
+          this.setState({
+            storeForm: {
+              state: "ERROR",
+              error:
+                "Can not process the request. Type of error: " +
+                response.status +
+                ", response status: " +
+                response.statusText
+            }
+          });
+          this.recaptchaRef.reset();
         }
       })
-    }).then(response => {
-      if (response.ok) {
-        this.setState({ storeForm: { state: "SUCCESS" } });
-      } else {
+      .then(text => (text.length ? JSON.parse(text) : {}))
+      .then(json => {
+        if (json.status === 400) {
+          this.setState({
+            storeForm: {
+              state: "ERROR",
+              error: json.detail
+            }
+          });
+          this.recaptchaStoreFormRef.reset();
+          debugger;
+          return;
+        }
+
         this.setState({
           storeForm: {
-            state: "ERROR",
-            error:
-              "Can not process the request. Type of error: " +
-              response.status +
-              ", response status: " +
-              response.statusText
+            state: "SUCCESS"
           }
         });
+      });
+  };
+
+  onSupplierFormRecaptchaError = errorType => {
+    this.setState({
+      supplierForm: {
+        state: "ERROR",
+        error: (
+          <React.Fragment>
+            The authorizing system, to detect you as a <strong>HUMAN</strong>{" "}
+            not a 🤖, occurred an error.
+            <br />
+            You could reload page to continue. If you receive this error again,
+            please <a href="/page/contact-us">get in touch with us.</a>
+          </React.Fragment>
+        )
       }
     });
   };
 
   onSupplierFormSubmit = formData => {
-    this.setState({ supplierForm: { state: "SUBMITTING" } });
+    this.setState(
+      {
+        supplierForm: { state: "SUBMITTING" },
+        supplierFormData: formData
+      },
+      () => {
+        this.recaptchaSupplierFormRef.execute();
+      }
+    );
+  };
 
-    fetch("/api/shop/retailers/v1/create", {
+  onSupplierFormRecaptchaResolved = () => {
+    const recaptchaToken = this.recaptchaSupplierFormRef.getResponse();
+
+    const formData = this.state.storeFormData;
+
+    fetch("/api/shop/suppliers/v1/create", {
       crossDomain: true,
       method: "POST",
       headers: {
@@ -147,24 +240,47 @@ class Enquiry extends Component {
           email: formData.email,
           firstName: formData.firstName,
           lastName: formData.lastName
+        },
+        recaptchaToken
+      })
+    })
+      .then(response => {
+        if (response.ok) {
+          this.setState({ supplierForm: { state: "SUCCESS" } });
+          return response.text();
+        } else {
+          this.setState({
+            supplierForm: {
+              state: "ERROR",
+              error:
+                "Can not process the request. Type of error: " +
+                response.status +
+                ", response status: " +
+                response.statusText
+            }
+          });
+          this.recaptchaSupplierFormRef.reset();
         }
       })
-    }).then(response => {
-      if (response.ok) {
-        this.setState({ supplierForm: { state: "SUCCESS" } });
-      } else {
+      .then(text => (text.length ? JSON.parse(text) : {}))
+      .then(json => {
+        if (json.status === 400) {
+          this.setState({
+            supplierForm: {
+              state: "ERROR",
+              error: json.detail
+            }
+          });
+          this.recaptchaSupplierFormRef.reset();
+          return;
+        }
+
         this.setState({
           supplierForm: {
-            state: "ERROR",
-            error:
-              "Can not process the request. Type of error: " +
-              response.status +
-              ", response status: " +
-              response.statusText
+            state: "SUCCESS"
           }
         });
-      }
-    });
+      });
   };
 
   render() {
@@ -215,6 +331,7 @@ class Enquiry extends Component {
                       <p>{this.state.storeForm.error}</p>
                     </div>
                   )}
+
                   <CreateStoreForm
                     onProgress={this.state.storeForm.state === "SUBMITTING"}
                     onSubmit={formData => this.onStoreFormSubmit(formData)}
@@ -291,6 +408,15 @@ class Enquiry extends Component {
                     onProgress={this.state.supplierForm.state === "SUBMITTING"}
                     onSubmit={formData => this.onSupplierFormSubmit(formData)}
                   />
+                  <Recaptcha
+                    ref={ref => (this.recaptchaSupplierFormRef = ref)}
+                    sitekey={process.env.RECAPTCHA_KEY}
+                    onResolved={() => this.onSupplierFormRecaptchaResolved()}
+                    onError={() => this.onSupplierFormRecaptchaError("ERROR")}
+                    onExpired={() =>
+                      this.onSupplierFormRecaptchaError("EXPIRED")
+                    }
+                  />
                 </div>
               </div>
 
@@ -304,7 +430,7 @@ class Enquiry extends Component {
               >
                 <div className="notification is-success">
                   <strong>
-                    Your store information has been successfully submitted.
+                    Your supplier information has been successfully submitted.
                   </strong>
                   <br />
                   We will contact you as soon as possible.
@@ -313,6 +439,14 @@ class Enquiry extends Component {
             </div>
           </div>
         </div>
+
+        <Recaptcha
+          ref={ref => (this.recaptchaStoreFormRef = ref)}
+          sitekey={process.env.RECAPTCHA_KEY}
+          onResolved={() => this.onStoreFormRecaptchaResolved()}
+          onError={() => this.onStoreFormSRecaptchaError("ERROR")}
+          onExpired={() => this.onStoreFormSRecaptchaError("EXPIRED")}
+        />
       </div>
     );
   }

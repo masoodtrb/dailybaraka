@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "next/router";
+import Link from "next/link";
+import Recaptcha from "react-google-invisible-recaptcha";
 
 import Head from "../components/head";
 import Nav from "../components/nav";
@@ -10,13 +12,18 @@ import "../styles/main.scss";
 
 class SignIn extends Component {
   state = {
-    signInForm: { state: "INITIATE", error: "" }
+    signInForm: { state: "INITIATE", error: "" },
+    formData: {}
   };
 
-  onSignInSubmit = formData => {
+  onRecaptchaResolve = () => {
+    const recaptchaToken = this.recaptchaRef.getResponse();
+
+    const { formData } = this.state;
     this.setState({
       signInForm: { state: "SUBMITTING" }
     });
+
     fetch("/api/panel/authenticate/v1/login", {
       method: "POST",
       headers: {
@@ -25,7 +32,8 @@ class SignIn extends Component {
       body: JSON.stringify({
         password: formData.password,
         rememberMe: formData.rememberMe,
-        username: formData.email
+        username: formData.email,
+        recaptchaToken
       })
     })
       .then(response => {
@@ -42,6 +50,7 @@ class SignIn extends Component {
                 response.statusText
             }
           });
+          this.recaptchaRef.reset();
         }
       })
       .then(json => {
@@ -52,6 +61,7 @@ class SignIn extends Component {
               error: json.detail
             }
           });
+          this.recaptchaRef.reset();
           return;
         }
         if (formData.rememberMe) {
@@ -62,6 +72,38 @@ class SignIn extends Component {
 
         this.props.router.push("/");
       });
+  };
+
+  onRecaptchaError = errorType => {
+    this.setState({
+      signUpForm: {
+        state: "ERROR",
+        error: (
+          <React.Fragment>
+            The authorizing system, to detect you as a <strong>HUMAN</strong>{" "}
+            not a 🤖, occurred an error.
+            <br />
+            You could reload page to continue. If you receive this error again,
+            please{" "}
+            <Link href="/page/contact-us">
+              <a>get in touch with us.</a>
+            </Link>
+          </React.Fragment>
+        )
+      }
+    });
+  };
+
+  onSignInSubmit = formData => {
+    this.setState(
+      {
+        signUpForm: { state: "SUBMITTING" },
+        formData
+      },
+      () => {
+        this.recaptchaRef.execute();
+      }
+    );
   };
 
   render() {
@@ -89,10 +131,21 @@ class SignIn extends Component {
                   onProgress={this.state.signInForm.state === "SUBMITTING"}
                   onSubmit={formData => this.onSignInSubmit(formData)}
                 />
+
+                <Recaptcha
+                  ref={ref => (this.recaptchaRef = ref)}
+                  sitekey={process.env.RECAPTCHA_KEY}
+                  onResolved={() => this.onRecaptchaResolve()}
+                  onError={() => this.onRecaptchaError("ERROR")}
+                  onExpired={() => this.onRecaptchaError("EXPIRED")}
+                />
                 <br />
                 <br />
                 <p className="note has-text-centered">
-                  Do not have an account? <a href="/signUp">Sign up</a>
+                  Do not have an account?{" "}
+                  <Link href="/signUp">
+                    <a>Sign up</a>
+                  </Link>
                 </p>
               </div>
             </div>
