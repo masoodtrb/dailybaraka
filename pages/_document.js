@@ -37,9 +37,11 @@ export default class MyDocument extends Document {
                 2019 - All right reserved for daily baraka
               </p>
 
-              <ul class="footer__links">
+              <ul className="footer__links">
                 <li>
-                  <Link href="/terms">Terms &amp; Condition</Link>
+                  <Link href="/page/terms">
+                    <a>Terms &amp; Condition</a>
+                  </Link>
                 </li>
               </ul>
             </div>

@@ -76,10 +76,14 @@ class Nav extends Component {
                 ) : (
                   <React.Fragment>
                     <li>
-                      <Link href="/signIn">Sign In</Link>
+                      <Link href="/signIn">
+                        <a>Sign In</a>
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/signUp">SignUp</Link>
+                      <Link href="/signUp">
+                        <a>SignUp</a>
+                      </Link>
                     </li>
                   </React.Fragment>
                 )}
@@ -95,18 +99,24 @@ class Nav extends Component {
 
             <ul>
               <li>
-                <Link href="/about">About us</Link>
-              </li>
-              <li>
-                <Link href="/contact">Contact us</Link>
-              </li>
-              <li>
-                <Link href="/accreditation-organizations">
-                  Accreditation Organizations
+                <Link href="/page/about-us">
+                  <a>About us</a>
                 </Link>
               </li>
               <li>
-                <Link href="/services">Our Services</Link>
+                <Link href="/page/contact-us">
+                  <a>Contact us</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/page/accreditation-organizations">
+                  <a>Accreditation Organizations</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/page/services">
+                  <a>Our Services</a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -116,14 +126,20 @@ class Nav extends Component {
             <div className="main-nav__container">
               <ul>
                 <li>
-                  <Link href="/local-stores">Local Stores</Link>
+                  <Link href="/local-stores">
+                    <a>Local Stores</a>
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/sectors">Sectors</Link>
+                  <Link href="/sectors">
+                    <a>Sectors</a>
+                  </Link>
                 </li>
 
                 <li>
-                  <Link href="/commercial-enquiries">Commercial Enquiries</Link>
+                  <Link href="/commercial-enquiries">
+                    <a>Commercial Enquiries</a>
+                  </Link>
                 </li>
               </ul>
 
@@ -131,10 +147,12 @@ class Nav extends Component {
                 <React.Fragment>
                   <div className="main-nav__logo">
                     <Link href="/">
-                      <img
-                        src="/static/images/logo.png"
-                        alt="daily baraka logo"
-                      />
+                      <a>
+                        <img
+                          src="/static/images/logo.png"
+                          alt="daily baraka logo"
+                        />
+                      </a>
                     </Link>
                   </div>
 

@@ -10,4 +10,5 @@ module.exports = routes()
   .add("signIn", "/signIn")
   .add("signUp", "/signUp")
   .add("commercial-enquiries", "/commercial-enquiries")
-  .add("local-stores", "/local-stores");
+  .add("local-stores", "/local-stores")
+  .add("page", "/page/:slug");
