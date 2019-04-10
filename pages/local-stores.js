@@ -63,6 +63,7 @@ class LocalStores extends Component {
       .then(json => {
         const stores = JSON.parse(JSON.stringify(this.state.stores));
 
+        // add new stores to list
         json.forEach((store, index) => {
           const isExist = stores.find(item => item.id === store.id);
           if (!isExist) stores.push(store);
