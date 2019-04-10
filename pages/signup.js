@@ -1,22 +1,25 @@
 import React, { Component } from "react";
+import Recaptcha from "react-google-invisible-recaptcha";
+import Link from "next/link";
+
 import Head from "../components/head";
 import Nav from "../components/nav";
-import "../styles/main.scss";
 import SignUpForm from "../components/forms/signUpForm";
+
+import "../styles/main.scss";
 
 class SignUp extends Component {
   state = {
     signUpForm: { state: "INITIATE", error: "" },
+    formData: {},
     enteredEmail: ""
   };
 
-  onSignUpSubmit = formData => {
-    this.setState({
-      signUpForm: { state: "SUBMITTING" },
-      enteredEmail: formData.email
-    });
+  onRecaptchaResolve = () => {
+    const recaptchaToken = this.recaptchaRef.getResponse();
+
+    const { formData } = this.state;
     fetch("/api/shop/account/v1/register", {
-      crossDomain: true,
       method: "POST",
       headers: {
         "content-type": "application/json"
@@ -27,7 +30,8 @@ class SignUp extends Component {
         login: formData.email,
         password: formData.password,
         firstName: formData.firstName,
-        lastName: formData.lastName
+        lastName: formData.lastName,
+        recaptchaToken
       })
     })
       .then(response => {
@@ -44,6 +48,7 @@ class SignUp extends Component {
                 response.statusText
             }
           });
+          this.recaptchaRef.reset();
         }
       })
       .then(text => (text.length ? JSON.parse(text) : {}))
@@ -55,6 +60,7 @@ class SignUp extends Component {
               error: json.detail
             }
           });
+          this.recaptchaRef.reset();
           return;
         }
 
@@ -64,6 +70,39 @@ class SignUp extends Component {
           }
         });
       });
+  };
+
+  onRecaptchaError = errorType => {
+    this.setState({
+      signUpForm: {
+        state: "ERROR",
+        error: (
+          <React.Fragment>
+            The authorizing system, to detect you as a <strong>HUMAN</strong>{" "}
+            not a 🤖, occurred an error.
+            <br />
+            You could reload page to continue. If you receive this error again,
+            please{" "}
+            <Link href="/page/contact-us">
+              <a>get in touch with us.</a>
+            </Link>
+          </React.Fragment>
+        )
+      }
+    });
+  };
+
+  onSignUpSubmit = formData => {
+    this.setState(
+      {
+        signUpForm: { state: "SUBMITTING" },
+        enteredEmail: formData.email,
+        formData
+      },
+      () => {
+        this.recaptchaRef.execute();
+      }
+    );
   };
 
   render() {
@@ -106,10 +145,19 @@ class SignUp extends Component {
                 )}
 
                 {this.state.signUpForm.state !== "SUCCESS" && (
-                  <SignUpForm
-                    onProgress={this.state.signUpForm.state === "SUBMITTING"}
-                    onSubmit={formData => this.onSignUpSubmit(formData)}
-                  />
+                  <React.Fragment>
+                    <SignUpForm
+                      onProgress={this.state.signUpForm.state === "SUBMITTING"}
+                      onSubmit={formData => this.onSignUpSubmit(formData)}
+                    />
+                    <Recaptcha
+                      ref={ref => (this.recaptchaRef = ref)}
+                      sitekey={process.env.RECAPTCHA_KEY}
+                      onResolved={() => this.onRecaptchaResolve()}
+                      onError={() => this.onRecaptchaError("ERROR")}
+                      onExpired={() => this.onRecaptchaError("EXPIRED")}
+                    />
+                  </React.Fragment>
                 )}
               </div>
             </div>
