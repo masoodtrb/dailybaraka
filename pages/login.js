@@ -6,7 +6,7 @@ import Recaptcha from "react-google-invisible-recaptcha";
 import Head from "../components/head";
 import Nav from "../components/nav";
 
-import SignInForm from "../components/forms/signInForm";
+import SignInForm from "../components/forms/loginForm";
 
 import "../styles/main.scss";
 

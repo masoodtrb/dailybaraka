@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import Head from "../components/head";
 import Nav from "../components/nav";
-import SignUpForm from "../components/forms/signUpForm";
+import SignUpForm from "../components/forms/registerForm";
 
 import "../styles/main.scss";
 
