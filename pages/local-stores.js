@@ -163,10 +163,10 @@ class LocalStores extends Component {
                     icon={StoreIcon}
                   >
                     <Popup>
-                      <div class="box">
-                        <article class="media">
-                          <div class="media-left">
-                            <figure class="image">
+                      <div className="box">
+                        <article className="media">
+                          <div className="media-left">
+                            <figure className="image">
                               <img
                                 src={
                                   store.logo
@@ -179,8 +179,8 @@ class LocalStores extends Component {
                               />
                             </figure>
                           </div>
-                          <div class="media-content">
-                            <div class="content">
+                          <div className="media-content">
+                            <div className="content">
                               <p>
                                 <strong>{store.name}</strong>
                               </p>

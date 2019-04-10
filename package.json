@@ -8,6 +8,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "formik": "^1.5.2",
+    "html-react-parser": "^0.7.0",
     "isomorphic-unfetch": "^3.0.0",
     "leaflet": "^1.4.0",
     "next": "^8.0.3",
