@@ -53,7 +53,7 @@ class SignUp extends Component {
       })
       .then(text => (text.length ? JSON.parse(text) : {}))
       .then(json => {
-        if (json.status === 400) {
+        if (json.status >= 300) {
           this.setState({
             signUpForm: {
               state: "ERROR",
@@ -138,8 +138,8 @@ class SignUp extends Component {
                       mail address.
                     </p>
                     <p>
-                      If you couldn't find the mail in the Inbox folder, check
-                      your Spam/Junk folder please.
+                      If you couldn't find this mail in your Inbox folder, check
+                      the Spam/Junk folder please.
                     </p>
                   </div>
                 )}

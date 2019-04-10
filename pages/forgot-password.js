@@ -6,13 +6,13 @@ import Recaptcha from "react-google-invisible-recaptcha";
 import Head from "../components/head";
 import Nav from "../components/nav";
 
-import SignInForm from "../components/forms/loginForm";
+import ForgotPasswordForm from "../components/forms/forgotPassword";
 
 import "../styles/main.scss";
 
-class SignIn extends Component {
+class ForgotPassword extends Component {
   state = {
-    signInForm: { state: "INITIATE", error: "" },
+    forgotPasswordForm: { state: "INITIATE", error: "" },
     formData: {}
   };
 
@@ -21,27 +21,25 @@ class SignIn extends Component {
 
     const { formData } = this.state;
     this.setState({
-      signInForm: { state: "SUBMITTING" }
+      forgotPasswordForm: { state: "SUBMITTING" }
     });
 
-    fetch("/api/panel/authenticate/v1/login", {
+    fetch("/api/shop/account/v1/reset-password/init", {
       method: "POST",
       headers: {
         "content-type": "application/json"
       },
       body: JSON.stringify({
-        password: formData.password,
-        rememberMe: formData.rememberMe,
-        username: formData.email,
+        email: formData.email,
         recaptchaToken
       })
     })
       .then(response => {
         if (response.ok) {
-          return response.json();
+          return response.text();
         } else {
           this.setState({
-            signInForm: {
+            forgotPasswordForm: {
               state: "ERROR",
               error:
                 "Can not process the request. Type of error: " +
@@ -53,10 +51,11 @@ class SignIn extends Component {
           this.recaptchaRef.reset();
         }
       })
+      .then(text => (text.length ? JSON.parse(text) : {}))
       .then(json => {
         if (json.status >= 300) {
           this.setState({
-            signInForm: {
+            forgotPasswordForm: {
               state: "ERROR",
               error: json.detail
             }
@@ -64,19 +63,18 @@ class SignIn extends Component {
           this.recaptchaRef.reset();
           return;
         }
-        if (formData.rememberMe) {
-          localStorage.setItem("token", json.id_token);
-        } else {
-          sessionStorage.setItem("token", json.id_token);
-        }
 
-        this.props.router.push("/");
+        this.setState({
+          forgotPasswordForm: {
+            state: "SUCCESS"
+          }
+        });
       });
   };
 
   onRecaptchaError = errorType => {
     this.setState({
-      signInForm: {
+      forgotPasswordForm: {
         state: "ERROR",
         error: (
           <React.Fragment>
@@ -94,10 +92,10 @@ class SignIn extends Component {
     });
   };
 
-  onSignInSubmit = formData => {
+  onForgotPasswordSubmit = formData => {
     this.setState(
       {
-        signInForm: { state: "SUBMITTING" },
+        forgotPasswordForm: { state: "SUBMITTING" },
         formData
       },
       () => {
@@ -109,44 +107,59 @@ class SignIn extends Component {
   render() {
     return (
       <div>
-        <Head title="Sign In" />
+        <Head title="Forgot Password" />
         <Nav />
 
         <div className="page signIn">
           <div className="container">
             <div className="columns">
               <div className="column is-6 is-offset-3">
-                <h1>Sign In</h1>
+                <h1>Forgot Password</h1>
 
-                {this.state.signInForm.state === "ERROR" && (
+                {this.state.forgotPasswordForm.state === "ERROR" && (
                   <div className="notification is-danger">
                     <button className="delete" />
                     <strong>An error has occurred</strong>
                     <br />
-                    <p>{this.state.signInForm.error}</p>
+                    <p>{this.state.forgotPasswordForm.error}</p>
                   </div>
                 )}
 
-                <SignInForm
-                  onProgress={this.state.signInForm.state === "SUBMITTING"}
-                  onSubmit={formData => this.onSignInSubmit(formData)}
-                />
+                {this.state.forgotPasswordForm.state === "SUCCESS" && (
+                  <div className="notification is-success">
+                    <strong>
+                      Your reset password request has been successfully
+                      submitted.
+                    </strong>
+                    <br />
+                    <p>You will receive an email to reset your password.</p>
+                    <p>
+                      If you couldn't find this mail in your Inbox folder, check
+                      the Spam/Junk folder please.
+                    </p>
+                  </div>
+                )}
 
-                <Recaptcha
-                  ref={ref => (this.recaptchaRef = ref)}
-                  sitekey={process.env.RECAPTCHA_KEY}
-                  onResolved={() => this.onRecaptchaResolve()}
-                  onError={() => this.onRecaptchaError("ERROR")}
-                  onExpired={() => this.onRecaptchaError("EXPIRED")}
-                />
-                <br />
-                <br />
-                <p className="note has-text-centered">
-                  Do not have an account?{" "}
-                  <Link href="/signIn">
-                    <a>Sign up</a>
-                  </Link>
-                </p>
+                {this.state.forgotPasswordForm.state !== "SUCCESS" && (
+                  <React.Fragment>
+                    <ForgotPasswordForm
+                      onProgress={
+                        this.state.forgotPasswordForm.state === "SUBMITTING"
+                      }
+                      onSubmit={formData =>
+                        this.onForgotPasswordSubmit(formData)
+                      }
+                    />
+
+                    <Recaptcha
+                      ref={ref => (this.recaptchaRef = ref)}
+                      sitekey={process.env.RECAPTCHA_KEY}
+                      onResolved={() => this.onRecaptchaResolve()}
+                      onError={() => this.onRecaptchaError("ERROR")}
+                      onExpired={() => this.onRecaptchaError("EXPIRED")}
+                    />
+                  </React.Fragment>
+                )}
               </div>
             </div>
           </div>
@@ -156,4 +169,4 @@ class SignIn extends Component {
   }
 }
 
-export default withRouter(SignIn);
+export default withRouter(ForgotPassword);

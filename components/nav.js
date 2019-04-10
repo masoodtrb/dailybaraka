@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Link from "next/link";
 
+import { getUserToken } from "../services/account";
+
 class Nav extends Component {
   state = {
     user: null,
@@ -9,10 +11,8 @@ class Nav extends Component {
 
   componentDidMount() {
     // get token from localStorage
-    let token = localStorage.getItem("token");
-    if (!token) {
-      token = sessionStorage.getItem("token");
-    }
+    const token = getUserToken();
+
     if (token) {
       fetch("/api/shop/account/v1/current-user", {
         headers: {
@@ -66,9 +66,9 @@ class Nav extends Component {
                     <li>
                       <i className="fas fa-user" />
                       &nbsp; Welcome{" "}
-                      <a className="username" href="#">
-                        {this.state.user.firstName}
-                      </a>
+                      <Link href="/profile">
+                        <a className="username">{this.state.user.firstName}</a>
+                      </Link>
                     </li>
                     <li>
                       <a href="#" onClick={e => this.onLogout(e)}>

@@ -53,11 +53,11 @@ class Product extends Component {
                 <img
                   className="product__brand-image"
                   src={
-                    product.brand.logo
+                    product.brand && product.logo
                       ? process.env.API_URL +
                         "api/shop/general/v1/file/" +
                         product.logo.id
-                      : product.supplier.logo
+                      : product.supplier && product.supplier.logo
                       ? process.env.API_URL +
                         "api/shop/general/v1/file/" +
                         product.supplier.logo.id

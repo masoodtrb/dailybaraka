@@ -165,7 +165,7 @@ class Enquiry extends Component {
       })
       .then(text => (text.length ? JSON.parse(text) : {}))
       .then(json => {
-        if (json.status === 400) {
+        if (json.status >= 300) {
           this.setState({
             storeForm: {
               state: "ERROR",
@@ -264,7 +264,7 @@ class Enquiry extends Component {
       })
       .then(text => (text.length ? JSON.parse(text) : {}))
       .then(json => {
-        if (json.status === 400) {
+        if (json.status >= 300) {
           this.setState({
             supplierForm: {
               state: "ERROR",

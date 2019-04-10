@@ -80,7 +80,7 @@ const SignInForm = props => (
             </div>
 
             <div className="control forgot-pass">
-              <Link href="/forgot-pass">
+              <Link href="/forgot-password">
                 <a>Forgot Password?</a>
               </Link>
             </div>
