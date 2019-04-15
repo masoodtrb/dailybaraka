@@ -423,49 +423,11 @@ a {
 .footer {
   background-color: #f2f2f2;
   padding: 2rem 1.5rem 3rem;
-  height: 45px;
+  min-height: 45px;
 
   p.copyright {
     color: #a5a5a5;
     font-size: 0.9em;
-  }
-
-  ul.social {
-    float: right;
-    li {
-      display: inline-block;
-      margin-left: 5px;
-      a {
-        display: block;
-        background-color: #c3c3c3;
-        border-radius: 50%;
-        width: 22px;
-        height: 22px;
-        line-height: 22px;
-        font-size: 0.7em;
-        text-align: center;
-        color: #fff;
-        &.social__instagram {
-          background-color: #007ab9;
-
-          &:hover {
-            background-color: darken(#007ab9, 10%);
-          }
-        }
-        &.social__twitter {
-          background-color: #598dca;
-          &:hover {
-            background-color: darken(#598dca, 10%);
-          }
-        }
-        &.social__facebook {
-          background-color: #3a589b;
-          &:hover {
-            background-color: darken(#3a589b, 10%);
-          }
-        }
-      }
-    }
   }
 
   p {
@@ -484,6 +446,23 @@ a {
         color: #a5a5a5;
         &:hover {
           color: darken(#a5a5a5, 5%);
+        }
+      }
+    }
+  }
+
+  @include mobile() {
+    padding: 1rem 0;
+
+    &__links {
+      display: block;
+      margin: 0;
+      li {
+        border: none;
+        padding: 0;
+        a {
+          display: block;
+          line-height: 50px;
         }
       }
     }
@@ -599,11 +578,11 @@ a {
       background-color: $primary-color;
       color: #fff;
       line-height: 24px;
-      font-size: 0.8em;
+      font-size: 1.1em;
       display: inline-block;
       min-width: 180px;
       padding-right: 10px;
-      margin-top: 10px;
+      margin-top: 15px;
       border-radius: 10px 5px 5px 10px;
 
       i {
@@ -611,13 +590,13 @@ a {
         border-radius: 8px 0 0 8px;
         color: $primary-color;
         padding: 7px;
-        margin-right: 5px;
+        margin-right: 10px;
       }
     }
   }
 
   .sector__products {
-    margin-top: 10px;
+    margin-top: 20px;
 
     .image {
       border: solid 0.5px #707070;
