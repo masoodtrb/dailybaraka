@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Link from "next/link";
+
 import * as sectorService from "../services/sector";
 
 import Head from "../components/head";
@@ -27,13 +29,14 @@ class Sector extends Component {
           {this.props.sector.result.map((supplier, index) => (
             <div key={"supplier-" + supplier.id} className="sector__supplier">
               <div className="container">
-                <a href={"/supplier/" + supplier.id + "-" + supplier.name}>
-                  <h2>
-                    <i className="fas fa-store" />
-                    {supplier.name}
-                  </h2>
-                </a>
-
+                <Link href={"/supplier/" + supplier.id + "/" + supplier.name}>
+                  <a>
+                    <h2>
+                      <i className="fas fa-store" />
+                      {supplier.name}
+                    </h2>
+                  </a>
+                </Link>
                 <div className="sector__products">
                   <div className="columns">
                     {supplier.products.map((product, index) => (
@@ -41,27 +44,31 @@ class Sector extends Component {
                         key={"product-" + product.id}
                         className="column is-2"
                       >
-                        <a href={"/product/" + product.id + "-" + product.name}>
-                          <div className="card">
-                            <div className="card-image">
-                              <figure className="image is-4by3">
-                                <img
-                                  src={
-                                    product.mainPicture
-                                      ? process.env.API_URL +
-                                        "api/shop/general/v1/file/" +
-                                        product.mainPicture.id
-                                      : "/static/images/128x128.png"
-                                  }
-                                  alt={product.name}
-                                />
-                              </figure>
+                        <Link
+                          href={"/product/" + product.id + "/" + product.name}
+                        >
+                          <a>
+                            <div className="card">
+                              <div className="card-image">
+                                <figure className="image is-4by3">
+                                  <img
+                                    src={
+                                      product.mainPicture
+                                        ? process.env.API_URL +
+                                          "api/shop/general/v1/file/" +
+                                          product.mainPicture.id
+                                        : "/static/images/128x128.png"
+                                    }
+                                    alt={product.name}
+                                  />
+                                </figure>
+                              </div>
+                              <div className="card-content">
+                                <h3>{product.name}</h3>
+                              </div>
                             </div>
-                            <div className="card-content">
-                              <h3>{product.name}</h3>
-                            </div>
-                          </div>
-                        </a>
+                          </a>
+                        </Link>
                       </div>
                     ))}
                   </div>

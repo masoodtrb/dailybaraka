@@ -11,7 +11,6 @@ class Nav extends Component {
   };
 
   componentDidMount() {
-    // get token from localStorage
     const token = getUserToken();
 
     if (token) {
@@ -222,17 +221,21 @@ class Nav extends Component {
           </div>
         </div>
         <div className="mob-nav">
-          <nav class="navbar" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
+          <nav
+            className="navbar"
+            role="navigation"
+            aria-label="main navigation"
+          >
+            <div className="navbar-brand">
               <Link href="/">
-                <a class="navbar-item">
+                <a className="navbar-item">
                   <img src="/static/images/logo.png" alt="Daily Baraka" />
                 </a>
               </Link>
 
               <a
                 role="button"
-                class="navbar-burger"
+                className="navbar-burger"
                 aria-label="menu"
                 aria-expanded="false"
                 onClick={e => this.toggleMenu(e)}
@@ -244,7 +247,9 @@ class Nav extends Component {
             </div>
           </nav>
           <div
-            class={["navbar-menu", this.state.showMenu && "active"].join(" ")}
+            className={["navbar-menu", this.state.showMenu && "active"].join(
+              " "
+            )}
             id="navMenu"
           >
             <ul>

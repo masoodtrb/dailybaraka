@@ -27,7 +27,13 @@ class Supplier extends Component {
 
         <div className="page supplier">
           <img
-            src="/static/images/product-cover.png"
+            src={
+              supplier.cover && supplier.cover.id
+                ? process.env.API_URL +
+                  "api/shop/general/v1/file/" +
+                  supplier.cover.id
+                : "/static/images/supplier-bg.png"
+            }
             className="supplier__cover"
             alt={supplier.name}
           />
@@ -35,6 +41,7 @@ class Supplier extends Component {
             <div className="columns">
               <div className="column">
                 <img
+                  className="supplier__logo"
                   src={
                     supplier.logo
                       ? process.env.API_URL +
@@ -49,7 +56,7 @@ class Supplier extends Component {
               </div>
               <div className="column">
                 <div className="supplier__products">
-                  <h2>Product Listing</h2>
+                  <h2>{supplier.name} Products</h2>
 
                   <h3>Beverages</h3>
                   <ul>

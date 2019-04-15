@@ -30,33 +30,35 @@ class Search extends Component {
             <div className="columns is-multiline">
               {products.result.map((item, index) => (
                 <div className="column is-4">
-                  <a href="/sector">
-                    <div className="box">
-                      <article className="media">
-                        <div className="media-left">
-                          <figure className="image">
-                            <img
-                              src={
-                                item.mainPicture
-                                  ? process.env.API_URL +
-                                    "api/shop/general/v1/file/" +
-                                    item.mainPicture.id
-                                  : "/static/images/128x128.png"
-                              }
-                              alt={item.name}
-                            />
-                          </figure>
-                        </div>
-                        <div className="media-content">
-                          <div className="content">
-                            <p>
-                              <strong>{item.name}</strong>
-                            </p>
+                  <Link href={"/product/" + product.id + "/" + product.name}>
+                    <a href="/sector">
+                      <div className="box">
+                        <article className="media">
+                          <div className="media-left">
+                            <figure className="image">
+                              <img
+                                src={
+                                  item.mainPicture
+                                    ? process.env.API_URL +
+                                      "api/shop/general/v1/file/" +
+                                      item.mainPicture.id
+                                    : "/static/images/128x128.png"
+                                }
+                                alt={item.name}
+                              />
+                            </figure>
                           </div>
-                        </div>
-                      </article>
-                    </div>
-                  </a>
+                          <div className="media-content">
+                            <div className="content">
+                              <p>
+                                <strong>{item.name}</strong>
+                              </p>
+                            </div>
+                          </div>
+                        </article>
+                      </div>
+                    </a>
+                  </Link>
                 </div>
               ))}
             </div>

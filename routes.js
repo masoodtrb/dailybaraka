@@ -12,11 +12,11 @@ module.exports = routes()
   .add("home", "/", "index")
   .add("page", "/page/:slug")
   .add("search", "/search")
-  .add("product", "/product/:id-:name")
+  .add("product", "/product/:id/:name")
   .add("sectors", "/sectors")
   .add("sector", "/sector/:id-:name")
 
   // Other Pages
-  .add("supplier", "/supplier/:id-:name")
+  .add("supplier", "/supplier/:id/:name")
   .add("commercial-enquiries", "/commercial-enquiries")
   .add("local-stores", "/local-stores");

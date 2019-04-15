@@ -24,6 +24,7 @@ class Product extends Component {
   render() {
     const { product } = this.props;
     const { tab } = this.state;
+    console.log(this.props);
     return (
       <div>
         <Head title={product.name} />
@@ -31,40 +32,52 @@ class Product extends Component {
 
         <div className="page product">
           <img
-            src="/static/images/product-cover.png"
+            src={
+              product.cover && product.cover.id
+                ? process.env.API_URL +
+                  "api/shop/general/v1/file/" +
+                  product.cover.id
+                : "/static/images/supplier-bg.png"
+            }
             className="product__cover"
             alt={product.name}
           />
           <div className="container">
             <div className="columns">
               <div className="column product__info">
-                <ul className="product__topcertified">
-                  {product.halalCertificates.map(certificate => (
-                    <li>
-                      <a>
-                        <img
-                          src="/static/images/halal2-logo.png"
-                          alt={certificate.name}
-                        />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-                <img
-                  className="product__brand-image"
-                  src={
-                    product.brand && product.logo
-                      ? process.env.API_URL +
-                        "api/shop/general/v1/file/" +
-                        product.logo.id
-                      : product.supplier && product.supplier.logo
-                      ? process.env.API_URL +
-                        "api/shop/general/v1/file/" +
-                        product.supplier.logo.id
-                      : "/static/images/128x128.png"
-                  }
-                  alt={product.brand.name}
-                />
+                {product.halalCertificates &&
+                  product.halalCertificates.length > 0 && (
+                    <ul className="product__topcertified">
+                      {product.halalCertificates.map(certificate => (
+                        <li>
+                          <a>
+                            <img
+                              src="/static/images/halal2-logo.png"
+                              alt={certificate.name}
+                            />
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                {product.brand && (
+                  <img
+                    className="product__brand-image"
+                    src={
+                      product.brand && product.brand.logo
+                        ? process.env.API_URL +
+                          "api/shop/general/v1/file/" +
+                          product.brand.logo.id
+                        : product.supplier && product.supplier.logo
+                        ? process.env.API_URL +
+                          "api/shop/general/v1/file/" +
+                          product.supplier.logo.id
+                        : "/static/images/128x128.png"
+                    }
+                    alt={product.brand.name}
+                  />
+                )}
+
                 <h1>{product.name}</h1>
 
                 <div className="product__description">
@@ -119,47 +132,41 @@ class Product extends Component {
                     ].join(" ")}
                   >
                     <ul>
-                      {product.halalCertificates.map(certificate => (
-                        <li>
-                          <a>
-                            <img
-                              src="/static/images/halal2-logo.png"
-                              alt={certificate.name}
-                            />
-                          </a>
-                        </li>
-                      ))}
+                      {product.halalCertificates &&
+                        product.halalCertificates.length > 0 &&
+                        product.halalCertificates.map(certificate => (
+                          <li>
+                            <a>
+                              <img
+                                src="/static/images/halal2-logo.png"
+                                alt={certificate.name}
+                              />
+                            </a>
+                          </li>
+                        ))}
                     </ul>
                   </div>
                 </div>
               </div>
 
-              <div className="column">
+              <div className="column is-hidden-touch">
                 <ul className="product__related">
-                  <li>
-                    <a href="#">
-                      <img
-                        src="/static/images/128x128.png"
-                        alt="Product Image 2"
-                      />
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <img
-                        src="/static/images/128x128.png"
-                        alt="Product Image 3"
-                      />
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <img
-                        src="/static/images/128x128.png"
-                        alt="Product Image 4"
-                      />
-                    </a>
-                  </li>
+                  {product.relatedProducts.map(item => (
+                    <li>
+                      <a href={"/product/" + item.id + "/" + item.name}>
+                        <img
+                          src={
+                            item.mainPicture && product.mainPicture.id
+                              ? process.env.API_URL +
+                                "api/shop/general/v1/file/" +
+                                product.mainPicture.id
+                              : "/static/images/128x128.png"
+                          }
+                          alt={item.name}
+                        />
+                      </a>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>

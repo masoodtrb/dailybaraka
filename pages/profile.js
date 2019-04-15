@@ -277,18 +277,18 @@ class Profile extends Component {
               ].join(" ")}
             >
               {!coupons || !coupons.result ? (
-                <div class="notification is-info">Please wait...</div>
+                <div className="notification is-info">Please wait...</div>
               ) : coupons.result && coupons.result.length === 0 ? (
-                <div class="notification is-info">
+                <div className="notification is-info">
                   You haven't any coupons yet.
                 </div>
               ) : (
                 <div className="columns is-multiline">
                   {coupons.result.map(coupon => (
                     <div className="column is-3">
-                      <div class="card">
-                        <div class="card-image">
-                          <figure class="image is-4by3">
+                      <div className="card">
+                        <div className="card-image">
+                          <figure className="image is-4by3">
                             <img
                               src={
                                 coupon.cover
@@ -300,10 +300,10 @@ class Profile extends Component {
                             />
                           </figure>
                         </div>
-                        <div class="card-content">
-                          <div class="media">
-                            <div class="media-left">
-                              <figure class="image is-48x48">
+                        <div className="card-content">
+                          <div className="media">
+                            <div className="media-left">
+                              <figure className="image is-48x48">
                                 <img
                                   src={
                                     coupon.logo
@@ -316,12 +316,12 @@ class Profile extends Component {
                                 />
                               </figure>
                             </div>
-                            <div class="media-content">
-                              <p class="title is-4">{coupon.name}</p>
+                            <div className="media-content">
+                              <p className="title is-4">{coupon.name}</p>
                             </div>
                           </div>
 
-                          <div class="content">
+                          <div className="content">
                             {coupon.description}
                             <br />
                             {coupon.termsConditions}
