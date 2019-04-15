@@ -61,8 +61,14 @@ class LocalStores extends Component {
     fetch("/api/shop/retailers/v1/load-by-location?" + parameters)
       .then(response => response.json())
       .then(json => {
-        const stores = JSON.parse(JSON.stringify(this.state.stores));
+        if (!json || json.length === 0) return;
 
+        if (json.status >= 300) {
+          alert("Error on server: " + json.detail);
+          return;
+        }
+
+        const stores = JSON.parse(JSON.stringify(this.state.stores));
         // add new stores to list
         json.forEach((store, index) => {
           const isExist = stores.find(item => item.id === store.id);

@@ -2,6 +2,7 @@ $font-size: 16px;
 $primary-color: #06182e;
 
 // Responsiveness
+$widescreen-enabled: true;
 
 // The container horizontal gap, which acts as the offset for breakpoints
 $gap: 64px;
@@ -49,11 +50,13 @@ $fullhd: 1344px + (2 * $gap);
     @content;
   }
 }
+
 @mixin desktop {
   @media screen and (min-width: $desktop) {
     @content;
   }
 }
+
 @mixin desktop-only {
   @if $widescreen-enabled {
     @media screen and (min-width: $desktop) and (max-width: $widescreen - 1px) {
@@ -61,6 +64,7 @@ $fullhd: 1344px + (2 * $gap);
     }
   }
 }
+
 @mixin until-widescreen {
   @if $widescreen-enabled {
     @media screen and (max-width: $widescreen - 1px) {
@@ -68,6 +72,7 @@ $fullhd: 1344px + (2 * $gap);
     }
   }
 }
+
 @mixin widescreen {
   @if $widescreen-enabled {
     @media screen and (min-width: $widescreen) {
@@ -75,6 +80,7 @@ $fullhd: 1344px + (2 * $gap);
     }
   }
 }
+
 @mixin widescreen-only {
   @if $widescreen-enabled and $fullhd-enabled {
     @media screen and (min-width: $widescreen) and (max-width: $fullhd - 1px) {
@@ -90,11 +96,26 @@ $fullhd: 1344px + (2 * $gap);
     }
   }
 }
+
 @mixin fullhd {
   @if $fullhd-enabled {
     @media screen and (min-width: $fullhd) {
       @content;
     }
+  }
+}
+
+// TRANSITIONS
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    margin-top: -10px;
+  }
+
+  100% {
+    opacity: 1;
+    margin-top: 0;
   }
 }
 
@@ -175,6 +196,12 @@ a {
   display: none;
   &.active {
     display: block;
+  }
+}
+
+.container {
+  @include touch() {
+    padding: 0 20px;
   }
 }
 
@@ -314,6 +341,80 @@ a {
 
       .search-input {
         flex: 1;
+      }
+    }
+  }
+
+  .mob-nav {
+    display: none;
+    .navbar {
+      background-color: rgb(34, 35, 43);
+      z-index: 1001;
+
+      .navbar-burger {
+        color: #fff;
+      }
+    }
+  }
+
+  .navbar-menu {
+    display: none;
+  }
+
+  @include tablet-only() {
+    .main-nav {
+      ul {
+        flex: 2;
+      }
+      &__logo {
+        flex: initial;
+        padding: 18px 10px 0 0;
+        img {
+          width: 24px;
+        }
+      }
+      &__search {
+        flex: 1;
+      }
+    }
+  }
+
+  @include mobile() {
+    .main-nav,
+    .top-nav {
+      display: none;
+    }
+
+    .mob-nav {
+      display: initial;
+    }
+
+    .navbar-menu {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      padding-top: 0;
+      z-index: 1000;
+      background-color: #22232b;
+
+      &.active {
+        display: block;
+        animation: fadeInDown 0.2s;
+      }
+
+      ul li {
+        &:first-child {
+          border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        a {
+          line-height: 50px;
+          color: #fff;
+          display: block;
+          padding-left: 20px;
+        }
       }
     }
   }

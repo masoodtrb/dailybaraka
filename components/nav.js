@@ -6,7 +6,8 @@ import { getUserToken } from "../services/account";
 class Nav extends Component {
   state = {
     user: null,
-    sectors: []
+    sectors: [],
+    showMenu: false
   };
 
   componentDidMount() {
@@ -43,7 +44,7 @@ class Nav extends Component {
       });
   }
 
-  onLogout(event) {
+  onLogout = event => {
     event.preventDefault();
 
     localStorage.removeItem("token");
@@ -52,7 +53,14 @@ class Nav extends Component {
     this.setState({
       user: null
     });
-  }
+  };
+
+  toggleMenu = event => {
+    event.preventDefault();
+    this.setState({
+      showMenu: !this.state.showMenu
+    });
+  };
 
   render() {
     return (
@@ -91,7 +99,6 @@ class Nav extends Component {
                   </React.Fragment>
                 )}
               </ul>
-
               <div className="select">
                 <select defaultValue="en-uk">
                   <option>Language</option>
@@ -99,7 +106,6 @@ class Nav extends Component {
                 </select>
               </div>
             </div>
-
             <ul>
               <li>
                 <Link href="/page/about-us">
@@ -127,6 +133,17 @@ class Nav extends Component {
         <div className="main-nav">
           <div className="container">
             <div className="main-nav__container">
+              <div className="main-nav__logo is-hidden-desktop">
+                <Link href="/">
+                  <a>
+                    <img
+                      src="/static/images/logo-small.png"
+                      alt="daily baraka logo"
+                    />
+                  </a>
+                </Link>
+              </div>
+
               <ul>
                 <li>
                   <Link href="/local-stores">
@@ -138,7 +155,6 @@ class Nav extends Component {
                     <a>Sectors</a>
                   </Link>
                 </li>
-
                 <li>
                   <Link href="/commercial-enquiries">
                     <a>Commercial Enquiries</a>
@@ -148,7 +164,7 @@ class Nav extends Component {
 
               {this.props.page != "index" && (
                 <React.Fragment>
-                  <div className="main-nav__logo">
+                  <div className="main-nav__logo is-hidden-touch">
                     <Link href="/">
                       <a>
                         <img
@@ -203,6 +219,77 @@ class Nav extends Component {
                 </React.Fragment>
               )}
             </div>
+          </div>
+        </div>
+        <div className="mob-nav">
+          <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+              <Link href="/">
+                <a class="navbar-item">
+                  <img src="/static/images/logo.png" alt="Daily Baraka" />
+                </a>
+              </Link>
+
+              <a
+                role="button"
+                class="navbar-burger"
+                aria-label="menu"
+                aria-expanded="false"
+                onClick={e => this.toggleMenu(e)}
+              >
+                <span aria-hidden="true" />
+                <span aria-hidden="true" />
+                <span aria-hidden="true" />
+              </a>
+            </div>
+          </nav>
+          <div
+            class={["navbar-menu", this.state.showMenu && "active"].join(" ")}
+            id="navMenu"
+          >
+            <ul>
+              <li>
+                <Link href="/signIn">
+                  <a>Sign In</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/signUp">
+                  <a>SignUp</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/local-stores">
+                  <a>Local Stores</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/sectors">
+                  <a>Sectors</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/commercial-enquiries">
+                  <a>Commercial Enquiries</a>
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/page/about-us">
+                  <a>About us</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/page/contact-us">
+                  <a>Contact us</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/page/accreditation-organizations">
+                  <a>Accreditation Organizations</a>
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
