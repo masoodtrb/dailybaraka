@@ -371,6 +371,23 @@ a {
     display: none;
   }
 
+  @include desktop-only() {
+    .main-nav {
+      ul {
+        flex: 2;
+      }
+
+      &__logo {
+        flex: 1;
+        padding: 15px 20px 0;
+      }
+
+      &__search {
+        flex: 2;
+      }
+    }
+  }
+
   @include tablet-only() {
     .main-nav {
       ul {
@@ -572,6 +589,13 @@ a {
           line-height: 5px;
         }
       }
+    }
+  }
+
+  @include touch {
+    .home__search {
+      width: 90%;
+      max-width: 400px;
     }
   }
 }

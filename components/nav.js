@@ -49,9 +49,14 @@ class Nav extends Component {
     localStorage.removeItem("token");
     sessionStorage.removeItem("token");
 
-    this.setState({
-      user: null
-    });
+    this.setState(
+      {
+        user: null
+      },
+      () => {
+        window.location.href = "/";
+      }
+    );
   };
 
   toggleMenu = event => {
@@ -253,16 +258,31 @@ class Nav extends Component {
             id="navMenu"
           >
             <ul>
-              <li>
-                <Link href="/signIn">
-                  <a>Sign In</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/signUp">
-                  <a>SignUp</a>
-                </Link>
-              </li>
+              {this.state.user ? (
+                <React.Fragment>
+                  <li>
+                    <Link href="/profile">
+                      <a className="username">
+                        <i className="fas fa-user" />
+                        &nbsp;Profile
+                      </a>
+                    </Link>
+                  </li>
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  <li>
+                    <Link href="/signIn">
+                      <a>Sign In</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/signUp">
+                      <a>SignUp</a>
+                    </Link>
+                  </li>
+                </React.Fragment>
+              )}
               <li>
                 <Link href="/local-stores">
                   <a>Local Stores</a>
@@ -294,6 +314,13 @@ class Nav extends Component {
                   <a>Accreditation Organizations</a>
                 </Link>
               </li>
+              {this.state.user && (
+                <li>
+                  <a href="#" onClick={e => this.onLogout(e)}>
+                    Logout
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
         </div>

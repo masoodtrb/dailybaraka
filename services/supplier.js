@@ -7,6 +7,15 @@ async function get(supplierId) {
   return await response.json();
 }
 
+async function getProducts(supplierId) {
+  const response = await fetch(
+    process.env.API_URL +
+      "api/shop/suppliers/v1/supplier-with-products/" +
+      supplierId
+  );
+  return await response.json();
+}
+
 async function create(data) {
   const response = await fetch(
     process.env.API_URL + "api/shop/suppliers/v1/create",
@@ -20,4 +29,4 @@ async function create(data) {
   return await response.json();
 }
 
-export { get, create };
+export { get, getProducts, create };
