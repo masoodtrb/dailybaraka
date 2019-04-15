@@ -121,7 +121,7 @@ class Enquiry extends Component {
     const recaptchaToken = this.recaptchaStoreFormRef.getResponse();
 
     const formData = this.state.storeFormData;
-    debugger;
+
     fetch("/api/shop/retailers/v1/create", {
       method: "POST",
       headers: {

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Link from "next/link";
+import moment from "moment";
 
 import { getUserToken } from "../services/account";
 
@@ -14,7 +15,9 @@ class Profile extends Component {
   state = {
     updateProfileForm: { state: "INITIATE", error: "" },
     changePasswordForm: { state: "INITIATE", error: "" },
-    userData: null
+    userData: null,
+    coupons: null,
+    currentTab: "PROFILE"
   };
 
   componentDidMount() {
@@ -35,6 +38,20 @@ class Profile extends Component {
               firstName: json.firstName,
               lastName: json.lastName
             }
+          });
+        });
+
+      fetch("/api/shop/coupons/v1/my-coupon-bank", {
+        headers: {
+          Authorization: "Bearer " + token
+        }
+      })
+        .then(response => {
+          return response.json();
+        })
+        .then(json => {
+          this.setState({
+            coupons: json
           });
         });
     } else {
@@ -146,7 +163,13 @@ class Profile extends Component {
       });
   };
 
+  onChangeTab = (event, tabState) => {
+    event.preventDefault();
+    this.setState({ currentTab: tabState });
+  };
+
   render() {
+    const { currentTab, coupons } = this.state;
     return (
       <div>
         <Head title="User Profile" />
@@ -154,75 +177,168 @@ class Profile extends Component {
 
         <div className="page signUp">
           <div className="container">
-            <h1>User Profile</h1>
+            <h1>My Profile</h1>
 
-            <div className="columns">
-              <div className="column is-6">
-                <fieldset>
-                  <legend>Update Profile</legend>
-                  <br />
-                  {this.state.updateProfileForm.state === "ERROR" && (
-                    <div className="notification is-danger">
-                      <button className="delete" />
-                      <strong>An error has occurred</strong>
-                      <br />
-                      <p>{this.state.updateProfileForm.error}</p>
-                    </div>
-                  )}
+            <div className="tabs">
+              <ul>
+                <li className={currentTab === "PROFILE" ? "is-active" : ""}>
+                  <a href="#" onClick={e => this.onChangeTab(e, "PROFILE")}>
+                    Profile Info
+                  </a>
+                </li>
+                <li className={currentTab === "COUPONS" ? "is-active" : ""}>
+                  <a href="#" onClick={e => this.onChangeTab(e, "COUPONS")}>
+                    My Coupons
+                  </a>
+                </li>
+              </ul>
+            </div>
 
-                  {this.state.updateProfileForm.state === "SUCCESS" && (
-                    <div className="notification is-success">
-                      <strong>
-                        Your profile has been successfully updated.
-                      </strong>
-                    </div>
-                  )}
+            <div
+              className={[
+                "tab-content",
+                currentTab === "PROFILE" ? "active" : null
+              ].join(" ")}
+            >
+              <div className="columns">
+                <div className="column is-6">
+                  <fieldset>
+                    <legend>Update Profile</legend>
+                    <br />
+                    {this.state.updateProfileForm.state === "ERROR" && (
+                      <div className="notification is-danger">
+                        <button className="delete" />
+                        <strong>An error has occurred</strong>
+                        <br />
+                        <p>{this.state.updateProfileForm.error}</p>
+                      </div>
+                    )}
 
-                  {this.state.userData ? (
-                    <UpdateProfileForm
-                      defaultValues={this.state.userData}
+                    {this.state.updateProfileForm.state === "SUCCESS" && (
+                      <div className="notification is-success">
+                        <strong>
+                          Your profile has been successfully updated.
+                        </strong>
+                      </div>
+                    )}
+
+                    {this.state.userData ? (
+                      <UpdateProfileForm
+                        defaultValues={this.state.userData}
+                        onProgress={
+                          this.state.updateProfileForm.state === "SUBMITTING"
+                        }
+                        onSubmit={formData =>
+                          this.onUpdateProfileSubmit(formData)
+                        }
+                      />
+                    ) : (
+                      <p>Please wait...</p>
+                    )}
+                  </fieldset>
+                </div>
+                <div className="column is-6">
+                  <fieldset>
+                    <legend>Change Password</legend>
+                    <br />
+                    {this.state.changePasswordForm.state === "ERROR" && (
+                      <div className="notification is-danger">
+                        <button className="delete" />
+                        <strong>An error has occurred</strong>
+                        <br />
+                        <p>{this.state.changePasswordForm.error}</p>
+                      </div>
+                    )}
+
+                    {this.state.changePasswordForm.state === "SUCCESS" && (
+                      <div className="notification is-success">
+                        <strong>
+                          Your password has been changed successfully.
+                        </strong>
+                      </div>
+                    )}
+
+                    <ChangePasswordForm
                       onProgress={
-                        this.state.updateProfileForm.state === "SUBMITTING"
+                        this.state.changePasswordForm.state === "SUBMITTING"
                       }
                       onSubmit={formData =>
-                        this.onUpdateProfileSubmit(formData)
+                        this.onChangePasswordSubmit(formData)
                       }
                     />
-                  ) : (
-                    <p>Please wait...</p>
-                  )}
-                </fieldset>
+                  </fieldset>
+                </div>
               </div>
+            </div>
+            <div
+              className={[
+                "tab-content",
+                currentTab === "COUPONS" ? "active" : null
+              ].join(" ")}
+            >
+              {!coupons || !coupons.result ? (
+                <div class="notification is-info">Please wait...</div>
+              ) : coupons.result && coupons.result.length === 0 ? (
+                <div class="notification is-info">
+                  You haven't any coupons yet.
+                </div>
+              ) : (
+                <div className="columns is-multiline">
+                  {coupons.result.map(coupon => (
+                    <div className="column is-3">
+                      <div class="card">
+                        <div class="card-image">
+                          <figure class="image is-4by3">
+                            <img
+                              src={
+                                coupon.cover
+                                  ? process.env.API_URL +
+                                    "api/shop/general/v1/file/" +
+                                    coupon.cover.id
+                                  : "/static/images/128x128.png"
+                              }
+                            />
+                          </figure>
+                        </div>
+                        <div class="card-content">
+                          <div class="media">
+                            <div class="media-left">
+                              <figure class="image is-48x48">
+                                <img
+                                  src={
+                                    coupon.logo
+                                      ? process.env.API_URL +
+                                        "api/shop/general/v1/file/" +
+                                        coupon.logo.id
+                                      : "/static/images/128x128.png"
+                                  }
+                                  alt="Placeholder image"
+                                />
+                              </figure>
+                            </div>
+                            <div class="media-content">
+                              <p class="title is-4">{coupon.name}</p>
+                            </div>
+                          </div>
 
-              <div className="column is-6">
-                <fieldset>
-                  <legend>Change Password</legend>
-                  <br />
-                  {this.state.changePasswordForm.state === "ERROR" && (
-                    <div className="notification is-danger">
-                      <button className="delete" />
-                      <strong>An error has occurred</strong>
-                      <br />
-                      <p>{this.state.changePasswordForm.error}</p>
+                          <div class="content">
+                            {coupon.description}
+                            <br />
+                            {coupon.termsConditions}
+                            <br />
+                            <i className="fas fa-clock" />
+                            &nbsp;Expiry Date:
+                            <time>
+                              &nbsp;
+                              {moment(coupon.expireDate * 1000).format("ll")}
+                            </time>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  )}
-
-                  {this.state.changePasswordForm.state === "SUCCESS" && (
-                    <div className="notification is-success">
-                      <strong>
-                        Your password has been changed successfully.
-                      </strong>
-                    </div>
-                  )}
-
-                  <ChangePasswordForm
-                    onProgress={
-                      this.state.changePasswordForm.state === "SUBMITTING"
-                    }
-                    onSubmit={formData => this.onChangePasswordSubmit(formData)}
-                  />
-                </fieldset>
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
