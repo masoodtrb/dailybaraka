@@ -11,6 +11,12 @@ class Supplier extends Component {
     };
   }
 
+  state = {
+    products: []
+  };
+
+  componentDidMount() {}
+
   render() {
     const { supplier } = this.props;
     console.log(this.props);
