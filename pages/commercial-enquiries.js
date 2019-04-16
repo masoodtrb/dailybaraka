@@ -173,7 +173,7 @@ class Enquiry extends Component {
             }
           });
           this.recaptchaStoreFormRef.reset();
-          debugger;
+
           return;
         }
 
