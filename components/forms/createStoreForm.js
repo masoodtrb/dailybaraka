@@ -16,7 +16,6 @@ const CreateStoreSchema = Yup.object().shape({
     .max(50, "City is too large.")
     .required("City is required."),
   state: Yup.string()
-    .min(3, "State is too short.")
     .max(50, "State is too large.")
     .required("State is required."),
   country: Yup.string()
