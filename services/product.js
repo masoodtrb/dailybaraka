@@ -7,6 +7,13 @@ async function get(productId) {
   return await response.json();
 }
 
+async function getBySlug(slug) {
+  const response = await fetch(
+    process.env.API_URL + "/api/shop/products/v1/load-by-slug/" + slug
+  );
+  return await response.json();
+}
+
 async function search(sectorId, query) {
   const response = await fetch(
     process.env.API_URL + "api/shop/products/v1/search",
@@ -34,4 +41,4 @@ async function search(sectorId, query) {
   return await response.json();
 }
 
-export { get, search };
+export { get, search, getBySlug };

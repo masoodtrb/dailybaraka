@@ -30,7 +30,7 @@ class Search extends Component {
             <div className="columns is-multiline">
               {products.result.map((item, index) => (
                 <div className="column is-4">
-                  <Link href={"/product/" + product.id + "/" + product.name}>
+                  <Link href={"/product/" + product.slug}>
                     <a href="/sector">
                       <div className="box">
                         <article className="media">

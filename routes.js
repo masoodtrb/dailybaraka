@@ -12,7 +12,7 @@ module.exports = routes()
   .add("home", "/", "index")
   .add("page", "/page/:slug")
   .add("search", "/search")
-  .add("product", "/product/:id/:name")
+  .add("product", "/product/:slug")
   .add("sectors", "/sectors")
   .add("sector", "/sector/:id-:name")
 

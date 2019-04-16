@@ -8,7 +8,7 @@ import "../styles/main.scss";
 class Product extends Component {
   static async getInitialProps({ query }) {
     return {
-      product: await productService.get(query.id)
+      product: await productService.getBySlug(query.id)
     };
   }
 
@@ -153,7 +153,7 @@ class Product extends Component {
                 <ul className="product__related">
                   {product.relatedProducts.map(item => (
                     <li>
-                      <a href={"/product/" + item.id + "/" + item.name}>
+                      <a href={"/product/" + item.slug}>
                         <img
                           src={
                             item.mainPicture && product.mainPicture.id

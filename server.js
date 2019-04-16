@@ -1,11 +1,14 @@
 const express = require("express");
 const next = require("next");
 const bodyParser = require("body-parser");
+const fs = require("fs");
 const request = require("request");
+const multer = require("multer");
 
 const routes = require("./routes");
 
-const app = next({ dev: process.env.NODE_ENV !== "production" });
+const environment = process.env.NODE_ENV || "development";
+const app = next({ dev: environment === "development" });
 
 const handler = routes.getRequestHandler(app);
 
@@ -15,34 +18,39 @@ app.prepare().then(() => {
 
   server.use(bodyParser.json());
 
-  // proxy on /api
-  server.use("/api/", (req, res) => {
-    const url = process.env.API_URL + "api" + req.url;
+  if (environment === "development") {
+    // proxy on /api
+    server.use("/api/", (req, res) => {
+      const url = process.env.API_URL + "api" + req.url;
 
-    // request headers
-    const headers = {
-      "content-type": "application/json"
-    };
-    if (req.headers.authorization) {
-      headers.Authorization = req.headers.authorization;
-    }
+      // request headers
+      const headers = {
+        "content-type": "application/json"
+      };
+      if (req.headers["content-type"]) {
+        headers["content-type"] = req.headers["content-type"];
+      }
+      if (req.headers.authorization) {
+        headers.Authorization = req.headers.authorization;
+      }
 
-    // request options
-    const options = {
-      method: req.method,
-      url,
-      headers,
-      body: req.body,
-      json: true
-    };
+      // request options
+      const options = {
+        method: req.method,
+        url,
+        headers,
+        body: req.body,
+        json: true
+      };
 
-    // proxy the request to api
-    request(options, (error, response, body) => {
-      if (error) throw new Error(error);
+      // proxy the request to api
+      request(options, (error, response, body) => {
+        if (error) throw new Error(error);
 
-      res.json(body);
+        res.json(body);
+      });
     });
-  });
+  }
 
   // next handler on GET
   server.get("*", (req, res) => {

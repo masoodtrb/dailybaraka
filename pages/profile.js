@@ -11,13 +11,16 @@ import ChangePasswordForm from "../components/forms/changePasswordForm";
 
 import "../styles/main.scss";
 
+const IMAGES_TYPES = ["image/jpeg", "image/png", "image/bmp", "image/gif"];
 class Profile extends Component {
   state = {
     updateProfileForm: { state: "INITIATE", error: "" },
     changePasswordForm: { state: "INITIATE", error: "" },
     userData: null,
     coupons: null,
-    currentTab: "PROFILE"
+    currentTab: "PROFILE",
+    uploadedImageId: null,
+    userImage: null
   };
 
   componentDidMount() {
@@ -72,7 +75,14 @@ class Profile extends Component {
       },
       body: JSON.stringify({
         firstName: formData.firstName,
-        lastName: formData.lastName
+        lastName: formData.lastName,
+        profilePicture: {
+          id: this.state.uploadedImageId
+            ? this.state.uploadedImageId
+            : formData.profilePicture
+            ? formData.profilePicture.id
+            : null
+        }
       })
     })
       .then(response => {
@@ -168,6 +178,106 @@ class Profile extends Component {
     this.setState({ currentTab: tabState });
   };
 
+  onImageUpdated = event => {
+    if (!event.target.files && !event.target.files[0]) {
+      this.setState({
+        updateProfileForm: {
+          state: "INITIAL"
+        }
+      });
+      return;
+    }
+
+    const imageFile = event.target.files[0];
+
+    if (IMAGES_TYPES.indexOf(imageFile.type) < 0) {
+      this.setState({
+        updateProfileForm: {
+          state: "ERROR",
+          error: (
+            <p>
+              Selected file is not supported. Please upload an image for your
+              profile.
+              <br />
+              Supported formats: (JPG, PNG, GIF, BMP)
+            </p>
+          )
+        }
+      });
+      return;
+    }
+
+    if (imageFile.size / 1024 / 1024 > 1.5) {
+      this.setState({
+        updateProfileForm: {
+          state: "ERROR",
+          error: (
+            <p>
+              Selected image file is too heavy. Max supported file size is
+              1.5MB.
+            </p>
+          )
+        }
+      });
+      return;
+    }
+
+    var reader = new FileReader();
+    reader.onload = e => {
+      this.setState({
+        userImage: e.target.result
+      });
+    };
+    reader.readAsDataURL(imageFile);
+
+    const formData = new FormData();
+    formData.append("file", imageFile);
+
+    fetch("/api/panel/general/v1/upload-file", {
+      method: "POST",
+      headers: {
+        authorization: "Bearer " + getUserToken()
+        // "content-type": "multipart/form-data"
+      },
+      body: formData
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.text();
+        } else {
+          this.setState({
+            updateProfileForm: {
+              state: "ERROR",
+              error:
+                "Can not process the request. Type of error: " +
+                response.status +
+                ", response status: " +
+                response.statusText
+            }
+          });
+        }
+      })
+      .then(text => (text.length ? JSON.parse(text) : {}))
+      .then(json => {
+        if (json.status >= 300) {
+          this.setState({
+            updateProfileForm: {
+              state: "ERROR",
+              error: json.detail
+            }
+          });
+          return;
+        }
+
+        this.setState({
+          uploadedImageId: json.data,
+          updateProfileForm: {
+            state: "INITIAL"
+          }
+        });
+      });
+  };
+
   render() {
     const { currentTab, coupons } = this.state;
     return (
@@ -175,7 +285,7 @@ class Profile extends Component {
         <Head title="User Profile" />
         <Nav />
 
-        <div className="page signUp">
+        <div className="page profile">
           <div className="container">
             <h1>My Profile</h1>
 
@@ -223,15 +333,34 @@ class Profile extends Component {
                     )}
 
                     {this.state.userData ? (
-                      <UpdateProfileForm
-                        defaultValues={this.state.userData}
-                        onProgress={
-                          this.state.updateProfileForm.state === "SUBMITTING"
-                        }
-                        onSubmit={formData =>
-                          this.onUpdateProfileSubmit(formData)
-                        }
-                      />
+                      <React.Fragment>
+                        <div className="profile__image">
+                          <input
+                            type="file"
+                            onChange={e => this.onImageUpdated(e)}
+                          />
+                          <img
+                            src={
+                              this.state.userImage
+                                ? this.state.userImage
+                                : this.state.userData.profilePicture
+                                ? process.env.API_URL +
+                                  "api/shop/general/v1/file/" +
+                                  this.state.userData.profilePicture.id
+                                : "/static/images/placeholder-profile.jpg"
+                            }
+                          />
+                        </div>
+                        <UpdateProfileForm
+                          defaultValues={this.state.userData}
+                          onProgress={
+                            this.state.updateProfileForm.state === "SUBMITTING"
+                          }
+                          onSubmit={formData =>
+                            this.onUpdateProfileSubmit(formData)
+                          }
+                        />
+                      </React.Fragment>
                     ) : (
                       <p>Please wait...</p>
                     )}

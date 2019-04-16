@@ -44,9 +44,7 @@ class Sector extends Component {
                         key={"product-" + product.id}
                         className="column is-2"
                       >
-                        <Link
-                          href={"/product/" + product.id + "/" + product.name}
-                        >
+                        <Link href={"/product/" + product.slug}>
                           <a>
                             <div className="card">
                               <div className="card-image">
