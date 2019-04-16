@@ -2,6 +2,7 @@ $font-size: 16px;
 $primary-color: #06182e;
 
 // Responsiveness
+$widescreen-enabled: true;
 
 // The container horizontal gap, which acts as the offset for breakpoints
 $gap: 64px;
@@ -49,11 +50,13 @@ $fullhd: 1344px + (2 * $gap);
     @content;
   }
 }
+
 @mixin desktop {
   @media screen and (min-width: $desktop) {
     @content;
   }
 }
+
 @mixin desktop-only {
   @if $widescreen-enabled {
     @media screen and (min-width: $desktop) and (max-width: $widescreen - 1px) {
@@ -61,6 +64,7 @@ $fullhd: 1344px + (2 * $gap);
     }
   }
 }
+
 @mixin until-widescreen {
   @if $widescreen-enabled {
     @media screen and (max-width: $widescreen - 1px) {
@@ -68,6 +72,7 @@ $fullhd: 1344px + (2 * $gap);
     }
   }
 }
+
 @mixin widescreen {
   @if $widescreen-enabled {
     @media screen and (min-width: $widescreen) {
@@ -75,6 +80,7 @@ $fullhd: 1344px + (2 * $gap);
     }
   }
 }
+
 @mixin widescreen-only {
   @if $widescreen-enabled and $fullhd-enabled {
     @media screen and (min-width: $widescreen) and (max-width: $fullhd - 1px) {
@@ -90,11 +96,26 @@ $fullhd: 1344px + (2 * $gap);
     }
   }
 }
+
 @mixin fullhd {
   @if $fullhd-enabled {
     @media screen and (min-width: $fullhd) {
       @content;
     }
+  }
+}
+
+// TRANSITIONS
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    margin-top: -10px;
+  }
+
+  100% {
+    opacity: 1;
+    margin-top: 0;
   }
 }
 
@@ -169,12 +190,28 @@ a {
       color: $primary-color;
     }
   }
+
+  @include touch {
+    ul {
+      display: flex;
+      li {
+        display: initial;
+        flex: 1;
+      }
+    }
+  }
 }
 
 .tab-content {
   display: none;
   &.active {
     display: block;
+  }
+}
+
+.container {
+  @include touch() {
+    padding: 0 20px;
   }
 }
 
@@ -212,6 +249,7 @@ a {
 
           &.username {
             color: #a2c34b;
+            text-transform: capitalize;
           }
         }
       }
@@ -317,54 +355,107 @@ a {
       }
     }
   }
+
+  .mob-nav {
+    display: none;
+    .navbar {
+      background-color: rgb(34, 35, 43);
+      z-index: 1001;
+
+      .navbar-burger {
+        color: #fff;
+      }
+    }
+  }
+
+  .navbar-menu {
+    display: none;
+  }
+
+  @include desktop-only() {
+    .main-nav {
+      ul {
+        flex: 2;
+      }
+
+      &__logo {
+        flex: 1;
+        padding: 15px 20px 0;
+      }
+
+      &__search {
+        flex: 2;
+      }
+    }
+  }
+
+  @include tablet-only() {
+    .main-nav {
+      ul {
+        flex: 2;
+      }
+      &__logo {
+        flex: initial;
+        padding: 18px 10px 0 0;
+        img {
+          width: 24px;
+        }
+      }
+      &__search {
+        flex: 1;
+      }
+    }
+  }
+
+  @include mobile() {
+    .main-nav,
+    .top-nav {
+      display: none;
+    }
+
+    .mob-nav {
+      display: initial;
+    }
+
+    .navbar-menu {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      padding-top: 0;
+      z-index: 1000;
+      background-color: #22232b;
+
+      &.active {
+        display: block;
+        animation: fadeInDown 0.2s;
+      }
+
+      ul li {
+        &:first-child {
+          border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        a {
+          line-height: 50px;
+          color: #fff;
+          display: block;
+          padding-left: 20px;
+        }
+      }
+    }
+  }
 }
 
 .footer {
   background-color: #f2f2f2;
   padding: 2rem 1.5rem 3rem;
-  height: 45px;
+  min-height: 45px;
 
   p.copyright {
     color: #a5a5a5;
     font-size: 0.9em;
-  }
-
-  ul.social {
-    float: right;
-    li {
-      display: inline-block;
-      margin-left: 5px;
-      a {
-        display: block;
-        background-color: #c3c3c3;
-        border-radius: 50%;
-        width: 22px;
-        height: 22px;
-        line-height: 22px;
-        font-size: 0.7em;
-        text-align: center;
-        color: #fff;
-        &.social__instagram {
-          background-color: #007ab9;
-
-          &:hover {
-            background-color: darken(#007ab9, 10%);
-          }
-        }
-        &.social__twitter {
-          background-color: #598dca;
-          &:hover {
-            background-color: darken(#598dca, 10%);
-          }
-        }
-        &.social__facebook {
-          background-color: #3a589b;
-          &:hover {
-            background-color: darken(#3a589b, 10%);
-          }
-        }
-      }
-    }
   }
 
   p {
@@ -383,6 +474,23 @@ a {
         color: #a5a5a5;
         &:hover {
           color: darken(#a5a5a5, 5%);
+        }
+      }
+    }
+  }
+
+  @include mobile() {
+    padding: 1rem 0;
+
+    &__links {
+      display: block;
+      margin: 0;
+      li {
+        border: none;
+        padding: 0;
+        a {
+          display: block;
+          line-height: 50px;
         }
       }
     }
@@ -484,6 +592,13 @@ a {
       }
     }
   }
+
+  @include touch {
+    .home__search {
+      width: 90%;
+      max-width: 400px;
+    }
+  }
 }
 
 .page.sector {
@@ -498,11 +613,11 @@ a {
       background-color: $primary-color;
       color: #fff;
       line-height: 24px;
-      font-size: 0.8em;
+      font-size: 1.1em;
       display: inline-block;
       min-width: 180px;
       padding-right: 10px;
-      margin-top: 10px;
+      margin-top: 15px;
       border-radius: 10px 5px 5px 10px;
 
       i {
@@ -510,13 +625,13 @@ a {
         border-radius: 8px 0 0 8px;
         color: $primary-color;
         padding: 7px;
-        margin-right: 5px;
+        margin-right: 10px;
       }
     }
   }
 
   .sector__products {
-    margin-top: 10px;
+    margin-top: 20px;
 
     .image {
       border: solid 0.5px #707070;
@@ -571,19 +686,23 @@ a {
     width: 100%;
   }
 
+  .supplier__logo {
+    height: 128px;
+  }
+
   .supplier__products {
     background-color: rgba(171, 171, 171, 0.8);
     border: 0.5px solid #b1b1b1;
     border-radius: 2px;
     float: right;
     width: 420px;
-    padding: 30px 18px;
+    padding: 20px 20px 30px;
     color: $primary-color;
     font-size: 0.8em;
-    margin-top: -200px;
 
     h2 {
-      font-size: 1.2em;
+      font-size: 1.4em;
+      font-weight: bold;
     }
 
     h3 {
@@ -602,6 +721,32 @@ a {
 
           &:hover {
             color: darken($primary-color, 10%);
+          }
+        }
+      }
+    }
+  }
+
+  @include touch {
+    .container {
+      margin-top: 0;
+    }
+
+    .supplier__products {
+      float: none;
+      width: 100%;
+      background-color: #fff;
+
+      ul {
+        padding-left: 0;
+        li {
+          border-bottom: 2px solid #fff;
+          background-color: #efefef;
+          margin-bottom: 1px;
+          a {
+            line-height: 50px;
+            padding-left: 20px;
+            display: block;
           }
         }
       }
@@ -715,6 +860,15 @@ a {
 
     .tab-content {
       padding-left: 20px;
+    }
+  }
+
+  @include touch {
+    .container {
+      margin-top: 0;
+    }
+    .product__topcertified {
+      margin-top: 0;
     }
   }
 }
@@ -839,7 +993,32 @@ a {
 }
 
 .page.rich-content {
+  h2 {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+  }
   .rich-content__content {
     line-height: 32px;
+  }
+}
+
+.page.profile {
+  .profile__image {
+    position: relative;
+    overflow: hidden;
+    width: 180px;
+    border: 6px solid #fff;
+    margin: 10px auto 30px;
+    box-shadow: 2px 2px 5px 1px #efefef;
+
+    input {
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      cursor: pointer;
+    }
   }
 }

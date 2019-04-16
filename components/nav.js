@@ -6,11 +6,11 @@ import { getUserToken } from "../services/account";
 class Nav extends Component {
   state = {
     user: null,
-    sectors: []
+    sectors: [],
+    showMenu: false
   };
 
   componentDidMount() {
-    // get token from localStorage
     const token = getUserToken();
 
     if (token) {
@@ -43,16 +43,28 @@ class Nav extends Component {
       });
   }
 
-  onLogout(event) {
+  onLogout = event => {
     event.preventDefault();
 
     localStorage.removeItem("token");
     sessionStorage.removeItem("token");
 
+    this.setState(
+      {
+        user: null
+      },
+      () => {
+        window.location.href = "/";
+      }
+    );
+  };
+
+  toggleMenu = event => {
+    event.preventDefault();
     this.setState({
-      user: null
+      showMenu: !this.state.showMenu
     });
-  }
+  };
 
   render() {
     return (
@@ -91,7 +103,6 @@ class Nav extends Component {
                   </React.Fragment>
                 )}
               </ul>
-
               <div className="select">
                 <select defaultValue="en-uk">
                   <option>Language</option>
@@ -99,7 +110,6 @@ class Nav extends Component {
                 </select>
               </div>
             </div>
-
             <ul>
               <li>
                 <Link href="/page/about-us">
@@ -127,6 +137,17 @@ class Nav extends Component {
         <div className="main-nav">
           <div className="container">
             <div className="main-nav__container">
+              <div className="main-nav__logo is-hidden-desktop">
+                <Link href="/">
+                  <a>
+                    <img
+                      src="/static/images/logo-small.png"
+                      alt="daily baraka logo"
+                    />
+                  </a>
+                </Link>
+              </div>
+
               <ul>
                 <li>
                   <Link href="/local-stores">
@@ -138,7 +159,6 @@ class Nav extends Component {
                     <a>Sectors</a>
                   </Link>
                 </li>
-
                 <li>
                   <Link href="/commercial-enquiries">
                     <a>Commercial Enquiries</a>
@@ -148,7 +168,7 @@ class Nav extends Component {
 
               {this.props.page != "index" && (
                 <React.Fragment>
-                  <div className="main-nav__logo">
+                  <div className="main-nav__logo is-hidden-touch">
                     <Link href="/">
                       <a>
                         <img
@@ -203,6 +223,105 @@ class Nav extends Component {
                 </React.Fragment>
               )}
             </div>
+          </div>
+        </div>
+        <div className="mob-nav">
+          <nav
+            className="navbar"
+            role="navigation"
+            aria-label="main navigation"
+          >
+            <div className="navbar-brand">
+              <Link href="/">
+                <a className="navbar-item">
+                  <img src="/static/images/logo.png" alt="Daily Baraka" />
+                </a>
+              </Link>
+
+              <a
+                role="button"
+                className="navbar-burger"
+                aria-label="menu"
+                aria-expanded="false"
+                onClick={e => this.toggleMenu(e)}
+              >
+                <span aria-hidden="true" />
+                <span aria-hidden="true" />
+                <span aria-hidden="true" />
+              </a>
+            </div>
+          </nav>
+          <div
+            className={["navbar-menu", this.state.showMenu && "active"].join(
+              " "
+            )}
+            id="navMenu"
+          >
+            <ul>
+              {this.state.user ? (
+                <React.Fragment>
+                  <li>
+                    <Link href="/profile">
+                      <a className="username">
+                        <i className="fas fa-user" />
+                        &nbsp;Profile
+                      </a>
+                    </Link>
+                  </li>
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  <li>
+                    <Link href="/signIn">
+                      <a>Sign In</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/signUp">
+                      <a>SignUp</a>
+                    </Link>
+                  </li>
+                </React.Fragment>
+              )}
+              <li>
+                <Link href="/local-stores">
+                  <a>Local Stores</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/sectors">
+                  <a>Sectors</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/commercial-enquiries">
+                  <a>Commercial Enquiries</a>
+                </Link>
+              </li>
+
+              <li>
+                <Link href="/page/about-us">
+                  <a>About us</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/page/contact-us">
+                  <a>Contact us</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/page/accreditation-organizations">
+                  <a>Accreditation Organizations</a>
+                </Link>
+              </li>
+              {this.state.user && (
+                <li>
+                  <a href="#" onClick={e => this.onLogout(e)}>
+                    Logout
+                  </a>
+                </li>
+              )}
+            </ul>
           </div>
         </div>
       </div>

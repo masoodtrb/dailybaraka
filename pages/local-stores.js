@@ -43,28 +43,33 @@ class LocalStores extends Component {
 
   updateStores = () => {
     // create parameters based on function inputs
-    let parameters =
-      "lat=" +
-      this.state.center.lat +
-      "&lng=" +
-      this.state.center.lng +
-      "&radius=" +
-      //Math.ceil(this.state.zoom / 3);
-      this.state.zoom;
+    let parameters = {
+      lat: this.state.center.lat,
+      lng: this.state.center.lng,
+      radius: 2
+    };
 
     if (this.state.selectedCategoryId)
-      parameters += "&categoryId=" + this.state.selectedCategoryId;
-
-    console.log("updated");
+      parameters.categoryId = this.state.selectedCategoryId;
 
     // request to get local stores based on lat & lng
-    fetch("/api/shop/retailers/v1/load-by-location?" + parameters)
+    fetch("/api/shop/retailers/v1/load-by-location", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(parameters)
+    })
       .then(response => response.json())
       .then(json => {
-        const stores = JSON.parse(JSON.stringify(this.state.stores));
+        if (json.status && json.status >= 300) {
+          alert("Error on server: " + json.detail);
+          return;
+        }
 
+        const stores = JSON.parse(JSON.stringify(this.state.stores));
         // add new stores to list
-        json.forEach((store, index) => {
+        json.result.forEach((store, index) => {
           const isExist = stores.find(item => item.id === store.id);
           if (!isExist) stores.push(store);
         });

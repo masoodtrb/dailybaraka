@@ -2,15 +2,12 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
-const CreateSupplierSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(2, "Organization Name is too short.")
-    .max(50, "Organization Name is too large.")
-    .required("Organization Name is required."),
+const ContactFormSchema = Yup.object().shape({
   address: Yup.string()
     .min(5, "Address is too short.")
     .max(200, "Address is too large.")
     .required("Address is required."),
+  address2: Yup.string().max(200, "Address is too large."),
   city: Yup.string()
     .min(3, "City is too short.")
     .max(50, "City is too large.")
@@ -43,12 +40,12 @@ const CreateSupplierSchema = Yup.object().shape({
     .required("Email is required.")
 });
 
-const CreateSupplierForm = props => (
+const ContactFormForm = props => (
   <div>
     <Formik
       initialValues={{
-        name: "",
         address: "",
+        address2: "",
         city: "",
         state: "",
         country: "",
@@ -57,9 +54,9 @@ const CreateSupplierForm = props => (
         lastName: "",
         phone: "",
         email: "",
-        enquiry: ""
+        message: ""
       }}
-      validationSchema={CreateSupplierSchema}
+      validationSchema={ContactFormSchema}
       onSubmit={values => {
         props.onSubmit(values);
       }}
@@ -67,19 +64,75 @@ const CreateSupplierForm = props => (
       {({ errors, touched }) => (
         <Form>
           <div className="field">
-            <label className="label">Organization/Business *</label>
-            <div className="control">
-              <Field
-                name="name"
-                className="input"
-                type="text"
-                placeholder="Name of your organization"
-              />
+            <div className="columns">
+              <div className="column">
+                <label className="label">First Name *</label>
+                <div className="control">
+                  <Field
+                    name="firstName"
+                    className="input"
+                    type="text"
+                    placeholder="Your Name"
+                  />
+                </div>
+                {errors.firstName && touched.firstName ? (
+                  <p className="help is-danger">{errors.firstName}</p>
+                ) : null}
+              </div>
+              <div className="column">
+                <label className="label">Last Name *</label>
+                <div className="control">
+                  <Field
+                    name="lastName"
+                    className="input"
+                    type="text"
+                    placeholder="Your Last Name"
+                  />
+                </div>
+                {errors.lastName && touched.lastName ? (
+                  <p className="help is-danger">{errors.lastName}</p>
+                ) : null}
+              </div>
             </div>
-            {errors.name && touched.name ? (
-              <p className="help is-danger">{errors.name}</p>
-            ) : null}
           </div>
+
+          <div className="field">
+            <div className="columns">
+              <div className="column">
+                <div className="field">
+                  <label className="label">Phone Number *</label>
+                  <div className="control">
+                    <Field
+                      name="phone"
+                      className="input"
+                      type="tel"
+                      placeholder="Phone Number"
+                    />
+                  </div>
+                  {errors.phone && touched.phone ? (
+                    <p className="help is-danger">{errors.phone}</p>
+                  ) : null}
+                </div>
+              </div>
+              <div className="column">
+                <div className="field">
+                  <label className="label">Email *</label>
+                  <div className="control">
+                    <Field
+                      name="email"
+                      className="input"
+                      type="email"
+                      placeholder="Email"
+                    />
+                  </div>
+                  {errors.email && touched.email ? (
+                    <p className="help is-danger">{errors.email}</p>
+                  ) : null}
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="field">
             <label className="label">Address *</label>
             <div className="control">
@@ -87,13 +140,29 @@ const CreateSupplierForm = props => (
                 name="address"
                 className="input"
                 type="text"
-                placeholder="Your organization address"
+                placeholder="Your address"
               />
             </div>
             {errors.address && touched.address ? (
               <p className="help is-danger">{errors.address}</p>
             ) : null}
           </div>
+
+          <div className="field">
+            <label className="label">Address Line 2</label>
+            <div className="control">
+              <Field
+                name="address"
+                className="input"
+                type="text"
+                placeholder="Your address (line 2)"
+              />
+            </div>
+            {errors.address && touched.address ? (
+              <p className="help is-danger">{errors.address}</p>
+            ) : null}
+          </div>
+
           <div className="field">
             <div className="columns">
               <div className="column">
@@ -103,7 +172,7 @@ const CreateSupplierForm = props => (
                     name="city"
                     className="input"
                     type="text"
-                    placeholder="City where your organization located on"
+                    placeholder="City where you are located on"
                   />
                 </div>
                 {errors.city && touched.city ? (
@@ -111,13 +180,13 @@ const CreateSupplierForm = props => (
                 ) : null}
               </div>
               <div className="column">
-                <label className="label">State/Provience *</label>
+                <label className="label">State *</label>
                 <div className="control">
                   <Field
                     name="state"
                     className="input"
                     type="text"
-                    placeholder="Your organization State/Provience"
+                    placeholder="Your State"
                   />
                 </div>
                 {errors.state && touched.state ? (
@@ -395,87 +464,10 @@ const CreateSupplierForm = props => (
             </div>
           </div>
 
-          <strong>Contact Name</strong>
-
           <div className="field">
-            <div className="columns">
-              <div className="column">
-                <label className="label">First Name *</label>
-                <div className="control">
-                  <Field
-                    name="firstName"
-                    className="input"
-                    type="text"
-                    placeholder="Your Name"
-                  />
-                </div>
-                {errors.firstName && touched.firstName ? (
-                  <p className="help is-danger">{errors.firstName}</p>
-                ) : null}
-              </div>
-              <div className="column">
-                <label className="label">Last Name *</label>
-                <div className="control">
-                  <Field
-                    name="lastName"
-                    className="input"
-                    type="text"
-                    placeholder="Your Last Name"
-                  />
-                </div>
-                {errors.lastName && touched.lastName ? (
-                  <p className="help is-danger">{errors.lastName}</p>
-                ) : null}
-              </div>
-            </div>
-          </div>
-
-          <div className="field">
-            <div className="columns">
-              <div className="column">
-                <div className="field">
-                  <label className="label">Phone Number *</label>
-                  <div className="control">
-                    <Field
-                      name="phone"
-                      className="input"
-                      type="tel"
-                      placeholder="Phone Number"
-                    />
-                  </div>
-                  {errors.phone && touched.phone ? (
-                    <p className="help is-danger">{errors.phone}</p>
-                  ) : null}
-                </div>
-              </div>
-              <div className="column">
-                <div className="field">
-                  <label className="label">Email *</label>
-                  <div className="control">
-                    <Field
-                      name="email"
-                      className="input"
-                      type="email"
-                      placeholder="Email"
-                    />
-                  </div>
-                  {errors.email && touched.email ? (
-                    <p className="help is-danger">{errors.email}</p>
-                  ) : null}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="field">
-            <label className="label">enquiry</label>
+            <label className="label">Message</label>
             <div className="control">
-              <Field
-                component="textarea"
-                name="enquiry"
-                className="textarea"
-                placeholder="enquiry"
-              />
+              <Field component="textarea" name="message" className="textarea" />
             </div>
           </div>
 
@@ -498,4 +490,4 @@ const CreateSupplierForm = props => (
   </div>
 );
 
-export default CreateSupplierForm;
+export default ContactFormForm;

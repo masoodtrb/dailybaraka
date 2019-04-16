@@ -4,13 +4,8 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
 const SignInSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Email is invalid.")
-    .required("Email is required."),
-  password: Yup.string()
-    .min(6, "Password is too short.")
-    .max(30, "Password is too large.")
-    .required("Password is required.")
+  email: Yup.string().required("Email is required."),
+  password: Yup.string().required("Password is required.")
 });
 
 const SignInForm = props => (
