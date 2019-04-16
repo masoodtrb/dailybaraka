@@ -20,7 +20,6 @@ class Supplier extends Component {
 
   render() {
     const { supplier } = this.props;
-    console.log(this.props);
     return (
       <div>
         <Head title={supplier.name} />

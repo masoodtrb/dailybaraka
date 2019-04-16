@@ -8,7 +8,7 @@ import "../styles/main.scss";
 class Product extends Component {
   static async getInitialProps({ query }) {
     return {
-      product: await productService.getBySlug(query.id)
+      product: await productService.getBySlug(query.slug)
     };
   }
 
@@ -24,7 +24,6 @@ class Product extends Component {
   render() {
     const { product } = this.props;
     const { tab } = this.state;
-    console.log(this.props);
     return (
       <div>
         <Head title={product.name} />
@@ -150,24 +149,26 @@ class Product extends Component {
               </div>
 
               <div className="column is-hidden-touch">
-                <ul className="product__related">
-                  {product.relatedProducts.map(item => (
-                    <li>
-                      <a href={"/product/" + item.slug}>
-                        <img
-                          src={
-                            item.mainPicture && product.mainPicture.id
-                              ? process.env.API_URL +
-                                "api/shop/general/v1/file/" +
-                                product.mainPicture.id
-                              : "/static/images/128x128.png"
-                          }
-                          alt={item.name}
-                        />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+                {product.relatedProducts && (
+                  <ul className="product__related">
+                    {product.relatedProducts.map(item => (
+                      <li>
+                        <a href={"/product/" + item.slug}>
+                          <img
+                            src={
+                              item.mainPicture && product.mainPicture.id
+                                ? process.env.API_URL +
+                                  "api/shop/general/v1/file/" +
+                                  product.mainPicture.id
+                                : "/static/images/128x128.png"
+                            }
+                            alt={item.name}
+                          />
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
           </div>

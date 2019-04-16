@@ -8,8 +8,6 @@ import "../styles/main.scss";
 
 class Search extends Component {
   static async getInitialProps({ query }) {
-    console.log("query");
-    console.log(query);
     return {
       products: await productService.search(query.sector, query.q),
       searchValue: query.q
