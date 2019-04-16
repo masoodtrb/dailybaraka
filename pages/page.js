@@ -40,7 +40,7 @@ class Page extends Component {
 
     const formData = this.state.contactFormData;
 
-    fetch("/api/shop/retailers/v1/create", {
+    fetch("/api/shop/contact-us/v1/create", {
       method: "POST",
       headers: {
         "content-type": "application/json"
@@ -117,28 +117,51 @@ class Page extends Component {
                   <br />
                   <br />
                   <h2>Get in touch with us!</h2>
-                  {this.state.contactForm.state === "ERROR" && (
-                    <div className="notification is-danger">
-                      <button className="delete" />
-                      <strong>An error has occurred</strong>
-                      <br />
-                      <p>{this.state.contactForm.error}</p>
-                    </div>
-                  )}
-                  <ContactForm
-                    onProgress={this.state.contactForm.state === "SUBMITTING"}
-                    onSubmit={formData => this.onContactFormSubmit(formData)}
-                  />
+                  <div
+                    className={[
+                      "columns animate",
+                      this.state.contactForm.state === "SUCCESS"
+                        ? "animate-hidden"
+                        : ""
+                    ].join(" ")}
+                  >
+                    {this.state.contactForm.state === "ERROR" && (
+                      <div className="notification is-danger">
+                        <button className="delete" />
+                        <strong>An error has occurred</strong>
+                        <br />
+                        <p>{this.state.contactForm.error}</p>
+                      </div>
+                    )}
+                    <ContactForm
+                      onProgress={this.state.contactForm.state === "SUBMITTING"}
+                      onSubmit={formData => this.onContactFormSubmit(formData)}
+                    />
 
-                  <Recaptcha
-                    ref={ref => (this.recaptchaContactFormRef = ref)}
-                    sitekey={process.env.RECAPTCHA_KEY}
-                    onResolved={() => this.onContactFormRecaptchaResolved()}
-                    onError={() => this.onContactFormSRecaptchaError("ERROR")}
-                    onExpired={() =>
-                      this.onContactFormSRecaptchaError("EXPIRED")
-                    }
-                  />
+                    <Recaptcha
+                      ref={ref => (this.recaptchaContactFormRef = ref)}
+                      sitekey={process.env.RECAPTCHA_KEY}
+                      onResolved={() => this.onContactFormRecaptchaResolved()}
+                      onError={() => this.onContactFormSRecaptchaError("ERROR")}
+                      onExpired={() =>
+                        this.onContactFormSRecaptchaError("EXPIRED")
+                      }
+                    />
+                  </div>
+                  <div
+                    className={[
+                      "animate hidden",
+                      this.state.contactForm.state === "SUCCESS"
+                        ? "animate-show"
+                        : ""
+                    ].join(" ")}
+                  >
+                    <div className="notification is-success">
+                      <strong>
+                        Your request has been successfully submitted.
+                      </strong>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}

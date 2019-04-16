@@ -7,6 +7,7 @@ const ContactFormSchema = Yup.object().shape({
     .min(5, "Address is too short.")
     .max(200, "Address is too large.")
     .required("Address is required."),
+  address2: Yup.string().max(200, "Address is too large."),
   city: Yup.string()
     .min(3, "City is too short.")
     .max(50, "City is too large.")

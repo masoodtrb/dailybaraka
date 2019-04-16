@@ -336,6 +336,14 @@ class Enquiry extends Component {
                     onProgress={this.state.storeForm.state === "SUBMITTING"}
                     onSubmit={formData => this.onStoreFormSubmit(formData)}
                   />
+
+                  <Recaptcha
+                    ref={ref => (this.recaptchaStoreFormRef = ref)}
+                    sitekey={process.env.RECAPTCHA_KEY}
+                    onResolved={() => this.onStoreFormRecaptchaResolved()}
+                    onError={() => this.onStoreFormSRecaptchaError("ERROR")}
+                    onExpired={() => this.onStoreFormSRecaptchaError("EXPIRED")}
+                  />
                 </div>
                 <div className="column is-6">
                   <div className="has-text-centered">
@@ -439,14 +447,6 @@ class Enquiry extends Component {
             </div>
           </div>
         </div>
-
-        <Recaptcha
-          ref={ref => (this.recaptchaStoreFormRef = ref)}
-          sitekey={process.env.RECAPTCHA_KEY}
-          onResolved={() => this.onStoreFormRecaptchaResolved()}
-          onError={() => this.onStoreFormSRecaptchaError("ERROR")}
-          onExpired={() => this.onStoreFormSRecaptchaError("EXPIRED")}
-        />
       </div>
     );
   }
