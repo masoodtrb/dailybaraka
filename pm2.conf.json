@@ -1,0 +1,14 @@
+{
+    "app": [
+        {
+            "name": "daily-web-ui",
+            "script": "./server.js",
+            "watch": true,
+            "exec_mode": "cluster",
+            "env": {
+                "NODE_ENV": "production",
+                "port": 9990
+            }
+        }
+    ]
+}
