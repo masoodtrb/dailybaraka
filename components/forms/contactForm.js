@@ -7,7 +7,6 @@ const ContactFormSchema = Yup.object().shape({
     .min(5, "Address is too short.")
     .max(200, "Address is too large.")
     .required("Address is required."),
-  address2: Yup.string().max(200, "Address is too large."),
   city: Yup.string()
     .min(3, "City is too short.")
     .max(50, "City is too large.")
@@ -45,7 +44,6 @@ const ContactFormForm = props => (
     <Formik
       initialValues={{
         address: "",
-        address2: "",
         city: "",
         state: "",
         country: "",
@@ -141,21 +139,6 @@ const ContactFormForm = props => (
                 className="input"
                 type="text"
                 placeholder="Your address"
-              />
-            </div>
-            {errors.address && touched.address ? (
-              <p className="help is-danger">{errors.address}</p>
-            ) : null}
-          </div>
-
-          <div className="field">
-            <label className="label">Address Line 2</label>
-            <div className="control">
-              <Field
-                name="address"
-                className="input"
-                type="text"
-                placeholder="Your address (line 2)"
               />
             </div>
             {errors.address && touched.address ? (
