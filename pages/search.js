@@ -20,7 +20,6 @@ class Search extends Component {
 
   render() {
     const { products, searchValue } = this.props;
-    console.log(this.props);
     return (
       <div>
         <Head title="Search" />

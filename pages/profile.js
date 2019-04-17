@@ -58,7 +58,7 @@ class Profile extends Component {
           });
         });
     } else {
-      window.location.href = "/";
+      window.location.href = "/login?returnUrl=/profile";
     }
   }
 

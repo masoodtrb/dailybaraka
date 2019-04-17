@@ -11,6 +11,12 @@ import SignInForm from "../components/forms/loginForm";
 import "../styles/main.scss";
 
 class SignIn extends Component {
+  static async getInitialProps({ query }) {
+    return {
+      returnUrl: query.returnUrl
+    };
+  }
+
   state = {
     signInForm: { state: "INITIATE", error: "" },
     formData: {}
@@ -70,6 +76,10 @@ class SignIn extends Component {
           sessionStorage.setItem("token", json.id_token);
         }
 
+        if (this.props.returnUrl) {
+          this.props.router.push(this.props.returnUrl);
+          return;
+        }
         this.props.router.push("/");
       });
   };

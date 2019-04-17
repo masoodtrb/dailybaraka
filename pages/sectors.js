@@ -13,7 +13,6 @@ class Sectors extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <Head title="Sectors" />
