@@ -25,7 +25,7 @@ class Sectors extends Component {
             <div className="columns is-multiline">
               {this.props.sectors.result.map((item, index) => (
                 <div key={item.id} className="column is-4">
-                  <a href={"/sector/" + item.id + "-" + item.name}>
+                  <a href={"/sector/" + item.id + "/" + item.name}>
                     <div className="box">
                       <article className="media">
                         <div className="media-left">

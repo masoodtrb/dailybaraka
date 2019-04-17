@@ -14,7 +14,7 @@ module.exports = routes()
   .add("search", "/search")
   .add("product", "/product/:slug")
   .add("sectors", "/sectors")
-  .add("sector", "/sector/:id-:name")
+  .add("sector", "/sector/:id/:name")
 
   // Other Pages
   .add("supplier", "/supplier/:id/:name")
