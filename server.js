@@ -58,7 +58,7 @@ app.prepare().then(() => {
   });
 
   // run on specific port
-  server.listen(3000, err => {
+  server.listen(process.env.port || 3000, err => {
     if (err) throw err;
     console.log("> Read on http://localhost:3000");
   });
