@@ -30,39 +30,45 @@ class Search extends Component {
             <h1>Search result for "{searchValue}"</h1>
 
             <div className="columns is-multiline">
-              {products.result.map((product, index) => (
-                <div className="column is-4">
-                  <Link href={"/product/" + product.slug}>
-                    <a>
-                      <div className="box">
-                        <article className="media">
-                          <div className="media-left">
-                            <figure className="image">
-                              <img
-                                src={
-                                  product.mainPicture
-                                    ? process.env.API_URL +
-                                      "api/shop/general/v1/file/" +
-                                      product.mainPicture.id
-                                    : "/static/images/128x128.png"
-                                }
-                                alt={product.name}
-                              />
-                            </figure>
-                          </div>
-                          <div className="media-content">
-                            <div className="content">
-                              <p>
-                                <strong>{product.name}</strong>
-                              </p>
+              {products.result &&
+              products.result &&
+              products.result.length > 0 ? (
+                products.result.map((product, index) => (
+                  <div className="column is-4">
+                    <Link href={"/product/" + product.slug}>
+                      <a>
+                        <div className="box">
+                          <article className="media">
+                            <div className="media-left">
+                              <figure className="image">
+                                <img
+                                  src={
+                                    product.mainPicture
+                                      ? process.env.API_URL +
+                                        "api/shop/general/v1/file/" +
+                                        product.mainPicture.id
+                                      : "/static/images/128x128.png"
+                                  }
+                                  alt={product.name}
+                                />
+                              </figure>
                             </div>
-                          </div>
-                        </article>
-                      </div>
-                    </a>
-                  </Link>
-                </div>
-              ))}
+                            <div className="media-content">
+                              <div className="content">
+                                <p>
+                                  <strong>{product.name}</strong>
+                                </p>
+                              </div>
+                            </div>
+                          </article>
+                        </div>
+                      </a>
+                    </Link>
+                  </div>
+                ))
+              ) : (
+                <div className="notification is-info">No result is found!</div>
+              )}
             </div>
           </div>
         </div>
