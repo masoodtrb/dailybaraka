@@ -767,12 +767,21 @@ a {
     }
 
     p {
-      padding: 15px 12px;
+      padding: 20px 0;
     }
 
     strong {
-      font-size: 1.8em;
+      font-size: 1.4em;
       font-weight: normal;
+    }
+
+    .media-content {
+      overflow: hidden;
+      & p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
   }
 }

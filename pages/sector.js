@@ -11,22 +11,24 @@ import "../styles/main.scss";
 class Sector extends Component {
   static async getInitialProps({ query }) {
     return {
-      sector: await sectorService.getSuppliersAndProducts(query.id)
+      sector: await sectorService.get(query.id),
+      suppliers: await sectorService.getSuppliersAndProducts(query.id)
     };
   }
 
   render() {
+    const { sector, suppliers } = this.props;
     return (
       <div>
-        <Head title="Sector" />
+        <Head title={sector.name} />
         <Nav />
 
         <div className="page sector">
           <div className="container">
-            <h1>Sector Title</h1>
+            <h1>{sector.name}</h1>
           </div>
 
-          {this.props.sector.result.map((supplier, index) => (
+          {suppliers.result.map((supplier, index) => (
             <div key={"supplier-" + supplier.id} className="sector__supplier">
               <div className="container">
                 <Link href={"/supplier/" + supplier.id + "/" + supplier.name}>
@@ -75,7 +77,7 @@ class Sector extends Component {
             </div>
           ))}
 
-          {this.props.sector.pagination.page > 1 && (
+          {suppliers.pagination.page > 1 && (
             <nav
               className="pagination"
               role="navigation"

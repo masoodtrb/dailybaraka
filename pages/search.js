@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Link from "next/link";
 import * as productService from "../services/product";
 
 import Head from "../components/head";
@@ -26,30 +27,30 @@ class Search extends Component {
             <h1>Search result for "{searchValue}"</h1>
 
             <div className="columns is-multiline">
-              {products.result.map((item, index) => (
+              {products.result.map((product, index) => (
                 <div className="column is-4">
                   <Link href={"/product/" + product.slug}>
-                    <a href="/sector">
+                    <a>
                       <div className="box">
                         <article className="media">
                           <div className="media-left">
                             <figure className="image">
                               <img
                                 src={
-                                  item.mainPicture
+                                  product.mainPicture
                                     ? process.env.API_URL +
                                       "api/shop/general/v1/file/" +
-                                      item.mainPicture.id
+                                      product.mainPicture.id
                                     : "/static/images/128x128.png"
                                 }
-                                alt={item.name}
+                                alt={product.name}
                               />
                             </figure>
                           </div>
                           <div className="media-content">
                             <div className="content">
                               <p>
-                                <strong>{item.name}</strong>
+                                <strong>{product.name}</strong>
                               </p>
                             </div>
                           </div>

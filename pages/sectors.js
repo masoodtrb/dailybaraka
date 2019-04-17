@@ -13,6 +13,7 @@ class Sectors extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div>
         <Head title="Sectors" />
@@ -31,7 +32,13 @@ class Sectors extends Component {
                         <div className="media-left">
                           <figure className="image">
                             <img
-                              src="https://bulma.io/images/placeholders/128x128.png"
+                              src={
+                                item.picture
+                                  ? process.env.API_URL +
+                                    "api/shop/general/v1/file/" +
+                                    item.picture.id
+                                  : "/static/images/128x128.png"
+                              }
                               alt={item.name}
                             />
                           </figure>
