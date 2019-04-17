@@ -37,10 +37,7 @@ class Profile extends Component {
         })
         .then(json => {
           this.setState({
-            userData: {
-              firstName: json.firstName,
-              lastName: json.lastName
-            }
+            userData: json
           });
         });
 
@@ -280,6 +277,7 @@ class Profile extends Component {
 
   render() {
     const { currentTab, coupons } = this.state;
+    console.log(this.state.userData);
     return (
       <div>
         <Head title="User Profile" />
