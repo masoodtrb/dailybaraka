@@ -32,7 +32,7 @@ class Supplier extends Component {
                 ? process.env.API_URL +
                   "api/shop/general/v1/file/" +
                   supplier.cover.id
-                : "/static/images/supplier-bg.png"
+                : "/static/images/top-bg.jpg"
             }
             className="supplier__cover"
             alt={supplier.name}

@@ -24,37 +24,38 @@ class Sectors extends Component {
             <h1>Sectors</h1>
 
             <div className="columns is-multiline">
-              {this.props.sectors.result.map((item, index) => (
-                <div key={item.id} className="column is-4">
-                  <a href={"/sector/" + item.id + "/" + item.name}>
-                    <div className="box">
-                      <article className="media">
-                        <div className="media-left">
-                          <figure className="image">
-                            <img
-                              src={
-                                item.picture
-                                  ? process.env.API_URL +
-                                    "api/shop/general/v1/file/" +
-                                    item.picture.id
-                                  : "/static/images/128x128.png"
-                              }
-                              alt={item.name}
-                            />
-                          </figure>
-                        </div>
-                        <div className="media-content">
-                          <div className="content">
-                            <p>
-                              <strong>{item.name}</strong>
-                            </p>
+              {this.props.sectors.result &&
+                this.props.sectors.result.map((item, index) => (
+                  <div key={item.id} className="column is-4">
+                    <a href={"/sector/" + item.id + "/" + item.name}>
+                      <div className="box">
+                        <article className="media">
+                          <div className="media-left">
+                            <figure className="image">
+                              <img
+                                src={
+                                  item.picture
+                                    ? process.env.API_URL +
+                                      "api/shop/general/v1/file/" +
+                                      item.picture.id
+                                    : "/static/images/128x128.png"
+                                }
+                                alt={item.name}
+                              />
+                            </figure>
                           </div>
-                        </div>
-                      </article>
-                    </div>
-                  </a>
-                </div>
-              ))}
+                          <div className="media-content">
+                            <div className="content">
+                              <p>
+                                <strong>{item.name}</strong>
+                              </p>
+                            </div>
+                          </div>
+                        </article>
+                      </div>
+                    </a>
+                  </div>
+                ))}
             </div>
           </div>
         </div>

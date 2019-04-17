@@ -36,7 +36,7 @@ class Product extends Component {
                 ? process.env.API_URL +
                   "api/shop/general/v1/file/" +
                   product.cover.id
-                : "/static/images/supplier-bg.png"
+                : "/static/images/top-bg.jpg"
             }
             className="product__cover"
             alt={product.name}
