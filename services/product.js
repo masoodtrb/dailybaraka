@@ -15,6 +15,20 @@ async function getBySlug(slug) {
 }
 
 async function search(sectorId, query) {
+  let filters = [
+    {
+      field: "name",
+      operator: "LIKE",
+      value: query
+    }
+  ];
+  if (sectorId) {
+    filters.push({
+      field: "categories.id",
+      operator: "EQ",
+      value: sectorId
+    });
+  }
   const response = await fetch(
     process.env.API_URL + "api/shop/products/v1/search",
     {
@@ -23,18 +37,7 @@ async function search(sectorId, query) {
         "content-type": "application/json"
       },
       body: JSON.stringify({
-        filter: [
-          {
-            field: "name",
-            operator: "LIKE",
-            value: query
-          },
-          {
-            field: "categories.id",
-            operator: "EQ",
-            value: sectorId
-          }
-        ]
+        filters
       })
     }
   );

@@ -10,13 +10,17 @@ import "../styles/main.scss";
 class Search extends Component {
   static async getInitialProps({ query }) {
     return {
-      products: await productService.search(query.sector, query.q),
+      products: await productService.search(
+        query.sector === "all" ? null : query.sector,
+        query.q
+      ),
       searchValue: query.q
     };
   }
 
   render() {
     const { products, searchValue } = this.props;
+    console.log(this.props);
     return (
       <div>
         <Head title="Search" />
