@@ -23,10 +23,10 @@ async function search(sectorId, query) {
         "content-type": "application/json"
       },
       body: JSON.stringify({
-        filter: [
+        filters: [
           {
             field: "name",
-            operator: "LIKE",
+            operator: "ILIKE",
             value: query
           },
           {
