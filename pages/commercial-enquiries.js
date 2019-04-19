@@ -38,7 +38,8 @@ class Enquiry extends Component {
 
   onUpdatePosition = event => {
     this.setState({
-      marker: event.target.getCenter()
+      marker: event.target.getCenter(),
+      zoom: event.target.getZoom()
     });
   };
 
