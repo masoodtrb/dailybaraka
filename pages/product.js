@@ -24,7 +24,6 @@ class Product extends Component {
   render() {
     const { product } = this.props;
     const { tab } = this.state;
-    console.log(this.props);
     return (
       <div>
         <Head title={product.name} />

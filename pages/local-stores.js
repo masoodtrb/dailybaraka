@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import * as sectorService from "../services/sector";
 
 import Head from "../components/head";
 import Nav from "../components/nav";
@@ -8,6 +9,10 @@ import "../styles/main.scss";
 let Leaflet, Map, TileLayer, Marker, Popup, StoreIcon;
 
 class LocalStores extends Component {
+  static async getInitialProps({ req }) {
+    return { sectors: await sectorService.getAll() };
+  }
+
   state = {
     center: {
       lat: 51.505,
@@ -16,7 +21,8 @@ class LocalStores extends Component {
     userLocation: null,
     zoom: 16,
     stores: [],
-    selectedCategoryId: null
+    openFilters: false,
+    sectors: []
   };
 
   storeIcon = {};
@@ -38,19 +44,24 @@ class LocalStores extends Component {
       iconSize: [44, 44]
     });
 
-    this.forceUpdate();
+    this.forceUpdate(() => {
+      this.updateStores();
+
+      this.setState({
+        sectors: this.props.sectors
+      });
+    });
   }
 
-  updateStores = () => {
+  updateStores = (sectorId = null) => {
     // create parameters based on function inputs
     let parameters = {
       lat: this.state.center.lat,
       lng: this.state.center.lng,
-      radius: 2
+      radius: 5
     };
 
-    if (this.state.selectedCategoryId)
-      parameters.categoryId = this.state.selectedCategoryId;
+    if (sectorId) parameters.categoryId = sectorId;
 
     // request to get local stores based on lat & lng
     fetch("/api/shop/retailers/v1/load-by-location", {
@@ -132,6 +143,34 @@ class LocalStores extends Component {
     }
   };
 
+  onMapFilters = event => {
+    event.preventDefault();
+
+    this.setState({
+      openFilters: !this.state.openFilters
+    });
+  };
+
+  onSectorFilter = sectorId => {
+    debugger;
+    let sectors = [...this.state.sectors.result];
+
+    sectors.forEach(item => {
+      item.selected = false;
+    });
+
+    if (!sectorId) {
+      this.updateStores();
+      return;
+    }
+
+    let sector = sectors.find(item => item.id === sectorId);
+
+    sector.selected = true;
+
+    this.updateStores(sectorId);
+  };
+
   render() {
     return (
       <div>
@@ -199,9 +238,43 @@ class LocalStores extends Component {
                 ))}
               </Map>
 
+              <div
+                class={[
+                  "map__filters",
+                  this.state.openFilters ? "active" : ""
+                ].join(" ")}
+              >
+                <div class="control">
+                  <label class="radio" onClick={() => this.onSectorFilter()}>
+                    <input type="radio" name="sector" />
+                    All
+                  </label>
+                  {this.state.sectors &&
+                    this.state.sectors.result &&
+                    this.state.sectors.result.map(sector => (
+                      <label key={sector.id} class="radio">
+                        <input
+                          type="radio"
+                          name="sector"
+                          value={sector.id}
+                          onClick={() => this.onSectorFilter(sector.id)}
+                          checked={sector.selected}
+                        />
+                        {sector.name}
+                      </label>
+                    ))}
+                </div>
+              </div>
+
               <div className="map__buttons">
                 <button
-                  className="button is-primary map__location"
+                  className="button is-primary"
+                  onClick={e => this.onMapFilters(e)}
+                >
+                  <i class="fas fa-list" />
+                </button>
+                <button
+                  className="button is-primary"
                   onClick={e => this.onSetLocation(e)}
                 >
                   <i className="fas fa-map-marker-alt" />

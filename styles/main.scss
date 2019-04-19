@@ -950,6 +950,8 @@ a {
         line-height: 46px;
         color: #454f63;
         font-size: 18px;
+        display: flex;
+        margin-top: 10px;
 
         &:hover {
           background-color: darken(#fff, 2%);
@@ -957,7 +959,32 @@ a {
       }
     }
 
-    &__location {
+    .map__filters {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 300px;
+      z-index: 1000;
+      background-color: #fff;
+      overflow-y: scroll;
+      display: none;
+
+      &.active {
+        display: block;
+      }
+
+      .radio {
+        display: block;
+        margin: 15px 20px;
+        border: 1px solid #cecece;
+        padding: 10px 15px;
+        border-radius: 3px;
+
+        input {
+          margin-right: 5px;
+        }
+      }
     }
 
     .box {

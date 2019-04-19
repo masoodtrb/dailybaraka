@@ -277,7 +277,6 @@ class Profile extends Component {
 
   render() {
     const { currentTab, coupons } = this.state;
-    console.log(this.state.userData);
     return (
       <div>
         <Head title="User Profile" />
