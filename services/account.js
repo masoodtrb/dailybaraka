@@ -9,4 +9,13 @@ const getUserToken = () => {
   return token;
 };
 
-export { getUserToken };
+const getCurrentUser = () => {
+  let user = localStorage.getItem("user");
+  if (!user) {
+    user = sessionStorage.getItem("user");
+  }
+
+  return user;
+}
+
+export { getUserToken, getCurrentUser };

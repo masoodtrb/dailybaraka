@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Link from "next/link";
 
-import { getUserToken } from "../services/account";
+import { getUserToken, getCurrentUser } from "../services/account";
 
 class Nav extends Component {
   state = {
@@ -10,8 +10,16 @@ class Nav extends Component {
     showMenu: false
   };
 
+  componentWillMount () {
+    // console.log('localStorage', localStorage)
+    // this.setState({
+    //   user: JSON.parse(localStorage.getItem('user')) || null
+    // });
+  }
+
   componentDidMount() {
     const token = getUserToken();
+    this.setState({user: JSON.parse(getCurrentUser())})
 
     if (token) {
       fetch("/api/shop/account/v1/current-user", {
@@ -23,6 +31,7 @@ class Nav extends Component {
           return response.json();
         })
         .then(json => {
+          localStorage.setItem('user', JSON.stringify({ ...json, token: token }));
           this.setState({
             user: { ...json, token: token }
           });
@@ -48,6 +57,8 @@ class Nav extends Component {
 
     localStorage.removeItem("token");
     sessionStorage.removeItem("token");
+
+    localStorage.removeItem("user");
 
     this.setState(
       {

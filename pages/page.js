@@ -40,11 +40,15 @@ class Page extends Component {
 
     const formData = this.state.contactFormData;
 
+    var header = {
+      "content-type": "application/json"
+    };
+    if (localStorage.token) {
+      header.Authorization = `Bearar ${localStorage.token}`
+    }
     fetch("/api/shop/contact-us/v1/create", {
       method: "POST",
-      headers: {
-        "content-type": "application/json"
-      },
+      headers: header,
       body: JSON.stringify({
         address: formData.address,
         city: formData.city,
