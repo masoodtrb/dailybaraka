@@ -31,7 +31,13 @@ class Nav extends Component {
 
     // get all sectors
     fetch("/api/shop/categories/v1/search", {
-      method: "POST"
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        size: 1000
+      })
     })
       .then(response => {
         return response.json();

@@ -81,7 +81,8 @@ class LocalStores extends Component {
   onUpdatePosition = event => {
     this.setState(
       {
-        center: event.target.getCenter()
+        center: event.target.getCenter(),
+        zoom: event.target.getZoom()
       },
       () => {
         this.updateStores();

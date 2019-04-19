@@ -19,7 +19,7 @@ export default class MyDocument extends Document {
               <ul className="footer__links">
                 <li>
                   <Link href="/page/terms">
-                    <a>Terms &amp; Condition</a>
+                    <a>Terms &amp; Conditions</a>
                   </Link>
                 </li>
               </ul>
