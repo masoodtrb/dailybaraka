@@ -21,8 +21,7 @@ class LocalStores extends Component {
     userLocation: null,
     zoom: 16,
     stores: [],
-    openFilters: false,
-    sectors: []
+    openFilters: false
   };
 
   storeIcon = {};
@@ -46,14 +45,10 @@ class LocalStores extends Component {
 
     this.forceUpdate(() => {
       this.updateStores();
-
-      this.setState({
-        sectors: this.props.sectors
-      });
     });
   }
 
-  updateStores = (sectorId = null) => {
+  updateStores = () => {
     // create parameters based on function inputs
     let parameters = {
       lat: this.state.center.lat,
@@ -61,7 +56,8 @@ class LocalStores extends Component {
       radius: 5
     };
 
-    if (sectorId) parameters.categoryId = sectorId;
+    if (this.state.selectedSectorId)
+      parameters.categoryId = this.state.selectedSectorId;
 
     // request to get local stores based on lat & lng
     fetch("/api/shop/retailers/v1/load-by-location", {
@@ -151,24 +147,16 @@ class LocalStores extends Component {
     });
   };
 
-  onSectorFilter = sectorId => {
-    debugger;
-    let sectors = [...this.state.sectors.result];
-
-    sectors.forEach(item => {
-      item.selected = false;
-    });
-
-    if (!sectorId) {
-      this.updateStores();
-      return;
-    }
-
-    let sector = sectors.find(item => item.id === sectorId);
-
-    sector.selected = true;
-
-    this.updateStores(sectorId);
+  onSectorFilter = (sectorId = null) => {
+    this.setState(
+      {
+        selectedSectorId: sectorId,
+        stores: []
+      },
+      () => {
+        this.updateStores(sectorId);
+      }
+    );
   };
 
   render() {
@@ -239,26 +227,33 @@ class LocalStores extends Component {
               </Map>
 
               <div
-                class={[
+                className={[
                   "map__filters",
                   this.state.openFilters ? "active" : ""
                 ].join(" ")}
               >
-                <div class="control">
-                  <label class="radio" onClick={() => this.onSectorFilter()}>
-                    <input type="radio" name="sector" />
+                <div className="control">
+                  <label
+                    className="radio"
+                    onClick={() => this.onSectorFilter()}
+                  >
+                    <input
+                      type="radio"
+                      name="sector"
+                      checked={!this.state.selectedSectorId}
+                    />
                     All
                   </label>
-                  {this.state.sectors &&
-                    this.state.sectors.result &&
-                    this.state.sectors.result.map(sector => (
-                      <label key={sector.id} class="radio">
+                  {this.props.sectors &&
+                    this.props.sectors.result &&
+                    this.props.sectors.result.map(sector => (
+                      <label key={sector.id} className="radio">
                         <input
                           type="radio"
                           name="sector"
                           value={sector.id}
                           onClick={() => this.onSectorFilter(sector.id)}
-                          checked={sector.selected}
+                          checked={this.state.selectedSectorId === sector.id}
                         />
                         {sector.name}
                       </label>
@@ -271,7 +266,7 @@ class LocalStores extends Component {
                   className="button is-primary"
                   onClick={e => this.onMapFilters(e)}
                 >
-                  <i class="fas fa-list" />
+                  <i className="fas fa-list" />
                 </button>
                 <button
                   className="button is-primary"
