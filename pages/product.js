@@ -24,6 +24,7 @@ class Product extends Component {
   render() {
     const { product } = this.props;
     const { tab } = this.state;
+    console.log(this.props);
     return (
       <div>
         <Head title={product.name} />
@@ -49,7 +50,11 @@ class Product extends Component {
                     <ul className="product__topcertified">
                       {product.halalCertificates.map(certificate => (
                         <li>
-                          <a>
+                          <a
+                            href={certificate.link}
+                            target="_blank"
+                            rel="noopener nofollow"
+                          >
                             <img
                               src="/static/images/halal2-logo.png"
                               alt={certificate.name}
@@ -103,7 +108,7 @@ class Product extends Component {
                           href="#"
                           onClick={e => this.onChangeTab(e, "certificates")}
                         >
-                          Certificates
+                          Certifiers
                         </a>
                       </li>
                     </ul>
@@ -135,7 +140,11 @@ class Product extends Component {
                         product.halalCertificates.length > 0 &&
                         product.halalCertificates.map(certificate => (
                           <li>
-                            <a>
+                            <a
+                              href={certificate.link}
+                              target="_blank"
+                              rel="noopener nofollow"
+                            >
                               <img
                                 src="/static/images/halal2-logo.png"
                                 alt={certificate.name}
