@@ -24,7 +24,6 @@ class Product extends Component {
   render() {
     const { product } = this.props;
     const { tab } = this.state;
-    console.log(this.props);
     return (
       <div>
         <Head title={product.name} />
@@ -165,10 +164,10 @@ class Product extends Component {
                         <a href={"/product/" + item.slug}>
                           <img
                             src={
-                              item.mainPicture && product.mainPicture.id
+                              item.mainPicture && item.mainPicture.id
                                 ? process.env.API_URL +
                                   "api/shop/general/v1/file/" +
-                                  product.mainPicture.id
+                                  item.mainPicture.id
                                 : "/static/images/128x128.png"
                             }
                             alt={item.name}
