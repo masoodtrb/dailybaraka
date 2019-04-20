@@ -1,9 +1,7 @@
 const express = require("express");
 const next = require("next");
 const bodyParser = require("body-parser");
-const fs = require("fs");
 const request = require("request");
-const multer = require("multer");
 
 const routes = require("./routes");
 

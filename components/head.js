@@ -9,7 +9,11 @@ const defaultOGImage = "";
 const Head = props => (
   <NextHead>
     <meta charSet="UTF-8" />
-    <title>{props.title || ""}</title>
+    <title>
+      {props.title === "Home"
+        ? "DailyBaraka - How brands attract with the muslim customers"
+        : (props.title || "") + " - DailyBaraka"}
+    </title>
     <meta
       name="description"
       content={props.description || defaultDescription}
@@ -87,7 +91,7 @@ const Head = props => (
       sizes="16x16"
       href="/static/favicon-16x16.png"
     />
-    <link rel="manifest" href="/static/manifest.json" />
+    <link rel="manifest" href="/manifest.json" />
     <meta name="msapplication-TileColor" content="#ffffff" />
     <meta
       name="msapplication-TileImage"
@@ -97,7 +101,7 @@ const Head = props => (
     <link rel="icon" sizes="192x192" href="/static/touch-icon.png" />
     <link rel="apple-touch-icon" href="/static/touch-icon.png" />
     <link rel="mask-icon" href="/static/favicon-mask.svg" color="#49B882" />
-    <link rel="icon" href="/static/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" />
 
     <meta property="og:url" content={props.url || defaultOGURL} />
     <meta property="og:title" content={props.title || ""} />
