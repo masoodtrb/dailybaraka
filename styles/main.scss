@@ -1056,3 +1056,66 @@ a {
     }
   }
 }
+
+.page.feeds {
+  .feeds__categories {
+    a {
+      display: inline-block;
+      width: calc(50% - 4px);
+      margin: 2px;
+      vertical-align: top;
+      position: relative;
+
+      &:after {
+        position: absolute;
+        content: "";
+        display: block;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+
+        background: rgba(0, 110, 255, 0.6);
+
+        mix-blend-mode: multiply;
+        transition: 0.2s opacity ease-out;
+        z-index: 9;
+      }
+
+      &:hover:after {
+        opacity: 0;
+      }
+
+      img {
+        display: block;
+      }
+
+      span {
+        position: absolute;
+        bottom: 20px;
+        font-weight: bold;
+        font-size: 1.4em;
+        margin: 0 auto;
+        display: block;
+        z-index: 10;
+        color: #fff;
+        text-align: center;
+        width: 100%;
+      }
+    }
+  }
+
+  .feeds__profile {
+    label {
+      font-size: 0.7em;
+      color: #999;
+      font-weight: bold;
+      & + span {
+        color: #4a85ce;
+        float: right;
+        font-size: 0.9em;
+        font-weight: bold;
+      }
+    }
+  }
+}
