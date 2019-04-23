@@ -16,24 +16,24 @@ class UserFeeds extends Component {
             <h1>My Feeds</h1>
             <div className="columns">
               <div className="column is-3">
-                <div class="card feeds__profile">
-                  <div class="card-image">
-                    <figure class="image is-4by3">
+                <div className="card feeds__profile">
+                  <div className="card-image">
+                    <figure className="image is-4by3">
                       <img
                         src="http://lorempixel.com/270/200/people/"
                         alt="Placeholder image"
                       />
                     </figure>
                   </div>
-                  <div class="card-content">
-                    <div class="media">
-                      <div class="media-content">
-                        <p class="title is-4">Maria Snow</p>
-                        <p class="subtitle is-6">@mariasnw</p>
+                  <div className="card-content">
+                    <div className="media">
+                      <div className="media-content">
+                        <p className="title is-4">Maria Snow</p>
+                        <p className="subtitle is-6">@mariasnw</p>
                       </div>
                     </div>
 
-                    <div class="content">
+                    <div className="content">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       Phasellus nec iaculis mauris.
                       <hr />
@@ -54,49 +54,49 @@ class UserFeeds extends Component {
                 </div>
               </div>
               <div className="column is-5">
-                <div class="card">
-                  <div class="card-content">
-                    <div class="media">
-                      <div class="media-left">
-                        <figure class="image is-48x48">
+                <div className="card">
+                  <div className="card-content">
+                    <div className="media">
+                      <div className="media-left">
+                        <figure className="image is-48x48">
                           <img
                             src="http://lorempixel.com/96/96/people/2"
                             alt="Placeholder image"
                           />
                         </figure>
                       </div>
-                      <div class="media-content">
-                        <p class="title is-4">Nima Bani</p>
-                        <p class="subtitle is-6">
+                      <div className="media-content">
+                        <p className="title is-4">Nima Bani</p>
+                        <p className="subtitle is-6">
                           Director - Prima Cheese - 15h ago
                         </p>
                       </div>
                     </div>
 
-                    <div class="content">
+                    <div className="content">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       Phasellus nec iaculis mauris.&nbsp;
                       <a href="#">#css</a> <a href="#">#responsive</a>
                     </div>
 
-                    <div class="card">
-                      <div class="card-content">
-                        <div class="media">
-                          <div class="media-left">
-                            <figure class="image is-48x48">
+                    <div className="card">
+                      <div className="card-content">
+                        <div className="media">
+                          <div className="media-left">
+                            <figure className="image is-48x48">
                               <img
                                 src="http://lorempixel.com/96/96/technics/3"
                                 alt="Placeholder image"
                               />
                             </figure>
                           </div>
-                          <div class="media-content">
-                            <p class="title is-5">Boots Chemist</p>
-                            <p class="subtitle is-6">662 Followers</p>
+                          <div className="media-content">
+                            <p className="title is-5">Boots Chemist</p>
+                            <p className="subtitle is-6">662 Followers</p>
                           </div>
                         </div>
 
-                        <div class="content">
+                        <div className="content">
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit. Phasellus nec iaculis mauris.
                         </div>
@@ -110,17 +110,17 @@ class UserFeeds extends Component {
                     </div>
                   </div>
 
-                  <footer class="card-footer">
-                    <a href="#" class="card-footer-item">
-                      <i class="far fa-thumbs-up" />
+                  <footer className="card-footer">
+                    <a href="#" className="card-footer-item">
+                      <i className="far fa-thumbs-up" />
                       &nbsp;Like
                     </a>
-                    <a href="#" class="card-footer-item">
-                      <i class="far fa-comment-dots" />
+                    <a href="#" className="card-footer-item">
+                      <i className="far fa-comment-dots" />
                       &nbsp;Comment
                     </a>
-                    <a href="#" class="card-footer-item">
-                      <i class="far fa-share-square" />
+                    <a href="#" className="card-footer-item">
+                      <i className="far fa-share-square" />
                       &nbsp;Share
                     </a>
                   </footer>
@@ -128,43 +128,43 @@ class UserFeeds extends Component {
                 <br />
                 {[...Array(6)].map(() => (
                   <React.Fragment>
-                    <div class="card">
-                      <div class="card-content">
-                        <div class="media">
-                          <div class="media-left">
-                            <figure class="image is-48x48">
+                    <div className="card">
+                      <div className="card-content">
+                        <div className="media">
+                          <div className="media-left">
+                            <figure className="image is-48x48">
                               <img
                                 src="http://lorempixel.com/96/96/people/2"
                                 alt="Placeholder image"
                               />
                             </figure>
                           </div>
-                          <div class="media-content">
-                            <p class="title is-4">Nima Bani</p>
-                            <p class="subtitle is-6">
+                          <div className="media-content">
+                            <p className="title is-4">Nima Bani</p>
+                            <p className="subtitle is-6">
                               Director - Prima Cheese - 15h ago
                             </p>
                           </div>
                         </div>
 
-                        <div class="content">
+                        <div className="content">
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit. Phasellus nec iaculis mauris.&nbsp;
                           <a href="#">#css</a> <a href="#">#responsive</a>
                         </div>
                       </div>
 
-                      <footer class="card-footer">
-                        <a href="#" class="card-footer-item">
-                          <i class="far fa-thumbs-up" />
+                      <footer className="card-footer">
+                        <a href="#" className="card-footer-item">
+                          <i className="far fa-thumbs-up" />
                           &nbsp;Like
                         </a>
-                        <a href="#" class="card-footer-item">
-                          <i class="far fa-comment-dots" />
+                        <a href="#" className="card-footer-item">
+                          <i className="far fa-comment-dots" />
                           &nbsp;Comment
                         </a>
-                        <a href="#" class="card-footer-item">
-                          <i class="far fa-share-square" />
+                        <a href="#" className="card-footer-item">
+                          <i className="far fa-share-square" />
                           &nbsp;Share
                         </a>
                       </footer>
