@@ -30,7 +30,7 @@ class Supplier extends Component {
             src={
               supplier.cover && supplier.cover.id
                 ? process.env.API_URL +
-                  "api/shop/general/v1/file/" +
+                  "/api/shop/general/v1/file/" +
                   supplier.cover.id
                 : "/static/images/top-bg.jpg"
             }
@@ -45,7 +45,7 @@ class Supplier extends Component {
                   src={
                     supplier.logo
                       ? process.env.API_URL +
-                        "api/shop/general/v1/file/" +
+                        "/api/shop/general/v1/file/" +
                         supplier.logo.id
                       : "/static/images/128x128.png"
                   }
@@ -61,14 +61,17 @@ class Supplier extends Component {
                     <div>No products available yet!</div>
                   ) : (
                     supplier.categories.map(category => (
-                      <React.Fragment>
+                      <React.Fragment key={"category-" + category.id}>
                         <h3>{category.name}</h3>
 
                         {category.products && category.products.length > 0 && (
                           <ul>
                             {category.products.map(product => (
-                              <li>
-                                <Link href={"/product/" + product.slug}>
+                              <li key={"product-" + product.id}>
+                                <Link
+                                  href={"/product?slug=" + item.slug}
+                                  as={"/product/" + item.slug}
+                                >
                                   <a>
                                     {product.brand && product.brand.name}{" "}
                                     {product.name}

@@ -12,7 +12,6 @@
     "isomorphic-unfetch": "^3.0.0",
     "leaflet": "^1.4.0",
     "moment": "^2.24.0",
-    "multer": "^1.4.1",
     "next": "^8.0.3",
     "react": "^16.8.5",
     "react-chartjs": "^1.2.0",
