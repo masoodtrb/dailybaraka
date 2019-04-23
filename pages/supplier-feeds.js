@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import Line from "react-chartjs";
+
 import Head from "../components/head";
 import Nav from "../components/nav";
 
@@ -197,34 +199,13 @@ class SupplierFeeds extends Component {
                 ))}
               </div>
               <div className="column is-4">
-                <div className="feeds__categories">
-                  {[...Array(6)].map((item, index) => (
-                    <a href="#">
-                      <img
-                        src={
-                          "http://lorempixel.com/400/400/sports/" +
-                          (index + 1) +
-                          "/"
-                        }
-                        alt="Placeholder image"
-                      />
-                      <span>
-                        {index === 0
-                          ? "Lifestyle"
-                          : index === 1
-                          ? "Holiday"
-                          : index === 2
-                          ? "Foods"
-                          : index === 3
-                          ? "Charity"
-                          : index === 4
-                          ? "Finance"
-                          : index === 5
-                          ? "Health"
-                          : ""}
-                      </span>
-                    </a>
-                  ))}
+                <div className="feeds__insights">
+                  <Line.LineChart
+                    data={[10,20]}
+                    options={}
+                    width="600"
+                    height="250"
+                  />
                 </div>
               </div>
             </div>
