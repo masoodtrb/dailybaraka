@@ -33,9 +33,15 @@ class Search extends Component {
               {products.result &&
               products.result &&
               products.result.length > 0 ? (
-                products.result.map((product, index) => (
-                  <div className="column is-4">
-                    <Link href={"/product/" + product.slug}>
+                products.result.map(product => (
+                  <div
+                    key={"search-product" + product.id}
+                    className="column is-4"
+                  >
+                    <Link
+                      href={"/product?slug=" + product.slug}
+                      as={"/product/" + product.slug}
+                    >
                       <a>
                         <div className="box">
                           <article className="media">
@@ -45,7 +51,7 @@ class Search extends Component {
                                   src={
                                     product.mainPicture
                                       ? process.env.API_URL +
-                                        "api/shop/general/v1/file/" +
+                                        "/api/shop/general/v1/file/" +
                                         product.mainPicture.id
                                       : "/static/images/128x128.png"
                                   }

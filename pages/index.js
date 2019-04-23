@@ -36,7 +36,7 @@ class Home extends Component {
                           All
                         </option>
                         {this.props.sectors.result.map(sector => (
-                          <option key={sector.id} value={sector.id}>
+                          <option key={"sector-" + sector.id} value={sector.id}>
                             {sector.name}
                           </option>
                         ))}

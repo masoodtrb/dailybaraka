@@ -34,7 +34,7 @@ class Product extends Component {
             src={
               product.cover && product.cover.id
                 ? process.env.API_URL +
-                  "api/shop/general/v1/file/" +
+                  "/api/shop/general/v1/file/" +
                   product.cover.id
                 : "/static/images/top-bg.jpg"
             }
@@ -48,7 +48,7 @@ class Product extends Component {
                   product.halalCertificates.length > 0 && (
                     <ul className="product__topcertified">
                       {product.halalCertificates.map(certificate => (
-                        <li>
+                        <li key={"certificate-" + certificate.id}>
                           <a
                             href={certificate.link}
                             target="_blank"
@@ -69,11 +69,11 @@ class Product extends Component {
                     src={
                       product.brand && product.brand.logo
                         ? process.env.API_URL +
-                          "api/shop/general/v1/file/" +
+                          "/api/shop/general/v1/file/" +
                           product.brand.logo.id
                         : product.supplier && product.supplier.logo
                         ? process.env.API_URL +
-                          "api/shop/general/v1/file/" +
+                          "/api/shop/general/v1/file/" +
                           product.supplier.logo.id
                         : "/static/images/128x128.png"
                     }
@@ -138,7 +138,7 @@ class Product extends Component {
                       {product.halalCertificates &&
                         product.halalCertificates.length > 0 &&
                         product.halalCertificates.map(certificate => (
-                          <li>
+                          <li key={"certificate-" + certificate.id}>
                             <a
                               href={certificate.link}
                               target="_blank"
@@ -159,18 +159,22 @@ class Product extends Component {
               <div className="column is-hidden-touch">
                 {product.relatedProducts && (
                   <ul className="product__related">
-                    {product.relatedProducts.map(item => (
-                      <li>
-                        <a href={"/product/" + item.slug}>
+                    {product.relatedProducts.map(relatedProduct => (
+                      <li key={"relatedProduct-" + relatedProduct.id}>
+                        <a
+                          href={"/product?slug=" + relatedProduct.slug}
+                          as={"/product/" + relatedProduct.slug}
+                        >
                           <img
                             src={
-                              item.mainPicture && item.mainPicture.id
+                              relatedProduct.mainPicture &&
+                              relatedProduct.mainPicture.id
                                 ? process.env.API_URL +
-                                  "api/shop/general/v1/file/" +
-                                  item.mainPicture.id
+                                  "/api/shop/general/v1/file/" +
+                                  relatedProduct.mainPicture.id
                                 : "/static/images/128x128.png"
                             }
-                            alt={item.name}
+                            alt={relatedProduct.name}
                           />
                         </a>
                       </li>

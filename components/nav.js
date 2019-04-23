@@ -10,7 +10,7 @@ class Nav extends Component {
     showMenu: false
   };
 
-  componentWillMount () {
+  componentWillMount() {
     // console.log('localStorage', localStorage)
     // this.setState({
     //   user: JSON.parse(localStorage.getItem('user')) || null
@@ -19,7 +19,7 @@ class Nav extends Component {
 
   componentDidMount() {
     const token = getUserToken();
-    this.setState({user: JSON.parse(getCurrentUser())})
+    this.setState({ user: JSON.parse(getCurrentUser()) });
 
     if (token) {
       fetch("/api/shop/account/v1/current-user", {
@@ -31,7 +31,10 @@ class Nav extends Component {
           return response.json();
         })
         .then(json => {
-          localStorage.setItem('user', JSON.stringify({ ...json, token: token }));
+          localStorage.setItem(
+            "user",
+            JSON.stringify({ ...json, token: token })
+          );
           this.setState({
             user: { ...json, token: token }
           });
@@ -129,22 +132,25 @@ class Nav extends Component {
             </div>
             <ul>
               <li>
-                <Link href="/page/about-us">
+                <Link href="/page?slug=about-us" as="/page/about-us">
                   <a>About us</a>
                 </Link>
               </li>
               <li>
-                <Link href="/page/contact-us">
+                <Link href="/page?slug=contact-us" as="/page/contact-us">
                   <a>Contact us</a>
                 </Link>
               </li>
               <li>
-                <Link href="/page/accreditation-organizations">
+                <Link
+                  href="/page?slug=accreditation-organizations"
+                  as="/page/accreditation-organizations"
+                >
                   <a>Accreditation Organizations</a>
                 </Link>
               </li>
               <li>
-                <Link href="/page/services">
+                <Link href="/page?slug=services" as="/page/services">
                   <a>Our Services</a>
                 </Link>
               </li>
@@ -317,17 +323,20 @@ class Nav extends Component {
               </li>
 
               <li>
-                <Link href="/page/about-us">
+                <Link href="/page?slug=about-us" as="/page/about-us">
                   <a>About us</a>
                 </Link>
               </li>
               <li>
-                <Link href="/page/contact-us">
+                <Link href="/page?slug=contact-us" as="/page/contact-us">
                   <a>Contact us</a>
                 </Link>
               </li>
               <li>
-                <Link href="/page/accreditation-organizations">
+                <Link
+                  href="/page?slug=accreditation-organizations"
+                  href="/page/accreditation-organizations"
+                >
                   <a>Accreditation Organizations</a>
                 </Link>
               </li>

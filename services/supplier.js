@@ -2,7 +2,7 @@ import fetch from "isomorphic-unfetch";
 
 async function get(supplierId) {
   const response = await fetch(
-    process.env.API_URL + "api/shop/suppliers/v1/load/" + supplierId
+    process.env.API_URL + "/api/shop/suppliers/v1/load/" + supplierId
   );
   return await response.json();
 }
@@ -10,7 +10,7 @@ async function get(supplierId) {
 async function getProducts(supplierId) {
   const response = await fetch(
     process.env.API_URL +
-      "api/shop/suppliers/v1/supplier-with-products/" +
+      "/api/shop/suppliers/v1/supplier-with-products/" +
       supplierId
   );
   return await response.json();
@@ -18,7 +18,7 @@ async function getProducts(supplierId) {
 
 async function create(data) {
   const response = await fetch(
-    process.env.API_URL + "api/shop/suppliers/v1/create",
+    process.env.API_URL + "/api/shop/suppliers/v1/create",
     {
       headers: {
         "content-type": "application/json"

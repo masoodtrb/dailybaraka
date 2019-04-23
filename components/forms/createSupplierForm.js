@@ -132,7 +132,12 @@ const CreateSupplierForm = props => (
               <div className="column">
                 <label className="label">Country *</label>
                 <div className="control">
-                  <Field component="select" name="country" class="input">
+                  <Field
+                    defaultValue="United Kingdom"
+                    component="select"
+                    name="country"
+                    className="input"
+                  >
                     <option disabled value="">
                       Country where your organization located on
                     </option>
@@ -359,7 +364,7 @@ const CreateSupplierForm = props => (
                     <option>Uganda</option>
                     <option>Ukraine</option>
                     <option>United Arab Emirates</option>
-                    <option selected="">United Kingdom</option>
+                    <option>United Kingdom</option>
                     <option>Uruguay</option>
                     <option>Uzbekistan</option>
                     <option>Vanuatu</option>
