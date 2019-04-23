@@ -1118,4 +1118,28 @@ a {
       }
     }
   }
+
+  .feeds__post {
+    display: flex;
+
+    .feeds__postbody {
+      flex: 1;
+      padding: 20px 25px;
+      cursor: text;
+      font-weight: bold;
+    }
+
+    .feeds__postvideo,
+    .feeds__postimage {
+      padding: 20px 25px;
+      min-width: 50px;
+      border-left: 1px solid #eee;
+      text-align: center;
+      cursor: pointer;
+
+      &:hover {
+        color: #178bde;
+      }
+    }
+  }
 }

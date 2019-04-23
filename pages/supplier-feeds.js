@@ -5,15 +5,15 @@ import Nav from "../components/nav";
 
 import "../styles/main.scss";
 
-class UserFeeds extends Component {
+class SupplierFeeds extends Component {
   render() {
     return (
       <div>
         <Head title="My Feeds" />
         <Nav />
         <div className="page feeds">
+          <br />
           <div className="container">
-            <h1>My Feeds</h1>
             <div className="columns">
               <div className="column is-3">
                 <div class="card feeds__profile">
@@ -28,32 +28,50 @@ class UserFeeds extends Component {
                   <div class="card-content">
                     <div class="media">
                       <div class="media-content">
-                        <p class="title is-4">Maria Snow</p>
-                        <p class="subtitle is-6">@mariasnw</p>
+                        <p class="title is-4">Boots Chemist</p>
+                        <p class="subtitle is-6">@bootschemist</p>
                       </div>
                     </div>
-
+                    <hr />
                     <div class="content">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Phasellus nec iaculis mauris.
-                      <hr />
                       <p>
-                        <label>Families and Friends in network</label>
+                        <label>Products</label>
                         <span>52</span>
                       </p>
                       <p>
-                        <label>My favorite products</label>
+                        <label>Campaigns</label>
                         <span>146</span>
                       </p>
                       <p>
-                        <label>My saved articles</label>
+                        <label>Coupons</label>
                         <span>3</span>
                       </p>
+                    </div>
+                    <hr />
+                    <div className="content">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Phasellus nec iaculis mauris lorem ipsum dolor sit amet,
+                      consectetur adipiscing elit. Phasellus nec iaculis mauris.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Phasellus nec iaculis mauris.
                     </div>
                   </div>
                 </div>
               </div>
               <div className="column is-5">
+                <div class="card feeds__post">
+                  <div class="feeds__postbody">
+                    <i class="far fa-edit" />
+                    &nbsp;Start a post
+                  </div>
+                  <div class="feeds__postvideo">
+                    <i class="far fa-file-video" />
+                  </div>
+                  <div class="feeds__postimage">
+                    <i class="far fa-file-image" />
+                  </div>
+                </div>
+                <br />
                 <div class="card">
                   <div class="card-content">
                     <div class="media">
@@ -91,19 +109,24 @@ class UserFeeds extends Component {
                             </figure>
                           </div>
                           <div class="media-content">
-                            <p class="title is-5">Boots Chemist</p>
-                            <p class="subtitle is-6">662 Followers</p>
+                            <h1 class="title is-5">Boots Chemist</h1>
                           </div>
                         </div>
 
                         <div class="content">
                           Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Phasellus nec iaculis mauris.
+                          elit. Phasellus nec iaculis mauris lorem ipsum dolor
+                          sit amet, consectetur adipiscing elit.
                         </div>
                         <div className="content">
-                          <img
-                            src="http://lorempixel.com/800/500/food/"
-                            alt="Placeholder image"
+                          <iframe
+                            style={{ "min-height": 260 }}
+                            width="800"
+                            height="500"
+                            src="https://www.youtube.com/embed/pOuSRUl-Pco"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
                           />
                         </div>
                       </div>
@@ -212,4 +235,4 @@ class UserFeeds extends Component {
   }
 }
 
-export default UserFeeds;
+export default SupplierFeeds;

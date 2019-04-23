@@ -20,4 +20,5 @@ module.exports = routes()
   .add("supplier", "/supplier/:id/:name")
   .add("commercial-enquiries", "/commercial-enquiries")
   .add("local-stores", "/local-stores")
-  .add("user-feeds", "/user-feeds");
+  .add("user-feeds", "/user-feeds")
+  .add("supplier-feeds", "/supplier-feeds");
