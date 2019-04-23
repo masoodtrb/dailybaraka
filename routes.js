@@ -19,5 +19,6 @@ module.exports = routes()
   // Other Pages
   .add("supplier", "/:lang/supplier/:id/:name")
   .add("commercial-enquiries", "/:lang/commercial-enquiries")
-  .add("local-stores", "/:lang/local-stores");
-  .add("user-feeds", "/user-feeds");
+  .add("local-stores", "/:lang/local-stores")
+  .add("user-feeds", "/user-feeds")
+  .add("supplier-feeds", "/supplier-feeds");
