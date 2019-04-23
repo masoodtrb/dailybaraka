@@ -188,6 +188,7 @@ class LocalStores extends Component {
 
                 {this.state.stores.map(store => (
                   <Marker
+                    key={"store-" + store.id}
                     draggable={false}
                     position={{
                       lat: store.lat,
@@ -204,7 +205,7 @@ class LocalStores extends Component {
                                 src={
                                   store.logo
                                     ? process.env.API_URL +
-                                      "api/shop/general/v1/file/" +
+                                      "/api/shop/general/v1/file/" +
                                       store.logo.id
                                     : "/static/images/128x128.png"
                                 }
@@ -247,7 +248,7 @@ class LocalStores extends Component {
                   {this.props.sectors &&
                     this.props.sectors.result &&
                     this.props.sectors.result.map(sector => (
-                      <label key={sector.id} className="radio">
+                      <label key={"sector-" + sector.id} className="radio">
                         <input
                           type="radio"
                           name="sector"

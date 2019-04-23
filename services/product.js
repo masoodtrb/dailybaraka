@@ -2,7 +2,7 @@ import fetch from "isomorphic-unfetch";
 
 async function get(productId) {
   const response = await fetch(
-    process.env.API_URL + "api/shop/products/v1/load/" + productId
+    process.env.API_URL + "/api/shop/products/v1/load/" + productId
   );
   return await response.json();
 }
@@ -30,7 +30,7 @@ async function search(sectorId, query) {
     });
   }
   const response = await fetch(
-    process.env.API_URL + "api/shop/products/v1/search",
+    process.env.API_URL + "/api/shop/products/v1/search",
     {
       method: "POST",
       headers: {

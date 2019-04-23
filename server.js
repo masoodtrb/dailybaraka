@@ -19,7 +19,7 @@ app.prepare().then(() => {
   if (environment === "development") {
     // proxy on /api
     server.use("/api/", (req, res) => {
-      const url = process.env.API_URL + "api" + req.url;
+      const url = process.env.API_URL + "/api" + req.url;
 
       // request headers
       const headers = {

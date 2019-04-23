@@ -342,7 +342,7 @@ class Profile extends Component {
                                 ? this.state.userImage
                                 : this.state.userData.profilePicture
                                 ? process.env.API_URL +
-                                  "api/shop/general/v1/file/" +
+                                  "/api/shop/general/v1/file/" +
                                   this.state.userData.profilePicture.id
                                 : "/static/images/placeholder-profile.jpg"
                             }
@@ -411,7 +411,7 @@ class Profile extends Component {
               ) : (
                 <div className="columns is-multiline">
                   {coupons.result.map(coupon => (
-                    <div className="column is-3">
+                    <div key={"coupon-" + coupon.id} className="column is-3">
                       <div className="card">
                         <div className="card-image">
                           <figure className="image is-4by3">
@@ -419,7 +419,7 @@ class Profile extends Component {
                               src={
                                 coupon.cover
                                   ? process.env.API_URL +
-                                    "api/shop/general/v1/file/" +
+                                    "/api/shop/general/v1/file/" +
                                     coupon.cover.id
                                   : "/static/images/128x128.png"
                               }
@@ -434,7 +434,7 @@ class Profile extends Component {
                                   src={
                                     coupon.logo
                                       ? process.env.API_URL +
-                                        "api/shop/general/v1/file/" +
+                                        "/api/shop/general/v1/file/" +
                                         coupon.logo.id
                                       : "/static/images/128x128.png"
                                   }
