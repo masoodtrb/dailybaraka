@@ -91,7 +91,7 @@ const Head = props => (
       sizes="16x16"
       href="/static/favicon-16x16.png"
     />
-    <link rel="manifest" href="/manifest.json" />
+    <link rel="manifest" href="/static/manifest.json" />
     <meta name="msapplication-TileColor" content="#ffffff" />
     <meta
       name="msapplication-TileImage"
