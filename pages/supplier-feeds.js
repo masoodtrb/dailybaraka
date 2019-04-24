@@ -1,36 +1,36 @@
 import React, { Component } from "react";
-import { Bar, Line } from "react-chartjs-2";
+import { Bar, Line, Doughnut } from "react-chartjs-2";
 
 import Head from "../components/head";
 import Nav from "../components/nav";
 
 import "../styles/main.scss";
 
-const cardChartData2 = {
+const postLikesData = {
   labels: ["January", "February", "March", "April", "May", "June", "July"],
   datasets: [
     {
       label: "Daily post likes",
       backgroundColor: "#fff",
-      borderColor: "#111",
+      borderColor: "#9CBA43",
       data: [1, 18, 9, 17, 34, 22, 11]
     }
   ]
 };
 
-const cardChartData3 = {
+const postCommentsData = {
   labels: ["January", "February", "March", "April", "May", "June", "July"],
   datasets: [
     {
       label: "Daily post likes",
       backgroundColor: "transparent",
-      borderColor: "#111",
+      borderColor: "#5B85C6",
       data: [11, 4, 16, 12, 25, 22, 26]
     }
   ]
 };
 
-const cardChartData4 = {
+const couponUsageData = {
   labels: [
     "January",
     "February",
@@ -57,7 +57,7 @@ const cardChartData4 = {
   datasets: [
     {
       label: "Daily post likes",
-      backgroundColor: "#111",
+      backgroundColor: "#9CBA43",
       data: [
         11,
         12,
@@ -85,7 +85,18 @@ const cardChartData4 = {
   ]
 };
 
-const cardChartOpts2 = {
+const couponStatusUsageData = {
+  labels: ["Expired", "Used", "Remained"],
+  datasets: [
+    {
+      label: "Coupons status",
+      backgroundColor: ["#873023", "#9CBA43", "#5B85C6"],
+      data: [3, 8, 12]
+    }
+  ]
+};
+
+const cleanStyleChartOptions = {
   tooltips: {
     enabled: false
   },
@@ -111,8 +122,8 @@ const cardChartOpts2 = {
         display: false,
         ticks: {
           display: false,
-          min: Math.min.apply(Math, cardChartData2.datasets[0].data) - 5,
-          max: Math.max.apply(Math, cardChartData2.datasets[0].data) + 5
+          min: Math.min.apply(Math, postLikesData.datasets[0].data) - 5,
+          max: Math.max.apply(Math, postLikesData.datasets[0].data) + 5
         }
       }
     ]
@@ -127,6 +138,40 @@ const cardChartOpts2 = {
       hitRadius: 10,
       hoverRadius: 4
     }
+  }
+};
+
+const cleanStyleChartWithLegendsOptions = {
+  tooltips: {
+    enabled: false
+  },
+  maintainAspectRatio: false,
+  legend: {
+    display: true
+  },
+  scales: {
+    xAxes: [
+      {
+        gridLines: {
+          color: "transparent",
+          zeroLineColor: "transparent"
+        },
+        ticks: {
+          fontSize: 2,
+          fontColor: "transparent"
+        }
+      }
+    ],
+    yAxes: [
+      {
+        display: false,
+        ticks: {
+          display: false,
+          min: Math.min.apply(Math, postLikesData.datasets[0].data) - 5,
+          max: Math.max.apply(Math, postLikesData.datasets[0].data) + 5
+        }
+      }
+    ]
   }
 };
 
@@ -327,18 +372,18 @@ class SupplierFeeds extends Component {
                     <h2>2.563</h2>
                     <h3>Post likes</h3>
                     <Line
-                      data={cardChartData2}
-                      options={cardChartOpts2}
+                      data={postLikesData}
+                      options={cleanStyleChartOptions}
                       height={70}
                     />
                   </div>
 
                   <div>
                     <h2>108</h2>
-                    <h3>Post likes</h3>
+                    <h3>Post comments</h3>
                     <Line
-                      data={cardChartData3}
-                      options={cardChartOpts2}
+                      data={postCommentsData}
+                      options={cleanStyleChartOptions}
                       height={70}
                     />
                   </div>
@@ -347,8 +392,17 @@ class SupplierFeeds extends Component {
                     <h2>305</h2>
                     <h3>Coupon Usage</h3>
                     <Bar
-                      data={cardChartData4}
-                      options={cardChartOpts2}
+                      data={couponUsageData}
+                      options={cleanStyleChartOptions}
+                      height={70}
+                    />
+                  </div>
+                  <div>
+                    <h2>680</h2>
+                    <h3>Coupons Status</h3>
+                    <Doughnut
+                      data={couponStatusUsageData}
+                      options={cleanStyleChartWithLegendsOptions}
                       height={70}
                     />
                   </div>
