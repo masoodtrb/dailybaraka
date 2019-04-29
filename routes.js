@@ -2,21 +2,21 @@ const routes = require("next-routes");
 
 module.exports = routes()
   // Account Pages
-  .add("register", "/signUp")
-  .add("login", "/signIn")
-  .add("forgot-password", "/forgot-password")
-  .add("reset-password", "/reset-password/:key")
-  .add("profile", "/profile")
+  .add("register", "/:lang/signUp")
+  .add("login", "/:lang/signIn")
+  .add("forgot-password", "/:lang/forgot-password")
+  .add("reset-password", "/:lang/reset-password/:key")
+  .add("profile", "/:lang/profile")
 
   // General Pages
-  .add("home", "/", "index")
-  .add("page", "/page/:slug")
-  .add("search", "/search")
-  .add("product", "/product/:slug")
-  .add("sectors", "/sectors")
-  .add("sector", "/sector/:id/:name")
+  .add("home", "/:lang/", "index")
+  .add("page", "/:lang/page/:slug")
+  .add("search", "/:lang/search")
+  .add("product", "/:lang/product/:slug")
+  .add("sectors", "/:lang/sectors")
+  .add("sector", "/:lang/sector/:id/:name")
 
   // Other Pages
-  .add("supplier", "/supplier/:id/:name")
-  .add("commercial-enquiries", "/commercial-enquiries")
-  .add("local-stores", "/local-stores");
+  .add("supplier", "/:lang/supplier/:id/:name")
+  .add("commercial-enquiries", "/:lang/commercial-enquiries")
+  .add("local-stores", "/:lang/local-stores");

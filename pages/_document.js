@@ -1,8 +1,19 @@
 import Document, { Head, Main, NextScript } from "next/document";
+import { defineMessages, injectIntl } from "react-intl";
 import Link from "next/link";
 
-import * as sectorService from "../services/sector";
 export default class MyDocument extends Document {
+  static async getInitialProps(context) {
+    const props = await super.getInitialProps(context);
+    const {
+      req: { locale }
+    } = context;
+    return {
+      ...props,
+      locale
+    };
+  }
+
   render() {
     return (
       <html>

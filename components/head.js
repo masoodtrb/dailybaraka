@@ -9,11 +9,7 @@ const defaultOGImage = "";
 const Head = props => (
   <NextHead>
     <meta charSet="UTF-8" />
-    <title>
-      {props.title === "Home"
-        ? "DailyBaraka - How brands attract with the muslim customers"
-        : (props.title || "") + " - DailyBaraka"}
-    </title>
+    <title>{(props.title || "Untitled Page") + " - DailyBaraka"}</title>
     <meta
       name="description"
       content={props.description || defaultDescription}

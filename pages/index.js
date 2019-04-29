@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { FormattedMessage, defineMessages } from "react-intl";
+import withIntl from "../hoc/withIntl";
 
 import * as sectorService from "../services/sector";
 
@@ -7,15 +9,22 @@ import Nav from "../components/nav";
 
 import "../styles/main.scss";
 
+const { title } = defineMessages({
+  title: {
+    id: "home.title",
+    defaultMessage: "Home"
+  }
+});
+
 class Home extends Component {
-  static async getInitialProps({ req }) {
+  static async getInitialProps() {
     return { sectors: await sectorService.getAll() };
   }
 
   render() {
     return (
       <div>
-        <Head title="Home" />
+        <Head title={this.props.intl.formatMessage(title)} />
         <Nav page="index" />
 
         <div className="page home">
@@ -33,7 +42,10 @@ class Home extends Component {
                     <span className="select">
                       <select name="sector">
                         <option defaultValue value="all">
-                          All
+                          <FormattedMessage
+                            id="home.sectors.all"
+                            defaultMessage="All"
+                          />
                         </option>
                         {this.props.sectors.result.map(sector => (
                           <option key={"sector-" + sector.id} value={sector.id}>
@@ -66,4 +78,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default withIntl(Home);

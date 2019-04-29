@@ -44,7 +44,7 @@ class Page extends Component {
       "content-type": "application/json"
     };
     if (localStorage.token) {
-      header.Authorization = `Bearar ${localStorage.token}`
+      header.Authorization = `Bearar ${localStorage.token}`;
     }
     fetch("/api/shop/contact-us/v1/create", {
       method: "POST",
