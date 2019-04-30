@@ -6,6 +6,7 @@ import Head from "../components/head";
 import Nav from "../components/nav";
 
 import "../styles/main.scss";
+import { FormattedMessage } from "react-intl";
 
 class Supplier extends Component {
   static async getInitialProps({ query }) {
@@ -56,9 +57,20 @@ class Supplier extends Component {
               </div>
               <div className="column is-6 is-12-touch">
                 <div className="supplier__products">
-                  <h2>{supplier.name} Products</h2>
+                  <h2>
+                    <FormattedMessage
+                      id="supplier.products.title"
+                      values={{ supplier: supplier.name }}
+                      defaultMessage="{supplier} Products"
+                    />
+                  </h2>
                   {!supplier.categories || supplier.categories.length === 0 ? (
-                    <div>No products available yet!</div>
+                    <div>
+                      <FormattedMessage
+                        id="supplier.products.empty"
+                        defaultMessage="No products available yet!"
+                      />
+                    </div>
                   ) : (
                     supplier.categories.map(category => (
                       <React.Fragment key={"category-" + category.id}>
@@ -69,8 +81,10 @@ class Supplier extends Component {
                             {category.products.map(product => (
                               <li key={"product-" + product.id}>
                                 <Link
-                                  href={"/product?slug=" + item.slug}
-                                  as={"/product/" + item.slug}
+                                  href={`/product?slug=${item.slug}`}
+                                  as={`/${this.props.locale}/product/${
+                                    item.slug
+                                  }`}
                                 >
                                   <a>
                                     {product.brand && product.brand.name}{" "}

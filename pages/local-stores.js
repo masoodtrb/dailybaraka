@@ -1,12 +1,32 @@
 import React, { Component } from "react";
+import { FormattedMessage, defineMessages } from "react-intl";
+
 import * as sectorService from "../services/sector";
 
 import Head from "../components/head";
 import Nav from "../components/nav";
 
 import "../styles/main.scss";
+import withIntl from "../hoc/withIntl";
 
 let Leaflet, Map, TileLayer, Marker, Popup, StoreIcon;
+
+const messages = defineMessages({
+  title: {
+    id: "local-stores.title",
+    defaultMessage: "Local Stores"
+  },
+  geolocationError: {
+    id: "common.geolocation.error",
+    defaultMessage:
+      "For finding your location, Please accept the Location Access Request on your browser. Also you can find your organization location from the map."
+  },
+  geolocationNotSupport: {
+    id: "common.geolocation.not-support",
+    defaultMessage:
+      "Your browser does not support this feature. Please find your organization location from the map."
+  }
+});
 
 class LocalStores extends Component {
   static async getInitialProps({ req }) {
@@ -122,9 +142,7 @@ class LocalStores extends Component {
         },
         error => {
           // for when getting location results in an error
-          alert(
-            "For finding your location, Please accept the Location Access Request on your browser."
-          );
+          alert(this.props.intl.formatMessage(messages.geolocationError));
 
           console.error(
             "An error has occurred while retrieving location",
@@ -133,9 +151,7 @@ class LocalStores extends Component {
         }
       );
     } else {
-      alert(
-        "Your browser does not support this feature. Please find your organization location from the map."
-      );
+      alert(this.props.intl.formatMessage(messages.geolocationNotSupport));
     }
   };
 
@@ -162,7 +178,7 @@ class LocalStores extends Component {
   render() {
     return (
       <div>
-        <Head title="Local Stores" />
+        <Head title={this.props.intl.formatMessage(messages.title)} />
         <Nav />
 
         <div className="page local-stores">
@@ -243,7 +259,7 @@ class LocalStores extends Component {
                       name="sector"
                       checked={!this.state.selectedSectorId}
                     />
-                    All
+                    <FormattedMessage id="sectors.all" defaultMessage="All" />
                   </label>
                   {this.props.sectors &&
                     this.props.sectors.result &&
@@ -284,4 +300,4 @@ class LocalStores extends Component {
   }
 }
 
-export default LocalStores;
+export default withIntl(LocalStores);

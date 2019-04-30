@@ -1,10 +1,30 @@
 import React, { Component } from "react";
 
+import {
+  FormattedHTMLMessage,
+  FormattedMessage,
+  defineMessages
+} from "react-intl";
+
+import withIntl from "../hoc/withIntl";
+
 import Head from "../components/head";
 import Nav from "../components/nav";
 import ResetPasswordForm from "../components/forms/resetPasswordForm";
 
 import "../styles/main.scss";
+
+const messages = defineMessages({
+  title: {
+    id: "reset-password.title",
+    defaultMessage: "Reset Password"
+  },
+  resetPasswordError: {
+    id: "reset-password.error",
+    defaultMessage:
+      "Can not process the request. Type of error: {status}, response status: {statusText}"
+  }
+});
 
 class ResetPassword extends Component {
   state = {
@@ -32,11 +52,13 @@ class ResetPassword extends Component {
           this.setState({
             resetPasswordForm: {
               state: "ERROR",
-              error:
-                "Can not process the request. Type of error: " +
-                response.status +
-                ", response status: " +
-                response.statusText
+              error: this.props.intl.formatMessage(
+                messages.resetPasswordError,
+                {
+                  status: response.status,
+                  statusText: response.statusText
+                }
+              )
             }
           });
         }
@@ -64,19 +86,29 @@ class ResetPassword extends Component {
   render() {
     return (
       <div>
-        <Head title="Reset Password" />
+        <Head title={this.props.intl.formatMessage(messages.title)} />
         <Nav />
 
         <div className="page reset-password">
           <div className="container">
             <div className="columns">
               <div className="column is-6 is-offset-3">
-                <h1>Reset Password</h1>
+                <h1>
+                  <FormattedMessage
+                    id="reset-password.title"
+                    defaultMessage="Reset Password"
+                  />
+                </h1>
 
                 {this.state.resetPasswordForm.state === "ERROR" && (
                   <div className="notification is-danger">
                     <button className="delete" />
-                    <strong>An error has occurred</strong>
+                    <strong>
+                      <FormattedMessage
+                        id="common.error"
+                        defaultMessage="An error has occurred"
+                      />
+                    </strong>
                     <br />
                     <p>{this.state.resetPasswordForm.error}</p>
                   </div>
@@ -84,11 +116,10 @@ class ResetPassword extends Component {
 
                 {this.state.resetPasswordForm.state === "SUCCESS" && (
                   <div className="notification is-success">
-                    <strong>
-                      Your password has been successfully updated.
-                    </strong>
-                    <br />
-                    <p>You will be redirected to login page.</p>
+                    <FormattedHTMLMessage
+                      id="reset-password.success"
+                      defaultMessage="<strong>Your password has been successfully updated.</strong><br /><p>You will be redirected to login page.</p>"
+                    />
                   </div>
                 )}
 
@@ -109,4 +140,4 @@ class ResetPassword extends Component {
   }
 }
 
-export default ResetPassword;
+export default withIntl(ResetPassword);

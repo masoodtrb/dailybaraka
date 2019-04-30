@@ -1,19 +1,7 @@
 import Document, { Head, Main, NextScript } from "next/document";
-import { defineMessages, injectIntl } from "react-intl";
 import Link from "next/link";
 
 export default class MyDocument extends Document {
-  static async getInitialProps(context) {
-    const props = await super.getInitialProps(context);
-    const {
-      req: { locale }
-    } = context;
-    return {
-      ...props,
-      locale
-    };
-  }
-
   render() {
     return (
       <html>
@@ -29,7 +17,7 @@ export default class MyDocument extends Document {
 
               <ul className="footer__links">
                 <li>
-                  <Link href="/page/terms">
+                  <Link href={`/${this.props.locale}/page/terms`}>
                     <a>Terms &amp; Conditions</a>
                   </Link>
                 </li>

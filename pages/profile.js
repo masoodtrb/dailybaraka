@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import Link from "next/link";
 import moment from "moment";
+import {
+  defineMessages,
+  FormattedHTMLMessage,
+  FormattedMessage
+} from "react-intl";
+
+import withIntl from "../hoc/withIntl";
 
 import { getUserToken } from "../services/account";
 
@@ -12,6 +19,39 @@ import ChangePasswordForm from "../components/forms/changePasswordForm";
 import "../styles/main.scss";
 
 const IMAGES_TYPES = ["image/jpeg", "image/png", "image/bmp", "image/gif"];
+
+const messages = defineMessages({
+  title: {
+    id: "profile.title",
+    defaultMessage: "My Profile"
+  },
+  updateProfileError: {
+    id: "profile.update.error",
+    defaultMessage:
+      "Can not process the request. Type of error: {status}, response status: {statusText}"
+  },
+  changePasswordError: {
+    id: "profile.change-password.error",
+    defaultMessage:
+      "Can not process the request. Type of error: {status}, response status: {statusText}"
+  },
+  updateProfileImage: {
+    id: "profile.update.image.error",
+    defaultMessage:
+      "Can not process the request. Type of error: {status}, response status: {statusText}"
+  },
+  updateProfileImageFormatError: {
+    id: "profile.update.image.format-error",
+    defaultMessage:
+      "<p>Selected file is not supported. Please upload an image for your profile.<br />Supported formats: (JPG, PNG, GIF, BMP)</p>"
+  },
+  updateProfileImageSizeError: {
+    id: "profile.update.image.size-error",
+    defaultMessage:
+      "<p>Selected image file is too heavy. Max supported file size is 1.5MB.</p>"
+  }
+});
+
 class Profile extends Component {
   state = {
     updateProfileForm: { state: "INITIATE", error: "" },
@@ -24,6 +64,9 @@ class Profile extends Component {
   };
 
   componentDidMount() {
+    console.log("this.props.intl");
+    console.log(this.props);
+
     const token = getUserToken();
 
     if (token) {
@@ -55,7 +98,7 @@ class Profile extends Component {
           });
         });
     } else {
-      window.location.href = "/login?returnUrl=/profile";
+      window.location.href = {`/${this.props.locale}/login?returnUrl=/${this.props.locale}/profile`};
     }
   }
 
@@ -89,11 +132,13 @@ class Profile extends Component {
           this.setState({
             updateProfileForm: {
               state: "ERROR",
-              error:
-                "Can not process the request. Type of error: " +
-                response.status +
-                ", response status: " +
-                response.statusText
+              error: this.props.intl.formatMessage(
+                messages.updateProfileError,
+                {
+                  status: response.status,
+                  statusText: response.statusText
+                }
+              )
             }
           });
         }
@@ -141,11 +186,13 @@ class Profile extends Component {
           this.setState({
             changePasswordForm: {
               state: "ERROR",
-              error:
-                "Can not process the request. Type of error: " +
-                response.status +
-                ", response status: " +
-                response.statusText
+              error: this.props.intl.formatMessage(
+                messages.changePasswordError,
+                {
+                  status: response.status,
+                  statusText: response.statusText
+                }
+              )
             }
           });
         }
@@ -191,13 +238,8 @@ class Profile extends Component {
       this.setState({
         updateProfileForm: {
           state: "ERROR",
-          error: (
-            <p>
-              Selected file is not supported. Please upload an image for your
-              profile.
-              <br />
-              Supported formats: (JPG, PNG, GIF, BMP)
-            </p>
+          error: this.props.intl.formatHTMLMessage(
+            messages.updateProfileImageFormatError
           )
         }
       });
@@ -208,11 +250,8 @@ class Profile extends Component {
       this.setState({
         updateProfileForm: {
           state: "ERROR",
-          error: (
-            <p>
-              Selected image file is too heavy. Max supported file size is
-              1.5MB.
-            </p>
+          error: this.props.intl.formatHTMLMessage(
+            messages.updateProfileImageSizeError
           )
         }
       });
@@ -245,11 +284,13 @@ class Profile extends Component {
           this.setState({
             updateProfileForm: {
               state: "ERROR",
-              error:
-                "Can not process the request. Type of error: " +
-                response.status +
-                ", response status: " +
-                response.statusText
+              error: this.props.intl.formatMessage(
+                messages.updateProfileImage,
+                {
+                  status: response.status,
+                  statusText: response.statusText
+                }
+              )
             }
           });
         }
@@ -279,23 +320,34 @@ class Profile extends Component {
     const { currentTab, coupons } = this.state;
     return (
       <div>
-        <Head title="User Profile" />
+        <Head title={this.props.intl.formatMessage(messages.title)} />
         <Nav />
 
         <div className="page profile">
           <div className="container">
-            <h1>My Profile</h1>
+            <h1>
+              <FormattedMessage
+                id="profile.title"
+                defaultMessage="My Profile"
+              />
+            </h1>
 
             <div className="tabs">
               <ul>
                 <li className={currentTab === "PROFILE" ? "is-active" : ""}>
                   <a href="#" onClick={e => this.onChangeTab(e, "PROFILE")}>
-                    Profile Info
+                    <FormattedMessage
+                      id="profile.tab-title"
+                      defaultMessage="Profile Info"
+                    />
                   </a>
                 </li>
                 <li className={currentTab === "COUPONS" ? "is-active" : ""}>
                   <a href="#" onClick={e => this.onChangeTab(e, "COUPONS")}>
-                    My Coupons
+                    <FormattedMessage
+                      id="profile.coupons.title"
+                      defaultMessage="My Coupons"
+                    />
                   </a>
                 </li>
               </ul>
@@ -310,12 +362,22 @@ class Profile extends Component {
               <div className="columns">
                 <div className="column is-6">
                   <fieldset>
-                    <legend>Update Profile</legend>
+                    <legend>
+                      <FormattedMessage
+                        id="profile.update.title"
+                        defaultMessage="Update Profile"
+                      />
+                    </legend>
                     <br />
                     {this.state.updateProfileForm.state === "ERROR" && (
                       <div className="notification is-danger">
                         <button className="delete" />
-                        <strong>An error has occurred</strong>
+                        <strong>
+                          <FormattedMessage
+                            id="common.error"
+                            defaultMessage="An error has occurred"
+                          />
+                        </strong>
                         <br />
                         <p>{this.state.updateProfileForm.error}</p>
                       </div>
@@ -324,7 +386,10 @@ class Profile extends Component {
                     {this.state.updateProfileForm.state === "SUCCESS" && (
                       <div className="notification is-success">
                         <strong>
-                          Your profile has been successfully updated.
+                          <FormattedMessage
+                            id="profile.update.success"
+                            defaultMessage="Your profile has been successfully updated."
+                          />
                         </strong>
                       </div>
                     )}
@@ -359,18 +424,33 @@ class Profile extends Component {
                         />
                       </React.Fragment>
                     ) : (
-                      <p>Please wait...</p>
+                      <p>
+                        <FormattedMessage
+                          id="common.wait"
+                          defaultMessage="Please wait..."
+                        />
+                      </p>
                     )}
                   </fieldset>
                 </div>
                 <div className="column is-6">
                   <fieldset>
-                    <legend>Change Password</legend>
+                    <legend>
+                      <FormattedMessage
+                        id="profile.change-password.title"
+                        defaultMessage="Change Password"
+                      />
+                    </legend>
                     <br />
                     {this.state.changePasswordForm.state === "ERROR" && (
                       <div className="notification is-danger">
                         <button className="delete" />
-                        <strong>An error has occurred</strong>
+                        <strong>
+                          <FormattedMessage
+                            id="common.error"
+                            defaultMessage="An error has occurred"
+                          />
+                        </strong>
                         <br />
                         <p>{this.state.changePasswordForm.error}</p>
                       </div>
@@ -379,7 +459,10 @@ class Profile extends Component {
                     {this.state.changePasswordForm.state === "SUCCESS" && (
                       <div className="notification is-success">
                         <strong>
-                          Your password has been changed successfully.
+                          <FormattedMessage
+                            id="profile.change-password.success"
+                            defaultMessage="Your password has been changed successfully."
+                          />
                         </strong>
                       </div>
                     )}
@@ -403,10 +486,18 @@ class Profile extends Component {
               ].join(" ")}
             >
               {!coupons || !coupons.result ? (
-                <div className="notification is-info">Please wait...</div>
+                <div className="notification is-info">
+                  <FormattedMessage
+                    id="common.wait"
+                    defaultMessage="Please wait..."
+                  />
+                </div>
               ) : coupons.result && coupons.result.length === 0 ? (
                 <div className="notification is-info">
-                  You haven't any coupons yet.
+                  <FormattedMessage
+                    id="profile.coupons.empty"
+                    defaultMessage="You haven't any coupons yet."
+                  />
                 </div>
               ) : (
                 <div className="columns is-multiline">
@@ -438,7 +529,7 @@ class Profile extends Component {
                                         coupon.logo.id
                                       : "/static/images/128x128.png"
                                   }
-                                  alt="Placeholder image"
+                                  alt="coupon image"
                                 />
                               </figure>
                             </div>
@@ -453,7 +544,11 @@ class Profile extends Component {
                             {coupon.termsConditions}
                             <br />
                             <i className="fas fa-clock" />
-                            &nbsp;Expiry Date:
+                            &nbsp;
+                            <FormattedMessage
+                              id="profile.coupons.expiry-date"
+                              defaultMessage="Expiry Date:"
+                            />
                             <time>
                               &nbsp;
                               {moment(coupon.expireDate * 1000).format("ll")}
@@ -473,4 +568,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default withIntl(Profile);

@@ -1,9 +1,16 @@
 import React, { Component } from "react";
 import Recaptcha from "react-google-invisible-recaptcha";
 import Link from "next/link";
+import {
+  FormattedMessage,
+  FormattedHTMLMessage,
+  defineMessages
+} from "react-intl";
 
 import Head from "../components/head";
 import Nav from "../components/nav";
+
+import withIntl from "../hoc/withIntl";
 
 import CreateStoreForm from "../components/forms/createStoreForm";
 import CreateSupplierForm from "../components/forms/createSupplierForm";
@@ -11,6 +18,33 @@ import CreateSupplierForm from "../components/forms/createSupplierForm";
 import "../styles/main.scss";
 
 let Map, TileLayer, Marker;
+
+const messages = defineMessages({
+  title: {
+    id: "commercial-enquiries.title",
+    defaultMessage: "Commercial Enquiries"
+  },
+  geolocationError: {
+    id: "common.geolocation.error",
+    defaultMessage:
+      "For finding your location, Please accept the Location Access Request on your browser. Also you can find your organization location from the map."
+  },
+  geolocationNotSupport: {
+    id: "common.geolocation.not-support",
+    defaultMessage:
+      "Your browser does not support this feature. Please find your organization location from the map."
+  },
+  retailerCreateError: {
+    id: "commercial-enquiries.supplier.error",
+    defaultMessage:
+      "Can not process the request. Type of error: {status}, response status: {statusText}"
+  },
+  storeCreateError: {
+    id: "commercial-enquiries.store.error",
+    defaultMessage:
+      "Can not process the request. Type of error: {status}, response status: {statusText}"
+  }
+});
 
 class Enquiry extends Component {
   state = {
@@ -60,10 +94,7 @@ class Enquiry extends Component {
         },
         error => {
           // for when getting location results in an error
-          alert(
-            "For finding your location, Please accept the Location Access Request on your browser. " +
-              "Also you can find your organization location from the map."
-          );
+          alert(this.props.intl.formatMessage(messages.geolocationError));
 
           console.error(
             "An error has occurred while retrieving location",
@@ -72,9 +103,7 @@ class Enquiry extends Component {
         }
       );
     } else {
-      alert(
-        "Your browser does not support this feature. Please find your organization location from the map."
-      );
+      alert(this.props.intl.formatMessage(messages.geolocationNotSupport));
     }
   };
 
@@ -88,16 +117,33 @@ class Enquiry extends Component {
       storeForm: {
         state: "ERROR",
         error: (
-          <React.Fragment>
-            The authorizing system, to detect you as a <strong>HUMAN</strong>{" "}
-            not a 🤖, occurred an error.
-            <br />
-            You could reload page to continue. If you receive this error again,
-            please{" "}
-            <Link href="/page/contact-us">
-              <a>get in touch with us.</a>
-            </Link>
-          </React.Fragment>
+          <FormattedHTMLMessage
+            id="common.recaptcha.error"
+            values={{
+              reportLink: (
+                <Link
+                  href="/page?slug=contact-us"
+                  as={`/${this.props.locale}/page/contact-us`}
+                >
+                  <a>
+                    <FormattedMessage
+                      id="common.recaptcha.error.report-link"
+                      defaultMessage="get in touch with us."
+                    />
+                  </a>
+                </Link>
+              )
+            }}
+            defaultMessage={
+              <React.Fragment>
+                The authorizing system, to detect you as a{" "}
+                <strong>HUMAN</strong> not a 🤖, occurred an error.
+                <br />
+                You could reload page to continue. If you receive this error
+                again, please '{reportLink}'.
+              </React.Fragment>
+            }
+          />
         )
       }
     });
@@ -154,11 +200,10 @@ class Enquiry extends Component {
           this.setState({
             storeForm: {
               state: "ERROR",
-              error:
-                "Can not process the request. Type of error: " +
-                response.status +
-                ", response status: " +
-                response.statusText
+              error: this.props.intl.formatMessage(messages.storeCreateError, {
+                status: response.status,
+                statusText: response.statusText
+              })
             }
           });
           this.recaptchaRef.reset();
@@ -191,13 +236,30 @@ class Enquiry extends Component {
       supplierForm: {
         state: "ERROR",
         error: (
-          <React.Fragment>
-            The authorizing system, to detect you as a <strong>HUMAN</strong>{" "}
-            not a 🤖, occurred an error.
-            <br />
-            You could reload page to continue. If you receive this error again,
-            please <a href="/page/contact-us">get in touch with us.</a>
-          </React.Fragment>
+          <FormattedHTMLMessage
+            id="common.recaptcha.error"
+            values={{
+              reportLink: (
+                <Link href={`/${this.props.locale}/page/contact-us`}>
+                  <a>
+                    <FormattedMessage
+                      id="common.recaptcha.error.report-link"
+                      defaultMessage="get in touch with us."
+                    />
+                  </a>
+                </Link>
+              )
+            }}
+            defaultMessage={
+              <React.Fragment>
+                The authorizing system, to detect you as a{" "}
+                <strong>HUMAN</strong> not a 🤖, occurred an error.
+                <br />
+                You could reload page to continue. If you receive this error
+                again, please '{reportLink}'.
+              </React.Fragment>
+            }
+          />
         )
       }
     });
@@ -253,11 +315,13 @@ class Enquiry extends Component {
           this.setState({
             supplierForm: {
               state: "ERROR",
-              error:
-                "Can not process the request. Type of error: " +
-                response.status +
-                ", response status: " +
-                response.statusText
+              error: this.props.intl.formatMessage(
+                messages.retailerCreateError,
+                {
+                  status: response.status,
+                  statusText: response.statusText
+                }
+              )
             }
           });
           this.recaptchaSupplierFormRef.reset();
@@ -289,7 +353,7 @@ class Enquiry extends Component {
     const { tab } = this.state;
     return (
       <div>
-        <Head title="Commercial Enquiries" />
+        <Head title={this.props.intl.formatMessage(messages.title)} />
         <Nav />
 
         <div className="page enquiry">
@@ -298,12 +362,18 @@ class Enquiry extends Component {
               <ul>
                 <li className={tab === "store" ? "is-active" : ""}>
                   <a href="#" onClick={e => this.onChangeTab(e, "store")}>
-                    Local Stores/Service Provider
+                    <FormattedMessage
+                      id="commercial-enquiries.store.title"
+                      defaultMessage="Local Stores/Service Provider"
+                    />
                   </a>
                 </li>
                 <li className={tab === "supplier" ? "is-active" : ""}>
                   <a href="#" onClick={e => this.onChangeTab(e, "supplier")}>
-                    Supplier
+                    <FormattedMessage
+                      id="commercial-enquiries.supplier.title"
+                      defaultMessage="Supplier"
+                    />
                   </a>
                 </li>
               </ul>
@@ -327,7 +397,12 @@ class Enquiry extends Component {
                   {this.state.storeForm.state === "ERROR" && (
                     <div className="notification is-danger">
                       <button className="delete" />
-                      <strong>An error has occurred</strong>
+                      <strong>
+                        <FormattedMessage
+                          id="common.error"
+                          defaultMessage="An error has occurred"
+                        />
+                      </strong>
                       <br />
                       <p>{this.state.storeForm.error}</p>
                     </div>
@@ -353,7 +428,11 @@ class Enquiry extends Component {
                       onClick={e => this.onSetLocation(e)}
                     >
                       <i className="fas fa-map-marker-alt" />
-                      &nbsp;Get my location
+                      &nbsp;
+                      <FormattedMessage
+                        id="common.geolocation.get"
+                        defaultMessage="Get my location"
+                      />
                     </button>
                   </div>
                   <br />
@@ -382,11 +461,19 @@ class Enquiry extends Component {
                 ].join(" ")}
               >
                 <div className="notification is-success">
-                  <strong>
-                    Your store information has been successfully submitted.
-                  </strong>
-                  <br />
-                  We will contact you as soon as possible.
+                  <FormattedHTMLMessage
+                    id="commercial-enquiries.store.success"
+                    defaultMessage={
+                      <React.Fragment>
+                        <strong>
+                          Your store information has been successfully
+                          submitted.
+                        </strong>
+                        <br />
+                        We will contact you as soon as possible.
+                      </React.Fragment>
+                    }
+                  />
                 </div>
               </div>
             </div>
@@ -408,7 +495,12 @@ class Enquiry extends Component {
                   {this.state.supplierForm.state === "ERROR" && (
                     <div className="notification is-danger">
                       <button className="delete" />
-                      <strong>An error has occurred</strong>
+                      <strong>
+                        <FormattedMessage
+                          id="common.error"
+                          defaultMessage="An error has occurred"
+                        />
+                      </strong>
                       <br />
                       <p>{this.state.supplierForm.error}</p>
                     </div>
@@ -438,11 +530,19 @@ class Enquiry extends Component {
                 ].join(" ")}
               >
                 <div className="notification is-success">
-                  <strong>
-                    Your supplier information has been successfully submitted.
-                  </strong>
-                  <br />
-                  We will contact you as soon as possible.
+                  <FormattedHTMLMessage
+                    id="commercial-enquiries.supplier.success"
+                    defaultMessage={
+                      <React.Fragment>
+                        <strong>
+                          Your supplier information has been successfully
+                          submitted.
+                        </strong>
+                        <br />
+                        We will contact you as soon as possible.
+                      </React.Fragment>
+                    }
+                  />
                 </div>
               </div>
             </div>
@@ -453,4 +553,4 @@ class Enquiry extends Component {
   }
 }
 
-export default Enquiry;
+export default withIntl(Enquiry);

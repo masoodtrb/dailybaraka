@@ -32,8 +32,10 @@ class Sector extends Component {
             <div key={"supplier-" + supplier.id} className="sector__supplier">
               <div className="container">
                 <Link
-                  as={"/supplier/?id=" + supplier.id + "&name=" + supplier.name}
-                  href={"/supplier/" + supplier.id + "/" + supplier.name}
+                  href={`/supplier/?id=${supplier.id}&name=${supplier.name}`}
+                  as={`/${this.props.locale}/supplier/${supplier.id}/${
+                    supplier.name
+                  }`}
                 >
                   <a>
                     <h2>
@@ -50,8 +52,8 @@ class Sector extends Component {
                         className="column is-2"
                       >
                         <Link
-                          href={"/product?slug=" + product.slug}
-                          as={"/product/" + product.slug}
+                          href={`/product?slug=${product.slug}`}
+                          as={`/${this.props.locale}/product/${product.slug}`}
                         >
                           <a>
                             <div className="card">

@@ -73,7 +73,8 @@ app.prepare().then(() => {
     // set local and translations in req to access in pages
     req.locale = selectedLocale;
     req.messages =
-      environment === "development" ? {} : getMessages(selectedLocale);
+      //environment === "development" ? {} :
+      getMessages(selectedLocale);
 
     return handler(req, res);
   });

@@ -1,7 +1,24 @@
 import React, { Component } from "react";
 import Link from "next/link";
+import withIntl from "../hoc/withIntl";
 
 import { getUserToken, getCurrentUser } from "../services/account";
+import { FormattedMessage, defineMessages } from "react-intl";
+
+const messages = defineMessages({
+  allSectors: {
+    id: "sectors.all",
+    defaultValue: "All"
+  },
+  wait: {
+    id: "common.wait",
+    defaultMessage: "Please wait..."
+  },
+  search: {
+    id: "common.search",
+    defaultMessage: "Search"
+  }
+});
 
 class Nav extends Component {
   state = {
@@ -10,14 +27,10 @@ class Nav extends Component {
     showMenu: false
   };
 
-  componentWillMount() {
-    // console.log('localStorage', localStorage)
-    // this.setState({
-    //   user: JSON.parse(localStorage.getItem('user')) || null
-    // });
-  }
-
   componentDidMount() {
+    console.log("props");
+    console.log(this.props);
+
     const token = getUserToken();
     this.setState({ user: JSON.parse(getCurrentUser()) });
 
@@ -74,7 +87,7 @@ class Nav extends Component {
         user: null
       },
       () => {
-        window.location.href = "/";
+        window.location.href = `/${this.props.intl.locale}/`;
       }
     );
   };
@@ -84,6 +97,14 @@ class Nav extends Component {
     this.setState({
       showMenu: !this.state.showMenu
     });
+  };
+
+  changeLanguage = event => {
+    event.preventDefault();
+
+    const selectedLocal = event.target.value;
+
+    window.location.href = `/${selectedLocal}/`;
   };
 
   render() {
@@ -97,61 +118,120 @@ class Nav extends Component {
                   <React.Fragment>
                     <li>
                       <i className="fas fa-user" />
-                      &nbsp; Welcome{" "}
-                      <Link href="/profile">
-                        <a className="username">{this.state.user.firstName}</a>
-                      </Link>
+                      &nbsp;
+                      <FormattedMessage
+                        id="nav.welcome"
+                        values={{
+                          user: (
+                            <Link href={`/${this.props.intl.locale}/profile`}>
+                              <a className="username">
+                                {this.state.user.firstName}
+                              </a>
+                            </Link>
+                          )
+                        }}
+                        defaultMessage="Welcome {user}"
+                      />
+                      &nbsp;
                     </li>
                     <li>
                       <a href="#" onClick={e => this.onLogout(e)}>
-                        Logout
+                        <FormattedMessage
+                          id="common.logout"
+                          defaultMessage="Logout"
+                        />
                       </a>
                     </li>
                   </React.Fragment>
                 ) : (
                   <React.Fragment>
                     <li>
-                      <Link href="/signIn">
-                        <a>Sign In</a>
+                      <Link href={`/${this.props.intl.locale}/signIn`}>
+                        <a>
+                          <FormattedMessage
+                            id="common.login"
+                            defaultMessage="Sign In"
+                          />
+                        </a>
                       </Link>
                     </li>
                     <li>
-                      <Link href="/signUp">
-                        <a>SignUp</a>
+                      <Link href={`/${this.props.intl.locale}/signUp`}>
+                        <a>
+                          <FormattedMessage
+                            id="common.register"
+                            defaultMessage="Sing Up"
+                          />
+                        </a>
                       </Link>
                     </li>
                   </React.Fragment>
                 )}
               </ul>
               <div className="select">
-                <select defaultValue="en-uk">
+                <select
+                  defaultValue={this.props.intl.locale}
+                  onChange={e => this.changeLanguage(e)}
+                >
                   <option>Language</option>
-                  <option value="en-uk">English - UK</option>
+                  <option value="en">English - UK</option>
+                  <option value="de">Deutsche - DE</option>
                 </select>
               </div>
             </div>
             <ul>
               <li>
-                <Link href="/page?slug=about-us" as="/page/about-us">
-                  <a>About us</a>
+                <Link
+                  href="/page?slug=about-us"
+                  as={`/${this.props.intl.locale}/page/about-us`}
+                >
+                  <a>
+                    <FormattedMessage
+                      id="nav.about-us"
+                      defaultMessage="About us"
+                    />
+                  </a>
                 </Link>
               </li>
               <li>
-                <Link href="/page?slug=contact-us" as="/page/contact-us">
-                  <a>Contact us</a>
+                <Link
+                  href="/page?slug=contact-us"
+                  as={`/${this.props.intl.locale}/page/contact-us`}
+                >
+                  <a>
+                    <FormattedMessage
+                      id="nav.contact-us"
+                      defaultMessage="Contact us"
+                    />
+                  </a>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/page?slug=accreditation-organizations"
-                  as="/page/accreditation-organizations"
+                  as={`/${
+                    this.props.intl.locale
+                  }/page/accreditation-organizations`}
                 >
-                  <a>Accreditation Organizations</a>
+                  <a>
+                    <FormattedMessage
+                      id="nav.accreditation-organizations"
+                      defaultMessage="Accreditation Organizations"
+                    />
+                  </a>
                 </Link>
               </li>
               <li>
-                <Link href="/page?slug=services" as="/page/services">
-                  <a>Our Services</a>
+                <Link
+                  href="/page?slug=services"
+                  as={`/${this.props.intl.locale}/page/services`}
+                >
+                  <a>
+                    <FormattedMessage
+                      id="nav.our-services"
+                      defaultMessage="Our Services"
+                    />
+                  </a>
                 </Link>
               </li>
             </ul>
@@ -161,7 +241,7 @@ class Nav extends Component {
           <div className="container">
             <div className="main-nav__container">
               <div className="main-nav__logo is-hidden-desktop">
-                <Link href="/">
+                <Link href={`/${this.props.intl.locale}/`}>
                   <a>
                     <img
                       src="/static/images/logo-small.png"
@@ -173,18 +253,35 @@ class Nav extends Component {
 
               <ul>
                 <li>
-                  <Link href="/local-stores">
-                    <a>Local Stores</a>
+                  <Link href={`/${this.props.intl.locale}/local-stores`}>
+                    <a>
+                      <FormattedMessage
+                        id="nav.local-stores"
+                        defaultMessage="Local Stores"
+                      />
+                    </a>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/sectors">
-                    <a>Sectors</a>
+                  <Link href={`/${this.props.intl.locale}/sectors`}>
+                    <a>
+                      <FormattedMessage
+                        id="nav.sectors"
+                        defaultMessage="Sectors"
+                      />
+                    </a>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/commercial-enquiries">
-                    <a>Commercial Enquiries</a>
+                  <Link
+                    href={`/${this.props.intl.locale}/commercial-enquiries`}
+                  >
+                    <a>
+                      <FormattedMessage
+                        id="nav.commercial-enquiries"
+                        defaultMessage="Commercial Enquiries"
+                      />
+                    </a>
                   </Link>
                 </li>
               </ul>
@@ -192,7 +289,7 @@ class Nav extends Component {
               {this.props.page != "index" && (
                 <React.Fragment>
                   <div className="main-nav__logo is-hidden-touch">
-                    <Link href="/">
+                    <Link href={`/${this.props.intl.locale}/`}>
                       <a>
                         <img
                           src="/static/images/logo.png"
@@ -203,17 +300,21 @@ class Nav extends Component {
                   </div>
 
                   <div className="main-nav__search">
-                    <form action="/search" method="get">
+                    <form action={`/${this.props.locale}/search`} method="get">
                       <div className="field has-addons">
                         <p className="control">
                           <span className="select">
                             <select name="sector">
                               <option defaultValue value="all">
-                                All
+                                {this.props.intl.formatMessage(
+                                  messages.allSectors
+                                )}
                               </option>
                               {this.state.sectors &&
                               this.state.sectors.length === 0 ? (
-                                <option disabled="disabled">Loading...</option>
+                                <option disabled="disabled">
+                                  {this.props.intl.formatMessage(messages.wait)}
+                                </option>
                               ) : (
                                 this.state.sectors.map(sector => (
                                   <option
@@ -232,7 +333,9 @@ class Nav extends Component {
                             name="q"
                             className="input"
                             type="search"
-                            placeholder="Search"
+                            placeholder={this.props.intl.formatMessage(
+                              messages.search
+                            )}
                           />
                         </p>
                         <p className="control">
@@ -255,7 +358,7 @@ class Nav extends Component {
             aria-label="main navigation"
           >
             <div className="navbar-brand">
-              <Link href="/">
+              <Link href={`/${this.props.locale}/`}>
                 <a className="navbar-item">
                   <img src="/static/images/logo.png" alt="Daily Baraka" />
                 </a>
@@ -284,10 +387,14 @@ class Nav extends Component {
               {this.state.user ? (
                 <React.Fragment>
                   <li>
-                    <Link href="/profile">
+                    <Link href={`/${this.props.locale}/profile`}>
                       <a className="username">
                         <i className="fas fa-user" />
-                        &nbsp;Profile
+                        &nbsp;
+                        <FormattedMessage
+                          id="nav.profile"
+                          defaultMessage="Profile"
+                        />
                       </a>
                     </Link>
                   </li>
@@ -295,55 +402,103 @@ class Nav extends Component {
               ) : (
                 <React.Fragment>
                   <li>
-                    <Link href="/signIn">
-                      <a>Sign In</a>
+                    <Link href={`/${this.props.locale}/signIn`}>
+                      <a>
+                        <FormattedMessage
+                          id="common.login"
+                          defaultMessage="Sign In"
+                        />
+                      </a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/signUp">
-                      <a>SignUp</a>
+                    <Link href={`/${this.props.locale}/signUp`}>
+                      <a>
+                        <FormattedMessage
+                          id="common.register"
+                          defaultMessage="Sign Up"
+                        />
+                      </a>
                     </Link>
                   </li>
                 </React.Fragment>
               )}
               <li>
-                <Link href="/local-stores">
-                  <a>Local Stores</a>
+                <Link href={`/${this.props.locale}/local-stores`}>
+                  <a>
+                    <FormattedMessage
+                      id="nav.local-stores"
+                      defaultMessage="Local Stores"
+                    />
+                  </a>
                 </Link>
               </li>
               <li>
-                <Link href="/sectors">
-                  <a>Sectors</a>
+                <Link href={`/${this.props.locale}/sectors`}>
+                  <a>
+                    <FormattedMessage
+                      id="nav.sectors"
+                      defaultMessage="Sectors"
+                    />
+                  </a>
                 </Link>
               </li>
               <li>
-                <Link href="/commercial-enquiries">
-                  <a>Commercial Enquiries</a>
+                <Link href={`/${this.props.locale}/commercial-enquiries`}>
+                  <a>
+                    <FormattedMessage
+                      id="nav.commercial-enquiries"
+                      defaultMessage="Commercial Enquiries"
+                    />
+                  </a>
                 </Link>
               </li>
 
               <li>
-                <Link href="/page?slug=about-us" as="/page/about-us">
-                  <a>About us</a>
+                <Link
+                  href="/page?slug=about-us"
+                  as={`/${this.props.locale}/page/about-us`}
+                >
+                  <a>
+                    <FormattedMessage
+                      id="nav.about-us"
+                      defaultMessage="About Us"
+                    />
+                  </a>
                 </Link>
               </li>
               <li>
-                <Link href="/page?slug=contact-us" as="/page/contact-us">
-                  <a>Contact us</a>
+                <Link
+                  href="/page?slug=contact-us"
+                  as={`/${this.props.locale}/page/contact-us`}
+                >
+                  <a>
+                    <FormattedMessage
+                      id="nav.contact-us"
+                      defaultMessage="Contact Us"
+                    />
+                  </a>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/page?slug=accreditation-organizations"
-                  href="/page/accreditation-organizations"
+                  href={`/${
+                    this.props.locale
+                  }/page/accreditation-organizations`}
                 >
-                  <a>Accreditation Organizations</a>
+                  <a>
+                    <FormattedMessage
+                      id="nav.accreditation-organizations"
+                      defaultMessage="Accreditation Organizations"
+                    />
+                  </a>
                 </Link>
               </li>
               {this.state.user && (
                 <li>
                   <a href="#" onClick={e => this.onLogout(e)}>
-                    Logout
+                    <FormattedMessage id="nav.logout" defaultMessage="Logout" />
                   </a>
                 </li>
               )}
@@ -355,4 +510,4 @@ class Nav extends Component {
   }
 }
 
-export default Nav;
+export default withIntl(Nav);

@@ -4,6 +4,7 @@ import * as productService from "../services/product";
 import Head from "../components/head";
 import Nav from "../components/nav";
 import "../styles/main.scss";
+import { FormattedMessage } from "react-intl";
 
 class Product extends Component {
   static async getInitialProps({ query }) {
@@ -91,7 +92,10 @@ class Product extends Component {
                           href="#"
                           onClick={e => this.onChangeTab(e, "product")}
                         >
-                          Product
+                          <FormattedMessage
+                            id="product.description"
+                            defaultMessage="Product"
+                          />
                         </a>
                       </li>
                       <li className={tab === "ingredient" ? "is-active" : ""}>
@@ -99,7 +103,10 @@ class Product extends Component {
                           href="#"
                           onClick={e => this.onChangeTab(e, "ingredient")}
                         >
-                          Ingredient
+                          <FormattedMessage
+                            id="product.ingredient"
+                            defaultMessage="Ingredient"
+                          />
                         </a>
                       </li>
                       <li className={tab === "certificates" ? "is-active" : ""}>
@@ -107,7 +114,10 @@ class Product extends Component {
                           href="#"
                           onClick={e => this.onChangeTab(e, "certificates")}
                         >
-                          Certifiers
+                          <FormattedMessage
+                            id="product.certifiers"
+                            defaultMessage="Certifiers"
+                          />
                         </a>
                       </li>
                     </ul>

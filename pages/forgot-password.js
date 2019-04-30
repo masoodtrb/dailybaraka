@@ -2,13 +2,31 @@ import React, { Component } from "react";
 import { withRouter } from "next/router";
 import Link from "next/link";
 import Recaptcha from "react-google-invisible-recaptcha";
+import {
+  defineMessages,
+  FormattedHTMLMessage,
+  FormattedMessage
+} from "react-intl";
 
+import withIntl from "../hoc/withIntl";
 import Head from "../components/head";
 import Nav from "../components/nav";
 
 import ForgotPasswordForm from "../components/forms/forgotPassword";
 
 import "../styles/main.scss";
+
+const messages = defineMessages({
+  title: {
+    id: "forgot-password.title",
+    defaultMessage: "Forgot Password"
+  },
+  forgotPasswordError: {
+    id: "forgot-password.error",
+    defaultMessage:
+      "Can not process the request. Type of error: {status}, response status: {statusText}"
+  }
+});
 
 class ForgotPassword extends Component {
   state = {
@@ -41,11 +59,13 @@ class ForgotPassword extends Component {
           this.setState({
             forgotPasswordForm: {
               state: "ERROR",
-              error:
-                "Can not process the request. Type of error: " +
-                response.status +
-                ", response status: " +
-                response.statusText
+              error: this.props.intl.formatMessage(
+                messages.forgotPasswordError,
+                {
+                  status: response.status,
+                  statusText: response.statusText
+                }
+              )
             }
           });
           this.recaptchaRef.reset();
@@ -77,16 +97,30 @@ class ForgotPassword extends Component {
       forgotPasswordForm: {
         state: "ERROR",
         error: (
-          <React.Fragment>
-            The authorizing system, to detect you as a <strong>HUMAN</strong>{" "}
-            not a 🤖, occurred an error.
-            <br />
-            You could reload page to continue. If you receive this error again,
-            please{" "}
-            <Link href="/page/contact-us">
-              <a>get in touch with us.</a>
-            </Link>
-          </React.Fragment>
+          <FormattedHTMLMessage
+            id="common.recaptcha.error"
+            values={{
+              reportLink: (
+                <Link href={`/${this.props.locale}/page/contact-us`}>
+                  <a>
+                    <FormattedMessage
+                      id="common.recaptcha.error.report-link"
+                      defaultMessage="get in touch with us."
+                    />
+                  </a>
+                </Link>
+              )
+            }}
+            defaultMessage={
+              <React.Fragment>
+                The authorizing system, to detect you as a{" "}
+                <strong>HUMAN</strong> not a 🤖, occurred an error.
+                <br />
+                You could reload page to continue. If you receive this error
+                again, please '{reportLink}'.
+              </React.Fragment>
+            }
+          />
         )
       }
     });
@@ -114,12 +148,17 @@ class ForgotPassword extends Component {
           <div className="container">
             <div className="columns">
               <div className="column is-6 is-offset-3">
-                <h1>Forgot Password</h1>
+                <h1>{this.props.intl.formatMessage(messages.title)}</h1>
 
                 {this.state.forgotPasswordForm.state === "ERROR" && (
                   <div className="notification is-danger">
                     <button className="delete" />
-                    <strong>An error has occurred</strong>
+                    <strong>
+                      <FormattedMessage
+                        id="common.error"
+                        defaultMessage="An error has occurred"
+                      />
+                    </strong>
                     <br />
                     <p>{this.state.forgotPasswordForm.error}</p>
                   </div>
@@ -127,16 +166,25 @@ class ForgotPassword extends Component {
 
                 {this.state.forgotPasswordForm.state === "SUCCESS" && (
                   <div className="notification is-success">
-                    <strong>
-                      Your reset password request has been successfully
-                      submitted.
-                    </strong>
-                    <br />
-                    <p>You will receive an email to reset your password.</p>
-                    <p>
-                      If you couldn't find this mail in your Inbox folder, check
-                      the Spam/Junk folder please.
-                    </p>
+                    <FormattedHTMLMessage
+                      id="forgot-password.success"
+                      defaultMessage={
+                        <React.Fragment>
+                          <strong>
+                            Your reset password request has been successfully
+                            submitted.
+                          </strong>
+                          <br />
+                          <p>
+                            You will receive an email to reset your password.
+                          </p>
+                          <p>
+                            If you couldn't find this mail in your Inbox folder,
+                            check the Spam/Junk folder please.
+                          </p>
+                        </React.Fragment>
+                      }
+                    />
                   </div>
                 )}
 
@@ -169,4 +217,4 @@ class ForgotPassword extends Component {
   }
 }
 
-export default withRouter(ForgotPassword);
+export default withRouter(withIntl(ForgotPassword));

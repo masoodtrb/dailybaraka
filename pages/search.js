@@ -1,11 +1,22 @@
 import React, { Component } from "react";
 import Link from "next/link";
+import { FormattedMessage, defineMessages } from "react-intl";
+
+import withIntl from "../hoc/withIntl";
+
 import * as productService from "../services/product";
 
 import Head from "../components/head";
 import Nav from "../components/nav";
 
 import "../styles/main.scss";
+
+const messages = defineMessages({
+  title: {
+    id: "search.title",
+    defaultMessage: "Search"
+  }
+});
 
 class Search extends Component {
   static async getInitialProps({ query }) {
@@ -22,12 +33,18 @@ class Search extends Component {
     const { products, searchValue } = this.props;
     return (
       <div>
-        <Head title="Search" />
+        <Head title={this.props.intl.formatMessage(messages.title)} />
         <Nav />
 
         <div className="page sectors">
           <div className="container">
-            <h1>Search result for "{searchValue}"</h1>
+            <h1>
+              <FormattedMessage
+                id="search.title"
+                values={{ searchValue }}
+                defaultMessage="Search result for '{searchValue}'"
+              />
+            </h1>
 
             <div className="columns is-multiline">
               {products.result &&
@@ -39,8 +56,8 @@ class Search extends Component {
                     className="column is-4"
                   >
                     <Link
-                      href={"/product?slug=" + product.slug}
-                      as={"/product/" + product.slug}
+                      href={`/product?slug=${product.slug}`}
+                      as={`/${this.props.locale}/product/${product.slug}`}
                     >
                       <a>
                         <div className="box">
@@ -73,7 +90,12 @@ class Search extends Component {
                   </div>
                 ))
               ) : (
-                <div className="notification is-info">No result is found!</div>
+                <div className="notification is-info">
+                  <FormattedMessage
+                    id="search.empty"
+                    defaultMessage="No result is found!"
+                  />
+                </div>
               )}
             </div>
           </div>
@@ -83,4 +105,4 @@ class Search extends Component {
   }
 }
 
-export default Search;
+export default withIntl(Search);

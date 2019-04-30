@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import parse from "html-react-parser";
 import Recaptcha from "react-google-invisible-recaptcha";
+import {
+  defineMessages,
+  FormattedHTMLMessage,
+  FormattedMessage
+} from "react-intl";
 
 import * as pageService from "../services/page";
 
@@ -10,6 +15,14 @@ import Nav from "../components/nav";
 import ContactForm from "../components/forms/contactForm";
 
 import "../styles/main.scss";
+
+const messages = defineMessages({
+  forgotPasswordError: {
+    id: "page.contact-us.error",
+    defaultMessage:
+      "Can not process the request. Type of error: {status}, response status: {statusText}"
+  }
+});
 
 class Page extends Component {
   static async getInitialProps({ query }) {
@@ -70,11 +83,13 @@ class Page extends Component {
           this.setState({
             contactForm: {
               state: "ERROR",
-              error:
-                "Can not process the request. Type of error: " +
-                response.status +
-                ", response status: " +
-                response.statusText
+              error: this.props.intl.formatMessage(
+                messages.forgotPasswordError,
+                {
+                  status: response.status,
+                  statusText: response.statusText
+                }
+              )
             }
           });
           this.recaptchaRef.reset();
@@ -112,7 +127,9 @@ class Page extends Component {
         <div className="page rich-content">
           <div className="container">
             <h1>{page.title}</h1>
-            <div className="rich-content__content">{parse(page.body)}</div>
+            <div className="rich-content__content">
+              {page.body && parse(page.body)}
+            </div>
             {page.slug === "contact-us" && (
               <div className="columns">
                 <div className="column is-6">
@@ -120,10 +137,15 @@ class Page extends Component {
                   <br />
                   <br />
                   <br />
-                  <h2>Get in touch with us!</h2>
+                  <h2>
+                    <FormattedMessage
+                      id="page.contact-us.title"
+                      defaultMessage="Get in touch with us!"
+                    />
+                  </h2>
                   <div
                     className={[
-                      "columns animate",
+                      "animate",
                       this.state.contactForm.state === "SUCCESS"
                         ? "animate-hidden"
                         : ""
@@ -132,7 +154,12 @@ class Page extends Component {
                     {this.state.contactForm.state === "ERROR" && (
                       <div className="notification is-danger">
                         <button className="delete" />
-                        <strong>An error has occurred</strong>
+                        <strong>
+                          <FormattedMessage
+                            id="common.error"
+                            defaultMessage="An error has occurred"
+                          />
+                        </strong>
                         <br />
                         <p>{this.state.contactForm.error}</p>
                       </div>
@@ -162,7 +189,10 @@ class Page extends Component {
                   >
                     <div className="notification is-success">
                       <strong>
-                        Your request has been successfully submitted.
+                        <FormattedMessage
+                          id="page.contact-us.success"
+                          defaultMessage="Your request has been successfully submitted."
+                        />
                       </strong>
                     </div>
                   </div>

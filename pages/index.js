@@ -9,10 +9,18 @@ import Nav from "../components/nav";
 
 import "../styles/main.scss";
 
-const { title } = defineMessages({
+const messages = defineMessages({
   title: {
     id: "home.title",
     defaultMessage: "Home"
+  },
+  search: {
+    id: "common.search",
+    defaultMessage: "Search"
+  },
+  allSectors: {
+    id: "sectors.all",
+    defaultMessage: "All"
   }
 });
 
@@ -24,7 +32,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Head title={this.props.intl.formatMessage(title)} />
+        <Head title={this.props.intl.formatMessage(messages.title)} />
         <Nav page="index" />
 
         <div className="page home">
@@ -42,10 +50,7 @@ class Home extends Component {
                     <span className="select">
                       <select name="sector">
                         <option defaultValue value="all">
-                          <FormattedMessage
-                            id="home.sectors.all"
-                            defaultMessage="All"
-                          />
+                          {this.props.intl.formatMessage(messages.allSectors)}
                         </option>
                         {this.props.sectors.result.map(sector => (
                           <option key={"sector-" + sector.id} value={sector.id}>
@@ -60,7 +65,9 @@ class Home extends Component {
                       className="input"
                       name="q"
                       type="search"
-                      placeholder="Search"
+                      placeholder={this.props.intl.formatMessage(
+                        messages.search
+                      )}
                     />
                   </p>
                   <p className="control">

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { defineMessages, FormattedMessage } from "react-intl";
 import { withRouter } from "next/router";
 import Link from "next/link";
 import Recaptcha from "react-google-invisible-recaptcha";
@@ -9,6 +10,19 @@ import Nav from "../components/nav";
 import SignInForm from "../components/forms/loginForm";
 
 import "../styles/main.scss";
+import withIntl from "../hoc/withIntl";
+
+const messages = defineMessages({
+  title: {
+    id: "login.title",
+    defaultMessage: "Sign In"
+  },
+  loginError: {
+    id: "login.error",
+    defaultMessage:
+      "Can not process the request. Type of error: {status}, response status: {statusText}"
+  }
+});
 
 class SignIn extends Component {
   static async getInitialProps({ query }) {
@@ -49,11 +63,10 @@ class SignIn extends Component {
           this.setState({
             signInForm: {
               state: "ERROR",
-              error:
-                "Can not process the request. Type of error: " +
-                response.status +
-                ", response status: " +
-                response.statusText
+              error: this.props.intl.formatMessage(messages.loginError, {
+                status: response.status,
+                statusText: response.statusText
+              })
             }
           });
           this.recaptchaRef.reset();
@@ -89,16 +102,30 @@ class SignIn extends Component {
       signInForm: {
         state: "ERROR",
         error: (
-          <React.Fragment>
-            The authorizing system, to detect you as a <strong>HUMAN</strong>{" "}
-            not a 🤖, occurred an error.
-            <br />
-            You could reload page to continue. If you receive this error again,
-            please{" "}
-            <Link href="/page/contact-us">
-              <a>get in touch with us.</a>
-            </Link>
-          </React.Fragment>
+          <FormattedHTMLMessage
+            id="common.recaptcha.error"
+            values={{
+              reportLink: (
+                <Link href={`/${this.props.locale}/page/contact-us`}>
+                  <a>
+                    <FormattedMessage
+                      id="common.recaptcha.error.report-link"
+                      defaultMessage="get in touch with us."
+                    />
+                  </a>
+                </Link>
+              )
+            }}
+            defaultMessage={
+              <React.Fragment>
+                The authorizing system, to detect you as a{" "}
+                <strong>HUMAN</strong> not a 🤖, occurred an error.
+                <br />
+                You could reload page to continue. If you receive this error
+                again, please '{reportLink}'.
+              </React.Fragment>
+            }
+          />
         )
       }
     });
@@ -119,19 +146,26 @@ class SignIn extends Component {
   render() {
     return (
       <div>
-        <Head title="Sign In" />
+        <Head title={this.props.intl.formatMessage(messages.title)} />
         <Nav />
 
         <div className="page signIn">
           <div className="container">
             <div className="columns">
               <div className="column is-6 is-offset-3">
-                <h1>Sign In</h1>
+                <h1>
+                  <FormattedMessage id="login.title" defaultMessage="Sign In" />
+                </h1>
 
                 {this.state.signInForm.state === "ERROR" && (
                   <div className="notification is-danger">
                     <button className="delete" />
-                    <strong>An error has occurred</strong>
+                    <strong>
+                      <FormattedMessage
+                        id="common.error"
+                        defaultMessage="An error has occurred"
+                      />
+                    </strong>
                     <br />
                     <p>{this.state.signInForm.error}</p>
                   </div>
@@ -152,9 +186,18 @@ class SignIn extends Component {
                 <br />
                 <br />
                 <p className="note has-text-centered">
-                  Do not have an account?{" "}
-                  <Link href="/signIn">
-                    <a>Sign up</a>
+                  <FormattedMessage
+                    id="login.register-hint"
+                    defaultMessage="Do not have an account?"
+                  />
+                  &nbsp;
+                  <Link href={`/${this.props.locale}/signIn`}>
+                    <a>
+                      <FormattedMessage
+                        id="common.register"
+                        defaultMessage="Sign up"
+                      />
+                    </a>
                   </Link>
                 </p>
               </div>
@@ -166,4 +209,4 @@ class SignIn extends Component {
   }
 }
 
-export default withRouter(SignIn);
+export default withRouter(withIntl(SignIn));
