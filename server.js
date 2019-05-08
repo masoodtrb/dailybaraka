@@ -15,7 +15,35 @@ const handler = routes.getRequestHandler(app);
 // locale. These will only be used in production, in dev the `defaultMessage` in
 // each message description in the source code will be used.
 const getMessages = locale => {
-  return require(`./lang/${locale}.json`);
+  var options = {
+    method: "POST",
+    url: "http://daily.irresno.ir/api/shop/lang-resource/v1/search",
+    headers: {
+      "content-type": "application/json"
+    },
+    body: {
+      size: "10000",
+      page: "1",
+      filters: [
+        { field: "lang", operator: "EQ", value: locale.toUpperCase() },
+        { field: "platform", operator: "EQ", value: "WEB" }
+      ]
+    },
+    json: true
+  };
+
+  return new Promise(function(resolve, reject) {
+    request(options, function(error, response, body) {
+      if (error) throw reject(error);
+
+      var messages = {};
+      body.result.forEach(item => {
+        messages[item.key] = item.value;
+      });
+
+      resolve(messages);
+    });
+  });
 };
 
 // express setup
@@ -60,7 +88,7 @@ app.prepare().then(() => {
     });
   }
   // next handler on GET
-  server.get("*", (req, res) => {
+  server.get("*", async (req, res) => {
     // get selected locale from req path
     const urlPathName = new URL(req.url).pathname;
     const selectedLocale =
@@ -68,13 +96,18 @@ app.prepare().then(() => {
 
     // TODO: get languages from api
     // if pathname first part is not in languages list, it means static content
-    if (["en", "de"].indexOf(selectedLocale) === -1) return handler(req, res);
+    if (["en", "de", "fr", "es"].indexOf(selectedLocale) === -1)
+      return handler(req, res);
 
     // set local and translations in req to access in pages
     req.locale = selectedLocale;
-    req.messages =
-      //environment === "development" ? {} :
-      getMessages(selectedLocale);
+    // on development environment use default messages to speed up develop time
+    if (environment === "development") {
+      req.messages = {};
+    } else {
+      const messages = await getMessages(selectedLocale);
+      req.messages = messages;
+    }
 
     return handler(req, res);
   });

@@ -1,6 +1,10 @@
 import App, { Container } from "next/app";
 import React from "react";
 import { IntlProvider, addLocaleData } from "react-intl";
+import en from "react-intl/locale-data/en.js";
+import de from "react-intl/locale-data/de.js";
+import fr from "react-intl/locale-data/fr.js";
+import es from "react-intl/locale-data/es.js";
 
 export default class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
@@ -20,7 +24,7 @@ export default class MyApp extends App {
   }
   render() {
     const { Component, pageProps, locale, messages, initialNow } = this.props;
-    addLocaleData(require(`react-intl/locale-data/${locale}`));
+    addLocaleData([...en, ...de, ...fr, ...es]);
 
     return (
       <Container>
