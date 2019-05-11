@@ -48,15 +48,19 @@ class Home extends Component {
                 <div className="field has-addons">
                   <p className="control">
                     <span className="select">
-                      <select name="sector">
+                      <select name="sector" className="home__sectors">
                         <option defaultValue value="all">
                           {this.props.intl.formatMessage(messages.allSectors)}
                         </option>
-                        {this.props.sectors.result.map(sector => (
-                          <option key={"sector-" + sector.id} value={sector.id}>
-                            {sector.name}
-                          </option>
-                        ))}
+                        {this.props.sectors &&
+                          this.props.sectors.result.map(sector => (
+                            <option
+                              key={"sector-" + sector.id}
+                              value={sector.id}
+                            >
+                              {sector.name}
+                            </option>
+                          ))}
                       </select>
                     </span>
                   </p>
