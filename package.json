@@ -1,7 +1,7 @@
 {
   "name": "daily-baraka-front",
   "scripts": {
-    "test": "jest",
+    "test": "jest --watch",
     "dev": "node server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js"
