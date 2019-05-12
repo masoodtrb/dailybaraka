@@ -28,9 +28,6 @@ class Nav extends Component {
   };
 
   componentDidMount() {
-    console.log("props");
-    console.log(this.props);
-
     const token = getUserToken();
     this.setState({ user: JSON.parse(getCurrentUser()) });
 

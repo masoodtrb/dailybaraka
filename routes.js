@@ -9,7 +9,7 @@ module.exports = routes()
   .add("profile", "/:lang/profile")
 
   // General Pages
-  .add("home", "/:lang/", "index")
+  .add("home", "/:lang", "index")
   .add("page", "/:lang/page/:slug")
   .add("search", "/:lang/search")
   .add("product", "/:lang/product/:slug")
