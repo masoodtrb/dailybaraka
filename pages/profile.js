@@ -98,7 +98,9 @@ class Profile extends Component {
           });
         });
     } else {
-      window.location.href = {`/${this.props.locale}/login?returnUrl=/${this.props.locale}/profile`};
+      window.location.href = `as/${this.props.locale}/login?returnUrl=/${
+        this.props.locale
+      }/profile`;
     }
   }
 

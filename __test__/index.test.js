@@ -1,7 +1,7 @@
 import React from "react";
 import createComponentWithIntl from "../../utils/createComponentWithIntl";
 
-import IndexPage from "../index.js";
+import IndexPage from "../__test__/index";
 
 describe("With Snapshot Testing", () => {
   it("Index Page shows as the snapshot", () => {
