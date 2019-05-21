@@ -1,17 +1,19 @@
 import React, { Component } from "react";
 import Link from "next/link";
+import { FormattedMessage } from "react-intl";
+
 import * as supplierService from "../services/supplier";
 
 import Head from "../components/head";
 import Nav from "../components/nav";
 
 import "../styles/main.scss";
-import { FormattedMessage } from "react-intl";
+import withIntl from "../hoc/withIntl";
 
 class Supplier extends Component {
   static async getInitialProps({ query }) {
     return {
-      supplier: await supplierService.getProducts(query.id)
+      supplier: await supplierService.getProducts(query.lang, query.id)
     };
   }
 
@@ -81,9 +83,9 @@ class Supplier extends Component {
                             {category.products.map(product => (
                               <li key={"product-" + product.id}>
                                 <Link
-                                  href={`/product?slug=${item.slug}`}
-                                  as={`/${this.props.locale}/product/${
-                                    item.slug
+                                  href={`/product?slug=${product.slug}&lang=${this.props.intl.locale}`}
+                                  as={`/${this.props.intl.locale}/product/${
+                                    product.slug
                                   }`}
                                 >
                                   <a>
@@ -108,4 +110,4 @@ class Supplier extends Component {
   }
 }
 
-export default Supplier;
+export default withIntl(Supplier);

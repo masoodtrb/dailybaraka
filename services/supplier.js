@@ -1,13 +1,13 @@
 import fetch from "isomorphic-unfetch";
 
-async function get(supplierId) {
+async function get(lang, supplierId) {
   const response = await fetch(
     process.env.API_URL + "/api/shop/suppliers/v1/load/" + supplierId
   );
   return await response.json();
 }
 
-async function getProducts(supplierId) {
+async function getProducts(lang, supplierId) {
   const response = await fetch(
     process.env.API_URL +
       "/api/shop/suppliers/v1/supplier-with-products/" +

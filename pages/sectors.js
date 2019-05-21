@@ -16,8 +16,8 @@ const messages = defineMessages({
   }
 });
 class Sectors extends Component {
-  static async getInitialProps({ req }) {
-    return { sectors: await sectorService.getAll() };
+  static async getInitialProps({ query }) {
+    return { sectors: await sectorService.getAll(query.lang) };
   }
 
   render() {
@@ -37,8 +37,8 @@ class Sectors extends Component {
                 this.props.sectors.result.map(sector => (
                   <div key={"sector-" + sector.id} className="column is-4">
                     <Link
-                      href={`/sector?id=${sector.id}&name=${sector.name}`}
-                      as={`/${this.props.locale}/sector/${sector.id}/${
+                      href={`/sector?id=${sector.id}&name=${sector.name}&lang=${this.props.intl.locale}`}
+                      as={`/${this.props.intl.locale}/sector/${sector.id}/${
                         sector.name
                       }`}
                     >

@@ -3,7 +3,6 @@ import Link from "next/link";
 import moment from "moment";
 import {
   defineMessages,
-  FormattedHTMLMessage,
   FormattedMessage
 } from "react-intl";
 
@@ -64,9 +63,6 @@ class Profile extends Component {
   };
 
   componentDidMount() {
-    console.log("this.props.intl");
-    console.log(this.props);
-
     const token = getUserToken();
 
     if (token) {
@@ -98,8 +94,8 @@ class Profile extends Component {
           });
         });
     } else {
-      window.location.href = `as/${this.props.locale}/login?returnUrl=/${
-        this.props.locale
+      window.location.href = `/${this.props.intl.locale}/login?returnUrl=/${
+        this.props.intl.locale
       }/profile`;
     }
   }

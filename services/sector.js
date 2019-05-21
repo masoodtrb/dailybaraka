@@ -1,19 +1,25 @@
 import fetch from "isomorphic-unfetch";
 
-async function get(sectorId) {
+async function get(lang,sectorId) {
   const response = await fetch(
-    process.env.API_URL + "/api/shop/categories/v1/load/" + sectorId
+    process.env.API_URL + "/api/shop/categories/v1/load/" + sectorId,
+    {
+      headers: {
+        "lang": lang.toUpperCase()
+      }
+    }
   );
   return await response.json();
 }
 
-async function getAll() {
+async function getAll(lang) {
   const response = await fetch(
     process.env.API_URL + "/api/shop/categories/v1/search",
     {
       method: "POST",
       headers: {
-        "content-type": "application/json"
+        "content-type": "application/json",
+        "lang": lang.toUpperCase()
       },
       body: JSON.stringify({
         size: 1000
@@ -23,13 +29,14 @@ async function getAll() {
   return await response.json();
 }
 
-async function getSuppliersAndProducts(sectorId) {
+async function getSuppliersAndProducts(lang,sectorId) {
   const response = await fetch(
     process.env.API_URL + "/api/shop/suppliers/v1/fat-search",
     {
       method: "POST",
       headers: {
-        "content-type": "application/json"
+        "content-type": "application/json",
+        "lang": lang.toUpperCase()
       },
       body: JSON.stringify({
         filters: [

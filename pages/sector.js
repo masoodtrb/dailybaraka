@@ -5,14 +5,15 @@ import * as sectorService from "../services/sector";
 
 import Head from "../components/head";
 import Nav from "../components/nav";
+import withIntl from "../hoc/withIntl";
 
 import "../styles/main.scss";
 
 class Sector extends Component {
   static async getInitialProps({ query }) {
     return {
-      sector: await sectorService.get(query.id),
-      suppliers: await sectorService.getSuppliersAndProducts(query.id)
+      sector: await sectorService.get(query.lang, query.id),
+      suppliers: await sectorService.getSuppliersAndProducts(query.lang, query.id)
     };
   }
 
@@ -28,12 +29,12 @@ class Sector extends Component {
             <h1>{sector.name}</h1>
           </div>
 
-          {suppliers.result.map(supplier => (
+          {suppliers && suppliers.result && suppliers.result.map(supplier => (
             <div key={"supplier-" + supplier.id} className="sector__supplier">
               <div className="container">
                 <Link
-                  href={`/supplier/?id=${supplier.id}&name=${supplier.name}`}
-                  as={`/${this.props.locale}/supplier/${supplier.id}/${
+                  href={`/supplier/?id=${supplier.id}&name=${supplier.name}&lang=${this.props.intl.locale}`}
+                  as={`/${this.props.intl.locale}/supplier/${supplier.id}/${
                     supplier.name
                   }`}
                 >
@@ -45,15 +46,15 @@ class Sector extends Component {
                   </a>
                 </Link>
                 <div className="sector__products">
-                  <div className="columns">
+                  <div className="columns is-multiline">
                     {supplier.products.map(product => (
                       <div
                         key={"product-" + product.id}
                         className="column is-2"
                       >
                         <Link
-                          href={`/product?slug=${product.slug}`}
-                          as={`/${this.props.locale}/product/${product.slug}`}
+                          href={`/product?slug=${product.slug}&lang=${this.props.intl.locale}`}
+                          as={`/${this.props.intl.locale}/product/${product.slug}`}
                         >
                           <a>
                             <div className="card">
@@ -81,11 +82,23 @@ class Sector extends Component {
                     ))}
                   </div>
                 </div>
+                <div>
+                  <Link
+                    href={`/supplier/?id=${supplier.id}&name=${supplier.name}&lang=${this.props.intl.locale}`}
+                    as={`/${this.props.intl.locale}/supplier/${supplier.id}/${
+                      supplier.name
+                    }`}
+                  >
+                    <a className="sector__more">
+                      More...
+                    </a>
+                  </Link>
+                </div>
               </div>
             </div>
           ))}
 
-          {suppliers.pagination.page > 1 && (
+          {suppliers && suppliers.pagination && suppliers.pagination.page > 1 && (
             <nav
               className="pagination"
               role="navigation"
@@ -127,4 +140,4 @@ class Sector extends Component {
   }
 }
 
-export default Sector;
+export default withIntl(Sector);

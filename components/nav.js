@@ -84,7 +84,7 @@ class Nav extends Component {
         user: null
       },
       () => {
-        window.location.href = `/${this.props.intl.locale}/`;
+        window.location.href = `/${this.props.intl.locale}`;
       }
     );
   };
@@ -120,7 +120,7 @@ class Nav extends Component {
                         id="nav.welcome"
                         values={{
                           user: (
-                            <Link href={`/${this.props.intl.locale}/profile`}>
+                            <Link href={`/profile?lang=${this.props.intl.locale}`} as={`/${this.props.intl.locale}/profile`}>
                               <a className="username">
                                 {this.state.user.firstName}
                               </a>
@@ -143,7 +143,7 @@ class Nav extends Component {
                 ) : (
                   <React.Fragment>
                     <li>
-                      <Link href={`/${this.props.intl.locale}/signIn`}>
+                      <Link href={`/signIn?lang=${this.props.intl.locale}`} as={`/${this.props.intl.locale}/signIn`}>
                         <a>
                           <FormattedMessage
                             id="common.login"
@@ -153,7 +153,7 @@ class Nav extends Component {
                       </Link>
                     </li>
                     <li>
-                      <Link href={`/${this.props.intl.locale}/signUp`}>
+                      <Link href={`/signUp?lang=${this.props.intl.locale}`} as={`/${this.props.intl.locale}/signUp`}>
                         <a>
                           <FormattedMessage
                             id="common.register"
@@ -179,7 +179,7 @@ class Nav extends Component {
             <ul>
               <li>
                 <Link
-                  href="/page?slug=about-us"
+                  href={`/page?slug=about-us&lang=${this.props.intl.locale}`}
                   as={`/${this.props.intl.locale}/page/about-us`}
                 >
                   <a>
@@ -192,7 +192,7 @@ class Nav extends Component {
               </li>
               <li>
                 <Link
-                  href="/page?slug=contact-us"
+                  href={`/page?slug=contact-us&lang=${this.props.intl.locale}`}
                   as={`/${this.props.intl.locale}/page/contact-us`}
                 >
                   <a>
@@ -205,7 +205,7 @@ class Nav extends Component {
               </li>
               <li>
                 <Link
-                  href="/page?slug=accreditation-organizations"
+                  href={`/page?slug=accreditation-organizations&lang=${this.props.intl.locale}`}
                   as={`/${
                     this.props.intl.locale
                   }/page/accreditation-organizations`}
@@ -220,7 +220,7 @@ class Nav extends Component {
               </li>
               <li>
                 <Link
-                  href="/page?slug=services"
+                  href={`/page?slug=services&lang=${this.props.intl.locale}`}
                   as={`/${this.props.intl.locale}/page/services`}
                 >
                   <a>
@@ -238,7 +238,7 @@ class Nav extends Component {
           <div className="container">
             <div className="main-nav__container">
               <div className="main-nav__logo is-hidden-desktop">
-                <Link href={`/${this.props.intl.locale}/`}>
+                <Link href={`/${this.props.intl.locale}`}>
                   <a>
                     <img
                       src="/static/images/logo-small.png"
@@ -250,7 +250,7 @@ class Nav extends Component {
 
               <ul>
                 <li>
-                  <Link href={`/${this.props.intl.locale}/local-stores`}>
+                  <Link href={`/local-stores?lang=${this.props.intl.locale}`} as={`/${this.props.intl.locale}/local-stores`}>
                     <a>
                       <FormattedMessage
                         id="nav.local-stores"
@@ -260,7 +260,10 @@ class Nav extends Component {
                   </Link>
                 </li>
                 <li>
-                  <Link href={`/${this.props.intl.locale}/sectors`}>
+                  <Link
+                    href={`/sectors?lang=${this.props.intl.locale}`}
+                    as={`/${this.props.intl.locale}/sectors`}
+                  >
                     <a>
                       <FormattedMessage
                         id="nav.sectors"
@@ -271,7 +274,10 @@ class Nav extends Component {
                 </li>
                 <li>
                   <Link
-                    href={`/${this.props.intl.locale}/commercial-enquiries`}
+                    href={`/commercial-enquiries?lang=${
+                      this.props.intl.locale
+                    }`}
+                    as={`/${this.props.intl.locale}/commercial-enquiries`}
                   >
                     <a>
                       <FormattedMessage
@@ -286,7 +292,7 @@ class Nav extends Component {
               {this.props.page != "index" && (
                 <React.Fragment>
                   <div className="main-nav__logo is-hidden-touch">
-                    <Link href={`/${this.props.intl.locale}/`}>
+                    <Link href={`/${this.props.intl.locale}`}>
                       <a>
                         <img
                           src="/static/images/logo.png"
@@ -297,7 +303,10 @@ class Nav extends Component {
                   </div>
 
                   <div className="main-nav__search">
-                    <form action={`/${this.props.locale}/search`} method="get">
+                    <form
+                      action={`/${this.props.intl.locale}/search`}
+                      method="get"
+                    >
                       <div className="field has-addons">
                         <p className="control">
                           <span className="select">
@@ -313,6 +322,7 @@ class Nav extends Component {
                                   {this.props.intl.formatMessage(messages.wait)}
                                 </option>
                               ) : (
+                                this.state.sectors &&
                                 this.state.sectors.map(sector => (
                                   <option
                                     key={"sector-" + sector.id}
@@ -355,7 +365,7 @@ class Nav extends Component {
             aria-label="main navigation"
           >
             <div className="navbar-brand">
-              <Link href={`/${this.props.locale}/`}>
+              <Link href={`/${this.props.intl.locale}`}>
                 <a className="navbar-item">
                   <img src="/static/images/logo.png" alt="Daily Baraka" />
                 </a>
@@ -384,7 +394,7 @@ class Nav extends Component {
               {this.state.user ? (
                 <React.Fragment>
                   <li>
-                    <Link href={`/${this.props.locale}/profile`}>
+                    <Link href={`/profile?lang=${this.props.intl.locale}`} as={`/${this.props.intl.locale}/profile`}>
                       <a className="username">
                         <i className="fas fa-user" />
                         &nbsp;
@@ -399,7 +409,7 @@ class Nav extends Component {
               ) : (
                 <React.Fragment>
                   <li>
-                    <Link href={`/${this.props.locale}/signIn`}>
+                    <Link href={`/signIn?lang=${this.props.intl.locale}`} as={`/${this.props.intl.locale}/signIn`}>
                       <a>
                         <FormattedMessage
                           id="common.login"
@@ -409,7 +419,7 @@ class Nav extends Component {
                     </Link>
                   </li>
                   <li>
-                    <Link href={`/${this.props.locale}/signUp`}>
+                    <Link href={`/signUp?lang=${this.props.intl.locale}`} as={`/${this.props.intl.locale}/signUp`}>
                       <a>
                         <FormattedMessage
                           id="common.register"
@@ -421,7 +431,7 @@ class Nav extends Component {
                 </React.Fragment>
               )}
               <li>
-                <Link href={`/${this.props.locale}/local-stores`}>
+                <Link href={`/local-stores?lang=${this.props.intl.locale}`} as={`/${this.props.intl.locale}/local-stores`}>
                   <a>
                     <FormattedMessage
                       id="nav.local-stores"
@@ -431,7 +441,7 @@ class Nav extends Component {
                 </Link>
               </li>
               <li>
-                <Link href={`/${this.props.locale}/sectors`}>
+                <Link href={`/sectors?lang=${this.props.intl.locale}`} as={`/${this.props.intl.locale}/sectors`}>
                   <a>
                     <FormattedMessage
                       id="nav.sectors"
@@ -441,7 +451,10 @@ class Nav extends Component {
                 </Link>
               </li>
               <li>
-                <Link href={`/${this.props.locale}/commercial-enquiries`}>
+                <Link
+                  href={`/commercial-enquiries?lang=${this.props.intl.locale}`}
+                  as={`/${this.props.intl.locale}/commercial-enquiries`}
+                >
                   <a>
                     <FormattedMessage
                       id="nav.commercial-enquiries"
@@ -453,8 +466,8 @@ class Nav extends Component {
 
               <li>
                 <Link
-                  href="/page?slug=about-us"
-                  as={`/${this.props.locale}/page/about-us`}
+                  href={`/page?slug=about-us&lang=${this.props.intl.locale}`}
+                  as={`/${this.props.intl.locale}/page/about-us`}
                 >
                   <a>
                     <FormattedMessage
@@ -466,8 +479,8 @@ class Nav extends Component {
               </li>
               <li>
                 <Link
-                  href="/page?slug=contact-us"
-                  as={`/${this.props.locale}/page/contact-us`}
+                  href={`/page?slug=contact-us&lang=${this.props.intl.locale}`}
+                  as={`/${this.props.intl.locale}/page/contact-us`}
                 >
                   <a>
                     <FormattedMessage
@@ -479,9 +492,9 @@ class Nav extends Component {
               </li>
               <li>
                 <Link
-                  href="/page?slug=accreditation-organizations"
+                  href={`/page?slug=accreditation-organizations&lang=${this.props.intl.locale}`}
                   href={`/${
-                    this.props.locale
+                    this.props.intl.locale
                   }/page/accreditation-organizations`}
                 >
                   <a>

@@ -126,7 +126,7 @@ class SignInForm extends React.Component {
                 </div>
 
                 <div className="control forgot-pass">
-                  <Link href={`/${this.props.intl.locale}/forgot-password`}>
+                  <Link href={`/forgot-password?lang=${this.props.intl.locale}`} as={`/${this.props.intl.locale}/forgot-password`}>
                     <a>
                       <FormattedMessage
                         id="login.form.forgot-pass-hint"

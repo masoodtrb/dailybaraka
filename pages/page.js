@@ -15,6 +15,7 @@ import Nav from "../components/nav";
 import ContactForm from "../components/forms/contactForm";
 
 import "../styles/main.scss";
+import withIntl from "../hoc/withIntl";
 
 const messages = defineMessages({
   forgotPasswordError: {
@@ -27,7 +28,7 @@ const messages = defineMessages({
 class Page extends Component {
   static async getInitialProps({ query }) {
     return {
-      page: await pageService.getPageContent(query.slug)
+      page: await pageService.getPageContent(query.lang, query.slug)
     };
   }
 
@@ -206,4 +207,4 @@ class Page extends Component {
   }
 }
 
-export default Page;
+export default withIntl(Page);

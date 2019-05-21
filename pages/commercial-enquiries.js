@@ -122,8 +122,8 @@ class Enquiry extends Component {
             values={{
               reportLink: (
                 <Link
-                  href="/page?slug=contact-us"
-                  as={`/${this.props.locale}/page/contact-us`}
+                  href={`/page?slug=contact-us&lang=${this.props.intl.locale}`}
+                  as={`/${this.props.intl.locale}/page/contact-us`}
                 >
                   <a>
                     <FormattedMessage
@@ -240,7 +240,10 @@ class Enquiry extends Component {
             id="common.recaptcha.error"
             values={{
               reportLink: (
-                <Link href={`/${this.props.locale}/page/contact-us`}>
+                <Link
+                  href={`/page?slug=contact-us&lang=${this.props.intl.locale}`}
+                  as={`/${this.props.intl.locale}/page/contact-us`}
+                >
                   <a>
                     <FormattedMessage
                       id="common.recaptcha.error.report-link"

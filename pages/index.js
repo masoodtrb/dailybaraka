@@ -25,8 +25,8 @@ const messages = defineMessages({
 });
 
 class Home extends Component {
-  static async getInitialProps() {
-    return { sectors: await sectorService.getAll() };
+  static async getInitialProps({query}) {
+    return { sectors: await sectorService.getAll(query.lang) };
   }
 
   render() {
@@ -52,7 +52,7 @@ class Home extends Component {
                         <option defaultValue value="all">
                           {this.props.intl.formatMessage(messages.allSectors)}
                         </option>
-                        {this.props.sectors &&
+                        {this.props.sectors && this.props.sectors.result &&
                           this.props.sectors.result.map(sector => (
                             <option
                               key={"sector-" + sector.id}

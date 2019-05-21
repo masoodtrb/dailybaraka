@@ -1,20 +1,30 @@
 import fetch from "isomorphic-unfetch";
 
-async function get(productId) {
+async function get(lang, productId) {
   const response = await fetch(
-    process.env.API_URL + "/api/shop/products/v1/load/" + productId
+    process.env.API_URL + "/api/shop/products/v1/load/" + productId,
+    {
+      headers: {
+        "lang": lang.toUpperCase()
+      }
+    }
   );
   return await response.json();
 }
 
-async function getBySlug(slug) {
+async function getBySlug(lang, slug) {
   const response = await fetch(
-    process.env.API_URL + "/api/shop/products/v1/load-by-slug/" + slug
+    process.env.API_URL + "/api/shop/products/v1/load-by-slug/" + slug,
+    {
+      headers: {
+        "lang": lang.toUpperCase()
+      }
+    }
   );
   return await response.json();
 }
 
-async function search(sectorId, query) {
+async function search(lang, sectorId, query) {
   let filters = [
     {
       field: "name",
@@ -34,7 +44,9 @@ async function search(sectorId, query) {
     {
       method: "POST",
       headers: {
-        "content-type": "application/json"
+        "content-type": "application/json",
+        "lang": lang.toUpperCase()
+         
       },
       body: JSON.stringify({
         filters

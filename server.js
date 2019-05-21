@@ -58,14 +58,19 @@ app.prepare().then(() => {
     // proxy on /api
     server.use("/api/", (req, res) => {
       const url = process.env.API_URL + "/api" + req.url;
-
       // request headers
       const headers = {
         "content-type": "application/json"
       };
+      
       if (req.headers["content-type"]) {
         headers["content-type"] = req.headers["content-type"];
       }
+
+      if(req.headers.cookie){
+        headers.cookie = req.headers.cookie;
+      }
+
       if (req.headers.authorization) {
         headers.Authorization = req.headers.authorization;
       }

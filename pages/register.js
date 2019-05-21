@@ -98,8 +98,8 @@ class SignUp extends Component {
             values={{
               reportLink: (
                 <Link
-                  href="/page?slug=contact-us"
-                  as={`/${this.props.locale}/page/contact-us`}
+                  href={`/page?slug=contact-us&lang=${this.props.intl.locale}`}
+                  as={`/${this.props.intl.locale}/page/contact-us`}
                 >
                   <a>
                     <FormattedMessage

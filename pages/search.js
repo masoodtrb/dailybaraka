@@ -22,6 +22,7 @@ class Search extends Component {
   static async getInitialProps({ query }) {
     return {
       products: await productService.search(
+        query.lang,
         query.sector === "all" ? null : query.sector,
         query.q
       ),
@@ -56,8 +57,8 @@ class Search extends Component {
                     className="column is-4"
                   >
                     <Link
-                      href={`/product?slug=${product.slug}`}
-                      as={`/${this.props.locale}/product/${product.slug}`}
+                      href={`/product?slug=${product.slug}&lang=${this.props.intl.locale}`}
+                      as={`/${this.props.intl.locale}/product/${product.slug}`}
                     >
                       <a>
                         <div className="box">

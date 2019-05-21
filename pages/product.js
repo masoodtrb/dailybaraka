@@ -9,7 +9,7 @@ import { FormattedMessage } from "react-intl";
 class Product extends Component {
   static async getInitialProps({ query }) {
     return {
-      product: await productService.getBySlug(query.slug)
+      product: await productService.getBySlug(query.lang, query.slug)
     };
   }
 

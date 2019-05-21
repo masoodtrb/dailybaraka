@@ -29,8 +29,8 @@ const messages = defineMessages({
 });
 
 class LocalStores extends Component {
-  static async getInitialProps({ req }) {
-    return { sectors: await sectorService.getAll() };
+  static async getInitialProps({ query }) {
+    return { sectors: await sectorService.getAll(query.lang) };
   }
 
   state = {
