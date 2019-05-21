@@ -82,14 +82,14 @@ class Sector extends Component {
                     ))}
                   </div>
                 </div>
-                <div>
+                <div className="sector__more">
                   <Link
                     href={`/supplier/?id=${supplier.id}&name=${supplier.name}&lang=${this.props.intl.locale}`}
                     as={`/${this.props.intl.locale}/supplier/${supplier.id}/${
                       supplier.name
                     }`}
                   >
-                    <a className="sector__more">
+                    <a>
                       More...
                     </a>
                   </Link>
