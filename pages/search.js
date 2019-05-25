@@ -49,9 +49,7 @@ class Search extends Component {
             </h1>
 
             <div className="columns is-multiline">
-              {products.result &&
-              products.result &&
-              products.result.length > 0 ? (
+              {products.result && products.result.length > 0 ? (
                 products.result.map(product => (
                   <div
                     key={"search-product" + product.id}

@@ -181,8 +181,8 @@ class SignUp extends Component {
                           <br />
                           <p>
                             To continue and activate your account, we are
-                            sending an email to "{this.state.enteredEmail}" for
-                            confirmation your mail address.
+                            sending an email to your email address for
+                            confirmation.
                           </p>
                           <p>
                             If you couldn't find this mail in your Inbox folder,
