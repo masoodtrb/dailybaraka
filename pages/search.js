@@ -32,6 +32,7 @@ class Search extends Component {
 
   render() {
     const { products, searchValue } = this.props;
+    console.log("this.props :", this.props);
     return (
       <div>
         <Head title={this.props.intl.formatMessage(messages.title)} />
@@ -57,7 +58,9 @@ class Search extends Component {
                     className="column is-4"
                   >
                     <Link
-                      href={`/product?slug=${product.slug}&lang=${this.props.intl.locale}`}
+                      href={`/product?slug=${product.slug}&lang=${
+                        this.props.intl.locale
+                      }`}
                       as={`/${this.props.intl.locale}/product/${product.slug}`}
                     >
                       <a>
@@ -91,7 +94,7 @@ class Search extends Component {
                   </div>
                 ))
               ) : (
-                <div className="notification is-info">
+                <div className="notification column is-12">
                   <FormattedMessage
                     id="search.empty"
                     defaultMessage="No result is found!"

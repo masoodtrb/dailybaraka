@@ -25,7 +25,7 @@ const messages = defineMessages({
 });
 
 class Home extends Component {
-  static async getInitialProps({query}) {
+  static async getInitialProps({ query }) {
     return { sectors: await sectorService.getAll(query.lang) };
   }
 
@@ -44,7 +44,7 @@ class Home extends Component {
             />
 
             <div className="home__search">
-              <form action="/search" method="get">
+              <form action={`/${this.props.intl.locale}/search`} method="get">
                 <div className="field has-addons">
                   <p className="control">
                     <span className="select">
@@ -52,7 +52,8 @@ class Home extends Component {
                         <option defaultValue value="all">
                           {this.props.intl.formatMessage(messages.allSectors)}
                         </option>
-                        {this.props.sectors && this.props.sectors.result &&
+                        {this.props.sectors &&
+                          this.props.sectors.result &&
                           this.props.sectors.result.map(sector => (
                             <option
                               key={"sector-" + sector.id}
