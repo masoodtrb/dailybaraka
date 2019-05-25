@@ -1,5 +1,3 @@
-import fetch from "isomorphic-unfetch";
-
 const getUserToken = () => {
   let token = localStorage.getItem("token");
   if (!token) {
@@ -16,6 +14,6 @@ const getCurrentUser = () => {
   }
 
   return user;
-}
+};
 
 export { getUserToken, getCurrentUser };

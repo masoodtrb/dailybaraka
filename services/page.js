@@ -5,7 +5,7 @@ async function getPageContent(lang, slug) {
     process.env.API_URL + "/api/shop/static-pages/v1/slug/" + slug,
     {
       headers: {
-        "lang": lang.toUpperCase()
+        lang: lang.toUpperCase()
       }
     }
   );

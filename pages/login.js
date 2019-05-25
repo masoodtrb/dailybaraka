@@ -106,7 +106,7 @@ class SignIn extends Component {
             id="common.recaptcha.error"
             values={{
               reportLink: (
-                <Link 
+                <Link
                   href={`/page?slug=contact-us&lang=${this.props.intl.locale}`}
                   as={`/${this.props.intl.locale}/page/contact-us`}
                 >
@@ -194,7 +194,10 @@ class SignIn extends Component {
                     defaultMessage="Do not have an account?"
                   />
                   &nbsp;
-                  <Link href={`/${this.props.intl.locale}/signIn`}>
+                  <Link
+                    href={`/register?lang=${this.props.intl.locale}`}
+                    as={`/${this.props.intl.locale}/signUp`}
+                  >
                     <a>
                       <FormattedMessage
                         id="common.register"

@@ -147,7 +147,7 @@ class Nav extends Component {
                   <React.Fragment>
                     <li>
                       <Link
-                        href={`/signIn?lang=${this.props.intl.locale}`}
+                        href={`/login?lang=${this.props.intl.locale}`}
                         as={`/${this.props.intl.locale}/signIn`}
                       >
                         <a>
@@ -160,7 +160,7 @@ class Nav extends Component {
                     </li>
                     <li>
                       <Link
-                        href={`/signUp?lang=${this.props.intl.locale}`}
+                        href={`/register?lang=${this.props.intl.locale}`}
                         as={`/${this.props.intl.locale}/signUp`}
                       >
                         <a>
@@ -306,7 +306,10 @@ class Nav extends Component {
               {this.props.page != "index" && (
                 <React.Fragment>
                   <div className="main-nav__logo is-hidden-touch">
-                    <Link href={`/${this.props.intl.locale}`}>
+                    <Link
+                      href={`/index?lang=${this.props.intl.locale}`}
+                      as={`/${this.props.intl.locale}`}
+                    >
                       <a>
                         <img
                           src="/static/images/logo.png"
@@ -427,7 +430,7 @@ class Nav extends Component {
                 <React.Fragment>
                   <li>
                     <Link
-                      href={`/signIn?lang=${this.props.intl.locale}`}
+                      href={`/login?lang=${this.props.intl.locale}`}
                       as={`/${this.props.intl.locale}/signIn`}
                     >
                       <a>
@@ -440,7 +443,7 @@ class Nav extends Component {
                   </li>
                   <li>
                     <Link
-                      href={`/signUp?lang=${this.props.intl.locale}`}
+                      href={`/register?lang=${this.props.intl.locale}`}
                       as={`/${this.props.intl.locale}/signUp`}
                     >
                       <a>
