@@ -179,9 +179,10 @@ class Nav extends Component {
                   defaultValue={this.props.intl.locale}
                   onChange={e => this.changeLanguage(e)}
                 >
-                  <option>Language</option>
                   <option value="en">English - UK</option>
                   <option value="de">Deutsche - DE</option>
+                  <option value="fr">Française - FR</option>
+                  <option value="es">Español - ES</option>
                 </select>
               </div>
             </div>
