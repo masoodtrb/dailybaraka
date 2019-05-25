@@ -9,14 +9,6 @@ const messages = defineMessages({
     id: "profile.change-password.form.old-password.placeholder",
     defaultMessage: "Password"
   },
-  oldPasswordMin: {
-    id: "profile.change-password.form.old-password.min",
-    defaultMessage: "Old Password is too short."
-  },
-  oldPasswordMax: {
-    id: "profile.change-password.form.old-password.max",
-    defaultMessage: "Old Password is too large."
-  },
   oldPasswordRequired: {
     id: "profile.change-password.form.old-password.required",
     defaultMessage: "Old Password is required."
@@ -55,10 +47,9 @@ const messages = defineMessages({
 
 class ChangePasswordForm extends React.Component {
   Schema = Yup.object().shape({
-    oldPassword: Yup.string()
-      .min(6, this.props.intl.formatMessage(messages.oldPasswordMin))
-      .max(30, this.props.intl.formatMessage(messages.oldPasswordMax))
-      .required(this.props.intl.formatMessage(messages.oldPasswordRequired)),
+    oldPassword: Yup.string().required(
+      this.props.intl.formatMessage(messages.oldPasswordRequired)
+    ),
     newPassword: Yup.string()
       .min(6, this.props.intl.formatMessage(messages.newPasswordMin))
       .max(30, this.props.intl.formatMessage(messages.newPasswordMax))
