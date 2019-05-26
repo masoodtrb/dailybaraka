@@ -93,7 +93,7 @@ class SignIn extends Component {
           this.props.router.push(this.props.returnUrl);
           return;
         }
-        this.props.router.push("/");
+        this.props.router.push(`/${this.props.intl.locale}`);
       });
   };
 

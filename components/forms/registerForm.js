@@ -133,7 +133,7 @@ class SignUpForm extends React.Component {
         [Yup.ref("password"), null],
         this.props.intl.formatMessage(messages.rePasswordNotMatch)
       )
-      .required(messages.rePasswordRequired)
+      .required(this.props.intl.formatMessage(messages.rePasswordRequired))
   });
 
   render() {
@@ -177,7 +177,6 @@ class SignUpForm extends React.Component {
                   <p className="help is-danger">{errors.firstName}</p>
                 ) : null}
               </div>
-
               <div className="field">
                 <label className="label">
                   <FormattedMessage
