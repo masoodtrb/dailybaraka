@@ -470,7 +470,7 @@ class Profile extends Component {
                       </div>
                     )}
 
-                    {this.state.changePasswordForm.state === "SUCCESS" && (
+                    {this.state.changePasswordForm.state === "SUCCESS" ? (
                       <div className="notification is-success">
                         <strong>
                           <FormattedMessage
@@ -479,16 +479,16 @@ class Profile extends Component {
                           />
                         </strong>
                       </div>
+                    ) : (
+                      <ChangePasswordForm
+                        onProgress={
+                          this.state.changePasswordForm.state === "SUBMITTING"
+                        }
+                        onSubmit={formData =>
+                          this.onChangePasswordSubmit(formData)
+                        }
+                      />
                     )}
-
-                    <ChangePasswordForm
-                      onProgress={
-                        this.state.changePasswordForm.state === "SUBMITTING"
-                      }
-                      onSubmit={formData =>
-                        this.onChangePasswordSubmit(formData)
-                      }
-                    />
                   </fieldset>
                 </div>
               </div>
