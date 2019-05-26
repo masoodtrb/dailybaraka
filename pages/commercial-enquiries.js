@@ -414,7 +414,14 @@ class Enquiry extends Component {
                 <div className="column is-6">
                   {this.state.storeForm.state === "ERROR" && (
                     <div className="notification is-danger">
-                      <button className="delete" />
+                      <button
+                        className="delete"
+                        onClick={() =>
+                          this.setState({
+                            storeForm: { state: "INITIATE", error: "" }
+                          })
+                        }
+                      />
                       <strong>
                         <FormattedMessage
                           id="common.error"
@@ -512,7 +519,14 @@ class Enquiry extends Component {
                 <div className="column is-6">
                   {this.state.supplierForm.state === "ERROR" && (
                     <div className="notification is-danger">
-                      <button className="delete" />
+                      <button
+                        className="delete"
+                        onClick={() =>
+                          this.setState({
+                            supplierForm: { state: "INITIATE", error: "" }
+                          })
+                        }
+                      />
                       <strong>
                         <FormattedMessage
                           id="common.error"

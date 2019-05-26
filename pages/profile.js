@@ -366,7 +366,17 @@ class Profile extends Component {
                     <br />
                     {this.state.updateProfileForm.state === "ERROR" && (
                       <div className="notification is-danger">
-                        <button className="delete" />
+                        <button
+                          className="delete"
+                          onClick={() =>
+                            this.setState({
+                              updateProfileForm: {
+                                state: "INITIATE",
+                                error: ""
+                              }
+                            })
+                          }
+                        />
                         <strong>
                           <FormattedMessage
                             id="common.error"
@@ -439,7 +449,17 @@ class Profile extends Component {
                     <br />
                     {this.state.changePasswordForm.state === "ERROR" && (
                       <div className="notification is-danger">
-                        <button className="delete" />
+                        <button
+                          className="delete"
+                          onClick={() =>
+                            this.setState({
+                              changePasswordForm: {
+                                state: "INITIATE",
+                                error: ""
+                              }
+                            })
+                          }
+                        />
                         <strong>
                           <FormattedMessage
                             id="common.error"

@@ -155,7 +155,14 @@ class ForgotPassword extends Component {
 
                 {this.state.forgotPasswordForm.state === "ERROR" && (
                   <div className="notification is-danger">
-                    <button className="delete" />
+                    <button
+                      className="delete"
+                      onClick={() =>
+                        this.setState({
+                          forgotPasswordForm: { state: "INITIATE", error: "" }
+                        })
+                      }
+                    />
                     <strong>
                       <FormattedMessage
                         id="common.error"

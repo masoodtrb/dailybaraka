@@ -154,7 +154,14 @@ class Page extends Component {
                   >
                     {this.state.contactForm.state === "ERROR" && (
                       <div className="notification is-danger">
-                        <button className="delete" />
+                        <button
+                          className="delete"
+                          onClick={() =>
+                            this.setState({
+                              contactForm: { state: "INITIATE", error: "" }
+                            })
+                          }
+                        />
                         <strong>
                           <FormattedMessage
                             id="common.error"
