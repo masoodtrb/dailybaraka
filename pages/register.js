@@ -42,7 +42,7 @@ class SignUp extends Component {
         "content-type": "application/json"
       },
       body: JSON.stringify({
-        langKey: "en",
+        region: this.props.intl.locale.toUpperCase(),
         email: formData.email,
         login: formData.email,
         password: formData.password,
