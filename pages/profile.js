@@ -264,7 +264,7 @@ class Profile extends Component {
     const formData = new FormData();
     formData.append("file", imageFile);
 
-    fetch("/api/panel/general/v1/upload-file", {
+    fetch("/api/shop/general/v1/upload-file", {
       method: "POST",
       headers: {
         authorization: "Bearer " + getUserToken()
