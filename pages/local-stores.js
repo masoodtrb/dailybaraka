@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { FormattedMessage, defineMessages } from "react-intl";
+import { ToastContainer, toast } from "react-toastify";
+
+import withIntl from "../hoc/withIntl";
 
 import * as sectorService from "../services/sector";
 
@@ -7,7 +10,7 @@ import Head from "../components/head";
 import Nav from "../components/nav";
 
 import "../styles/main.scss";
-import withIntl from "../hoc/withIntl";
+import "../styles/toastify.scss";
 
 let Leaflet, Map, TileLayer, Marker, Popup, StoreIcon;
 
@@ -41,7 +44,8 @@ class LocalStores extends Component {
     userLocation: null,
     zoom: 16,
     stores: [],
-    openFilters: false
+    openFilters: false,
+    hasError: false
   };
 
   storeIcon = {};
@@ -90,10 +94,29 @@ class LocalStores extends Component {
       .then(response => response.json())
       .then(json => {
         if (json.status && json.status >= 300) {
-          alert("Error on server: " + json.detail || json.title);
+          if (!this.state.hasError) {
+            toast.error(
+              "Could not load data. More detail:" + json.detail || json.title,
+              {
+                position: "bottom-center",
+                autoClose: false,
+                closeOnClick: true,
+                draggable: true,
+                onClose: () => {
+                  this.setState({
+                    hasError: false
+                  });
+                }
+              }
+            );
+            this.setState({
+              hasError: true
+            });
+          }
           return;
         }
 
+        debugger;
         const stores = JSON.parse(JSON.stringify(this.state.stores));
         // add new stores to list
         json.result.forEach((store, index) => {
@@ -101,7 +124,7 @@ class LocalStores extends Component {
           if (!isExist) stores.push(store);
         });
 
-        this.setState({ stores });
+        this.setState({ stores, hasError: false });
       });
   };
 
@@ -295,6 +318,7 @@ class LocalStores extends Component {
             </div>
           ) : null}
         </div>
+        <ToastContainer />
       </div>
     );
   }
