@@ -67,7 +67,7 @@ class UpdateProfileForm extends React.Component {
           }}
           validationSchema={this.Schema}
           onSubmit={values => {
-            props.onSubmit(values);
+            this.props.onSubmit(values);
           }}
         >
           {({ errors, touched }) => (

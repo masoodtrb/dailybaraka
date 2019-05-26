@@ -23,7 +23,7 @@ const messages = defineMessages({
 class Nav extends Component {
   state = {
     user: null,
-    sectors: [],
+    sectors: null,
     showMenu: false
   };
 
@@ -334,13 +334,15 @@ class Nav extends Component {
                                   messages.allSectors
                                 )}
                               </option>
-                              {this.state.sectors &&
-                              this.state.sectors.length === 0 ? (
+                              {!this.state.sectors ? (
                                 <option disabled="disabled">
                                   {this.props.intl.formatMessage(messages.wait)}
                                 </option>
+                              ) : this.state.sectors.length === 0 ? (
+                                <option disabled="disabled">
+                                  Sectors not available
+                                </option>
                               ) : (
-                                this.state.sectors &&
                                 this.state.sectors.map(sector => (
                                   <option
                                     key={"sector-" + sector.id}

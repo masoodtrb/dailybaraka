@@ -216,7 +216,7 @@ a {
 }
 
 .animate {
-  transition: all 5s ease;
+  //transition: all 5s ease;
 
   &.hidden {
     display: none;
@@ -977,6 +977,17 @@ a {
 
       &.active {
         display: block;
+      }
+
+      .filters__close {
+        color: #000;
+        position: absolute;
+        right: 5px;
+        font-size: 18px;
+      }
+
+      .control {
+        margin-top: 30px;
       }
 
       .radio {

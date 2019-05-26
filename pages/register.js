@@ -42,7 +42,7 @@ class SignUp extends Component {
         "content-type": "application/json"
       },
       body: JSON.stringify({
-        langKey: "en",
+        region: this.props.intl.locale.toUpperCase(),
         email: formData.email,
         login: formData.email,
         password: formData.password,
@@ -73,7 +73,7 @@ class SignUp extends Component {
           this.setState({
             signUpForm: {
               state: "ERROR",
-              error: json.detail
+              error: json.detail || json.title
             }
           });
           this.recaptchaRef.reset();
@@ -110,15 +110,13 @@ class SignUp extends Component {
                 </Link>
               )
             }}
-            defaultMessage={
-              <React.Fragment>
+            defaultMessage={`<div>
                 The authorizing system, to detect you as a{" "}
                 <strong>HUMAN</strong> not a 🤖, occurred an error.
                 <br />
                 You could reload page to continue. If you receive this error
                 again, please '{reportLink}'.
-              </React.Fragment>
-            }
+              </div>`}
           />
         )
       }
@@ -157,7 +155,14 @@ class SignUp extends Component {
 
                 {this.state.signUpForm.state === "ERROR" && (
                   <div className="notification is-danger">
-                    <button className="delete" />
+                    <button
+                      className="delete"
+                      onClick={() =>
+                        this.setState({
+                          signUpForm: { state: "INITIATE", error: "" }
+                        })
+                      }
+                    />
                     <strong>
                       <FormattedMessage
                         id="common.error"
@@ -173,23 +178,22 @@ class SignUp extends Component {
                   <div className="notification is-success">
                     <FormattedHTMLMessage
                       id="register.success"
-                      defaultMessage={
-                        <React.Fragment>
+                      defaultMessage={`
+                        <div>
                           <strong>
                             Your information has been successfully submitted.
                           </strong>
                           <br />
                           <p>
                             To continue and activate your account, we are
-                            sending an email to "{this.state.enteredEmail}" for
-                            confirmation your mail address.
+                            sending an email to your email address for
+                            confirmation.
                           </p>
                           <p>
                             If you couldn't find this mail in your Inbox folder,
                             check the Spam/Junk folder please.
                           </p>
-                        </React.Fragment>
-                      }
+                        </div>`}
                     />
                   </div>
                 )}

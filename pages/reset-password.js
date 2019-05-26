@@ -27,6 +27,12 @@ const messages = defineMessages({
 });
 
 class ResetPassword extends Component {
+  static async getInitialProps({ query }) {
+    return {
+      resetKey: query.key
+    };
+  }
+
   state = {
     resetPasswordForm: { state: "INITIATE", error: "" }
   };
@@ -35,13 +41,14 @@ class ResetPassword extends Component {
     this.setState({
       resetPasswordForm: { state: "SUBMITTING" }
     });
+
     fetch("/api/shop/account/v1/reset-password/finish", {
       method: "POST",
       headers: {
         "content-type": "application/json"
       },
       body: JSON.stringify({
-        key: this.props.url.query.key,
+        key: this.props.resetKey,
         newPassword: formData.password
       })
     })
@@ -69,7 +76,7 @@ class ResetPassword extends Component {
           this.setState({
             resetPasswordForm: {
               state: "ERROR",
-              error: json.detail
+              error: json.detail || json.title
             }
           });
           return;
@@ -102,7 +109,14 @@ class ResetPassword extends Component {
 
                 {this.state.resetPasswordForm.state === "ERROR" && (
                   <div className="notification is-danger">
-                    <button className="delete" />
+                    <button
+                      className="delete"
+                      onClick={() =>
+                        this.setState({
+                          resetPasswordForm: { state: "INITIATE", error: "" }
+                        })
+                      }
+                    />
                     <strong>
                       <FormattedMessage
                         id="common.error"

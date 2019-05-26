@@ -77,7 +77,7 @@ class ForgotPassword extends Component {
           this.setState({
             forgotPasswordForm: {
               state: "ERROR",
-              error: json.detail
+              error: json.detail || json.title
             }
           });
           this.recaptchaRef.reset();
@@ -101,7 +101,7 @@ class ForgotPassword extends Component {
             id="common.recaptcha.error"
             values={{
               reportLink: (
-                <Link 
+                <Link
                   href={`/page?slug=contact-us&lang=${this.props.intl.locale}`}
                   as={`/${this.props.intl.locale}/page/contact-us`}
                 >
@@ -114,15 +114,15 @@ class ForgotPassword extends Component {
                 </Link>
               )
             }}
-            defaultMessage={
-              <React.Fragment>
+            defaultMessage={`
+              <div>
                 The authorizing system, to detect you as a{" "}
                 <strong>HUMAN</strong> not a 🤖, occurred an error.
                 <br />
                 You could reload page to continue. If you receive this error
                 again, please '{reportLink}'.
-              </React.Fragment>
-            }
+              </div>
+            `}
           />
         )
       }
@@ -155,7 +155,14 @@ class ForgotPassword extends Component {
 
                 {this.state.forgotPasswordForm.state === "ERROR" && (
                   <div className="notification is-danger">
-                    <button className="delete" />
+                    <button
+                      className="delete"
+                      onClick={() =>
+                        this.setState({
+                          forgotPasswordForm: { state: "INITIATE", error: "" }
+                        })
+                      }
+                    />
                     <strong>
                       <FormattedMessage
                         id="common.error"
@@ -171,8 +178,7 @@ class ForgotPassword extends Component {
                   <div className="notification is-success">
                     <FormattedHTMLMessage
                       id="forgot-password.success"
-                      defaultMessage={
-                        <React.Fragment>
+                      defaultMessage={`<div>
                           <strong>
                             Your reset password request has been successfully
                             submitted.
@@ -185,8 +191,7 @@ class ForgotPassword extends Component {
                             If you couldn't find this mail in your Inbox folder,
                             check the Spam/Junk folder please.
                           </p>
-                        </React.Fragment>
-                      }
+                        </div>`}
                     />
                   </div>
                 )}

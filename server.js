@@ -16,28 +16,24 @@ const handler = routes.getRequestHandler(app);
 // each message description in the source code will be used.
 const getMessages = locale => {
   var options = {
-    method: "POST",
-    url: "http://daily.irresno.ir/api/shop/lang-resource/v1/search",
+    method: "GET",
+    url: `${
+      process.env.API_URL
+    }/api/shop/lang-resource/v1/load-resources/${locale.toUpperCase()}/WEB`,
     headers: {
       "content-type": "application/json"
     },
-    body: {
-      size: "10000",
-      page: "1",
-      filters: [
-        { field: "lang", operator: "EQ", value: locale.toUpperCase() },
-        { field: "platform", operator: "EQ", value: "WEB" }
-      ]
-    },
     json: true
   };
+
+  console.log("options.url :", options.url);
 
   return new Promise(function(resolve, reject) {
     request(options, function(error, response, body) {
       if (error) throw reject(error);
 
       var messages = {};
-      body.result.forEach(item => {
+      body.forEach(item => {
         messages[item.key] = item.value;
       });
 
@@ -62,12 +58,12 @@ app.prepare().then(() => {
       const headers = {
         "content-type": "application/json"
       };
-      
+
       if (req.headers["content-type"]) {
         headers["content-type"] = req.headers["content-type"];
       }
 
-      if(req.headers.cookie){
+      if (req.headers.cookie) {
         headers.cookie = req.headers.cookie;
       }
 
@@ -107,7 +103,7 @@ app.prepare().then(() => {
     // set local and translations in req to access in pages
     req.locale = selectedLocale;
     // on development environment use default messages to speed up develop time
-    if (environment === "development") {
+    if (environment !== "development") {
       req.messages = {};
     } else {
       try {

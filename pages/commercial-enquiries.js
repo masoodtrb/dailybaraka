@@ -6,16 +6,18 @@ import {
   FormattedHTMLMessage,
   defineMessages
 } from "react-intl";
+import { ToastContainer, toast } from "react-toastify";
+
+import withIntl from "../hoc/withIntl";
 
 import Head from "../components/head";
 import Nav from "../components/nav";
-
-import withIntl from "../hoc/withIntl";
 
 import CreateStoreForm from "../components/forms/createStoreForm";
 import CreateSupplierForm from "../components/forms/createSupplierForm";
 
 import "../styles/main.scss";
+import "../styles/toastify.scss";
 
 let Map, TileLayer, Marker;
 
@@ -94,7 +96,12 @@ class Enquiry extends Component {
         },
         error => {
           // for when getting location results in an error
-          alert(this.props.intl.formatMessage(messages.geolocationError));
+          toast.warn(this.props.intl.formatMessage(messages.geolocationError), {
+            position: "bottom-center",
+            autoClose: false,
+            closeOnClick: true,
+            draggable: true
+          });
 
           console.error(
             "An error has occurred while retrieving location",
@@ -103,7 +110,15 @@ class Enquiry extends Component {
         }
       );
     } else {
-      alert(this.props.intl.formatMessage(messages.geolocationNotSupport));
+      toast.error(
+        this.props.intl.formatMessage(messages.geolocationNotSupport),
+        {
+          position: "bottom-center",
+          autoClose: false,
+          closeOnClick: true,
+          draggable: true
+        }
+      );
     }
   };
 
@@ -215,7 +230,7 @@ class Enquiry extends Component {
           this.setState({
             storeForm: {
               state: "ERROR",
-              error: json.detail
+              error: json.detail || json.title
             }
           });
           this.recaptchaStoreFormRef.reset();
@@ -253,15 +268,15 @@ class Enquiry extends Component {
                 </Link>
               )
             }}
-            defaultMessage={
-              <React.Fragment>
+            defaultMessage={`
+              <div>
                 The authorizing system, to detect you as a{" "}
                 <strong>HUMAN</strong> not a 🤖, occurred an error.
                 <br />
                 You could reload page to continue. If you receive this error
                 again, please '{reportLink}'.
-              </React.Fragment>
-            }
+              </div>
+            `}
           />
         )
       }
@@ -336,7 +351,7 @@ class Enquiry extends Component {
           this.setState({
             supplierForm: {
               state: "ERROR",
-              error: json.detail
+              error: json.detail || json.title
             }
           });
           this.recaptchaSupplierFormRef.reset();
@@ -399,7 +414,14 @@ class Enquiry extends Component {
                 <div className="column is-6">
                   {this.state.storeForm.state === "ERROR" && (
                     <div className="notification is-danger">
-                      <button className="delete" />
+                      <button
+                        className="delete"
+                        onClick={() =>
+                          this.setState({
+                            storeForm: { state: "INITIATE", error: "" }
+                          })
+                        }
+                      />
                       <strong>
                         <FormattedMessage
                           id="common.error"
@@ -466,16 +488,16 @@ class Enquiry extends Component {
                 <div className="notification is-success">
                   <FormattedHTMLMessage
                     id="commercial-enquiries.store.success"
-                    defaultMessage={
-                      <React.Fragment>
+                    defaultMessage={`
+                      <div>
                         <strong>
                           Your store information has been successfully
                           submitted.
                         </strong>
                         <br />
                         We will contact you as soon as possible.
-                      </React.Fragment>
-                    }
+                      </div>
+                    `}
                   />
                 </div>
               </div>
@@ -497,7 +519,14 @@ class Enquiry extends Component {
                 <div className="column is-6">
                   {this.state.supplierForm.state === "ERROR" && (
                     <div className="notification is-danger">
-                      <button className="delete" />
+                      <button
+                        className="delete"
+                        onClick={() =>
+                          this.setState({
+                            supplierForm: { state: "INITIATE", error: "" }
+                          })
+                        }
+                      />
                       <strong>
                         <FormattedMessage
                           id="common.error"
@@ -535,22 +564,23 @@ class Enquiry extends Component {
                 <div className="notification is-success">
                   <FormattedHTMLMessage
                     id="commercial-enquiries.supplier.success"
-                    defaultMessage={
-                      <React.Fragment>
+                    defaultMessage={`
+                      <div>
                         <strong>
                           Your supplier information has been successfully
                           submitted.
                         </strong>
                         <br />
                         We will contact you as soon as possible.
-                      </React.Fragment>
-                    }
+                      </div>
+                    `}
                   />
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <ToastContainer />
       </div>
     );
   }

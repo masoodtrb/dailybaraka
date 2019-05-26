@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import Link from "next/link";
 import moment from "moment";
-import {
-  defineMessages,
-  FormattedMessage
-} from "react-intl";
+import { defineMessages, FormattedMessage } from "react-intl";
 
 import withIntl from "../hoc/withIntl";
 
@@ -147,7 +144,7 @@ class Profile extends Component {
           this.setState({
             updateProfileForm: {
               state: "ERROR",
-              error: json.detail
+              error: json.detail || json.title
             }
           });
           return;
@@ -201,7 +198,7 @@ class Profile extends Component {
           this.setState({
             changePasswordForm: {
               state: "ERROR",
-              error: json.detail
+              error: json.detail || json.title
             }
           });
           return;
@@ -267,7 +264,7 @@ class Profile extends Component {
     const formData = new FormData();
     formData.append("file", imageFile);
 
-    fetch("/api/panel/general/v1/upload-file", {
+    fetch("/api/shop/general/v1/upload-file", {
       method: "POST",
       headers: {
         authorization: "Bearer " + getUserToken()
@@ -299,12 +296,11 @@ class Profile extends Component {
           this.setState({
             updateProfileForm: {
               state: "ERROR",
-              error: json.detail
+              error: json.detail || json.title
             }
           });
           return;
         }
-
         this.setState({
           uploadedImageId: json.data,
           updateProfileForm: {
@@ -369,7 +365,17 @@ class Profile extends Component {
                     <br />
                     {this.state.updateProfileForm.state === "ERROR" && (
                       <div className="notification is-danger">
-                        <button className="delete" />
+                        <button
+                          className="delete"
+                          onClick={() =>
+                            this.setState({
+                              updateProfileForm: {
+                                state: "INITIATE",
+                                error: ""
+                              }
+                            })
+                          }
+                        />
                         <strong>
                           <FormattedMessage
                             id="common.error"
@@ -442,7 +448,17 @@ class Profile extends Component {
                     <br />
                     {this.state.changePasswordForm.state === "ERROR" && (
                       <div className="notification is-danger">
-                        <button className="delete" />
+                        <button
+                          className="delete"
+                          onClick={() =>
+                            this.setState({
+                              changePasswordForm: {
+                                state: "INITIATE",
+                                error: ""
+                              }
+                            })
+                          }
+                        />
                         <strong>
                           <FormattedMessage
                             id="common.error"
@@ -454,7 +470,7 @@ class Profile extends Component {
                       </div>
                     )}
 
-                    {this.state.changePasswordForm.state === "SUCCESS" && (
+                    {this.state.changePasswordForm.state === "SUCCESS" ? (
                       <div className="notification is-success">
                         <strong>
                           <FormattedMessage
@@ -463,16 +479,16 @@ class Profile extends Component {
                           />
                         </strong>
                       </div>
+                    ) : (
+                      <ChangePasswordForm
+                        onProgress={
+                          this.state.changePasswordForm.state === "SUBMITTING"
+                        }
+                        onSubmit={formData =>
+                          this.onChangePasswordSubmit(formData)
+                        }
+                      />
                     )}
-
-                    <ChangePasswordForm
-                      onProgress={
-                        this.state.changePasswordForm.state === "SUBMITTING"
-                      }
-                      onSubmit={formData =>
-                        this.onChangePasswordSubmit(formData)
-                      }
-                    />
                   </fieldset>
                 </div>
               </div>
