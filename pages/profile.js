@@ -301,7 +301,6 @@ class Profile extends Component {
           });
           return;
         }
-
         this.setState({
           uploadedImageId: json.data,
           updateProfileForm: {
