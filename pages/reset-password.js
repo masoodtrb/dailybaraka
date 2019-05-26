@@ -69,7 +69,7 @@ class ResetPassword extends Component {
           this.setState({
             resetPasswordForm: {
               state: "ERROR",
-              error: json.detail
+              error: json.detail || json.title
             }
           });
           return;

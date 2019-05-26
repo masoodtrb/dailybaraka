@@ -215,7 +215,7 @@ class Enquiry extends Component {
           this.setState({
             storeForm: {
               state: "ERROR",
-              error: json.detail
+              error: json.detail || json.title
             }
           });
           this.recaptchaStoreFormRef.reset();
@@ -253,15 +253,15 @@ class Enquiry extends Component {
                 </Link>
               )
             }}
-            defaultMessage={
-              <React.Fragment>
+            defaultMessage={`
+              <div>
                 The authorizing system, to detect you as a{" "}
                 <strong>HUMAN</strong> not a 🤖, occurred an error.
                 <br />
                 You could reload page to continue. If you receive this error
                 again, please '{reportLink}'.
-              </React.Fragment>
-            }
+              </div>
+            `}
           />
         )
       }
@@ -336,7 +336,7 @@ class Enquiry extends Component {
           this.setState({
             supplierForm: {
               state: "ERROR",
-              error: json.detail
+              error: json.detail || json.title
             }
           });
           this.recaptchaSupplierFormRef.reset();
@@ -466,16 +466,16 @@ class Enquiry extends Component {
                 <div className="notification is-success">
                   <FormattedHTMLMessage
                     id="commercial-enquiries.store.success"
-                    defaultMessage={
-                      <React.Fragment>
+                    defaultMessage={`
+                      <div>
                         <strong>
                           Your store information has been successfully
                           submitted.
                         </strong>
                         <br />
                         We will contact you as soon as possible.
-                      </React.Fragment>
-                    }
+                      </div>
+                    `}
                   />
                 </div>
               </div>
@@ -535,16 +535,16 @@ class Enquiry extends Component {
                 <div className="notification is-success">
                   <FormattedHTMLMessage
                     id="commercial-enquiries.supplier.success"
-                    defaultMessage={
-                      <React.Fragment>
+                    defaultMessage={`
+                      <div>
                         <strong>
                           Your supplier information has been successfully
                           submitted.
                         </strong>
                         <br />
                         We will contact you as soon as possible.
-                      </React.Fragment>
-                    }
+                      </div>
+                    `}
                   />
                 </div>
               </div>

@@ -77,7 +77,7 @@ class SignIn extends Component {
           this.setState({
             signInForm: {
               state: "ERROR",
-              error: json.detail
+              error: json.detail || json.title
             }
           });
           this.recaptchaRef.reset();
@@ -119,15 +119,15 @@ class SignIn extends Component {
                 </Link>
               )
             }}
-            defaultMessage={
-              <React.Fragment>
+            defaultMessage={`
+              <div>
                 The authorizing system, to detect you as a{" "}
                 <strong>HUMAN</strong> not a 🤖, occurred an error.
                 <br />
                 You could reload page to continue. If you receive this error
                 again, please '{reportLink}'.
-              </React.Fragment>
-            }
+              </div>
+            `}
           />
         )
       }

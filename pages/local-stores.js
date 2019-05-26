@@ -90,7 +90,7 @@ class LocalStores extends Component {
       .then(response => response.json())
       .then(json => {
         if (json.status && json.status >= 300) {
-          alert("Error on server: " + json.detail);
+          alert("Error on server: " + json.detail || json.title);
           return;
         }
 

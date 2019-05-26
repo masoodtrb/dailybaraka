@@ -102,7 +102,7 @@ class Page extends Component {
           this.setState({
             contactForm: {
               state: "ERROR",
-              error: json.detail
+              error: json.detail || json.title
             }
           });
           this.recaptchaContactFormRef.reset();

@@ -73,7 +73,7 @@ class SignUp extends Component {
           this.setState({
             signUpForm: {
               state: "ERROR",
-              error: json.detail
+              error: json.detail || json.title
             }
           });
           this.recaptchaRef.reset();
@@ -110,15 +110,13 @@ class SignUp extends Component {
                 </Link>
               )
             }}
-            defaultMessage={
-              <React.Fragment>
+            defaultMessage={`<div>
                 The authorizing system, to detect you as a{" "}
                 <strong>HUMAN</strong> not a 🤖, occurred an error.
                 <br />
                 You could reload page to continue. If you receive this error
                 again, please '{reportLink}'.
-              </React.Fragment>
-            }
+              </div>`}
           />
         )
       }
@@ -173,8 +171,8 @@ class SignUp extends Component {
                   <div className="notification is-success">
                     <FormattedHTMLMessage
                       id="register.success"
-                      defaultMessage={
-                        <React.Fragment>
+                      defaultMessage={`
+                        <div>
                           <strong>
                             Your information has been successfully submitted.
                           </strong>
@@ -188,8 +186,7 @@ class SignUp extends Component {
                             If you couldn't find this mail in your Inbox folder,
                             check the Spam/Junk folder please.
                           </p>
-                        </React.Fragment>
-                      }
+                        </div>`}
                     />
                   </div>
                 )}

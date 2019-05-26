@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import Link from "next/link";
 import moment from "moment";
-import {
-  defineMessages,
-  FormattedMessage
-} from "react-intl";
+import { defineMessages, FormattedMessage } from "react-intl";
 
 import withIntl from "../hoc/withIntl";
 
@@ -147,7 +144,7 @@ class Profile extends Component {
           this.setState({
             updateProfileForm: {
               state: "ERROR",
-              error: json.detail
+              error: json.detail || json.title
             }
           });
           return;
@@ -201,7 +198,7 @@ class Profile extends Component {
           this.setState({
             changePasswordForm: {
               state: "ERROR",
-              error: json.detail
+              error: json.detail || json.title
             }
           });
           return;
@@ -299,7 +296,7 @@ class Profile extends Component {
           this.setState({
             updateProfileForm: {
               state: "ERROR",
-              error: json.detail
+              error: json.detail || json.title
             }
           });
           return;
