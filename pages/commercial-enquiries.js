@@ -6,16 +6,18 @@ import {
   FormattedHTMLMessage,
   defineMessages
 } from "react-intl";
+import { ToastContainer, toast } from "react-toastify";
+
+import withIntl from "../hoc/withIntl";
 
 import Head from "../components/head";
 import Nav from "../components/nav";
-
-import withIntl from "../hoc/withIntl";
 
 import CreateStoreForm from "../components/forms/createStoreForm";
 import CreateSupplierForm from "../components/forms/createSupplierForm";
 
 import "../styles/main.scss";
+import "../styles/toastify.scss";
 
 let Map, TileLayer, Marker;
 
@@ -94,7 +96,12 @@ class Enquiry extends Component {
         },
         error => {
           // for when getting location results in an error
-          alert(this.props.intl.formatMessage(messages.geolocationError));
+          toast.warn(this.props.intl.formatMessage(messages.geolocationError), {
+            position: "bottom-center",
+            autoClose: false,
+            closeOnClick: true,
+            draggable: true
+          });
 
           console.error(
             "An error has occurred while retrieving location",
@@ -103,7 +110,15 @@ class Enquiry extends Component {
         }
       );
     } else {
-      alert(this.props.intl.formatMessage(messages.geolocationNotSupport));
+      toast.error(
+        this.props.intl.formatMessage(messages.geolocationNotSupport),
+        {
+          position: "bottom-center",
+          autoClose: false,
+          closeOnClick: true,
+          draggable: true
+        }
+      );
     }
   };
 
@@ -551,6 +566,7 @@ class Enquiry extends Component {
             </div>
           </div>
         </div>
+        <ToastContainer />
       </div>
     );
   }

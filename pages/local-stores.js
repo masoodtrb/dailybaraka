@@ -165,7 +165,12 @@ class LocalStores extends Component {
         },
         error => {
           // for when getting location results in an error
-          alert(this.props.intl.formatMessage(messages.geolocationError));
+          toast.warn(this.props.intl.formatMessage(messages.geolocationError), {
+            position: "bottom-center",
+            autoClose: false,
+            closeOnClick: true,
+            draggable: true
+          });
 
           console.error(
             "An error has occurred while retrieving location",
@@ -174,7 +179,15 @@ class LocalStores extends Component {
         }
       );
     } else {
-      alert(this.props.intl.formatMessage(messages.geolocationNotSupport));
+      toast.error(
+        this.props.intl.formatMessage(messages.geolocationNotSupport),
+        {
+          position: "bottom-center",
+          autoClose: false,
+          closeOnClick: true,
+          draggable: true
+        }
+      );
     }
   };
 
