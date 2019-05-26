@@ -44,7 +44,7 @@ class LocalStores extends Component {
     userLocation: null,
     zoom: 16,
     stores: [],
-    openFilters: false,
+    openFilters: true,
     hasError: false
   };
 
@@ -285,6 +285,13 @@ class LocalStores extends Component {
                   this.state.openFilters ? "active" : ""
                 ].join(" ")}
               >
+                <a
+                  className="filters__close"
+                  href="#"
+                  onClick={e => this.onMapFilters(e)}
+                >
+                  <i class="far fa-times-circle" />
+                </a>
                 <div className="control">
                   <label
                     className="radio"
