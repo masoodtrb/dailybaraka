@@ -39,7 +39,7 @@ class Home extends Component {
           <div className="container">
             <img
               className="home__logo"
-              src="/static/images/logo-big.png"
+              src="/static/images/logo-lg.png"
               alt="daily baraka logo"
             />
 

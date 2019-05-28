@@ -237,130 +237,70 @@ class Nav extends Component {
           <div className="main-nav">
             <div className="container">
               <div className="main-nav__container">
-                <div className="main-nav__logo is-hidden-desktop">
+                <div className="main-nav__logo">
                   <Link href={`/${this.props.intl.locale}`}>
                     <a>
                       <img
-                        src="/static/images/logo-small.png"
+                        src="/static/images/logo-white.png"
                         alt="daily baraka logo"
                       />
                     </a>
                   </Link>
                 </div>
 
-                <ul>
-                  <li>
-                    <Link
-                      href={`/local-stores?lang=${this.props.intl.locale}`}
-                      as={`/${this.props.intl.locale}/local-stores`}
-                    >
-                      <a>
-                        <FormattedMessage
-                          id="nav.local-stores"
-                          defaultMessage="Local Stores"
-                        />
-                      </a>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={`/sectors?lang=${this.props.intl.locale}`}
-                      as={`/${this.props.intl.locale}/sectors`}
-                    >
-                      <a>
-                        <FormattedMessage
-                          id="nav.sectors"
-                          defaultMessage="Sectors"
-                        />
-                      </a>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={`/commercial-enquiries?lang=${
-                        this.props.intl.locale
-                      }`}
-                      as={`/${this.props.intl.locale}/commercial-enquiries`}
-                    >
-                      <a>
-                        <FormattedMessage
-                          id="nav.commercial-enquiries"
-                          defaultMessage="Commercial Enquiries"
-                        />
-                      </a>
-                    </Link>
-                  </li>
-                </ul>
-
-                <React.Fragment>
-                  <div className="main-nav__logo is-hidden-touch">
-                    <Link
-                      href={`/index?lang=${this.props.intl.locale}`}
-                      as={`/${this.props.intl.locale}`}
-                    >
-                      <a>
-                        <img
-                          src="/static/images/logo.png"
-                          alt="daily baraka logo"
-                        />
-                      </a>
-                    </Link>
-                  </div>
-
-                  <div className="main-nav__search">
-                    <form
-                      action={`/${this.props.intl.locale}/search`}
-                      method="get"
-                    >
-                      <div className="field has-addons">
-                        <p className="control">
-                          <span className="select">
-                            <select name="sector">
-                              <option defaultValue value="all">
-                                {this.props.intl.formatMessage(
-                                  messages.allSectors
-                                )}
-                              </option>
-                              {!this.state.sectors ? (
-                                <option disabled="disabled">
-                                  {this.props.intl.formatMessage(messages.wait)}
-                                </option>
-                              ) : this.state.sectors.length === 0 ? (
-                                <option disabled="disabled">
-                                  Sectors not available
-                                </option>
-                              ) : (
-                                this.state.sectors.map(sector => (
-                                  <option
-                                    key={"sector-" + sector.id}
-                                    value={sector.id}
-                                  >
-                                    {sector.name}
-                                  </option>
-                                ))
+                <div className="main-nav__search">
+                  <form
+                    action={`/${this.props.intl.locale}/search`}
+                    method="get"
+                  >
+                    <div className="field has-addons">
+                      <p className="control">
+                        <span className="select">
+                          <select name="sector">
+                            <option defaultValue value="all">
+                              {this.props.intl.formatMessage(
+                                messages.allSectors
                               )}
-                            </select>
-                          </span>
-                        </p>
-                        <p className="control search-input">
-                          <input
-                            name="q"
-                            className="input"
-                            type="search"
-                            placeholder={this.props.intl.formatMessage(
-                              messages.search
+                            </option>
+                            {!this.state.sectors ? (
+                              <option disabled="disabled">
+                                {this.props.intl.formatMessage(messages.wait)}
+                              </option>
+                            ) : this.state.sectors.length === 0 ? (
+                              <option disabled="disabled">
+                                Sectors not available
+                              </option>
+                            ) : (
+                              this.state.sectors.map(sector => (
+                                <option
+                                  key={"sector-" + sector.id}
+                                  value={sector.id}
+                                >
+                                  {sector.name}
+                                </option>
+                              ))
                             )}
-                          />
-                        </p>
-                        <p className="control">
-                          <button type="submit" className="button">
-                            <i className="fas fa-search" />
-                          </button>
-                        </p>
-                      </div>
-                    </form>
-                  </div>
-                </React.Fragment>
+                          </select>
+                        </span>
+                      </p>
+                      <p className="control search-input">
+                        <input
+                          name="q"
+                          className="input"
+                          type="search"
+                          placeholder={this.props.intl.formatMessage(
+                            messages.search
+                          )}
+                        />
+                      </p>
+                      <p className="control">
+                        <button type="submit" className="button">
+                          <i className="fas fa-search" />
+                        </button>
+                      </p>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>

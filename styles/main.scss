@@ -298,7 +298,7 @@ a {
 
     &__logo {
       text-align: center;
-      padding: 10px 25px 0;
+      padding: 20px 40px 22px 0;
       img {
         width: 250px;
       }
@@ -371,23 +371,6 @@ a {
     display: none;
   }
 
-  @include desktop-only() {
-    .main-nav {
-      ul {
-        flex: 2;
-      }
-
-      &__logo {
-        flex: 1;
-        padding: 15px 20px 0;
-      }
-
-      &__search {
-        flex: 2;
-      }
-    }
-  }
-
   @include tablet-only() {
     .main-nav {
       ul {
@@ -395,9 +378,9 @@ a {
       }
       &__logo {
         flex: initial;
-        padding: 18px 10px 0 0;
+        padding: 10px 20px 12px 0;
         img {
-          width: 24px;
+          width: 250px;
         }
       }
       &__search {
