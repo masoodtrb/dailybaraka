@@ -189,26 +189,26 @@ class Nav extends Component {
             <ul>
               <li>
                 <Link
-                  href={`/page?slug=about-us&lang=${this.props.intl.locale}`}
-                  as={`/${this.props.intl.locale}/page/about-us`}
+                  href={`/page?slug=welcome&lang=${this.props.intl.locale}`}
+                  as={`/${this.props.intl.locale}/page/welcome`}
                 >
                   <a>
                     <FormattedMessage
-                      id="nav.about-us"
-                      defaultMessage="About us"
+                      id="nav.welcome"
+                      defaultMessage="Welcome"
                     />
                   </a>
                 </Link>
               </li>
               <li>
                 <Link
-                  href={`/page?slug=contact-us&lang=${this.props.intl.locale}`}
-                  as={`/${this.props.intl.locale}/page/contact-us`}
+                  href={`/page?slug=discover&lang=${this.props.intl.locale}`}
+                  as={`/${this.props.intl.locale}/page/discover`}
                 >
                   <a>
                     <FormattedMessage
-                      id="nav.contact-us"
-                      defaultMessage="Contact us"
+                      id="nav.discover"
+                      defaultMessage="Discover"
                     />
                   </a>
                 </Link>
@@ -225,20 +225,7 @@ class Nav extends Component {
                   <a>
                     <FormattedMessage
                       id="nav.accreditation-organizations"
-                      defaultMessage="Accreditation Organizations"
-                    />
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/page?slug=services&lang=${this.props.intl.locale}`}
-                  as={`/${this.props.intl.locale}/page/services`}
-                >
-                  <a>
-                    <FormattedMessage
-                      id="nav.our-services"
-                      defaultMessage="Our Services"
+                      defaultMessage="Accreditation Orgs"
                     />
                   </a>
                 </Link>
@@ -462,13 +449,13 @@ class Nav extends Component {
               )}
               <li>
                 <Link
-                  href={`/local-stores?lang=${this.props.intl.locale}`}
-                  as={`/${this.props.intl.locale}/local-stores`}
+                  href={`/welcome?lang=${this.props.intl.locale}`}
+                  as={`/${this.props.intl.locale}/welcome`}
                 >
                   <a>
                     <FormattedMessage
-                      id="nav.local-stores"
-                      defaultMessage="Local Stores"
+                      id="nav.welcome"
+                      defaultMessage="Welcome"
                     />
                   </a>
                 </Link>
@@ -488,13 +475,13 @@ class Nav extends Component {
               </li>
               <li>
                 <Link
-                  href={`/commercial-enquiries?lang=${this.props.intl.locale}`}
-                  as={`/${this.props.intl.locale}/commercial-enquiries`}
+                  href={`/discover?lang=${this.props.intl.locale}`}
+                  as={`/${this.props.intl.locale}/discover`}
                 >
                   <a>
                     <FormattedMessage
-                      id="nav.commercial-enquiries"
-                      defaultMessage="Commercial Enquiries"
+                      id="nav.discover"
+                      defaultMessage="Discover"
                     />
                   </a>
                 </Link>
@@ -538,7 +525,7 @@ class Nav extends Component {
                   <a>
                     <FormattedMessage
                       id="nav.accreditation-organizations"
-                      defaultMessage="Accreditation Organizations"
+                      defaultMessage="Accreditation Orgs"
                     />
                   </a>
                 </Link>
