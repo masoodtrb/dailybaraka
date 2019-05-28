@@ -103,7 +103,7 @@ app.prepare().then(() => {
     // set local and translations in req to access in pages
     req.locale = selectedLocale;
     // on development environment use default messages to speed up develop time
-    if (environment !== "development") {
+    if (environment === "development") {
       req.messages = {};
     } else {
       try {
