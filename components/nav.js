@@ -311,6 +311,16 @@ class Nav extends Component {
                     method="get"
                   >
                     <div className="field has-addons">
+                      <p className="control search-input">
+                        <input
+                          name="q"
+                          className="input"
+                          type="search"
+                          placeholder={this.props.intl.formatMessage(
+                            messages.search
+                          )}
+                        />
+                      </p>
                       <p className="control">
                         <span className="select">
                           <select name="sector">
@@ -341,16 +351,6 @@ class Nav extends Component {
                             )}
                           </select>
                         </span>
-                      </p>
-                      <p className="control search-input">
-                        <input
-                          name="q"
-                          className="input"
-                          type="search"
-                          placeholder={this.props.intl.formatMessage(
-                            messages.search
-                          )}
-                        />
                       </p>
                       <p className="control">
                         <button type="submit" className="button">

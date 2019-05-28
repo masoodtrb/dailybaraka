@@ -291,7 +291,7 @@ a {
     }
 
     &__explore {
-      padding: 15px 10px 15px 10px;
+      padding: 15px 5px 15px 10px;
 
       span {
         color: #fff;
@@ -359,44 +359,83 @@ a {
       flex: 1;
       width: 250px;
       font-size: 0.7em;
-      margin-top: 10px;
+      margin-top: 15px;
 
       input {
-        font-size: 0.7em;
+        font-size: 0.8em;
         line-height: 36px;
-        height: 36px;
-        border-radius: 2px !important;
+        height: 54px;
+        padding-left: 16px;
+        border-radius: 0 !important;
+        border-color: transparent !important;
+        border-right: #eee 1px solid !important;
 
         &::placeholder {
-          color: #013d13 !important;
-          font-weight: bold;
+          color: rgba(0, 0, 0, 0.6) !important;
         }
       }
 
       button {
-        margin-left: 4px;
-        background-color: rgb(158, 187, 68);
+        height: 54px;
+        width: 58px;
+        font-size: 16px;
+        margin-left: 15px;
+        background-color: #9ebb44;
         border-radius: 3px !important;
         border: none;
         i {
           color: #fff;
           opacity: 0.7;
         }
+
+        &:hover {
+          background-color: darken(#9ebb44, 5%);
+        }
       }
 
       .select {
+        position: relative;
         select {
-          font-size: 0.7em;
+          font-size: 0.8em;
           line-height: 36px;
-          height: 36px;
+          height: 54px;
           padding: 0 10px;
-          width: 40px;
-          color: #013d13;
+          width: 160px;
+          color: #a2c34b;
           text-align: center;
           text-align-last: center;
+          border-radius: 0 2px 2px 0 !important;
+          border: none !important;
+          border-left: #eee 1px solid !important;
+          padding-left: 35px;
+
+          &:hover {
+            color: darken(#a2c34b, 10%);
+          }
+
+          option {
+            color: #013d13;
+          }
         }
         &:after {
-          display: none !important;
+          // overrides pre styles
+          border: none;
+          transform: none;
+
+          content: "\F078";
+          font-weight: 900;
+          font-family: "Font Awesome 5 Free";
+          position: absolute;
+          font-size: 0.8em;
+          left: 15px;
+          top: 24px;
+          color: #a2c34b;
+        }
+
+        &:hover {
+          &:after {
+            color: darken(#a2c34b, 10%);
+          }
         }
       }
 
@@ -534,6 +573,7 @@ a {
   min-height: 80vh;
   overflow: hidden;
   padding-bottom: 20px;
+  clear: both;
 }
 
 .page.home {
