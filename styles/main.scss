@@ -282,25 +282,76 @@ a {
       width: 100%;
     }
 
-    ul {
-      flex: 1;
-      li {
-        display: inline-block;
-        a {
-          color: #fff;
-          font-size: 0.9em;
-          padding: 20px 0 20px;
-          margin-right: 25px;
-          display: block;
-        }
-      }
-    }
-
     &__logo {
       text-align: center;
       padding: 20px 40px 22px 0;
       img {
         width: 250px;
+      }
+    }
+
+    &__explore {
+      padding: 15px 10px 15px 10px;
+
+      span {
+        color: #fff;
+        font-size: 0.9em;
+        padding: 15px 25px 15px 15px;
+        display: block;
+        cursor: pointer;
+        border-radius: 4px 0 0 0;
+
+        i {
+          margin-right: 10px;
+          font-size: 0.8em;
+        }
+      }
+
+      ul {
+        display: none;
+        background-color: #f3f1f1;
+        padding: 12px 25px 25px 25px;
+        position: absolute;
+        z-index: 99;
+        min-width: 300px;
+        box-sizing: border-box;
+        box-shadow: 2px 3px 3px 0px rgba(0, 0, 0, 0.1);
+
+        li:first-child {
+          padding: 0;
+          a {
+            font-weight: bold;
+          }
+        }
+
+        li {
+          line-height: 28px;
+          padding-left: 8px;
+
+          a {
+            color: #0f3a70;
+            display: block;
+            font-size: 0.9em;
+            :hover {
+              color: darken(#0f3a70, 15%);
+            }
+          }
+        }
+      }
+
+      &:hover {
+        color: #06182e;
+        span {
+          background-color: #f3f1f1;
+        }
+
+        span {
+          color: #06182e;
+        }
+
+        ul {
+          display: block;
+        }
       }
     }
 

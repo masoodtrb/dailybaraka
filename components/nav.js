@@ -17,6 +17,18 @@ const messages = defineMessages({
   search: {
     id: "common.search",
     defaultMessage: "Search"
+  },
+  explore: {
+    id: "nav.explore",
+    defaultMessage: "Explore"
+  },
+  exploreSectors: {
+    id: "nav.explore.sectors",
+    defaultMessage: "All Sectors"
+  },
+  sectorsNotAvailable: {
+    id: "nav.sectors-not-available",
+    defaultMessage: "Sectors not available"
   }
 });
 
@@ -247,7 +259,52 @@ class Nav extends Component {
                     </a>
                   </Link>
                 </div>
-
+                <div className="main-nav__explore">
+                  <div>
+                    <span>
+                      <i className="fas fa-chevron-down" />
+                      {this.props.intl.formatMessage(messages.explore)}
+                    </span>
+                    <ul>
+                      <li>
+                        <Link
+                          href={`/sectors?lang=${this.props.intl.locale}`}
+                          as={`/${this.props.intl.locale}/sectors`}
+                        >
+                          <a>
+                            {this.props.intl.formatMessage(
+                              messages.exploreSectors
+                            )}
+                          </a>
+                        </Link>
+                      </li>
+                      {!this.state.sectors ? (
+                        <li>{this.props.intl.formatMessage(messages.wait)}</li>
+                      ) : this.state.sectors.length === 0 ? (
+                        <li>
+                          {this.props.intl.formatMessage(
+                            messages.sectorsNotAvailable
+                          )}
+                        </li>
+                      ) : (
+                        this.state.sectors.map(sector => (
+                          <li>
+                            <Link
+                              href={`/sector?id=${sector.id}&name=${
+                                sector.name
+                              }&lang=${this.props.intl.locale}`}
+                              as={`/${this.props.intl.locale}/sector/${
+                                sector.id
+                              }/${sector.name}`}
+                            >
+                              <a>{sector.name}</a>
+                            </Link>
+                          </li>
+                        ))
+                      )}
+                    </ul>
+                  </div>
+                </div>
                 <div className="main-nav__search">
                   <form
                     action={`/${this.props.intl.locale}/search`}
@@ -268,7 +325,9 @@ class Nav extends Component {
                               </option>
                             ) : this.state.sectors.length === 0 ? (
                               <option disabled="disabled">
-                                Sectors not available
+                                {this.props.intl.formatMessage(
+                                  messages.sectorsNotAvailable
+                                )}
                               </option>
                             ) : (
                               this.state.sectors.map(sector => (
