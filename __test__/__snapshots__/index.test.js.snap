@@ -298,7 +298,7 @@ exports[`With Snapshot Testing Index Page shows as the snapshot 1`] = `
       <img
         alt="daily baraka logo"
         className="home__logo"
-        src="/static/images/logo-big.png"
+        src="/static/images/logo-lg.png"
       />
       <div
         className="home__search"
