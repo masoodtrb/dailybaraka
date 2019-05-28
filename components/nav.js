@@ -246,65 +246,65 @@ class Nav extends Component {
             </ul>
           </div>
         </div>
-        <div className="main-nav">
-          <div className="container">
-            <div className="main-nav__container">
-              <div className="main-nav__logo is-hidden-desktop">
-                <Link href={`/${this.props.intl.locale}`}>
-                  <a>
-                    <img
-                      src="/static/images/logo-small.png"
-                      alt="daily baraka logo"
-                    />
-                  </a>
-                </Link>
-              </div>
+        {this.props.page != "index" && (
+          <div className="main-nav">
+            <div className="container">
+              <div className="main-nav__container">
+                <div className="main-nav__logo is-hidden-desktop">
+                  <Link href={`/${this.props.intl.locale}`}>
+                    <a>
+                      <img
+                        src="/static/images/logo-small.png"
+                        alt="daily baraka logo"
+                      />
+                    </a>
+                  </Link>
+                </div>
 
-              <ul>
-                <li>
-                  <Link
-                    href={`/local-stores?lang=${this.props.intl.locale}`}
-                    as={`/${this.props.intl.locale}/local-stores`}
-                  >
-                    <a>
-                      <FormattedMessage
-                        id="nav.local-stores"
-                        defaultMessage="Local Stores"
-                      />
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href={`/sectors?lang=${this.props.intl.locale}`}
-                    as={`/${this.props.intl.locale}/sectors`}
-                  >
-                    <a>
-                      <FormattedMessage
-                        id="nav.sectors"
-                        defaultMessage="Sectors"
-                      />
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href={`/commercial-enquiries?lang=${
-                      this.props.intl.locale
-                    }`}
-                    as={`/${this.props.intl.locale}/commercial-enquiries`}
-                  >
-                    <a>
-                      <FormattedMessage
-                        id="nav.commercial-enquiries"
-                        defaultMessage="Commercial Enquiries"
-                      />
-                    </a>
-                  </Link>
-                </li>
-              </ul>
+                <ul>
+                  <li>
+                    <Link
+                      href={`/local-stores?lang=${this.props.intl.locale}`}
+                      as={`/${this.props.intl.locale}/local-stores`}
+                    >
+                      <a>
+                        <FormattedMessage
+                          id="nav.local-stores"
+                          defaultMessage="Local Stores"
+                        />
+                      </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={`/sectors?lang=${this.props.intl.locale}`}
+                      as={`/${this.props.intl.locale}/sectors`}
+                    >
+                      <a>
+                        <FormattedMessage
+                          id="nav.sectors"
+                          defaultMessage="Sectors"
+                        />
+                      </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={`/commercial-enquiries?lang=${
+                        this.props.intl.locale
+                      }`}
+                      as={`/${this.props.intl.locale}/commercial-enquiries`}
+                    >
+                      <a>
+                        <FormattedMessage
+                          id="nav.commercial-enquiries"
+                          defaultMessage="Commercial Enquiries"
+                        />
+                      </a>
+                    </Link>
+                  </li>
+                </ul>
 
-              {this.props.page != "index" && (
                 <React.Fragment>
                   <div className="main-nav__logo is-hidden-touch">
                     <Link
@@ -374,10 +374,11 @@ class Nav extends Component {
                     </form>
                   </div>
                 </React.Fragment>
-              )}
+              </div>
             </div>
           </div>
-        </div>
+        )}
+
         <div className="mob-nav">
           <nav
             className="navbar"
