@@ -32,7 +32,6 @@ class Search extends Component {
 
   render() {
     const { products, searchValue } = this.props;
-    console.log("this.props :", this.props);
     return (
       <div>
         <Head title={this.props.intl.formatMessage(messages.title)} />
