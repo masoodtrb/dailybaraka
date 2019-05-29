@@ -361,17 +361,20 @@ a {
       font-size: 0.7em;
       margin-top: 15px;
 
-      input {
-        font-size: 0.8em;
-        line-height: 36px;
-        height: 54px;
-        padding-left: 16px;
-        border-radius: 0 !important;
-        border-color: transparent !important;
-        border-right: #eee 1px solid !important;
+      .search-input {
+        flex: 1;
+        input {
+          font-size: 0.8em;
+          line-height: 36px;
+          height: 54px;
+          padding-left: 16px;
+          border-radius: 0 !important;
+          border-color: transparent !important;
+          border-right: #eee 1px solid !important;
 
-        &::placeholder {
-          color: rgba(0, 0, 0, 0.6) !important;
+          &::placeholder {
+            color: rgba(0, 0, 0, 0.6) !important;
+          }
         }
       }
 
@@ -437,10 +440,6 @@ a {
             color: darken(#a2c34b, 10%);
           }
         }
-      }
-
-      .search-input {
-        flex: 1;
       }
     }
   }
@@ -610,83 +609,109 @@ a {
   }
 
   .home__search {
-    width: 400px;
-    margin: 80px auto;
+    width: 720px;
+    margin: 30px auto;
     font-size: 0.7em;
 
-    input {
-      font-size: 0.7em;
-      line-height: 36px;
-      height: 36px;
-      border-radius: 2px !important;
-
-      &::placeholder {
-        color: #013d13 !important;
+    .search-input {
+      flex: 1;
+      input {
+        font-size: 0.8em;
         font-weight: bold;
-      }
-    }
+        line-height: 36px;
+        height: 54px;
+        padding-left: 16px;
+        border: #013d13 1px solid !important;
+        color: #013d13;
 
-    button {
-      margin-left: 2px;
-      background-color: $primary-color;
-      border-radius: 3px !important;
-      i {
-        color: #fff;
-        opacity: 0.5;
+        &::placeholder {
+          color: #013d13 !important;
+        }
       }
     }
 
     .select {
+      position: relative;
       select {
-        font-size: 0.7em;
+        font-size: 0.8em;
+        font-weight: bold;
         line-height: 36px;
-        height: 36px;
+        height: 54px;
         padding: 0 10px;
-        width: 40px;
+        width: 160px;
+        color: #013d13;
+        text-align: center;
+        text-align-last: center;
+        padding-left: 35px;
+        border: 1px solid #013d13;
+        border-radius: 0 3px 3px 0 !important;
+
+        &:hover {
+          color: darken(#013d13, 10%);
+        }
+
+        option {
+          color: #013d13;
+        }
       }
+
       &:after {
-        display: none !important;
+        // overrides pre styles
+        border: none;
+        transform: none;
+
+        content: "\F078";
+        font-weight: 900;
+        font-family: "Font Awesome 5 Free";
+        position: absolute;
+        font-size: 0.8em;
+        left: 15px;
+        top: 24px;
+        color: #013d13;
+      }
+
+      &:hover:after {
+        color: darken(#013d13, 10%);
       }
     }
 
-    .search-input {
-      flex: 1;
+    button {
+      height: 54px;
+      width: 58px;
+      font-size: 16px;
+      margin-left: 15px;
+      background-color: #06182e;
+      border-radius: 3px !important;
+      border: none;
+
+      i {
+        color: #fff;
+      }
+
+      &:hover {
+        background-color: darken(#06182e, 5%);
+      }
     }
   }
 
   .home__sectors {
-    width: 600px;
-    display: block;
-    margin: 0 auto;
-    ul > li {
+    li {
       display: inline-block;
-      margin: 0 2px;
       a {
-        display: block;
-        height: 22px;
-        border-radius: 11px;
-        background-color: #dfdfdf;
-        border: solid 0.5px rgba(0, 0, 0, 0.12);
-        color: rgba(0, 0, 0, 0.87);
-        text-align: left;
-        padding: 2px 6px 2px 2px;
-
+        color: #a2c34b;
         &:hover {
-          background-color: darken(#dfdfdf, 10%);
+          color: darken(#a2c34b, 10%);
         }
+      }
 
-        img {
-          border-radius: 50%;
-          width: 17px;
-          height: 17px;
-          margin-right: 2px;
-          vertical-align: super;
-        }
-        span {
-          font-size: 0.9em;
-          vertical-align: text-top;
-          line-height: 5px;
-        }
+      &:before {
+        content: "|";
+        color: lighten(#a2c34b, 20%);
+        padding: 0 10px;
+      }
+
+      &:first-child:before {
+        display: none;
       }
     }
   }
