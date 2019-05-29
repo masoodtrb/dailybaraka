@@ -33,10 +33,10 @@ class Product extends Component {
         <div className="page product">
           <img
             src={
-              product.cover && product.cover.id
+              product.webPictures && product.webPictures.length > 0
                 ? process.env.API_URL +
                   "/api/shop/general/v1/file/" +
-                  product.cover.id
+                  product.webPictures[0].id
                 : "/static/images/top-bg.jpg"
             }
             className="product__cover"

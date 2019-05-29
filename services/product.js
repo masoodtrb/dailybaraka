@@ -5,7 +5,7 @@ async function get(lang, productId) {
     process.env.API_URL + "/api/shop/products/v1/load/" + productId,
     {
       headers: {
-        "lang": lang.toUpperCase()
+        lang: lang.toUpperCase()
       }
     }
   );
@@ -17,7 +17,7 @@ async function getBySlug(lang, slug) {
     process.env.API_URL + "/api/shop/products/v1/load-by-slug/" + slug,
     {
       headers: {
-        "lang": lang.toUpperCase()
+        lang: lang.toUpperCase()
       }
     }
   );
@@ -27,7 +27,7 @@ async function getBySlug(lang, slug) {
 async function search(lang, sectorId, query) {
   let filters = [
     {
-      field: "name",
+      field: "translates.name",
       operator: "LIKE",
       value: query
     }
@@ -45,8 +45,7 @@ async function search(lang, sectorId, query) {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        "lang": lang.toUpperCase()
-         
+        lang: lang.toUpperCase()
       },
       body: JSON.stringify({
         filters
