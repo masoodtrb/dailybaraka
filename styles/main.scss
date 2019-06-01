@@ -1166,12 +1166,49 @@ a {
     font-size: 1.3em;
     margin-bottom: 15px;
   }
+
   .rich-content__content {
     line-height: 32px;
 
     ul,
     ol {
       padding: 20px;
+    }
+  }
+
+  &.welcome {
+    background: url("/static/images/welcome-bg.png") no-repeat 0 0;
+    position: relative;
+
+    .container {
+      padding-top: 200px;
+      padding-bottom: 230px;
+    }
+
+    h1 {
+      color: #a2c34b;
+      font-size: 1.8em;
+      font-weight: bold;
+    }
+
+    .rich-content__content {
+      font-size: 1.1em;
+      font-weight: 500;
+      color: #272727;
+      text-align: justify;
+      p {
+        margin-bottom: 15px;
+      }
+    }
+
+    .welcome__image {
+    }
+
+    .welcome__register {
+      border-radius: 10px;
+      box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+      background-color: #ffffff;
+      padding: 35px 40px;
     }
   }
 }
