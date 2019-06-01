@@ -238,14 +238,14 @@ class Page extends Component {
           <div className="container">
             {page.slug === "welcome" ? (
               <div className="columns">
-                <div className="column is-3">
+                <div className="column is-3 is-hidden-touch">
                   <img
                     className="welcome__image"
                     src="/static/images/mobile.png"
                     alt="Daily Baraka Mobile"
                   />
                 </div>
-                <div className="column is-5">
+                <div className="column is-5-desktop is-8-tablet is-12-mobile">
                   <h1>{page.title}</h1>
 
                   <div className="rich-content__content">
@@ -254,7 +254,7 @@ class Page extends Component {
                     )}
                   </div>
                 </div>
-                <div className="column is-4">
+                <div className="column is-4 is-12-mobile">
                   <div className="welcome__register">
                     {this.state.signUpForm.state === "ERROR" && (
                       <div className="notification is-danger">
