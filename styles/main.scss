@@ -799,6 +799,73 @@ a {
   }
 }
 
+.page.search {
+  .search__product {
+    margin-bottom: 30px;
+    .product__content {
+      display: flex;
+      border-bottom: 1px solid #dbdbdb;
+      padding-bottom: 15px;
+
+      img {
+        width: 120px;
+        height: 120px;
+        border: solid 1px #dbdbdb;
+        border-radius: 4px;
+        margin-right: 10px;
+      }
+
+      h3 {
+        font-size: 1.3em;
+        font-weight: 600;
+      }
+    }
+
+    .product__shortcut {
+      display: flex;
+      font-size: 0.9em;
+
+      .shortcut__supplier {
+        width: 300px;
+        line-height: 28px;
+      }
+
+      .shortcut__organization {
+        flex: 1;
+        line-height: 28px;
+      }
+
+      .shortcut__button {
+        width: 200px;
+        border: solid 1px #e8e8e8;
+        border-top: none;
+        padding: 5px 20px;
+      }
+    }
+
+    a {
+      color: #a2c34b;
+
+      &:hover {
+        color: darken(#a2c34b, 10%);
+      }
+    }
+
+    @include touch() {
+      .product__content {
+        display: block;
+        img {
+          float: left;
+        }
+      }
+
+      .product__shortcut {
+        display: none;
+      }
+    }
+  }
+}
+
 .page.supplier {
   h2,
   h3 {
