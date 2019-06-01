@@ -704,13 +704,13 @@ a {
         }
       }
 
-      &:before {
+      &:after {
         content: "|";
         color: lighten(#a2c34b, 20%);
         padding: 0 10px;
       }
 
-      &:first-child:before {
+      &:last-child:after {
         display: none;
       }
     }
