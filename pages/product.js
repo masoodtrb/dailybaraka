@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import moment from "moment";
+
 import * as productService from "../services/product";
 
 import Head from "../components/head";
@@ -24,6 +26,7 @@ class Product extends Component {
 
   render() {
     const { product } = this.props;
+    debugger;
     const { tab } = this.state;
     return (
       <div>
@@ -188,7 +191,7 @@ class Product extends Component {
                 </div>
               </div>
 
-              <div className="column is-hidden-touch">
+              <div className="column is-5-desktop is-hidden-touch">
                 {product.relatedProducts && (
                   <ul className="product__related">
                     {product.relatedProducts.map(relatedProduct => (
@@ -213,6 +216,31 @@ class Product extends Component {
                     ))}
                   </ul>
                 )}
+                {product.coupons.map(coupon => (
+                  <div className="product__coupon">
+                    <div className="coupon__image">
+                      {cover && cover.id && (
+                        <img
+                          src={
+                            process.env.API_URL +
+                            "/api/shop/general/v1/file/" +
+                            cover.id
+                          }
+                          alt={coupon.name}
+                        />
+                      )}
+
+                      <span>
+                        <i class="far fa-clock" />
+                        &nbsp;{moment(coupon.expireDate * 1000).format("ll")}
+                      </span>
+                    </div>
+                    <div className="coupon__content">
+                      <h2>{coupon.name}</h2>
+                      <p>{coupon.description}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
             <br />

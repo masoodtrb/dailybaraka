@@ -74,34 +74,26 @@ $fullhd: 1344px + (2 * $gap);
 }
 
 @mixin widescreen {
-  @if $widescreen-enabled {
-    @media screen and (min-width: $widescreen) {
-      @content;
-    }
+  @media screen and (min-width: $widescreen) {
+    @content;
   }
 }
 
 @mixin widescreen-only {
-  @if $widescreen-enabled and $fullhd-enabled {
-    @media screen and (min-width: $widescreen) and (max-width: $fullhd - 1px) {
-      @content;
-    }
+  @media screen and (min-width: $widescreen) and (max-width: $fullhd - 1px) {
+    @content;
   }
 }
 
 @mixin until-fullhd {
-  @if $fullhd-enabled {
-    @media screen and (max-width: $fullhd - 1px) {
-      @content;
-    }
+  @media screen and (max-width: $fullhd - 1px) {
+    @content;
   }
 }
 
 @mixin fullhd {
-  @if $fullhd-enabled {
-    @media screen and (min-width: $fullhd) {
-      @content;
-    }
+  @media screen and (min-width: $fullhd) {
+    @content;
   }
 }
 
@@ -1081,6 +1073,7 @@ a {
   .product__brand-image {
     width: 120px;
     height: 120px;
+    background-color: #fff;
     border: solid 1px #d1d1d1;
     border-radius: 5px;
   }
@@ -1096,7 +1089,6 @@ a {
     img {
       width: 120px;
       height: 120px;
-      border-radius: 3px;
 
       border: solid 1px #d1d1d1;
       border-radius: 5px;
@@ -1158,12 +1150,70 @@ a {
     }
   }
 
+  .product__coupon {
+    display: flex;
+    margin-top: 10px;
+
+    .coupon__image {
+      font-size: 0.8em;
+      img {
+        width: 220px;
+        display: block;
+        margin-bottom: 5px;
+      }
+    }
+
+    .coupon__content {
+      flex: 1;
+      padding-left: 10px;
+
+      h2 {
+        color: #0f3a70;
+        font-size: 1.1em;
+        font-weight: bold;
+      }
+
+      p {
+        color: #272727;
+        font-size: 1em;
+      }
+    }
+  }
+
   @include touch {
     .container {
       margin-top: 0;
     }
     .product__topcertified {
       margin-top: 0;
+    }
+  }
+
+  @include widescreen-only() {
+    .product__coupon {
+      .coupon__image {
+        img {
+          width: 230px;
+        }
+      }
+    }
+  }
+
+  @include desktop-only() {
+    .product__coupon {
+      display: block;
+      .coupon__image {
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  @include mobile() {
+    .product__container {
+      margin-top: 0;
+      padding: 0 20px;
     }
   }
 }
