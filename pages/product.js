@@ -31,19 +31,19 @@ class Product extends Component {
         <Nav />
 
         <div className="page product">
-          <img
-            src={
-              product.webPictures && product.webPictures.length > 0
-                ? process.env.API_URL +
-                  "/api/shop/general/v1/file/" +
-                  product.webPictures[0].id
-                : "/static/images/top-bg.jpg"
-            }
-            className="product__cover"
-            alt={product.name}
-          />
           <div className="container">
-            <div className="columns">
+            <img
+              src={
+                product.webPictures && product.webPictures.length > 0
+                  ? process.env.API_URL +
+                    "/api/shop/general/v1/file/" +
+                    product.webPictures[0].id
+                  : "/static/images/top-bg.jpg"
+              }
+              className="product__cover"
+              alt={product.name}
+            />
+            <div className="columns product__container">
               <div className="column product__info">
                 {product.halalCertificates &&
                   product.halalCertificates.length > 0 && (
@@ -193,6 +193,10 @@ class Product extends Component {
                 )}
               </div>
             </div>
+            <br />
+            <br />
+            <br />
+            <br />
           </div>
         </div>
       </div>
