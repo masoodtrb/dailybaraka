@@ -867,6 +867,9 @@ a {
 }
 
 .page.supplier {
+  background-color: #eee;
+  padding: 0;
+
   h2,
   h3 {
     font-size: 1em;
@@ -874,7 +877,13 @@ a {
   }
 
   .container {
+    box-shadow: 0 3px 47px 0 rgba(42, 42, 42, 0.35);
+    background-color: #eee;
+  }
+
+  .supplier__container {
     margin-top: -70px;
+    padding-left: 80px;
   }
 
   .supplier__cover {
@@ -883,17 +892,24 @@ a {
 
   .supplier__logo {
     height: 128px;
+    border: solid 1px #d1d1d1;
   }
 
   .supplier__products {
-    background-color: rgba(171, 171, 171, 0.8);
-    border: 0.5px solid #b1b1b1;
-    border-radius: 2px;
-    float: right;
-    width: 420px;
-    padding: 20px 20px 30px;
-    color: $primary-color;
+    background-color: rgba(0, 0, 0, 0.37);
+    color: #fff;
     font-size: 0.8em;
+
+    overflow-y: auto;
+    width: 420px;
+    max-height: 700px;
+
+    padding: 20px 20px 30px;
+    border: 0.5px solid #b1b1b1;
+
+    position: absolute;
+    top: 50px;
+    right: 0;
 
     h2 {
       font-size: 1.4em;
@@ -911,26 +927,49 @@ a {
         line-height: 32px;
 
         a {
-          color: $primary-color;
+          color: #fff;
           font-size: 1em;
 
           &:hover {
-            color: darken($primary-color, 10%);
+            color: darken(#fff, 10%);
           }
         }
       }
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar {
+      width: 12px;
+      background-color: #f5f5f5;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.15);
+      border: solid 0.5px rgba(0, 0, 0, 0.2);
     }
   }
 
   @include touch {
     .container {
+      background-color: #fff;
+    }
+
+    .supplier__container {
       margin-top: 0;
+      padding-left: 0;
     }
 
     .supplier__products {
       float: none;
       width: 100%;
       background-color: #fff;
+      position: relative;
+      color: #000;
 
       ul {
         padding-left: 0;
@@ -942,6 +981,7 @@ a {
             line-height: 50px;
             padding-left: 20px;
             display: block;
+            color: #000;
           }
         }
       }

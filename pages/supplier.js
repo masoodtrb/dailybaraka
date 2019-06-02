@@ -29,19 +29,19 @@ class Supplier extends Component {
         <Nav />
 
         <div className="page supplier">
-          <img
-            src={
-              supplier.cover && supplier.cover.id
-                ? process.env.API_URL +
-                  "/api/shop/general/v1/file/" +
-                  supplier.cover.id
-                : "/static/images/top-bg.jpg"
-            }
-            className="supplier__cover"
-            alt={supplier.name}
-          />
           <div className="container">
-            <div className="columns is-multiline">
+            <img
+              src={
+                supplier.cover && supplier.cover.id
+                  ? process.env.API_URL +
+                    "/api/shop/general/v1/file/" +
+                    supplier.cover.id
+                  : "/static/images/top-bg.jpg"
+              }
+              className="supplier__cover"
+              alt={supplier.name}
+            />
+            <div className="columns is-multiline supplier__container">
               <div className="column is-6 is-12-touch">
                 <img
                   className="supplier__logo"
@@ -83,7 +83,9 @@ class Supplier extends Component {
                             {category.products.map(product => (
                               <li key={"product-" + product.id}>
                                 <Link
-                                  href={`/product?slug=${product.slug}&lang=${this.props.intl.locale}`}
+                                  href={`/product?slug=${product.slug}&lang=${
+                                    this.props.intl.locale
+                                  }`}
                                   as={`/${this.props.intl.locale}/product/${
                                     product.slug
                                   }`}
@@ -103,6 +105,10 @@ class Supplier extends Component {
                 </div>
               </div>
             </div>
+            <br />
+            <br />
+            <br />
+            <br />
           </div>
         </div>
       </div>
