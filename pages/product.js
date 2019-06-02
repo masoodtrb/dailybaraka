@@ -32,6 +32,28 @@ class Product extends Component {
 
         <div className="page product">
           <div className="container">
+            <ul className="product__commands">
+              <li>
+                <a href="">
+                  <i class="fas fa-shopping-cart" />
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <i class="fas fa-share-alt" />
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <i class="fas fa-thumbs-up" />
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <i class="fas fa-rss" />
+                </a>
+              </li>
+            </ul>
             <img
               src={
                 product.webPictures && product.webPictures.length > 0
