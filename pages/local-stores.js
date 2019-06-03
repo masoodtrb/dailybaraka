@@ -116,7 +116,6 @@ class LocalStores extends Component {
           return;
         }
 
-        debugger;
         const stores = JSON.parse(JSON.stringify(this.state.stores));
         // add new stores to list
         json.result.forEach((store, index) => {
@@ -290,7 +289,7 @@ class LocalStores extends Component {
                   href="#"
                   onClick={e => this.onMapFilters(e)}
                 >
-                  <i class="far fa-times-circle" />
+                  <i className="far fa-times-circle" />
                 </a>
                 <div className="control">
                   <label

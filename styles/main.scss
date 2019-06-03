@@ -1445,3 +1445,109 @@ a {
     }
   }
 }
+
+.page.feeds {
+  .feeds__categories {
+    a {
+      display: inline-block;
+      width: calc(50% - 4px);
+      margin: 2px;
+      vertical-align: top;
+      position: relative;
+
+      &:after {
+        position: absolute;
+        content: "";
+        display: block;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+
+        background: rgba(0, 110, 255, 0.6);
+
+        mix-blend-mode: multiply;
+        transition: 0.2s opacity ease-out;
+        z-index: 9;
+      }
+
+      &:hover:after {
+        opacity: 0;
+      }
+
+      img {
+        display: block;
+      }
+
+      span {
+        position: absolute;
+        bottom: 20px;
+        font-weight: bold;
+        font-size: 1.4em;
+        margin: 0 auto;
+        display: block;
+        z-index: 10;
+        color: #fff;
+        text-align: center;
+        width: 100%;
+      }
+    }
+  }
+
+  .feeds__profile {
+    label {
+      font-size: 0.7em;
+      color: #999;
+      font-weight: bold;
+      & + span {
+        color: #4a85ce;
+        float: right;
+        font-size: 0.9em;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .feeds__post {
+    display: flex;
+
+    .feeds__postbody {
+      flex: 1;
+      padding: 20px 25px;
+      cursor: text;
+      font-weight: bold;
+    }
+
+    .feeds__postvideo,
+    .feeds__postimage {
+      padding: 20px 25px;
+      min-width: 50px;
+      border-left: 1px solid #eee;
+      text-align: center;
+      cursor: pointer;
+
+      &:hover {
+        color: #178bde;
+      }
+    }
+  }
+
+  .feeds__insights {
+    & > div {
+      box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1),
+        0 0 0 1px rgba(10, 10, 10, 0.1);
+      padding: 20px 25px 0;
+      margin-bottom: 25px;
+    }
+
+    h2 {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    h3 {
+      font-size: 0.8em;
+      font-weight: bold;
+    }
+  }
+}

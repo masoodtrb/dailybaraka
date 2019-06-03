@@ -26,7 +26,6 @@ class Product extends Component {
 
   render() {
     const { product } = this.props;
-    debugger;
     const { tab } = this.state;
     return (
       <div>
@@ -38,22 +37,22 @@ class Product extends Component {
             <ul className="product__commands">
               <li>
                 <a href="">
-                  <i class="fas fa-shopping-cart" />
+                  <i className="fas fa-shopping-cart" />
                 </a>
               </li>
               <li>
                 <a href="">
-                  <i class="fas fa-share-alt" />
+                  <i className="fas fa-share-alt" />
                 </a>
               </li>
               <li>
                 <a href="">
-                  <i class="fas fa-thumbs-up" />
+                  <i className="fas fa-thumbs-up" />
                 </a>
               </li>
               <li>
                 <a href="">
-                  <i class="fas fa-rss" />
+                  <i className="fas fa-rss" />
                 </a>
               </li>
             </ul>
@@ -231,7 +230,7 @@ class Product extends Component {
                       )}
 
                       <span>
-                        <i class="far fa-clock" />
+                        <i className="far fa-clock" />
                         &nbsp;{moment(coupon.expireDate * 1000).format("ll")}
                       </span>
                     </div>

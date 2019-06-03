@@ -104,7 +104,7 @@ class Search extends Component {
                       </Link>
                     </a>
                     <a href="#" className="shortcut__button">
-                      <i class="fas fa-plus-circle" />
+                      <i className="fas fa-plus-circle" />
                       &nbsp;Add to shopping list
                     </a>
                   </div>
