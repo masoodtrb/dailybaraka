@@ -17,6 +17,18 @@ const messages = defineMessages({
   search: {
     id: "common.search",
     defaultMessage: "Search"
+  },
+  explore: {
+    id: "nav.explore",
+    defaultMessage: "Explore"
+  },
+  exploreSectors: {
+    id: "nav.explore.sectors",
+    defaultMessage: "All Sectors"
+  },
+  sectorsNotAvailable: {
+    id: "nav.sectors-not-available",
+    defaultMessage: "Sectors not available"
   }
 });
 
@@ -117,7 +129,7 @@ class Nav extends Component {
                       <i className="fas fa-user" />
                       &nbsp;
                       <FormattedMessage
-                        id="nav.welcome"
+                        id="nav.about-us"
                         values={{
                           user: (
                             <Link
@@ -189,26 +201,26 @@ class Nav extends Component {
             <ul>
               <li>
                 <Link
-                  href={`/page?slug=about-us&lang=${this.props.intl.locale}`}
-                  as={`/${this.props.intl.locale}/page/about-us`}
+                  href={`/page?slug=welcome&lang=${this.props.intl.locale}`}
+                  as={`/${this.props.intl.locale}/page/welcome`}
                 >
                   <a>
                     <FormattedMessage
-                      id="nav.about-us"
-                      defaultMessage="About us"
+                      id="nav.welcome"
+                      defaultMessage="Welcome"
                     />
                   </a>
                 </Link>
               </li>
               <li>
                 <Link
-                  href={`/page?slug=contact-us&lang=${this.props.intl.locale}`}
-                  as={`/${this.props.intl.locale}/page/contact-us`}
+                  href={`/page?slug=discover&lang=${this.props.intl.locale}`}
+                  as={`/${this.props.intl.locale}/page/discover`}
                 >
                   <a>
                     <FormattedMessage
-                      id="nav.contact-us"
-                      defaultMessage="Contact us"
+                      id="nav.discover"
+                      defaultMessage="Discover"
                     />
                   </a>
                 </Link>
@@ -225,20 +237,7 @@ class Nav extends Component {
                   <a>
                     <FormattedMessage
                       id="nav.accreditation-organizations"
-                      defaultMessage="Accreditation Organizations"
-                    />
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/page?slug=services&lang=${this.props.intl.locale}`}
-                  as={`/${this.props.intl.locale}/page/services`}
-                >
-                  <a>
-                    <FormattedMessage
-                      id="nav.our-services"
-                      defaultMessage="Our Services"
+                      defaultMessage="Accreditation Orgs"
                     />
                   </a>
                 </Link>
@@ -246,138 +245,126 @@ class Nav extends Component {
             </ul>
           </div>
         </div>
-        <div className="main-nav">
-          <div className="container">
-            <div className="main-nav__container">
-              <div className="main-nav__logo is-hidden-desktop">
-                <Link href={`/${this.props.intl.locale}`}>
-                  <a>
-                    <img
-                      src="/static/images/logo-small.png"
-                      alt="daily baraka logo"
-                    />
-                  </a>
-                </Link>
-              </div>
-
-              <ul>
-                <li>
-                  <Link
-                    href={`/local-stores?lang=${this.props.intl.locale}`}
-                    as={`/${this.props.intl.locale}/local-stores`}
-                  >
+        {this.props.page != "index" && (
+          <div className="main-nav">
+            <div className="container">
+              <div className="main-nav__container">
+                <div className="main-nav__logo">
+                  <Link href={`/${this.props.intl.locale}`}>
                     <a>
-                      <FormattedMessage
-                        id="nav.local-stores"
-                        defaultMessage="Local Stores"
+                      <img
+                        src="/static/images/logo-white.png"
+                        alt="daily baraka logo"
                       />
                     </a>
                   </Link>
-                </li>
-                <li>
-                  <Link
-                    href={`/sectors?lang=${this.props.intl.locale}`}
-                    as={`/${this.props.intl.locale}/sectors`}
-                  >
-                    <a>
-                      <FormattedMessage
-                        id="nav.sectors"
-                        defaultMessage="Sectors"
-                      />
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href={`/commercial-enquiries?lang=${
-                      this.props.intl.locale
-                    }`}
-                    as={`/${this.props.intl.locale}/commercial-enquiries`}
-                  >
-                    <a>
-                      <FormattedMessage
-                        id="nav.commercial-enquiries"
-                        defaultMessage="Commercial Enquiries"
-                      />
-                    </a>
-                  </Link>
-                </li>
-              </ul>
-
-              {this.props.page != "index" && (
-                <React.Fragment>
-                  <div className="main-nav__logo is-hidden-touch">
-                    <Link
-                      href={`/index?lang=${this.props.intl.locale}`}
-                      as={`/${this.props.intl.locale}`}
-                    >
-                      <a>
-                        <img
-                          src="/static/images/logo.png"
-                          alt="daily baraka logo"
-                        />
-                      </a>
-                    </Link>
+                </div>
+                <div className="main-nav__explore">
+                  <div>
+                    <span>
+                      <i className="fas fa-chevron-down" />
+                      {this.props.intl.formatMessage(messages.explore)}
+                    </span>
+                    <ul>
+                      <li>
+                        <Link
+                          href={`/sectors?lang=${this.props.intl.locale}`}
+                          as={`/${this.props.intl.locale}/sectors`}
+                        >
+                          <a>
+                            {this.props.intl.formatMessage(
+                              messages.exploreSectors
+                            )}
+                          </a>
+                        </Link>
+                      </li>
+                      {!this.state.sectors ? (
+                        <li>{this.props.intl.formatMessage(messages.wait)}</li>
+                      ) : this.state.sectors.length === 0 ? (
+                        <li>
+                          {this.props.intl.formatMessage(
+                            messages.sectorsNotAvailable
+                          )}
+                        </li>
+                      ) : (
+                        this.state.sectors.map(sector => (
+                          <li key={sector.id}>
+                            <Link
+                              href={`/sector?id=${sector.id}&name=${
+                                sector.name
+                              }&lang=${this.props.intl.locale}`}
+                              as={`/${this.props.intl.locale}/sector/${
+                                sector.id
+                              }/${sector.name}`}
+                            >
+                              <a>{sector.name}</a>
+                            </Link>
+                          </li>
+                        ))
+                      )}
+                    </ul>
                   </div>
-
-                  <div className="main-nav__search">
-                    <form
-                      action={`/${this.props.intl.locale}/search`}
-                      method="get"
-                    >
-                      <div className="field has-addons">
-                        <p className="control">
-                          <span className="select">
-                            <select name="sector">
-                              <option defaultValue value="all">
+                </div>
+                <div className="main-nav__search">
+                  <form
+                    action={`/${this.props.intl.locale}/search`}
+                    method="get"
+                  >
+                    <div className="field has-addons">
+                      <p className="control search-input">
+                        <input
+                          name="q"
+                          className="input"
+                          type="search"
+                          placeholder={this.props.intl.formatMessage(
+                            messages.search
+                          )}
+                        />
+                      </p>
+                      <p className="control">
+                        <span className="select">
+                          <select name="sector">
+                            <option defaultValue value="all">
+                              {this.props.intl.formatMessage(
+                                messages.allSectors
+                              )}
+                            </option>
+                            {!this.state.sectors ? (
+                              <option disabled="disabled">
+                                {this.props.intl.formatMessage(messages.wait)}
+                              </option>
+                            ) : this.state.sectors.length === 0 ? (
+                              <option disabled="disabled">
                                 {this.props.intl.formatMessage(
-                                  messages.allSectors
+                                  messages.sectorsNotAvailable
                                 )}
                               </option>
-                              {!this.state.sectors ? (
-                                <option disabled="disabled">
-                                  {this.props.intl.formatMessage(messages.wait)}
+                            ) : (
+                              this.state.sectors.map(sector => (
+                                <option
+                                  key={"sector-" + sector.id}
+                                  value={sector.id}
+                                >
+                                  {sector.name}
                                 </option>
-                              ) : this.state.sectors.length === 0 ? (
-                                <option disabled="disabled">
-                                  Sectors not available
-                                </option>
-                              ) : (
-                                this.state.sectors.map(sector => (
-                                  <option
-                                    key={"sector-" + sector.id}
-                                    value={sector.id}
-                                  >
-                                    {sector.name}
-                                  </option>
-                                ))
-                              )}
-                            </select>
-                          </span>
-                        </p>
-                        <p className="control search-input">
-                          <input
-                            name="q"
-                            className="input"
-                            type="search"
-                            placeholder={this.props.intl.formatMessage(
-                              messages.search
+                              ))
                             )}
-                          />
-                        </p>
-                        <p className="control">
-                          <button type="submit" className="button">
-                            <i className="fas fa-search" />
-                          </button>
-                        </p>
-                      </div>
-                    </form>
-                  </div>
-                </React.Fragment>
-              )}
+                          </select>
+                        </span>
+                      </p>
+                      <p className="control">
+                        <button type="submit" className="button">
+                          <i className="fas fa-search" />
+                        </button>
+                      </p>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        )}
+
         <div className="mob-nav">
           <nav
             className="navbar"
@@ -461,13 +448,13 @@ class Nav extends Component {
               )}
               <li>
                 <Link
-                  href={`/local-stores?lang=${this.props.intl.locale}`}
-                  as={`/${this.props.intl.locale}/local-stores`}
+                  href={`/welcome?lang=${this.props.intl.locale}`}
+                  as={`/${this.props.intl.locale}/welcome`}
                 >
                   <a>
                     <FormattedMessage
-                      id="nav.local-stores"
-                      defaultMessage="Local Stores"
+                      id="nav.welcome"
+                      defaultMessage="Welcome"
                     />
                   </a>
                 </Link>
@@ -487,13 +474,13 @@ class Nav extends Component {
               </li>
               <li>
                 <Link
-                  href={`/commercial-enquiries?lang=${this.props.intl.locale}`}
-                  as={`/${this.props.intl.locale}/commercial-enquiries`}
+                  href={`/local-stores?lang=${this.props.intl.locale}`}
+                  as={`/${this.props.intl.locale}/local-stores`}
                 >
                   <a>
                     <FormattedMessage
-                      id="nav.commercial-enquiries"
-                      defaultMessage="Commercial Enquiries"
+                      id="nav.local-stores"
+                      defaultMessage="nav.local-stores"
                     />
                   </a>
                 </Link>
@@ -537,7 +524,7 @@ class Nav extends Component {
                   <a>
                     <FormattedMessage
                       id="nav.accreditation-organizations"
-                      defaultMessage="Accreditation Organizations"
+                      defaultMessage="Accreditation Orgs"
                     />
                   </a>
                 </Link>

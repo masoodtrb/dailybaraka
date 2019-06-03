@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import moment from "moment";
+
 import * as productService from "../services/product";
 
 import Head from "../components/head";
@@ -31,19 +33,41 @@ class Product extends Component {
         <Nav />
 
         <div className="page product">
-          <img
-            src={
-              product.webPictures && product.webPictures.length > 0
-                ? process.env.API_URL +
-                  "/api/shop/general/v1/file/" +
-                  product.webPictures[0].id
-                : "/static/images/top-bg.jpg"
-            }
-            className="product__cover"
-            alt={product.name}
-          />
           <div className="container">
-            <div className="columns">
+            <ul className="product__commands">
+              <li>
+                <a href="">
+                  <i className="fas fa-shopping-cart" />
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <i className="fas fa-share-alt" />
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <i className="fas fa-thumbs-up" />
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <i className="fas fa-rss" />
+                </a>
+              </li>
+            </ul>
+            <img
+              src={
+                product.webPictures && product.webPictures.length > 0
+                  ? process.env.API_URL +
+                    "/api/shop/general/v1/file/" +
+                    product.webPictures[0].id
+                  : "/static/images/top-bg.jpg"
+              }
+              className="product__cover"
+              alt={product.name}
+            />
+            <div className="columns product__container">
               <div className="column product__info">
                 {product.halalCertificates &&
                   product.halalCertificates.length > 0 && (
@@ -166,7 +190,7 @@ class Product extends Component {
                 </div>
               </div>
 
-              <div className="column is-hidden-touch">
+              <div className="column is-5-desktop is-hidden-touch">
                 {product.relatedProducts && (
                   <ul className="product__related">
                     {product.relatedProducts.map(relatedProduct => (
@@ -191,8 +215,37 @@ class Product extends Component {
                     ))}
                   </ul>
                 )}
+                {product.coupons.map(coupon => (
+                  <div className="product__coupon">
+                    <div className="coupon__image">
+                      {cover && cover.id && (
+                        <img
+                          src={
+                            process.env.API_URL +
+                            "/api/shop/general/v1/file/" +
+                            cover.id
+                          }
+                          alt={coupon.name}
+                        />
+                      )}
+
+                      <span>
+                        <i className="far fa-clock" />
+                        &nbsp;{moment(coupon.expireDate * 1000).format("ll")}
+                      </span>
+                    </div>
+                    <div className="coupon__content">
+                      <h2>{coupon.name}</h2>
+                      <p>{coupon.description}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
+            <br />
+            <br />
+            <br />
+            <br />
           </div>
         </div>
       </div>
