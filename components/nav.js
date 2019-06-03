@@ -288,7 +288,7 @@ class Nav extends Component {
                         </li>
                       ) : (
                         this.state.sectors.map(sector => (
-                          <li>
+                          <li key={sector.id}>
                             <Link
                               href={`/sector?id=${sector.id}&name=${
                                 sector.name

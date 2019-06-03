@@ -89,7 +89,7 @@ class Home extends Component {
               {this.props.sectors &&
                 this.props.sectors.result &&
                 this.props.sectors.result.map(sector => (
-                  <li>
+                  <li key={sector.id}>
                     <Link
                       href={`/sector?id=${sector.id}&name=${sector.name}&lang=${
                         this.props.intl.locale
