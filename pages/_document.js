@@ -86,8 +86,8 @@ export default class MyDocument extends Document {
                     <ul>
                       <li>
                         <Link
-                          href={`/page?slug=services&lang=${query.lang}`}
-                          as={`/${query.lang}/page/services`}
+                          href={`/user-feeds?lang=${query.lang}`}
+                          as={`/${query.lang}/user-feeds`}
                         >
                           <a>Your feed</a>
                         </Link>
