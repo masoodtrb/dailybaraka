@@ -190,7 +190,7 @@ class SupplierFeeds extends Component {
                   <div className="card-image">
                     <figure className="image is-4by3">
                       <img
-                        src="http://lorempixel.com/270/200/people/"
+                        src="/static/images/feeds/boots.jpg"
                         alt="Placeholder image"
                       />
                     </figure>
@@ -248,16 +248,13 @@ class SupplierFeeds extends Component {
                       <div className="media-left">
                         <figure className="image is-48x48">
                           <img
-                            src="http://lorempixel.com/96/96/people/2"
+                            src="/static/images/feeds/nima.jpg"
                             alt="Placeholder image"
                           />
                         </figure>
                       </div>
                       <div className="media-content">
                         <p className="title is-4">Nima Bani</p>
-                        <p className="subtitle is-6">
-                          Director - Prima Cheese - 15h ago
-                        </p>
                       </div>
                     </div>
 
@@ -273,8 +270,8 @@ class SupplierFeeds extends Component {
                           <div className="media-left">
                             <figure className="image is-48x48">
                               <img
-                                src="http://lorempixel.com/96/96/technics/3"
-                                alt="Placeholder image"
+                                src="/static/images/feeds/boots.jpg"
+                                alt="Boots Chemist logo"
                               />
                             </figure>
                           </div>
@@ -319,52 +316,6 @@ class SupplierFeeds extends Component {
                   </footer>
                 </div>
                 <br />
-                {[...Array(6)].map(() => (
-                  <React.Fragment>
-                    <div className="card">
-                      <div className="card-content">
-                        <div className="media">
-                          <div className="media-left">
-                            <figure className="image is-48x48">
-                              <img
-                                src="http://lorempixel.com/96/96/people/2"
-                                alt="Placeholder image"
-                              />
-                            </figure>
-                          </div>
-                          <div className="media-content">
-                            <p className="title is-4">Nima Bani</p>
-                            <p className="subtitle is-6">
-                              Director - Prima Cheese - 15h ago
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="content">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Phasellus nec iaculis mauris.&nbsp;
-                          <a href="#">#css</a> <a href="#">#responsive</a>
-                        </div>
-                      </div>
-
-                      <footer className="card-footer">
-                        <a href="#" className="card-footer-item">
-                          <i className="far fa-thumbs-up" />
-                          &nbsp;Like
-                        </a>
-                        <a href="#" className="card-footer-item">
-                          <i className="far fa-comment-dots" />
-                          &nbsp;Comment
-                        </a>
-                        <a href="#" className="card-footer-item">
-                          <i className="far fa-share-square" />
-                          &nbsp;Share
-                        </a>
-                      </footer>
-                    </div>
-                    <br />
-                  </React.Fragment>
-                ))}
               </div>
               <div className="column is-4">
                 <div className="feeds__insights">
