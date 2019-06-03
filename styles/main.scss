@@ -276,7 +276,7 @@ a {
 
     &__logo {
       text-align: center;
-      padding: 20px 40px 22px 0;
+      padding: 10px 40px 12px 0;
       img {
         width: 250px;
       }
@@ -288,7 +288,7 @@ a {
       span {
         color: #fff;
         font-size: 0.9em;
-        padding: 15px 25px 15px 15px;
+        padding: 10px 25px 6px 15px;
         display: block;
         cursor: pointer;
         border-radius: 4px 0 0 0;
@@ -358,7 +358,7 @@ a {
         input {
           font-size: 0.8em;
           line-height: 36px;
-          height: 54px;
+          height: 37px;
           padding-left: 16px;
           border-radius: 0 !important;
           border-color: transparent !important;
@@ -370,30 +370,12 @@ a {
         }
       }
 
-      button {
-        height: 54px;
-        width: 58px;
-        font-size: 16px;
-        margin-left: 15px;
-        background-color: #9ebb44;
-        border-radius: 3px !important;
-        border: none;
-        i {
-          color: #fff;
-          opacity: 0.7;
-        }
-
-        &:hover {
-          background-color: darken(#9ebb44, 5%);
-        }
-      }
-
       .select {
         position: relative;
         select {
           font-size: 0.8em;
           line-height: 36px;
-          height: 54px;
+          height: 37px;
           padding: 0 10px;
           width: 160px;
           color: #a2c34b;
@@ -412,6 +394,7 @@ a {
             color: #013d13;
           }
         }
+
         &:after {
           // overrides pre styles
           border: none;
@@ -423,7 +406,7 @@ a {
           position: absolute;
           font-size: 0.8em;
           left: 15px;
-          top: 24px;
+          top: 16px;
           color: #a2c34b;
         }
 
@@ -431,6 +414,24 @@ a {
           &:after {
             color: darken(#a2c34b, 10%);
           }
+        }
+      }
+
+      button {
+        height: 37px;
+        width: 47px;
+        font-size: 16px;
+        margin-left: 15px;
+        background-color: #9ebb44;
+        border-radius: 3px !important;
+        border: none;
+        i {
+          color: #fff;
+          opacity: 0.7;
+        }
+
+        &:hover {
+          background-color: darken(#9ebb44, 5%);
         }
       }
     }
@@ -611,7 +612,7 @@ a {
         font-size: 0.8em;
         font-weight: bold;
         line-height: 36px;
-        height: 54px;
+        height: 37px;
         padding-left: 16px;
         border: #013d13 1px solid !important;
         color: #013d13;
@@ -628,7 +629,7 @@ a {
         font-size: 0.8em;
         font-weight: bold;
         line-height: 36px;
-        height: 54px;
+        height: 37px;
         padding: 0 10px;
         width: 160px;
         color: #013d13;
@@ -658,7 +659,7 @@ a {
         position: absolute;
         font-size: 0.8em;
         left: 15px;
-        top: 24px;
+        top: 16px;
         color: #013d13;
       }
 
@@ -668,8 +669,8 @@ a {
     }
 
     button {
-      height: 54px;
-      width: 58px;
+      height: 37px;
+      width: 42px;
       font-size: 16px;
       margin-left: 15px;
       background-color: #06182e;
