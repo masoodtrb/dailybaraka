@@ -214,12 +214,12 @@ class Nav extends Component {
               </li>
               <li>
                 <Link
-                  href={`/page?slug=discover&lang=${this.props.intl.locale}`}
-                  as={`/${this.props.intl.locale}/page/discover`}
+                  href={`/local-stores?lang=${this.props.intl.locale}`}
+                  as={`/${this.props.intl.locale}/local-stores`}
                 >
                   <a>
                     <FormattedMessage
-                      id="nav.discover"
+                      id="nav.local-stores"
                       defaultMessage="Discover"
                     />
                   </a>
@@ -483,7 +483,7 @@ class Nav extends Component {
                   <a>
                     <FormattedMessage
                       id="nav.local-stores"
-                      defaultMessage="nav.local-stores"
+                      defaultMessage="Discover"
                     />
                   </a>
                 </Link>
