@@ -53,6 +53,9 @@ export default class MyApp extends App {
 
   componentDidMount() {
     fixPageHeight();
+    setTimeout(() => {
+      fixPageHeight();
+    }, 500);
   }
 
   componentDidUpdate() {

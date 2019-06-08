@@ -58,20 +58,16 @@ export default class MyDocument extends Document {
                       </li>
                       <li>
                         <Link
-                          href={`/page?slug=commercial-enquiries&lang=${
-                            query.lang
-                          }`}
-                          as={`/${query.lang}/page/commercial-enquiries`}
+                          href={`/commercial-enquiries?lang=${query.lang}`}
+                          as={`/${query.lang}/commercial-enquiries`}
                         >
                           <a>Suppliers</a>
                         </Link>
                       </li>
                       <li>
                         <Link
-                          href={`/page?slug=commercial-enquiries&lang=${
-                            query.lang
-                          }`}
-                          as={`/${query.lang}/page/commercial-enquiries`}
+                          href={`/commercial-enquiries?lang=${query.lang}`}
+                          as={`/${query.lang}/commercial-enquiries`}
                         >
                           <a>Local stores/Service providers</a>
                         </Link>
