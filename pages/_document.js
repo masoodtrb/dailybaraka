@@ -1,5 +1,6 @@
 import Document, { Head, Main, NextScript } from "next/document";
 import Link from "next/link";
+import { FormattedMessage } from "react-intl";
 
 export default class MyDocument extends Document {
   render() {
@@ -29,31 +30,54 @@ export default class MyDocument extends Document {
                   </a>
                   <hr />
                   <p className="copyright">
-                    © 2019 All Rights Reserved. DailyBaraka Holdings Ltd
+                    <FormattedMessage
+                      id="footer.copy-rights"
+                      defaultMessage="© 2019 All Rights Reserved. DailyBaraka Holdings Ltd"
+                    />
                     <Link
                       href={`/page?slug=terms&lang=${query.lang}`}
                       as={`/${query.lang}/page/terms`}
                     >
-                      <a>Terms &amp; Conditions</a>
+                      <a>
+                        <FormattedMessage
+                          id="footer.terms"
+                          defaultMessage="Terms &amp; Conditions"
+                        />
+                      </a>
                     </Link>
                     <Link
                       href={`/page?slug=privacy&lang=${query.lang}`}
                       as={`/${query.lang}/page/privacy`}
                     >
-                      <a>Privacy policy</a>
+                      <a>
+                        <FormattedMessage
+                          id="footer.privacy"
+                          defaultMessage="Privacy policy"
+                        />
+                      </a>
                     </Link>
                   </p>
                 </div>
                 <div className="column is-narrow">
                   <div className="footer__links">
-                    <h3>Business Enquiries</h3>
+                    <h3>
+                      <FormattedMessage
+                        id="footer.business-enquiries"
+                        defaultMessage="Privacy policy"
+                      />
+                    </h3>
                     <ul>
                       <li>
                         <Link
                           href={`/page?slug=services&lang=${query.lang}`}
                           as={`/${query.lang}/page/services`}
                         >
-                          <a>Services</a>
+                          <a>
+                            <FormattedMessage
+                              id="footer.services"
+                              defaultMessage="Services"
+                            />
+                          </a>
                         </Link>
                       </li>
                       <li>
@@ -61,7 +85,12 @@ export default class MyDocument extends Document {
                           href={`/commercial-enquiries?lang=${query.lang}`}
                           as={`/${query.lang}/commercial-enquiries`}
                         >
-                          <a>Suppliers</a>
+                          <a>
+                            <FormattedMessage
+                              id="footer.suppliers"
+                              defaultMessage="Suppliers"
+                            />
+                          </a>
                         </Link>
                       </li>
                       <li>
@@ -69,7 +98,12 @@ export default class MyDocument extends Document {
                           href={`/commercial-enquiries?lang=${query.lang}`}
                           as={`/${query.lang}/commercial-enquiries`}
                         >
-                          <a>Local stores/Service providers</a>
+                          <a>
+                            <FormattedMessage
+                              id="footer.store-providers"
+                              defaultMessage="Local stores/Service providers"
+                            />
+                          </a>
                         </Link>
                       </li>
                     </ul>
@@ -78,14 +112,24 @@ export default class MyDocument extends Document {
 
                 <div className="column is-narrow">
                   <div className="footer__links">
-                    <h3>Consumer</h3>
+                    <h3>
+                      <FormattedMessage
+                        id="footer.consumer"
+                        defaultMessage="Consumer"
+                      />
+                    </h3>
                     <ul>
                       <li>
                         <Link
                           href={`/user-feeds?lang=${query.lang}`}
                           as={`/${query.lang}/user-feeds`}
                         >
-                          <a>Your feed</a>
+                          <a>
+                            <FormattedMessage
+                              id="footer.user-feed"
+                              defaultMessage="Your feed"
+                            />
+                          </a>
                         </Link>
                       </li>
                       <li>
@@ -93,7 +137,12 @@ export default class MyDocument extends Document {
                           href={`/page?slug=contact-us&lang=${query.lang}`}
                           as={`/${query.lang}/page/contact-us`}
                         >
-                          <a>Support</a>
+                          <a>
+                            <FormattedMessage
+                              id="footer.support"
+                              defaultMessage="Support"
+                            />
+                          </a>
                         </Link>
                       </li>
                       <li>
@@ -101,7 +150,12 @@ export default class MyDocument extends Document {
                           href={`/sectors?lang=${query.lang}`}
                           as={`/${query.lang}/sectors`}
                         >
-                          <a>Explore</a>
+                          <a>
+                            <FormattedMessage
+                              id="footer.explore"
+                              defaultMessage="Explore"
+                            />
+                          </a>
                         </Link>
                       </li>
                     </ul>
