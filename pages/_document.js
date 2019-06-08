@@ -102,8 +102,8 @@ export default class MyDocument extends Document {
                       </li>
                       <li>
                         <Link
-                          href={`/sections?lang=${query.lang}`}
-                          as={`/${query.lang}/sections`}
+                          href={`/sectors?lang=${query.lang}`}
+                          as={`/${query.lang}/sectors`}
                         >
                           <a>Explore</a>
                         </Link>
