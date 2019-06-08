@@ -91,7 +91,7 @@ class Profile extends Component {
           });
         });
     } else {
-      window.location.href = `/${this.props.intl.locale}/login?returnUrl=/${
+      window.location.href = `/${this.props.intl.locale}/signIn?returnUrl=/${
         this.props.intl.locale
       }/profile`;
     }

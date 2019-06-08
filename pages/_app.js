@@ -9,6 +9,17 @@ import de from "react-intl/locale-data/de.js";
 import fr from "react-intl/locale-data/fr.js";
 import es from "react-intl/locale-data/es.js";
 
+const fixPageHeight = () => {
+  const header = document.getElementsByClassName("header");
+  const footer = document.getElementsByClassName("footer");
+  const page = document.getElementsByClassName("page");
+
+  if (header.length && footer.length && page.length) {
+    page[0].style.minHeight = `calc(100vh - ${header[0].clientHeight}px - ${
+      footer[0].clientHeight
+    }px)`;
+  }
+};
 
 export default class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
@@ -24,12 +35,10 @@ export default class MyApp extends App {
     const { locale, messages } = req || window.__NEXT_DATA__.props;
     const initialNow = Date.now();
 
-    if(!locale) {
+    if (!locale) {
       const splittedUrl = req.originalUrl.split("/");
-      if(splittedUrl.length>0)
-        locale = splittedUrl[1] 
-      else
-        locale = "en";
+      if (splittedUrl.length > 0) locale = splittedUrl[1];
+      else locale = "en";
     }
 
     if (locale) {
@@ -41,6 +50,15 @@ export default class MyApp extends App {
 
     return { pageProps, locale, messages, initialNow };
   }
+
+  componentDidMount() {
+    fixPageHeight();
+  }
+
+  componentDidUpdate() {
+    fixPageHeight();
+  }
+
   render() {
     const { Component, pageProps, locale, messages, initialNow } = this.props;
     addLocaleData([...en, ...de, ...fr, ...es]);
