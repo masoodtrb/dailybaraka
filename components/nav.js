@@ -250,7 +250,10 @@ class Nav extends Component {
             <div className="container">
               <div className="main-nav__container">
                 <div className="main-nav__logo">
-                  <Link href={`/${this.props.intl.locale}`}>
+                  <Link
+                    href={`/index?lang=${this.props.intl.locale}`}
+                    as={`/${this.props.intl.locale}`}
+                  >
                     <a>
                       <img
                         src="/static/images/logo-white.png"
