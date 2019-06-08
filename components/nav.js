@@ -129,7 +129,7 @@ class Nav extends Component {
                       <i className="fas fa-user" />
                       &nbsp;
                       <FormattedMessage
-                        id="nav.about-us"
+                        id="nav.profile"
                         values={{
                           user: (
                             <Link
@@ -491,13 +491,13 @@ class Nav extends Component {
 
               <li>
                 <Link
-                  href={`/page?slug=about-us&lang=${this.props.intl.locale}`}
-                  as={`/${this.props.intl.locale}/page/about-us`}
+                  href={`/page?slug=welcome&lang=${this.props.intl.locale}`}
+                  as={`/${this.props.intl.locale}/page/welcome`}
                 >
                   <a>
                     <FormattedMessage
-                      id="nav.about-us"
-                      defaultMessage="About Us"
+                      id="nav.welcome"
+                      defaultMessage="Welcome"
                     />
                   </a>
                 </Link>
