@@ -11,9 +11,16 @@ import "../styles/main.scss";
 import withIntl from "../hoc/withIntl";
 
 class Supplier extends Component {
-  static async getInitialProps({ query }) {
+  static async getInitialProps({ query, res }) {
+    const supplier = await supplierService.getProducts(query.lang, query.id);
+
+    if (!supplier || supplier.status >= 300) {
+      res.statusCode = 404;
+      throw new Error("Page not found");
+    }
+
     return {
-      supplier: await supplierService.getProducts(query.lang, query.id)
+      supplier
     };
   }
 

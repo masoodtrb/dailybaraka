@@ -32,14 +32,34 @@ const messages = defineMessages({
   }
 });
 
+const replaceLanguage = (href, targetLanguage) => {
+  const languagesRegex = /\/en\/|\/de\/|\/fr\/|\/es\//;
+  if (href.match(languagesRegex))
+    return href.replace(languagesRegex, `/${targetLanguage}/`);
+  else return `/${targetLanguage}`;
+};
+
+const getUrlParameter = field => {
+  var urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(field);
+};
+
 class Nav extends Component {
   state = {
     user: null,
     sectors: null,
-    showMenu: false
+    showMenu: false,
+    searchValue: null
   };
 
   componentDidMount() {
+    const searchValue = getUrlParameter("q");
+    if (searchValue) {
+      this.setState({
+        searchValue
+      });
+    }
+
     const token = getUserToken();
     this.setState({ user: JSON.parse(getCurrentUser()) });
 
@@ -103,6 +123,7 @@ class Nav extends Component {
 
   toggleMenu = event => {
     event.preventDefault();
+
     this.setState({
       showMenu: !this.state.showMenu
     });
@@ -113,7 +134,13 @@ class Nav extends Component {
 
     const selectedLocal = event.target.value;
 
-    window.location.href = `/${selectedLocal}/`;
+    window.location.href = replaceLanguage(window.location.href, selectedLocal);
+  };
+
+  searchChange = event => {
+    this.setState({
+      searchValue: event.target.value
+    });
   };
 
   render() {
@@ -322,6 +349,8 @@ class Nav extends Component {
                           placeholder={this.props.intl.formatMessage(
                             messages.search
                           )}
+                          value={this.state.searchValue || ""}
+                          onChange={e => this.searchChange(e)}
                         />
                       </p>
                       <p className="control">

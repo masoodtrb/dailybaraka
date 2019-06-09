@@ -5,11 +5,27 @@ import { FormattedMessage, FormattedHTMLMessage } from "react-intl";
 
 class Layout extends Component {
   render() {
-    const { locale } = this.props;
+    const { locale, loading } = this.props;
 
     return (
       <React.Fragment>
         {this.props.children}
+
+        {loading && (
+          <div className="loading">
+            <div className="loading__modal">
+              <div className="loading__indicator">
+                <i class="fas fa-spinner" />
+              </div>
+              <h4>
+                <FormattedMessage
+                  id="common.loading"
+                  defaultMessage="Loading..."
+                />
+              </h4>
+            </div>
+          </div>
+        )}
         <div className="footer">
           <div className="container">
             <div className="columns">

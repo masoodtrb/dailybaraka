@@ -105,8 +105,7 @@ app.prepare().then(() => {
       req.messages = {};
     } else {
       try {
-        const messages = await getMessages(selectedLocale);
-        req.messages = messages;
+        req.messages = await getMessages(selectedLocale);
       } catch (e) {
         req.messages = {};
       }
