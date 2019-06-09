@@ -26,9 +26,16 @@ const messages = defineMessages({
 });
 
 class Page extends Component {
-  static async getInitialProps({ query }) {
+  static async getInitialProps({ query, res }) {
+    const page = await pageService.getPageContent(query.lang, query.slug);
+
+    if (!page || page.status >= 300) {
+      res.statusCode = 404;
+      throw new Error("Page not found");
+    }
+
     return {
-      page: await pageService.getPageContent(query.lang, query.slug),
+      page,
       slug: query.slug
     };
   }

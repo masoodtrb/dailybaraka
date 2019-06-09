@@ -9,9 +9,14 @@ import "../styles/main.scss";
 import { FormattedMessage } from "react-intl";
 
 class Product extends Component {
-  static async getInitialProps({ query }) {
+  static async getInitialProps({ query, res }) {
+    const product = await productService.getBySlug(query.lang, query.slug);
+    if (!product || product.status >= 300) {
+      res.statusCode = 404;
+      throw new Error("Page not found");
+    }
     return {
-      product: await productService.getBySlug(query.lang, query.slug)
+      product
     };
   }
 

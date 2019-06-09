@@ -11,9 +11,16 @@ import withIntl from "../hoc/withIntl";
 import "../styles/main.scss";
 
 class Sector extends Component {
-  static async getInitialProps({ query }) {
+  static async getInitialProps({ query, res }) {
+    const sector = await sectorService.get(query.lang, query.id);
+
+    if (!sector || sector.status >= 300) {
+      res.statusCode = 404;
+      throw new Error("Page not found");
+    }
+
     return {
-      sector: await sectorService.get(query.lang, query.id),
+      sector,
       suppliers: await sectorService.getSuppliersAndProducts(
         query.lang,
         query.id

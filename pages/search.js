@@ -79,7 +79,11 @@ class Search extends Component {
                   </div>
                   <div className="product__shortcut">
                     <span className="shortcut__supplier">
-                      More products from&nbsp;
+                      <FormattedMessage
+                        id="search.product.more-link"
+                        defaultMessage="More products from"
+                      />
+                      &nbsp;
                       <Link
                         href={`/supplier/?id=${product.supplier.id}&name=${
                           product.supplier.name
@@ -91,21 +95,28 @@ class Search extends Component {
                         <a>{product.supplier.name}</a>
                       </Link>
                     </span>
-                    <a href="#" className="shortcut__organization">
-                      <Link
-                        href={`/supplier/?id=${product.supplier.id}&name=${
-                          product.supplier.name
-                        }&lang=${locale}`}
-                        as={`/${locale}/supplier/${product.supplier.id}/${
-                          product.supplier.name
-                        }`}
-                      >
-                        <a>View accreditation organization</a>
-                      </Link>
-                    </a>
+                    <Link
+                      href={`/supplier/?id=${product.supplier.id}&name=${
+                        product.supplier.name
+                      }&lang=${locale}`}
+                      as={`/${locale}/supplier/${product.supplier.id}/${
+                        product.supplier.name
+                      }`}
+                    >
+                      <a className="shortcut__organization">
+                        <FormattedMessage
+                          id="search.product.supplier-link"
+                          defaultMessage="View accreditation organization"
+                        />
+                      </a>
+                    </Link>
                     <a href="#" className="shortcut__button">
                       <i className="fas fa-plus-circle" />
-                      &nbsp;Add to shopping list
+                      &nbsp;
+                      <FormattedMessage
+                        id="search.product.add-to-cart"
+                        defaultMessage="Add to shopping list"
+                      />
                     </a>
                   </div>
                 </div>
