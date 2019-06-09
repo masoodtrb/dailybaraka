@@ -19,12 +19,12 @@ const messages = defineMessages({
 });
 
 class Search extends Component {
-  static async getInitialProps({ query }) {
+  static async getInitialProps({ req, query }) {
     return {
       products: await productService.search(
         query.lang,
-        query.sector === "all" ? null : query.sector,
-        query.q
+        req.query.sector === "all" ? null : req.query.sector,
+        req.query.q
       ),
       searchValue: query.q
     };
@@ -35,7 +35,9 @@ class Search extends Component {
     const { locale } = this.props.intl;
     return (
       <div>
-        <Head title={this.props.intl.formatMessage(messages.title)} />
+        <Head
+          title={this.props.intl.formatMessage(messages.title, { searchValue })}
+        />
         <Nav />
 
         <div className="page search">
