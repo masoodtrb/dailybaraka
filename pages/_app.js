@@ -3,6 +3,7 @@ import React from "react";
 import { setCookie } from "nookies";
 import URL from "url-parse";
 import { IntlProvider, addLocaleData } from "react-intl";
+import Layout from "../components/layout";
 
 import en from "react-intl/locale-data/en.js";
 import de from "react-intl/locale-data/de.js";
@@ -73,7 +74,9 @@ export default class MyApp extends App {
           messages={messages}
           initialNow={initialNow}
         >
-          <Component {...pageProps} />
+          <Layout locale={locale}>
+            <Component {...pageProps} />
+          </Layout>
         </IntlProvider>
       </Container>
     );
