@@ -48,6 +48,7 @@ class Search extends Component {
                 values={{ searchValue }}
                 defaultMessage="Search result for '{searchValue}'"
               />
+              2
             </h1>
             <hr />
             {products.result && products.result.length > 0 ? (
