@@ -3,6 +3,8 @@ import React from "react";
 import { setCookie } from "nookies";
 import URL from "url-parse";
 import { IntlProvider, addLocaleData } from "react-intl";
+import Router from "next/router";
+
 import Layout from "../components/layout";
 
 import en from "react-intl/locale-data/en.js";
@@ -59,11 +61,36 @@ export default class MyApp extends App {
     return { pageProps, locale, messages, initialNow };
   }
 
+  state = {
+    loading: false
+  };
+
   componentDidMount() {
     fixPageHeight();
     setTimeout(() => {
       fixPageHeight();
     }, 500);
+
+    let timeoutIndicator;
+    Router.events.on("routeChangeStart", url => {
+      timeoutIndicator = setTimeout(() => {
+        this.setState({
+          loading: true
+        });
+      }, 1000);
+    });
+    Router.events.on("routeChangeComplete", () => {
+      clearTimeout(timeoutIndicator);
+      this.setState({
+        loading: false
+      });
+    });
+    Router.events.on("routeChangeError", () => {
+      clearTimeout(timeoutIndicator);
+      this.setState({
+        loading: false
+      });
+    });
   }
 
   componentDidUpdate() {
@@ -81,7 +108,7 @@ export default class MyApp extends App {
           messages={messages}
           initialNow={initialNow}
         >
-          <Layout locale={locale}>
+          <Layout locale={locale} loading={this.state.loading}>
             <Component {...pageProps} />
           </Layout>
         </IntlProvider>

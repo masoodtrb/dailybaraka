@@ -111,6 +111,15 @@ $fullhd: 1344px + (2 * $gap);
   }
 }
 
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 body {
   font-size: $font-size;
   font-family: "Noto Sans";
@@ -304,7 +313,7 @@ a {
         background-color: #f3f1f1;
         padding: 12px 25px 25px 25px;
         position: absolute;
-        z-index: 99;
+        z-index: 401;
         min-width: 300px;
         box-sizing: border-box;
         box-shadow: 2px 3px 3px 0px rgba(0, 0, 0, 0.1);
@@ -509,6 +518,44 @@ a {
         }
       }
     }
+  }
+}
+
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  background: rgba(#eee, 0.3);
+  z-index: 99;
+
+  color: #fff;
+  text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__modal {
+    position: relative;
+    width: 120px;
+    background-color: rgba(#06182e, 0.8);
+    border-radius: 5px;
+  }
+
+  &__indicator {
+    padding: 20px 0;
+    i {
+      font-size: 42px;
+      animation: rotating 1s linear infinite;
+    }
+  }
+
+  h4 {
+    padding-bottom: 20px;
+    font-weight: bold;
   }
 }
 
