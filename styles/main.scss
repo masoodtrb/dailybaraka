@@ -288,7 +288,7 @@ a {
       span {
         color: #fff;
         font-size: 0.9em;
-        padding: 10px 25px 6px 15px;
+        padding: 8px 25px 8px 15px;
         display: block;
         cursor: pointer;
         border-radius: 4px 0 0 0;
@@ -765,13 +765,19 @@ a {
         font-size: 1.2em;
         letter-spacing: 0.2px;
         color: rgba(0, 0, 0, 0.87);
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }
 
   .sector__more {
     text-align: right;
-    padding: 0 0 20px 0;
+    padding-top: 18px;
+    float: right;
+    font-size: 0.9em;
   }
 
   .pagination {
