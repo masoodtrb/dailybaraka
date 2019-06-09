@@ -32,6 +32,12 @@ const messages = defineMessages({
   }
 });
 
+const replaceLanguage = (href, targetLanguage) => {
+  const languagesRegex = /\/en\/|\/de\/|\/fr\/|\/es\//;
+  if (href.match(languagesRegex))
+    return href.replace(languagesRegex, `/${targetLanguage}/`);
+  else return `/${targetLanguage}`;
+};
 class Nav extends Component {
   state = {
     user: null,
@@ -103,6 +109,7 @@ class Nav extends Component {
 
   toggleMenu = event => {
     event.preventDefault();
+
     this.setState({
       showMenu: !this.state.showMenu
     });
@@ -113,7 +120,7 @@ class Nav extends Component {
 
     const selectedLocal = event.target.value;
 
-    window.location.href = `/${selectedLocal}/`;
+    window.location.href = replaceLanguage(window.location.href, selectedLocal);
   };
 
   render() {
