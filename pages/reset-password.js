@@ -82,11 +82,16 @@ class ResetPassword extends Component {
           return;
         }
 
-        this.setState({
-          resetPasswordForm: {
-            state: "SUCCESS"
+        this.setState(
+          {
+            resetPasswordForm: {
+              state: "SUCCESS"
+            }
+          },
+          () => {
+            window.location.href = `/${this.props.intl.locale}/signIn`;
           }
-        });
+        );
       });
   };
 

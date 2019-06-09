@@ -178,6 +178,9 @@ class SignUp extends Component {
                   <div className="notification is-success">
                     <FormattedHTMLMessage
                       id="register.success"
+                      values={{
+                        loginPage: `/${this.props.intl.locale}/signIn`
+                      }}
                       defaultMessage={`
                         <div>
                           <strong>
@@ -191,7 +194,10 @@ class SignUp extends Component {
                           </p>
                           <p>
                             If you couldn't find this mail in your Inbox folder,
-                            check the Spam/Junk folder please.
+                            check the Spam/Junk folder, please.
+                          </p>
+                          <p>
+                            <a href="{loginPage}">Login page</a>
                           </p>
                         </div>`}
                     />
