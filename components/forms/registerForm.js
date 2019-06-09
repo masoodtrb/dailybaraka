@@ -255,6 +255,7 @@ class SignUpForm extends React.Component {
                     name="password"
                     className="input"
                     type="password"
+                    autoComplete="new-password"
                     placeholder={this.props.intl.formatMessage(
                       messages.passwordPlaceholder
                     )}
