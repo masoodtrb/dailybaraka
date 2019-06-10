@@ -32,7 +32,8 @@ class Search extends Component {
 
   state = {
     products: null,
-    searchValue: null
+    searchValue: null,
+    sector: null
   };
 
   async componentDidMount() {
@@ -40,7 +41,8 @@ class Search extends Component {
     const sector = getUrlParameter("sector");
 
     this.setState({
-      searchValue: query
+      searchValue: query,
+      sector
     });
 
     this.setState({
@@ -55,7 +57,7 @@ class Search extends Component {
   render() {
     const { products, searchValue } = this.state;
     const { locale } = this.props.intl;
-    debugger;
+
     return (
       <div>
         <Head

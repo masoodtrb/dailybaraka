@@ -49,14 +49,18 @@ class Nav extends Component {
     user: null,
     sectors: null,
     showMenu: false,
-    searchValue: null
+    searchValue: null,
+    searchSector: null
   };
 
   componentDidMount() {
     const searchValue = getUrlParameter("q");
-    if (searchValue) {
+    const searchSector = getUrlParameter("sector");
+    debugger;
+    if (searchValue || searchSector) {
       this.setState({
-        searchValue
+        searchValue,
+        searchSector
       });
     }
 
@@ -137,9 +141,15 @@ class Nav extends Component {
     window.location.href = replaceLanguage(window.location.href, selectedLocal);
   };
 
-  searchChange = event => {
+  queryChange = event => {
     this.setState({
       searchValue: event.target.value
+    });
+  };
+
+  sectorChange = event => {
+    this.setState({
+      searchSector: event.target.value
     });
   };
 
@@ -350,13 +360,17 @@ class Nav extends Component {
                             messages.search
                           )}
                           value={this.state.searchValue || ""}
-                          onChange={e => this.searchChange(e)}
+                          onChange={e => this.queryChange(e)}
                         />
                       </p>
                       <p className="control">
                         <span className="select">
-                          <select name="sector">
-                            <option defaultValue value="all">
+                          <select
+                            name="sector"
+                            value={this.state.searchSector || "all"}
+                            onChange={e => this.sectorChange(e)}
+                          >
+                            <option value="all">
                               {this.props.intl.formatMessage(
                                 messages.allSectors
                               )}
