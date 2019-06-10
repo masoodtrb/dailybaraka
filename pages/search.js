@@ -18,21 +18,44 @@ const messages = defineMessages({
   }
 });
 
+const getUrlParameter = field => {
+  var urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(field);
+};
+
 class Search extends Component {
-  static async getInitialProps({ req, query }) {
+  static async getInitialProps({ query }) {
     return {
-      products: await productService.search(
-        query.lang,
-        req.query.sector === "all" ? null : req.query.sector,
-        req.query.q
-      ),
-      searchValue: query.q
+      lang: query.lang
     };
   }
 
+  state = {
+    products: null,
+    searchValue: null
+  };
+
+  async componentDidMount() {
+    const query = getUrlParameter("q");
+    const sector = getUrlParameter("sector");
+
+    this.setState({
+      searchValue: query
+    });
+
+    this.setState({
+      products: await productService.search(
+        this.props.lang,
+        sector === "all" ? null : sector,
+        query
+      )
+    });
+  }
+
   render() {
-    const { products, searchValue } = this.props;
+    const { products, searchValue } = this.state;
     const { locale } = this.props.intl;
+    debugger;
     return (
       <div>
         <Head
@@ -48,10 +71,23 @@ class Search extends Component {
                 values={{ searchValue }}
                 defaultMessage="Search result for '{searchValue}'"
               />
-              2
             </h1>
             <hr />
-            {products.result && products.result.length > 0 ? (
+            {!products ? (
+              <div className="notification column is-12">
+                <FormattedMessage
+                  id="common.wait"
+                  defaultMessage="Please wait..."
+                />
+              </div>
+            ) : !products.result || products.result.length === 0 ? (
+              <div className="notification column is-12">
+                <FormattedMessage
+                  id="search.empty"
+                  defaultMessage="No result is found!"
+                />
+              </div>
+            ) : (
               products.result.map(product => (
                 <div
                   key={"search-product" + product.id}
@@ -124,13 +160,6 @@ class Search extends Component {
                   </div>
                 </div>
               ))
-            ) : (
-              <div className="notification column is-12">
-                <FormattedMessage
-                  id="search.empty"
-                  defaultMessage="No result is found!"
-                />
-              </div>
             )}
           </div>
         </div>
