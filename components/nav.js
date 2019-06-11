@@ -56,7 +56,7 @@ class Nav extends Component {
   componentDidMount() {
     const searchValue = getUrlParameter("q");
     const searchSector = getUrlParameter("sector");
-    debugger;
+
     if (searchValue || searchSector) {
       this.setState({
         searchValue,
@@ -418,11 +418,19 @@ class Nav extends Component {
             aria-label="main navigation"
           >
             <div className="navbar-brand">
-              <Link href={`/${this.props.intl.locale}`}>
-                <a className="navbar-item">
-                  <img src="/static/images/logo.png" alt="Daily Baraka" />
-                </a>
-              </Link>
+              {this.props.page != "index" && (
+                <Link
+                  as={`/${this.props.intl.locale}`}
+                  href={`/index?lang=${this.props.intl.locale}`}
+                >
+                  <a className="navbar-item">
+                    <img
+                      src="/static/images/logo-white.png"
+                      alt="Daily Baraka"
+                    />
+                  </a>
+                </Link>
+              )}
 
               <a
                 role="button"
@@ -494,8 +502,8 @@ class Nav extends Component {
               )}
               <li>
                 <Link
-                  href={`/welcome?lang=${this.props.intl.locale}`}
-                  as={`/${this.props.intl.locale}/welcome`}
+                  href={`/page?slug=welcome&lang=${this.props.intl.locale}`}
+                  as={`/${this.props.intl.locale}/page/welcome`}
                 >
                   <a>
                     <FormattedMessage
@@ -563,7 +571,7 @@ class Nav extends Component {
                   href={`/page?slug=accreditation-organizations&lang=${
                     this.props.intl.locale
                   }`}
-                  href={`/${
+                  as={`/${
                     this.props.intl.locale
                   }/page/accreditation-organizations`}
                 >

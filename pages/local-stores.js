@@ -117,11 +117,14 @@ class LocalStores extends Component {
         }
 
         const stores = JSON.parse(JSON.stringify(this.state.stores));
-        // add new stores to list
-        json.result.forEach((store, index) => {
-          const isExist = stores.find(item => item.id === store.id);
-          if (!isExist) stores.push(store);
-        });
+
+        if (json && json.result && json.result.length > 0) {
+          // add new stores to list
+          json.result.forEach(store => {
+            const isExist = stores.find(item => item.id === store.id);
+            if (!isExist) stores.push(store);
+          });
+        }
 
         this.setState({ stores, hasError: false });
       });
@@ -299,7 +302,7 @@ class LocalStores extends Component {
                     <input
                       type="radio"
                       name="sector"
-                      checked={!this.state.selectedSectorId}
+                      defaultChecked={!this.state.selectedSectorId}
                     />
                     <FormattedMessage id="sectors.all" defaultMessage="All" />
                   </label>
@@ -312,7 +315,9 @@ class LocalStores extends Component {
                           name="sector"
                           value={sector.id}
                           onClick={() => this.onSectorFilter(sector.id)}
-                          checked={this.state.selectedSectorId === sector.id}
+                          defaultChecked={
+                            this.state.selectedSectorId === sector.id
+                          }
                         />
                         {sector.name}
                       </label>

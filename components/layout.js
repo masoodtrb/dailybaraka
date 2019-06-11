@@ -15,7 +15,7 @@ class Layout extends Component {
           <div className="loading">
             <div className="loading__modal">
               <div className="loading__indicator">
-                <i class="fas fa-spinner" />
+                <i className="fas fa-spinner" />
               </div>
               <h4>
                 <FormattedMessage
