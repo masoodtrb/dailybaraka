@@ -531,7 +531,7 @@ a {
   right: 0;
 
   background: rgba(#eee, 0.3);
-  z-index: 99;
+  z-index: 1003;
 
   color: #fff;
   text-align: center;
@@ -769,6 +769,7 @@ a {
     .home__search {
       width: 100%;
       max-width: 700px;
+      margin: 60px auto;
       .select {
         select {
           padding-right: 2px;
