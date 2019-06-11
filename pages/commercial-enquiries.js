@@ -298,7 +298,7 @@ class Enquiry extends Component {
   onSupplierFormRecaptchaResolved = () => {
     const recaptchaToken = this.recaptchaSupplierFormRef.getResponse();
 
-    const formData = this.state.storeFormData;
+    const formData = this.state.supplierFormData;
 
     fetch("/api/shop/suppliers/v1/create", {
       crossDomain: true,
@@ -437,14 +437,6 @@ class Enquiry extends Component {
                     onProgress={this.state.storeForm.state === "SUBMITTING"}
                     onSubmit={formData => this.onStoreFormSubmit(formData)}
                   />
-
-                  <Recaptcha
-                    ref={ref => (this.recaptchaStoreFormRef = ref)}
-                    sitekey={process.env.RECAPTCHA_KEY}
-                    onResolved={() => this.onStoreFormRecaptchaResolved()}
-                    onError={() => this.onStoreFormSRecaptchaError("ERROR")}
-                    onExpired={() => this.onStoreFormSRecaptchaError("EXPIRED")}
-                  />
                 </div>
                 <div className="column is-6">
                   <div className="has-text-centered">
@@ -541,15 +533,6 @@ class Enquiry extends Component {
                     onProgress={this.state.supplierForm.state === "SUBMITTING"}
                     onSubmit={formData => this.onSupplierFormSubmit(formData)}
                   />
-                  <Recaptcha
-                    ref={ref => (this.recaptchaSupplierFormRef = ref)}
-                    sitekey={process.env.RECAPTCHA_KEY}
-                    onResolved={() => this.onSupplierFormRecaptchaResolved()}
-                    onError={() => this.onSupplierFormRecaptchaError("ERROR")}
-                    onExpired={() =>
-                      this.onSupplierFormRecaptchaError("EXPIRED")
-                    }
-                  />
                 </div>
               </div>
 
@@ -580,6 +563,23 @@ class Enquiry extends Component {
             </div>
           </div>
         </div>
+
+        <Recaptcha
+          ref={ref => (this.recaptchaStoreFormRef = ref)}
+          sitekey={process.env.RECAPTCHA_KEY}
+          onResolved={() => this.onStoreFormRecaptchaResolved()}
+          onError={() => this.onStoreFormSRecaptchaError("ERROR")}
+          onExpired={() => this.onStoreFormSRecaptchaError("EXPIRED")}
+        />
+
+        <Recaptcha
+          ref={ref => (this.recaptchaSupplierFormRef = ref)}
+          sitekey={process.env.RECAPTCHA_KEY}
+          onResolved={() => this.onSupplierFormRecaptchaResolved()}
+          onError={() => this.onSupplierFormRecaptchaError("ERROR")}
+          onExpired={() => this.onSupplierFormRecaptchaError("EXPIRED")}
+        />
+
         <ToastContainer />
       </div>
     );
